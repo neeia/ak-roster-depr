@@ -82,6 +82,17 @@ const adnachielProp : OperatorProps = {
   skill2Mastery: 0,
   skill3Mastery: 0
 }
+const amiyaGuardProp : OperatorProps = {
+  name: "Amiya (Guard)",
+  rarity: 5,
+  potential: 6,
+  promotion: 2,
+  level: 1,
+  skillLevel: 1,
+  skill1Mastery: 0,
+  skill2Mastery: 0,
+  skill3Mastery: 0
+}
 const corruptingProp : OperatorProps = {
   name: "Skadi the Corrupting Heart",
   rarity: 6,
