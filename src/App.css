@@ -1,0 +1,76 @@
+.App {
+  text-align: left;
+  background-color: #121212;
+  color: white;
+}
+
+.icon {
+  height:60px;
+  width:60px;
+}
+
+.level-icon {
+  height:60px;
+  width:60px;
+  font-size: 48px;
+}
+
+.operator-block ~ .operator-block{
+  margin-top: 2em;
+}
+
+.column-group ~ .column-group {
+  margin-left: 1em;
+}
+
+.operator-name-large {
+  font-size: 32px;
+}
+
+.property {
+  color: white;
+}
+
+.field {
+  color: #ffdddd;
+  display:inline-block;
+}
+
+.data-row {
+  justify-content: space-between;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
