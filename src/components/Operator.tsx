@@ -13,18 +13,18 @@ function Operator(props: OperatorProps) {
     skill2Mastery,
     skill3Mastery,
   } = props;
-  let whatever = name;
   const potentialUrl = `https://res.cloudinary.com/samidare/image/upload/v1/arknights/potential/${potential}`;
   const promotionUrl = `https://res.cloudinary.com/samidare/image/upload/v1/arknights/elite/${promotion}`;
 
+  let operatorSlug = name;
   if (promotion === 2) {
-    whatever += " elite 2";
+    operatorSlug += " elite 2";
   } else if (promotion === 1 && name === "Amiya") {
-    whatever += " elite 1";
+    operatorSlug += " elite 1";
   }
 
   const imgUrl = `https://res.cloudinary.com/samidare/image/upload/v1/arknights/operators/${slugify(
-    whatever,
+    operatorSlug,
     { lower: true, replacement: "-" }
   )}`;
 
