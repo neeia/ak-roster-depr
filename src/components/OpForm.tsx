@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import Operator from './Operator';
+import React, { useState } from "react";
+import Operator from "./Operator";
 
 const OpForm: React.FC = () => {
   const [operatorName, setOperatorName] = useState(""); // where "" is the initial value
@@ -20,6 +20,6 @@ const OpForm: React.FC = () => {
         skill3Mastery={0} /> */}
     </>
   );
-}
+};
 
 export default OpForm;
