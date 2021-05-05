@@ -1,0 +1,927 @@
+[
+  {
+    "name": "Amiya",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Kal'tsit",
+    "isCnOnly": true,
+    "rarity": 6
+  },
+  {
+    "name": "Ch'en",
+    "isCnOnly": false,
+    "rarity": 6
+  },
+  {
+    "name": "Blaze",
+    "isCnOnly": false,
+    "rarity": 6
+  },
+  {
+    "name": "Sora",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Lava the Purgatory",
+    "isCnOnly": true,
+    "rarity": 5
+  },
+  {
+    "name": "Skadi the Corrupting Heart",
+    "isCnOnly": true,
+    "rarity": 6
+  },
+  {
+    "name": "Texas",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Exusiai",
+    "isCnOnly": false,
+    "rarity": 6
+  },
+  {
+    "name": "Franka",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Liskarm",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Silence",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Gitano",
+    "isCnOnly": false,
+    "rarity": 4
+  },
+  {
+    "name": "Deepcolor",
+    "isCnOnly": false,
+    "rarity": 4
+  },
+  {
+    "name": "Siege",
+    "isCnOnly": false,
+    "rarity": 6
+  },
+  {
+    "name": "W",
+    "isCnOnly": false,
+    "rarity": 6
+  },
+  {
+    "name": "Zima",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Myrrh",
+    "isCnOnly": false,
+    "rarity": 4
+  },
+  {
+    "name": "Shirayuki",
+    "isCnOnly": false,
+    "rarity": 4
+  },
+  {
+    "name": "Hibiscus",
+    "isCnOnly": false,
+    "rarity": 3
+  },
+  {
+    "name": "Lava",
+    "isCnOnly": false,
+    "rarity": 3
+  },
+  {
+    "name": "Beagle",
+    "isCnOnly": false,
+    "rarity": 3
+  },
+  {
+    "name": "Fang",
+    "isCnOnly": false,
+    "rarity": 3
+  },
+  {
+    "name": "Kroos",
+    "isCnOnly": false,
+    "rarity": 3
+  },
+  {
+    "name": "Meteor",
+    "isCnOnly": false,
+    "rarity": 4
+  },
+  {
+    "name": "Estelle",
+    "isCnOnly": false,
+    "rarity": 4
+  },
+  {
+    "name": "Ptilopsis",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Blue Poison",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Dobermann",
+    "isCnOnly": false,
+    "rarity": 4
+  },
+  {
+    "name": "Flamebringer",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "May",
+    "isCnOnly": false,
+    "rarity": 4
+  },
+  {
+    "name": "Ifrit",
+    "isCnOnly": false,
+    "rarity": 6
+  },
+  {
+    "name": "Hoshiguma",
+    "isCnOnly": false,
+    "rarity": 6
+  },
+  {
+    "name": "Beehunter",
+    "isCnOnly": false,
+    "rarity": 4
+  },
+  {
+    "name": "Lappland",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Haze",
+    "isCnOnly": false,
+    "rarity": 4
+  },
+  {
+    "name": "Specter",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Projekt Red",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Provence",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Shining",
+    "isCnOnly": false,
+    "rarity": 6
+  },
+  {
+    "name": "Nearl",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Scavenger",
+    "isCnOnly": false,
+    "rarity": 4
+  },
+  {
+    "name": "Cuora",
+    "isCnOnly": false,
+    "rarity": 4
+  },
+  {
+    "name": "Myrtle",
+    "isCnOnly": false,
+    "rarity": 4
+  },
+  {
+    "name": "Indra",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Firewatch",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Conviction",
+    "isCnOnly": false,
+    "rarity": 4
+  },
+  {
+    "name": "Vulcan",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Nightmare",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Skyfire",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Warfarin",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "SilverAsh",
+    "isCnOnly": false,
+    "rarity": 6
+  },
+  {
+    "name": "Cliffheart",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Pramanix",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Nightingale",
+    "isCnOnly": false,
+    "rarity": 6
+  },
+  {
+    "name": "Eyjafjalla",
+    "isCnOnly": false,
+    "rarity": 6
+  },
+  {
+    "name": "Perfumer",
+    "isCnOnly": false,
+    "rarity": 4
+  },
+  {
+    "name": "Earthspirit",
+    "isCnOnly": false,
+    "rarity": 4
+  },
+  {
+    "name": "Mousse",
+    "isCnOnly": false,
+    "rarity": 4
+  },
+  {
+    "name": "Gavial",
+    "isCnOnly": false,
+    "rarity": 4
+  },
+  {
+    "name": "Hellagur",
+    "isCnOnly": false,
+    "rarity": 6
+  },
+  {
+    "name": "Vermeil",
+    "isCnOnly": false,
+    "rarity": 4
+  },
+  {
+    "name": "Plume",
+    "isCnOnly": false,
+    "rarity": 3
+  },
+  {
+    "name": "Frostleaf",
+    "isCnOnly": false,
+    "rarity": 4
+  },
+  {
+    "name": "Istina",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Gummy",
+    "isCnOnly": false,
+    "rarity": 4
+  },
+  {
+    "name": "Rosa",
+    "isCnOnly": false,
+    "rarity": 6
+  },
+  {
+    "name": "Courier",
+    "isCnOnly": false,
+    "rarity": 4
+  },
+  {
+    "name": "Matterhorn",
+    "isCnOnly": false,
+    "rarity": 4
+  },
+  {
+    "name": "Croissant",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Ceobe",
+    "isCnOnly": false,
+    "rarity": 6
+  },
+  {
+    "name": "Nian",
+    "isCnOnly": false,
+    "rarity": 6
+  },
+  {
+    "name": "Dusk",
+    "isCnOnly": true,
+    "rarity": 6
+  },
+  {
+    "name": "Saria",
+    "isCnOnly": false,
+    "rarity": 6
+  },
+  {
+    "name": "Platinum",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Melantha",
+    "isCnOnly": false,
+    "rarity": 3
+  },
+  {
+    "name": "Cardigan",
+    "isCnOnly": false,
+    "rarity": 3
+  },
+  {
+    "name": "Steward",
+    "isCnOnly": false,
+    "rarity": 3
+  },
+  {
+    "name": "Adnachiel",
+    "isCnOnly": false,
+    "rarity": 3
+  },
+  {
+    "name": "Ansel",
+    "isCnOnly": false,
+    "rarity": 3
+  },
+  {
+    "name": "Mostima",
+    "isCnOnly": false,
+    "rarity": 6
+  },
+  {
+    "name": "Kafka",
+    "isCnOnly": true,
+    "rarity": 5
+  },
+  {
+    "name": "Manticore",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Andreana",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Meteorite",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Grani",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Bagpipe",
+    "isCnOnly": false,
+    "rarity": 6
+  },
+  {
+    "name": "Aak",
+    "isCnOnly": false,
+    "rarity": 6
+  },
+  {
+    "name": "Hung",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Savage",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Jessica",
+    "isCnOnly": false,
+    "rarity": 4
+  },
+  {
+    "name": "Rope",
+    "isCnOnly": false,
+    "rarity": 4
+  },
+  {
+    "name": "Gravel",
+    "isCnOnly": false,
+    "rarity": 4
+  },
+  {
+    "name": "Vanilla",
+    "isCnOnly": false,
+    "rarity": 3
+  },
+  {
+    "name": "FEater",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Mayer",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Waai Fu",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Magallan",
+    "isCnOnly": false,
+    "rarity": 6
+  },
+  {
+    "name": "Phantom",
+    "isCnOnly": false,
+    "rarity": 6
+  },
+  {
+    "name": "Bibeak",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Greyy",
+    "isCnOnly": false,
+    "rarity": 4
+  },
+  {
+    "name": "Shamare",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Podenco",
+    "isCnOnly": false,
+    "rarity": 4
+  },
+  {
+    "name": "Dur-nar",
+    "isCnOnly": false,
+    "rarity": 4
+  },
+  {
+    "name": "Reed",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Skadi",
+    "isCnOnly": false,
+    "rarity": 6
+  },
+  {
+    "name": "Mountain",
+    "isCnOnly": true,
+    "rarity": 6
+  },
+  {
+    "name": "Whislash",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Arene",
+    "isCnOnly": false,
+    "rarity": 4
+  },
+  {
+    "name": "Jaye",
+    "isCnOnly": false,
+    "rarity": 4
+  },
+  {
+    "name": "Astesia",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Breeze",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Shaw",
+    "isCnOnly": false,
+    "rarity": 4
+  },
+  {
+    "name": "Orchid",
+    "isCnOnly": false,
+    "rarity": 3
+  },
+  {
+    "name": "Executor",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Popukar",
+    "isCnOnly": false,
+    "rarity": 3
+  },
+  {
+    "name": "Catapult",
+    "isCnOnly": false,
+    "rarity": 3
+  },
+  {
+    "name": "Midnight",
+    "isCnOnly": false,
+    "rarity": 3
+  },
+  {
+    "name": "Spot",
+    "isCnOnly": false,
+    "rarity": 3
+  },
+  {
+    "name": "Matoimaru",
+    "isCnOnly": false,
+    "rarity": 4
+  },
+  {
+    "name": "Vigna",
+    "isCnOnly": false,
+    "rarity": 4
+  },
+  {
+    "name": "Angelina",
+    "isCnOnly": false,
+    "rarity": 6
+  },
+  {
+    "name": "Thorns",
+    "isCnOnly": false,
+    "rarity": 6
+  },
+  {
+    "name": "Ayerscarpe",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Sussurro",
+    "isCnOnly": false,
+    "rarity": 4
+  },
+  {
+    "name": "Cutter",
+    "isCnOnly": false,
+    "rarity": 4
+  },
+  {
+    "name": "Ambriel",
+    "isCnOnly": false,
+    "rarity": 4
+  },
+  {
+    "name": "Heavyrain",
+    "isCnOnly": true,
+    "rarity": 5
+  },
+  {
+    "name": "Leizi",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Swire",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Mudrock",
+    "isCnOnly": false,
+    "rarity": 6
+  },
+  {
+    "name": "Bison",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Glaucus",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Click",
+    "isCnOnly": false,
+    "rarity": 4
+  },
+  {
+    "name": "Archetto",
+    "isCnOnly": true,
+    "rarity": 6
+  },
+  {
+    "name": "Sideroca",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Scene",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Utage",
+    "isCnOnly": false,
+    "rarity": 4
+  },
+  {
+    "name": "Iris",
+    "isCnOnly": true,
+    "rarity": 5
+  },
+  {
+    "name": "Schwarz",
+    "isCnOnly": false,
+    "rarity": 6
+  },
+  {
+    "name": "Tsukinogi",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Beeswax",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Folinic",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Aosta",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Jackie",
+    "isCnOnly": false,
+    "rarity": 4
+  },
+  {
+    "name": "Ceylon",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Chiave",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Surtr",
+    "isCnOnly": false,
+    "rarity": 6
+  },
+  {
+    "name": "Ethan",
+    "isCnOnly": false,
+    "rarity": 4
+  },
+  {
+    "name": "Broca",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Suzuran",
+    "isCnOnly": false,
+    "rarity": 6
+  },
+  {
+    "name": "Saga",
+    "isCnOnly": true,
+    "rarity": 6
+  },
+  {
+    "name": "Toddifons",
+    "isCnOnly": true,
+    "rarity": 5
+  },
+  {
+    "name": "April",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Aciddrop",
+    "isCnOnly": false,
+    "rarity": 4
+  },
+  {
+    "name": "GreyThroat",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Leonhardt",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Asbestos",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Sesa",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Bubble",
+    "isCnOnly": false,
+    "rarity": 4
+  },
+  {
+    "name": "Snowsant",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Purestream",
+    "isCnOnly": true,
+    "rarity": 4
+  },
+  {
+    "name": "Mint",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Rosmontis",
+    "isCnOnly": false,
+    "rarity": 6
+  },
+  {
+    "name": "Weedy",
+    "isCnOnly": false,
+    "rarity": 6
+  },
+  {
+    "name": "Elysium",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Tuye",
+    "isCnOnly": true,
+    "rarity": 5
+  },
+  {
+    "name": "Absinthe",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Tomimi",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Flint",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Eunectes",
+    "isCnOnly": false,
+    "rarity": 6
+  },
+  {
+    "name": "Blemishine",
+    "isCnOnly": false,
+    "rarity": 6
+  },
+  {
+    "name": "Whisperain",
+    "isCnOnly": false,
+    "rarity": 5
+  },
+  {
+    "name": "Pinecone",
+    "isCnOnly": true,
+    "rarity": 4
+  },
+  {
+    "name": "Robin",
+    "isCnOnly": true,
+    "rarity": 5
+  },
+  {
+    "name": "Beanstalk",
+    "isCnOnly": true,
+    "rarity": 4
+  },
+  {
+    "name": "Mr.Nothing",
+    "isCnOnly": true,
+    "rarity": 5
+  },
+  {
+    "name": "Ash",
+    "isCnOnly": true,
+    "rarity": 6
+  },
+  {
+    "name": "Blitz",
+    "isCnOnly": true,
+    "rarity": 5
+  },
+  {
+    "name": "Frost",
+    "isCnOnly": true,
+    "rarity": 5
+  },
+  {
+    "name": "Tachanka",
+    "isCnOnly": true,
+    "rarity": 5
+  },
+  {
+    "name": "Passenger",
+    "isCnOnly": true,
+    "rarity": 6
+  },
+  {
+    "name": "Gladiia",
+    "isCnOnly": true,
+    "rarity": 6
+  },
+  {
+    "name": "Akafuyu",
+    "isCnOnly": true,
+    "rarity": 5
+  },
+  {
+    "name": "Amiya (Guard)",
+    "isCnOnly": true,
+    "rarity": null
+  }
+]
