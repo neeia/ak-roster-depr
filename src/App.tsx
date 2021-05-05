@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
 
-import OperatorDataTable, { OperatorProps } from './OperatorDataTable';
-import OpForm from './OpForm';
+import OperatorDataTable, { OperatorProps } from './components/OperatorDataTable';
+import OpForm from './components/OpForm';
 
 
 const angelinaProp : OperatorProps = {
