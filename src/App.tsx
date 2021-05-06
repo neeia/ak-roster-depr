@@ -1,11 +1,15 @@
 import React from "react";
-import { Container } from "@material-ui/core";
+import {
+  Container,
+  createMuiTheme,
+  CssBaseline,
+  ThemeProvider,
+} from "@material-ui/core";
 import "./App.css";
 
 import OperatorDataTableRow, {
   OperatorProps,
 } from "./components/OperatorDataTableRow";
-import OpForm from "./components/OpForm";
 import operators from "./data/operators.json";
 
 const operatorList: OperatorProps[] = [];
@@ -24,13 +28,22 @@ operators.forEach((op) => {
   operatorList.push(prop);
 });
 
+const darkTheme = createMuiTheme({
+  palette: {
+    type: "dark",
+  },
+});
+
 function App() {
   return (
-    <Container>
-      {operatorList.map((op) => (
-        <OperatorDataTableRow {...op} />
-      ))}
-    </Container>
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
+      <Container>
+        {operatorList.map((op) => (
+          <OperatorDataTableRow {...op} />
+        ))}
+      </Container>
+    </ThemeProvider>
   );
 }
 
