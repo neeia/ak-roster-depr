@@ -1,15 +1,17 @@
-import React from 'react';
-import { Container } from '@material-ui/core';
-import './App.css';
+import React from "react";
+import { Container } from "@material-ui/core";
+import "./App.css";
 
-import OperatorDataTableRow, { OperatorProps } from './components/OperatorDataTableRow';
-import OpForm from './components/OpForm';
-import operators from "./data/operators.json"
+import OperatorDataTableRow, {
+  OperatorProps,
+} from "./components/OperatorDataTableRow";
+import OpForm from "./components/OpForm";
+import operators from "./data/operators.json";
 
-const operatorList : OperatorProps[] = []
+const operatorList: OperatorProps[] = [];
 
-operators.forEach(op => {
-  const prop : OperatorProps = {
+operators.forEach((op) => {
+  const prop: OperatorProps = {
     name: op.name,
     potential: 1,
     promotion: 0,
@@ -17,26 +19,18 @@ operators.forEach(op => {
     skillLevel: 1,
     skill1Mastery: 0,
     skill2Mastery: 0,
-    skill3Mastery: 0
-  }
+    skill3Mastery: 0,
+  };
   operatorList.push(prop);
 });
 
-
 function App() {
-  // let columns : OperatorProps[][] = [];
-  // for (var i = 0; i < operatorList.length; i+=colSize) {
-  //   columns.push(operatorList.slice(i,i+colSize));
-  // }
   return (
-    <div className="App">
-        <OpForm/>
-        <Container>
-          <div className="operator-data-table">
-            {operatorList.map((op) => (<OperatorDataTableRow {...op}/>))} 
-          </div>
-        </Container>
-    </div>
+    <Container>
+      {operatorList.map((op) => (
+        <OperatorDataTableRow {...op} />
+      ))}
+    </Container>
   );
 }
 
