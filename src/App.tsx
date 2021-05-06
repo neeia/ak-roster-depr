@@ -7,9 +7,7 @@ import {
 } from "@material-ui/core";
 import "./App.css";
 
-import OperatorDataTableRow, {
-  OperatorProps,
-} from "./components/OperatorDataTableRow";
+import OperatorDataTableRow from "./components/OperatorDataTableRow";
 import operators from "./data/operators.json";
 
 
