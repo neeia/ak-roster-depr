@@ -26,13 +26,7 @@ function App() {
           {
             const props = {
               name: op.name,
-              potential: 1,
-              promotion: 0,
-              level: 0,
-              skillLevel: 1,
-              skill1Mastery: 0,
-              skill2Mastery: 0,
-              skill3Mastery: 0
+              rarity: op.rarity
             }
             return <OperatorDataTableRow {... props} />;
           })

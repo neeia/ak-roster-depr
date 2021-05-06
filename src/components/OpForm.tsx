@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Operator from "./Operator";
 
 const OpForm: React.FC = () => {
   const [operatorName, setOperatorName] = useState(""); // where "" is the initial value
