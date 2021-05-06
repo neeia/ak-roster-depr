@@ -4,7 +4,6 @@ import { OperatorProps } from "./OperatorDataTable";
 function Operator(props: OperatorProps) {
   const {
     name,
-    rarity,
     potential,
     promotion,
     level,
@@ -34,9 +33,9 @@ function Operator(props: OperatorProps) {
       <div className="data-row">
         <div className="operator-name-large">{name}</div>
       </div>
-      <div className="data-row">
+      {/* <div className="data-row">
         <div className="field">{"⭐".repeat(rarity)}</div>
-      </div>
+      </div> */}
       <div className="data-row">
         <div className="field">
           <img

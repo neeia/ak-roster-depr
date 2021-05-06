@@ -2,7 +2,6 @@ import slugify from "slugify";
 
 export interface OperatorProps {
   name: string;
-  rarity: number;
   potential: number;
   promotion: number;
   level?: number;
@@ -15,7 +14,6 @@ export interface OperatorProps {
 function OperatorDataTable(props: OperatorProps) {
   const {
     name,
-    rarity,
     potential,
     promotion,
     level,
@@ -40,9 +38,8 @@ function OperatorDataTable(props: OperatorProps) {
   return (
     <div className="collection">
       <div className="data-row">
-        <img className="field" src={imgUrl} alt={name} />
+        <img className="img-field" src={imgUrl} alt={name} />
         <div className="field">{name}</div>
-        <div className="field">{rarity}</div>
         <div className="field">{potential}</div>
         <div className="field">{promotion}</div>
         <div className="field">{level}</div>
