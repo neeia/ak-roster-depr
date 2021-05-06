@@ -4,10 +4,6 @@
   color: white;
 }
 
-.column-group ~ .column-group {
-  margin-left: 1em;
-}
-
 .table-icon-small {
   height: 48px;
   width: 48px;
