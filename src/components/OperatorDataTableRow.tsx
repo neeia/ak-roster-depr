@@ -38,16 +38,18 @@ function OperatorDataTableRow(props: OperatorProps) {
   )}`;
 
   return (
-    <Grid container>
-      <Grid item> <img className="img-field" src={imgUrl} alt={name} /></Grid>
-      <Grid item> {name}          </Grid>
-      <Grid item> {potential}     </Grid>
-      <Grid item> {promotion}     </Grid>
-      <Grid item> {level}         </Grid>
-      <Grid item> {skillLevel}    </Grid>
-      <Grid item> {skill1Mastery} </Grid>
-      <Grid item> {skill2Mastery} </Grid>
-      <Grid item> {skill3Mastery} </Grid>
+    <Grid container spacing={2}>
+      <Grid item>
+        <img className="img-field" src={imgUrl} alt={name} />
+      </Grid>
+      <Grid item>{name}</Grid>
+      <Grid item>{potential}</Grid>
+      <Grid item>{promotion}</Grid>
+      <Grid item>{level}</Grid>
+      <Grid item>{skillLevel}</Grid>
+      <Grid item>{skill1Mastery}</Grid>
+      <Grid item>{skill2Mastery}</Grid>
+      <Grid item>{skill3Mastery}</Grid>
     </Grid>
   );
 }
