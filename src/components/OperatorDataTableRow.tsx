@@ -1,3 +1,5 @@
+import { Grid } from "@material-ui/core";
+import React from "react";
 import slugify from "slugify";
 
 export interface OperatorProps {
@@ -11,7 +13,7 @@ export interface OperatorProps {
   skill3Mastery?: number;
 }
 
-function OperatorDataTable(props: OperatorProps) {
+function OperatorDataTableRow(props: OperatorProps) {
   const {
     name,
     potential,
@@ -36,7 +38,7 @@ function OperatorDataTable(props: OperatorProps) {
   )}`;
 
   return (
-    <div className="collection">
+    <Grid container>
       <div className="data-row">
         <img className="img-field" src={imgUrl} alt={name} />
         <div className="field">{name}</div>
@@ -48,7 +50,7 @@ function OperatorDataTable(props: OperatorProps) {
         <div className="field">{skill2Mastery}</div>
         <div className="field">{skill3Mastery}</div>
       </div>
-    </div>
+    </Grid>
   );
 }
-export default OperatorDataTable;
+export default OperatorDataTableRow;

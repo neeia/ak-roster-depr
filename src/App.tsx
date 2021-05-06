@@ -1,4 +1,5 @@
 import React from 'react';
+import { Container } from '@material-ui/core';
 import './App.css';
 
 import OperatorDataTable, { OperatorProps } from './components/OperatorDataTable';
@@ -30,9 +31,11 @@ function App() {
   return (
     <div className="App">
         <OpForm/>
-        <div className="operator-data-table">
-          {operatorList.map((op) => (<OperatorDataTable {...op}/>))} 
-        </div>
+        <Container>
+          <div className="operator-data-table">
+            {operatorList.map((op) => (<OperatorDataTable {...op}/>))} 
+          </div>
+        </Container>
     </div>
   );
 }
