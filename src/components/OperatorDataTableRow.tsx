@@ -39,8 +39,9 @@ function OperatorDataTableRow(props: OperatorProps) {
 
   return (
     <Grid container spacing={2}>
+      <input type="checkbox" />
       <Grid item>
-        <img className="img-field" src={imgUrl} alt={name} />
+        <img className="table-icon-small" src={imgUrl} alt={name} />
       </Grid>
       <Grid item>{name}</Grid>
       <Grid item><input defaultValue={potential}/></Grid>
