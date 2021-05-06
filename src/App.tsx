@@ -2,7 +2,7 @@ import React from 'react';
 import { Container } from '@material-ui/core';
 import './App.css';
 
-import OperatorDataTable, { OperatorProps } from './components/OperatorDataTable';
+import OperatorDataTableRow, { OperatorProps } from './components/OperatorDataTableRow';
 import OpForm from './components/OpForm';
 import operators from "./data/operators.json"
 
@@ -33,7 +33,7 @@ function App() {
         <OpForm/>
         <Container>
           <div className="operator-data-table">
-            {operatorList.map((op) => (<OperatorDataTable {...op}/>))} 
+            {operatorList.map((op) => (<OperatorDataTableRow {...op}/>))} 
           </div>
         </Container>
     </div>

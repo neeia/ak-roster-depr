@@ -1,5 +1,5 @@
 import slugify from "slugify";
-import { OperatorProps } from "./OperatorDataTable";
+import { OperatorProps } from "./OperatorDataTableRow";
 
 function Operator(props: OperatorProps) {
   const {
