@@ -8,3 +8,9 @@
   height: 48px;
   width: 48px;
 }
+
+input {
+  width: 48px;
+  background-color: #555555;
+  color:white;
+}
