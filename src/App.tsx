@@ -12,21 +12,6 @@ import OperatorDataTableRow, {
 } from "./components/OperatorDataTableRow";
 import operators from "./data/operators.json";
 
-const operatorList: OperatorProps[] = [];
-
-operators.forEach((op) => {
-  const prop: OperatorProps = {
-    name: op.name,
-    potential: 1,
-    promotion: 0,
-    level: 0,
-    skillLevel: 1,
-    skill1Mastery: 0,
-    skill2Mastery: 0,
-    skill3Mastery: 0,
-  };
-  operatorList.push(prop);
-});
 
 const darkTheme = createMuiTheme({
   palette: {
@@ -39,12 +24,24 @@ function App() {
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <Container>
-        {operatorList.map((op) => (
-          <OperatorDataTableRow {...op} />
-        ))}
+        {operators.map((op) =>
+          {
+            const props = {
+              name: op.name,
+              potential: 1,
+              promotion: 0,
+              level: 0,
+              skillLevel: 1,
+              skill1Mastery: 0,
+              skill2Mastery: 0,
+              skill3Mastery: 0
+            }
+            return <OperatorDataTableRow {... props} />;
+          })
+        }
       </Container>
     </ThemeProvider>
-  );
+  )
 }
 
 export default App;

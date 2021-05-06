@@ -43,13 +43,13 @@ function OperatorDataTableRow(props: OperatorProps) {
         <img className="img-field" src={imgUrl} alt={name} />
       </Grid>
       <Grid item>{name}</Grid>
-      <Grid item>{potential}</Grid>
-      <Grid item>{promotion}</Grid>
-      <Grid item>{level}</Grid>
-      <Grid item>{skillLevel}</Grid>
-      <Grid item>{skill1Mastery}</Grid>
-      <Grid item>{skill2Mastery}</Grid>
-      <Grid item>{skill3Mastery}</Grid>
+      <Grid item><input defaultValue={potential}/></Grid>
+      <Grid item><input defaultValue={promotion}/></Grid>
+      <Grid item><input defaultValue={level}/></Grid>
+      <Grid item><input defaultValue={skillLevel}/></Grid>
+      <Grid item><input defaultValue={skill1Mastery}/></Grid>
+      <Grid item><input defaultValue={skill2Mastery}/></Grid>
+      <Grid item><input defaultValue={skill3Mastery}/></Grid>
     </Grid>
   );
 }
