@@ -32,21 +32,20 @@ function OperatorDataTableRow(props: Props) {
   )}`;
 
 
-  const handleChangeOwned = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setOwned(e.target.checked);
-  };
-  
-  const handleChangePromotion = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPromotion(e.target.valueAsNumber);
-  };
+  const onChange = (opName:string, propName:string, propValue:any) => {
 
-  const handleChangeSkillLevel = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSkillLevel(e.target.valueAsNumber);
   };
 
   return (
     <Grid container spacing={2} alignItems="center">
-      <Grid item><input type="checkbox" checked={owned} onChange={handleChangeOwned} /></Grid>
+      <Grid item>
+        <input 
+          type="checkbox" 
+          name="owned"
+          checked={owned} 
+          onChange={(e) => onChange(name, e.target.name, e.target.checked)}
+        />
+      </Grid>
       <Grid item>
         <img
           style={{opacity :  (owned ? 1 : 0.2)}}
@@ -57,9 +56,23 @@ function OperatorDataTableRow(props: Props) {
       <Grid item>{rarity}</Grid>
       <Grid item>{name}</Grid>
       <Grid item><input defaultValue={potential} disabled={!owned}/></Grid>
-      <Grid item><input defaultValue={promotion} onChange={handleChangePromotion} disabled={!owned}/></Grid>
+      <Grid item>
+        <input 
+          name="promotion"
+          defaultValue={promotion}
+          disabled={!owned}
+          onChange={(e) => onChange(name, e.target.name, e.target.value)} 
+        />
+      </Grid>
       <Grid item><input defaultValue={level} disabled={!owned}/></Grid>
-      <Grid item><input defaultValue={skillLevel} onChange={handleChangeSkillLevel} disabled={!owned}/></Grid>
+      <Grid item>
+        <input 
+          name="skillLevel"
+          defaultValue={skillLevel}
+          disabled={!owned}
+          onChange={(e) => onChange(name, e.target.name, e.target.value)} 
+        />
+      </Grid>
       <Grid item><input defaultValue={skill1Mastery} disabled={promotion<2 || skillLevel<7 || !owned}/></Grid>
       <Grid item><input defaultValue={skill2Mastery} disabled={promotion<2 || skillLevel<7 || !owned}/></Grid>
       <Grid item><input defaultValue={skill3Mastery} disabled={promotion<2 || skillLevel<7 || !owned}/></Grid>
