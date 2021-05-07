@@ -32,21 +32,21 @@ function OperatorDataTableRow(props: Props) {
   )}`;
 
 
-  const listenerOwned = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeOwned = (e: React.ChangeEvent<HTMLInputElement>) => {
     setOwned(e.target.checked);
   };
   
-  const listenerPromotion = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangePromotion = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPromotion(e.target.valueAsNumber);
   };
 
-  const listenerSkillLevel = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeSkillLevel = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSkillLevel(e.target.valueAsNumber);
   };
 
   return (
     <Grid container spacing={2} alignItems="center">
-      <Grid item><input type="checkbox" checked={owned} onChange={listenerOwned} /></Grid>
+      <Grid item><input type="checkbox" checked={owned} onChange={handleChangeOwned} /></Grid>
       <Grid item>
         <img
           style={{opacity :  (owned ? 1 : 0.2)}}
@@ -57,9 +57,9 @@ function OperatorDataTableRow(props: Props) {
       <Grid item>{rarity}</Grid>
       <Grid item>{name}</Grid>
       <Grid item><input defaultValue={potential} disabled={!owned}/></Grid>
-      <Grid item><input defaultValue={promotion} onChange={listenerPromotion} disabled={!owned}/></Grid>
+      <Grid item><input defaultValue={promotion} onChange={handleChangePromotion} disabled={!owned}/></Grid>
       <Grid item><input defaultValue={level} disabled={!owned}/></Grid>
-      <Grid item><input defaultValue={skillLevel} onChange={listenerSkillLevel} disabled={!owned}/></Grid>
+      <Grid item><input defaultValue={skillLevel} onChange={handleChangeSkillLevel} disabled={!owned}/></Grid>
       <Grid item><input defaultValue={skill1Mastery} disabled={promotion<2 || skillLevel<7 || !owned}/></Grid>
       <Grid item><input defaultValue={skill2Mastery} disabled={promotion<2 || skillLevel<7 || !owned}/></Grid>
       <Grid item><input defaultValue={skill3Mastery} disabled={promotion<2 || skillLevel<7 || !owned}/></Grid>
