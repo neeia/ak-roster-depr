@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import {
-  Container,
   createMuiTheme,
   CssBaseline,
   ThemeProvider,
 } from "@material-ui/core";
+import Table from '@material-ui/core/Table';
+import TableHead from '@material-ui/core/TableHead';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
 import "./App.css";
 
 import OperatorDataTableRow from "./components/OperatorDataTableRow";
@@ -59,16 +63,33 @@ function App() {
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
-      <Container>
-        {operatorJson.map((op) =>
-          {
-            const opData = operators[op.name];
-            return <OperatorDataTableRow 
-                    operator={opData} 
-                    onChange = {handleChange} />;
-          })
-        }
-      </Container>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell align="right">Owned</TableCell>
+            <TableCell align="right">Icon</TableCell>
+            <TableCell>Rarity</TableCell>
+            <TableCell>Operator</TableCell>
+            <TableCell align="right">Potential</TableCell>
+            <TableCell align="right">Promotion</TableCell>
+            <TableCell align="right">Level</TableCell>
+            <TableCell align="right">Skill Level</TableCell>
+            <TableCell align="right">S1</TableCell>
+            <TableCell align="right">S2</TableCell>
+            <TableCell align="right">S3</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {operatorJson.map((op) =>
+            {
+              const opData = operators[op.name];
+              return <OperatorDataTableRow 
+                      operator={opData} 
+                      onChange = {handleChange} />;
+            })
+          }
+        </TableBody>
+      </Table>
     </ThemeProvider>
   )
 }

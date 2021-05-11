@@ -1,8 +1,8 @@
-import { Grid } from "@material-ui/core";
 import React from "react";
 import slugify from "slugify";
-import { useState } from "react";
 import { Operator } from "../App";
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
 
 interface Props {
   operator: Operator;
@@ -25,25 +25,27 @@ function OperatorDataTableRow(props: Props) {
   )}`;
 
   return (
-    <Grid container spacing={2} alignItems="center">
-      <Grid item>
+    <TableRow key={operator.name}>
+      <TableCell align="right">
         <input 
           name="owned"
           type="checkbox" 
-          checked={operator.owned} 
+          checked={operator.owned}
           onChange={(e) => onChange(operator.name, e.target.name, e.target.checked)}
         />
-      </Grid>
-      <Grid item>
+      </TableCell>
+      <TableCell align="right">
         <img
           style={{opacity :  (operator.owned ? 1 : 0.2)}}
           className="table-icon-small" 
           src={imgUrl} 
           alt={operator.name} />
-      </Grid>
-      <Grid item>{operator.rarity}</Grid>
-      <Grid item>{operator.name}</Grid>
-      <Grid item>
+      </TableCell>
+      <TableCell>{operator.rarity}</TableCell>
+      <TableCell component="th" scope="row">
+        {operator.name}
+      </TableCell>
+      <TableCell align="right">
         <input 
           name="potential"
           type="number"
@@ -51,8 +53,8 @@ function OperatorDataTableRow(props: Props) {
           disabled={!operator.owned}
           onChange={(e) => onChange(operator.name, e.target.name, e.target.valueAsNumber)} 
         />
-      </Grid>
-      <Grid item>
+      </TableCell>
+      <TableCell align="right">
         <input 
           name="promotion"
           type="number"
@@ -60,8 +62,8 @@ function OperatorDataTableRow(props: Props) {
           disabled={!operator.owned}
           onChange={(e) => onChange(operator.name, e.target.name, e.target.valueAsNumber)} 
         />
-      </Grid>
-      <Grid item>
+      </TableCell>
+      <TableCell align="right">
         <input 
           name="level"
           type="number"
@@ -69,8 +71,8 @@ function OperatorDataTableRow(props: Props) {
           disabled={!operator.owned}
           onChange={(e) => onChange(operator.name, e.target.name, e.target.valueAsNumber)} 
         />
-      </Grid>
-      <Grid item>
+      </TableCell>
+      <TableCell align="right">
         <input 
           name="skillLevel"
           type="number"
@@ -78,8 +80,8 @@ function OperatorDataTableRow(props: Props) {
           disabled={!operator.owned}
           onChange={(e) => onChange(operator.name, e.target.name, e.target.valueAsNumber)} 
         />
-      </Grid>
-      <Grid item>
+      </TableCell>
+      <TableCell align="right">
         <input 
           name="skill1Mastery"
           type="number"
@@ -87,8 +89,8 @@ function OperatorDataTableRow(props: Props) {
           disabled={operator.promotion<2 || operator.skillLevel<7 || !operator.owned}
           onChange={(e) => onChange(operator.name, e.target.name, e.target.valueAsNumber)} 
         />
-      </Grid>
-      <Grid item>
+      </TableCell>
+      <TableCell align="right">
         <input 
           name="skill1Mastery"
           type="number"
@@ -96,8 +98,8 @@ function OperatorDataTableRow(props: Props) {
           disabled={operator.promotion<2 || operator.skillLevel<7 || !operator.owned}
           onChange={(e) => onChange(operator.name, e.target.name, e.target.valueAsNumber)} 
         />
-      </Grid>
-      <Grid item>
+      </TableCell>
+      <TableCell align="right">
         <input 
           name="skill2Mastery"
           type="number"
@@ -105,8 +107,8 @@ function OperatorDataTableRow(props: Props) {
           disabled={operator.promotion<2 || operator.skillLevel<7 || !operator.owned}
           onChange={(e) => onChange(operator.name, e.target.name, e.target.valueAsNumber)} 
         />
-      </Grid>
-    </Grid>
+      </TableCell>
+    </TableRow>
   );
 }
 export default OperatorDataTableRow;
