@@ -1,22 +1,14 @@
-import React, { useState } from "react";
+interface Props {
+  onChange: (opName: string) => void;
+}
 
-const OpForm: React.FC = () => {
-  const [operatorName, setOperatorName] = useState(""); // where "" is the initial value
+function OpForm(props: Props) {
+  const change = props;
   return (
     <>
-      {/* <label>Operator name:
-        <input onChange={(e) => setOperatorName(e.target.value)} />
-      </label>
-      <Operator 
-        name={operatorName} 
-        rarity= {6}
-        potential={1}
-        promotion={0}
-        level={1}
-        skillLevel={1}
-        skill1Mastery={0}
-        skill2Mastery={0}
-        skill3Mastery={0} /> */}
+      {<label>Search:
+        <input onChange={(e) => change.onChange(e.target.value)} />
+      </label>}
     </>
   );
 };

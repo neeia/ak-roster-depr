@@ -13,6 +13,7 @@ import "./App.css";
 
 import OperatorDataTableRow from "./components/OperatorDataTableRow";
 import operatorJson from "./data/operators.json";
+import OpForm from "./components/OpForm";
 
 
 const darkTheme = createMuiTheme({
@@ -56,13 +57,16 @@ function App() {
     value: number | boolean) => {
       const copyOperators = {...operators};
       const operatorData = copyOperators[operatorName];
-      // operatorData[property] = value;
+      (operatorData as any)[property] = value;
       setOperators(copyOperators);
-    };
+  };
+
+  const [operatorFilter, setOperatorFilter] = useState<string>("");
 
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
+      <OpForm onChange={setOperatorFilter}/>
       <Table>
         <TableHead>
           <TableRow>
@@ -83,9 +87,11 @@ function App() {
           {operatorJson.map((op) =>
             {
               const opData = operators[op.name];
-              return <OperatorDataTableRow 
-                      operator={opData} 
-                      onChange = {handleChange} />;
+              if (op.name.toLowerCase().includes(operatorFilter.toLowerCase())) {
+                return <OperatorDataTableRow 
+                        operator={opData} 
+                        onChange = {handleChange} />;
+              }
             })
           }
         </TableBody>
