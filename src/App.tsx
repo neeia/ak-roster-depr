@@ -84,9 +84,9 @@ function App() {
       <CssBaseline />
       <AppBar position="static">
         <Tabs value={value} onChange={handleTabChange} aria-label="simple tabs example">
-        <Tab label="Item One" {...a11yProps(0)} />
-        <Tab label="Item Two" {...a11yProps(1)} />
-        <Tab label="Item Three" {...a11yProps(2)} />
+        <Tab label="Roster" {...a11yProps(0)} />
+        <Tab label="Collection" {...a11yProps(1)} />
+        <Tab label="Placeholder" {...a11yProps(2)} />
       </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
