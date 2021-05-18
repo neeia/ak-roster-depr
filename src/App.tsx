@@ -114,29 +114,30 @@ function App() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {operatorJson.map((op) =>
-              {
-                const opData = operators[op.name];
-                if (op.name.toLowerCase().includes(operatorFilter.toLowerCase())) {
-                  return <OperatorDataTableRow 
-                          operator={opData} 
-                          onChange = {handleChange} />;
-                }
-              })
-            }
+            {operatorJson
+              .filter((op) =>
+                op.name.toLowerCase().includes(operatorFilter.toLowerCase())
+              )
+              .map((op) => (
+                <OperatorDataTableRow
+                  key={op.name}
+                  operator={operators[op.name]}
+                  onChange={handleChange}
+                />
+              ))}
           </TableBody>
         </Table>
       </TabPanel>
       <TabPanel value={value} index={1}>
         <div className="container">
-          {operatorJson.map((op) =>
-            {
-              const opData = operators[op.name];
-              if (opData.potential > 0) {
-                return <OperatorCollectionBlock operator={opData}/>;
-              }
-            })
-          }
+          {operatorJson
+            .filter((op) => operators[op.name].potential > 0)
+            .map((op) => (
+              <OperatorCollectionBlock
+                key={op.name}
+                operator={operators[op.name]}
+              />
+            ))}
         </div>
       </TabPanel>
     </ThemeProvider>
