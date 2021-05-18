@@ -47,7 +47,7 @@ function OperatorCollectionBlock(props: Props) {
           />
         </div>
         <div className="collection-block-member">
-          <div className="collection-block-level-icon">{operator.level}</div>
+          <div className="collection-block-level-large">{operator.level}</div>
         </div>
       </div>
       {operator.skillLevel < 7 ? (
@@ -55,7 +55,7 @@ function OperatorCollectionBlock(props: Props) {
           <div className="collection-block-member">Skill Level {operator.skillLevel}</div>
         </div>
       ) : (
-        <div className="data-row">
+        <div className="collection-block-data-row">
           <div className="collection-block-member">{operator.skill1Mastery}</div>
           <div className="collection-block-member">{operator.skill2Mastery}</div>
           <div className="collection-block-member">{operator.skill3Mastery}</div>

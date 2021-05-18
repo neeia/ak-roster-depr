@@ -4,6 +4,7 @@ import {
   Box,
   createMuiTheme,
   CssBaseline,
+  Grid,
   Tab,
   Tabs,
   ThemeProvider,
@@ -67,14 +68,18 @@ function App() {
       setOperators(copyOperators);
   };
 
+  // no clue what this is for
   function a11yProps(index : number) {
     return {
       id: `simple-tab-${index}`,
       "aria-controls": `simple-tabpanel-${index}`
     };
   }
-
+  
+  // operator name search filter
   const [operatorFilter, setOperatorFilter] = useState<string>("");
+
+  // tab value controller
   const [value, setValue] = React.useState(0);
   const handleTabChange = (event : any, newValue : number) => {
     setValue(newValue);
@@ -123,15 +128,16 @@ function App() {
         </Table>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        {operatorJson.map((op) =>
-          {
-            const opData = operators[op.name];
-            if (op.name.toLowerCase().includes(operatorFilter.toLowerCase())) {
-              return <OperatorCollectionBlock 
-                      operator={opData}/>;
-            }
-          })
-        }
+        <div className="container">
+          {operatorJson.map((op) =>
+            {
+              const opData = operators[op.name];
+              if (opData.potential > 0) {
+                return <OperatorCollectionBlock operator={opData}/>;
+              }
+            })
+          }
+        </div>
       </TabPanel>
     </ThemeProvider>
   )
