@@ -19,6 +19,7 @@ import "./App.css";
 import OperatorDataTableRow from "./components/OperatorDataTableRow";
 import operatorJson from "./data/operators.json";
 import OpForm from "./components/OpForm";
+import OperatorCollectionBlock from "./components/OperatorCollectionBlock";
 
 
 const darkTheme = createMuiTheme({
@@ -120,6 +121,17 @@ function App() {
             }
           </TableBody>
         </Table>
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        {operatorJson.map((op) =>
+          {
+            const opData = operators[op.name];
+            if (op.name.toLowerCase().includes(operatorFilter.toLowerCase())) {
+              return <OperatorCollectionBlock 
+                      operator={opData}/>;
+            }
+          })
+        }
       </TabPanel>
     </ThemeProvider>
   )

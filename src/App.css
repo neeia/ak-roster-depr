@@ -14,3 +14,20 @@ input {
   background-color: #555555;
   color:white;
 }
+
+.collection-block-data-row {
+  justify-content: space-between;
+}
+
+.collection-block-icon {
+  height: 60px;
+  width: 60px;
+}
+
+.collection-block-level-icon {
+  font-size: 48;
+}
+
+.collection-block-member {
+  display:inline-block;
+}

@@ -85,16 +85,7 @@ function OperatorDataTableRow(props: Props) {
         <input 
           name="skill1Mastery"
           type="number"
-          value={operator.skill2Mastery}
-          disabled={operator.promotion<2 || operator.skillLevel<7 || !operator.owned}
-          onChange={(e) => onChange(operator.name, e.target.name, e.target.valueAsNumber)} 
-        />
-      </TableCell>
-      <TableCell align="right">
-        <input 
-          name="skill1Mastery"
-          type="number"
-          value={operator.skill2Mastery}
+          value={operator.skill1Mastery}
           disabled={operator.promotion<2 || operator.skillLevel<7 || !operator.owned}
           onChange={(e) => onChange(operator.name, e.target.name, e.target.valueAsNumber)} 
         />
@@ -104,6 +95,15 @@ function OperatorDataTableRow(props: Props) {
           name="skill2Mastery"
           type="number"
           value={operator.skill2Mastery}
+          disabled={operator.promotion<2 || operator.skillLevel<7 || !operator.owned}
+          onChange={(e) => onChange(operator.name, e.target.name, e.target.valueAsNumber)} 
+        />
+      </TableCell>
+      <TableCell align="right">
+        <input 
+          name="skill3Mastery"
+          type="number"
+          value={operator.skill3Mastery}
           disabled={operator.promotion<2 || operator.skillLevel<7 || !operator.owned}
           onChange={(e) => onChange(operator.name, e.target.name, e.target.valueAsNumber)} 
         />
