@@ -29,7 +29,9 @@ function OperatorCollectionBlock(props: Props) {
         <div className="operator-name-large">{operator.name}</div>
       </div>
       <div className="collection-block-data-row">
-        <div className="collection-block-member">{"⭐".repeat(operator.rarity)}</div>
+        <div className="collection-block-member">
+          {"⭐".repeat(operator.rarity)}
+        </div>
       </div>
       <div className="collection-block-data-row">
         <div className="collection-block-member">
@@ -52,13 +54,21 @@ function OperatorCollectionBlock(props: Props) {
       </div>
       {operator.skillLevel < 7 ? (
         <div className="collection-block-data-row">
-          <div className="collection-block-member">Skill Level {operator.skillLevel}</div>
+          <div className="collection-block-member">
+            Skill Level {operator.skillLevel}
+          </div>
         </div>
       ) : (
         <div className="collection-block-data-row">
-          <div className="collection-block-member">{operator.skill1Mastery}</div>
-          <div className="collection-block-member">{operator.skill2Mastery}</div>
-          <div className="collection-block-member">{operator.skill3Mastery}</div>
+          <div className="collection-block-member">
+            {operator.skill1Mastery}
+          </div>
+          <div className="collection-block-member">
+            {operator.skill2Mastery}
+          </div>
+          <div className="collection-block-member">
+            {operator.skill3Mastery}
+          </div>
         </div>
       )}
     </div>
