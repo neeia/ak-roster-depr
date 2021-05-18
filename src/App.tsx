@@ -64,8 +64,9 @@ function App() {
     value: number | boolean
   ) => {
     const copyOperators = { ...operators };
-    const operatorData = copyOperators[operatorName];
-    (operatorData as any)[property] = value;
+    const copyOperatorData = copyOperators[operatorName];
+    (copyOperatorData as any)[property] = value;
+    copyOperators[operatorName] = copyOperatorData;
     setOperators(copyOperators);
   };
 
