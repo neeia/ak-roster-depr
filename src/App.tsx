@@ -63,11 +63,13 @@ function App() {
     property: string,
     value: number | boolean
   ) => {
-    const copyOperators = { ...operators };
-    const copyOperatorData = copyOperators[operatorName];
-    (copyOperatorData as any)[property] = value;
-    copyOperators[operatorName] = copyOperatorData;
-    setOperators(copyOperators);
+    setOperators((oldOperators) => {
+      const copyOperators = { ...oldOperators };
+      const copyOperatorData = copyOperators[operatorName];
+      (copyOperatorData as any)[property] = value;
+      copyOperators[operatorName] = copyOperatorData;
+      return copyOperators;
+    });
   };
 
   // no clue what this is for
