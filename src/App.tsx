@@ -4,24 +4,22 @@ import {
   Box,
   createMuiTheme,
   CssBaseline,
-  Grid,
   Tab,
   Tabs,
   ThemeProvider,
   Typography,
 } from "@material-ui/core";
-import Table from '@material-ui/core/Table';
-import TableHead from '@material-ui/core/TableHead';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableRow from '@material-ui/core/TableRow';
+import Table from "@material-ui/core/Table";
+import TableHead from "@material-ui/core/TableHead";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableRow from "@material-ui/core/TableRow";
 import "./App.css";
 
 import OperatorDataTableRow from "./components/OperatorDataTableRow";
 import operatorJson from "./data/operators.json";
 import OpForm from "./components/OpForm";
 import OperatorCollectionBlock from "./components/OperatorCollectionBlock";
-
 
 const darkTheme = createMuiTheme({
   palette: {
@@ -30,23 +28,23 @@ const darkTheme = createMuiTheme({
 });
 
 export interface Operator {
- name : string;
- rarity : number;
- potential : number;
- promotion : number;
- owned: boolean;
- level : number;
- skillLevel : number;
- skill1Mastery?: number;
- skill2Mastery?: number;
- skill3Mastery?: number;
+  name: string;
+  rarity: number;
+  potential: number;
+  promotion: number;
+  owned: boolean;
+  level: number;
+  skillLevel: number;
+  skill1Mastery?: number;
+  skill2Mastery?: number;
+  skill3Mastery?: number;
 }
 
 function App() {
   const [operators, setOperators] = useState<Record<string, Operator>>(
     Object.fromEntries(
       operatorJson.map((op) => [
-        op.name, 
+        op.name,
         {
           name: op.name,
           rarity: op.rarity,
@@ -54,34 +52,39 @@ function App() {
           potential: 0,
           promotion: 0,
           level: 0,
-          skillLevel: 0
-          }]))
+          skillLevel: 0,
+        },
+      ])
+    )
   );
 
-  const handleChange = (
-    operatorName: string,
-    property: string,
-    value: number | boolean) => {
-      const copyOperators = {...operators};
-      const operatorData = copyOperators[operatorName];
-      (operatorData as any)[property] = value;
-      setOperators(copyOperators);
-  };
+  const handleChange = React.useCallback(
+    (operatorName: string, property: string, value: number | boolean) => {
+      setOperators((oldOperators) => {
+        const copyOperators = { ...oldOperators };
+        const copyOperatorData = { ...copyOperators[operatorName] };
+        (copyOperatorData as any)[property] = value;
+        copyOperators[operatorName] = copyOperatorData;
+        return copyOperators;
+      });
+    },
+    []
+  );
 
   // no clue what this is for
-  function a11yProps(index : number) {
+  function a11yProps(index: number) {
     return {
       id: `simple-tab-${index}`,
-      "aria-controls": `simple-tabpanel-${index}`
+      "aria-controls": `simple-tabpanel-${index}`,
     };
   }
-  
+
   // operator name search filter
   const [operatorFilter, setOperatorFilter] = useState<string>("");
 
   // tab value controller
   const [value, setValue] = React.useState(0);
-  const handleTabChange = (event : any, newValue : number) => {
+  const handleTabChange = (event: any, newValue: number) => {
     setValue(newValue);
   };
 
@@ -89,14 +92,18 @@ function App() {
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <AppBar position="static">
-        <Tabs value={value} onChange={handleTabChange} aria-label="simple tabs example">
-        <Tab label="Roster" {...a11yProps(0)} />
-        <Tab label="Collection" {...a11yProps(1)} />
-        <Tab label="Placeholder" {...a11yProps(2)} />
-      </Tabs>
+        <Tabs
+          value={value}
+          onChange={handleTabChange}
+          aria-label="simple tabs example"
+        >
+          <Tab label="Roster" {...a11yProps(0)} />
+          <Tab label="Collection" {...a11yProps(1)} />
+          <Tab label="Placeholder" {...a11yProps(2)} />
+        </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <OpForm onChange={setOperatorFilter}/>
+        <OpForm onChange={setOperatorFilter} />
         <Table>
           <TableHead>
             <TableRow>
@@ -114,39 +121,39 @@ function App() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {operatorJson.map((op) =>
-              {
-                const opData = operators[op.name];
-                if (op.name.toLowerCase().includes(operatorFilter.toLowerCase())) {
-                  return <OperatorDataTableRow 
-                          operator={opData} 
-                          onChange = {handleChange} />;
-                }
-              })
-            }
+            {operatorJson
+              .filter((op) =>
+                op.name.toLowerCase().includes(operatorFilter.toLowerCase())
+              )
+              .map((op) => (
+                <OperatorDataTableRow
+                  key={op.name}
+                  operator={operators[op.name]}
+                  onChange={handleChange}
+                />
+              ))}
           </TableBody>
         </Table>
       </TabPanel>
       <TabPanel value={value} index={1}>
         <div className="container">
-          {operatorJson.map((op) =>
-            {
-              const opData = operators[op.name];
-              if (opData.potential > 0) {
-                return <OperatorCollectionBlock operator={opData}/>;
-              }
-            })
-          }
+          {operatorJson
+            .filter((op) => operators[op.name].potential > 0)
+            .map((op) => (
+              <OperatorCollectionBlock
+                key={op.name}
+                operator={operators[op.name]}
+              />
+            ))}
         </div>
       </TabPanel>
     </ThemeProvider>
-  )
+  );
 }
 
 export default App;
 
-
-function TabPanel(props : TabProps) {
+function TabPanel(props: TabProps) {
   const { children, value, index, ...other } = props;
 
   return (
@@ -167,7 +174,7 @@ function TabPanel(props : TabProps) {
 }
 
 interface TabProps {
-  children: any,
-  index: number,
-  value: number
-};
+  children: any;
+  index: number;
+  value: number;
+}

@@ -1,3 +1,4 @@
+import React from "react";
 import slugify from "slugify";
 import { Operator } from "../App";
 
@@ -5,7 +6,7 @@ interface Props {
   operator: Operator;
 }
 
-function OperatorCollectionBlock(props: Props) {
+const OperatorCollectionBlock = React.memo((props: Props) => {
   const { operator } = props;
   const potentialUrl = `https://res.cloudinary.com/samidare/image/upload/v1/arknights/potential/${operator.potential}`;
   const promotionUrl = `https://res.cloudinary.com/samidare/image/upload/v1/arknights/elite/${operator.promotion}`;
@@ -29,7 +30,9 @@ function OperatorCollectionBlock(props: Props) {
         <div className="operator-name-large">{operator.name}</div>
       </div>
       <div className="collection-block-data-row">
-        <div className="collection-block-member">{"⭐".repeat(operator.rarity)}</div>
+        <div className="collection-block-member">
+          {"⭐".repeat(operator.rarity)}
+        </div>
       </div>
       <div className="collection-block-data-row">
         <div className="collection-block-member">
@@ -52,16 +55,24 @@ function OperatorCollectionBlock(props: Props) {
       </div>
       {operator.skillLevel < 7 ? (
         <div className="collection-block-data-row">
-          <div className="collection-block-member">Skill Level {operator.skillLevel}</div>
+          <div className="collection-block-member">
+            Skill Level {operator.skillLevel}
+          </div>
         </div>
       ) : (
         <div className="collection-block-data-row">
-          <div className="collection-block-member">{operator.skill1Mastery}</div>
-          <div className="collection-block-member">{operator.skill2Mastery}</div>
-          <div className="collection-block-member">{operator.skill3Mastery}</div>
+          <div className="collection-block-member">
+            {operator.skill1Mastery}
+          </div>
+          <div className="collection-block-member">
+            {operator.skill2Mastery}
+          </div>
+          <div className="collection-block-member">
+            {operator.skill3Mastery}
+          </div>
         </div>
       )}
     </div>
   );
-}
+});
 export default OperatorCollectionBlock;
