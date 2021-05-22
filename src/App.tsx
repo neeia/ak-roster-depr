@@ -4,6 +4,7 @@ import {
   Box,
   createMuiTheme,
   CssBaseline,
+  makeStyles,
   Tab,
   Tabs,
   ThemeProvider,
@@ -24,6 +25,15 @@ import OperatorCollectionBlock from "./components/OperatorCollectionBlock";
 const darkTheme = createMuiTheme({
   palette: {
     type: "dark",
+  },
+});
+
+const useStyles = makeStyles({
+  collectionContainer: {
+    display: "flex",
+    flexWrap: "wrap",
+    flexDirection: "column",
+    height: "100vh",
   },
 });
 
@@ -57,6 +67,7 @@ function App() {
       ])
     )
   );
+  const classes = useStyles();
 
   const handleChange = React.useCallback(
     (operatorName: string, property: string, value: number | boolean) => {
@@ -136,7 +147,7 @@ function App() {
         </Table>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <div className="container">
+        <div className={classes.collectionContainer}>
           {operatorJson
             .filter((op) => operators[op.name].potential > 0)
             .map((op) => (
