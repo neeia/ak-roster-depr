@@ -1,6 +1,16 @@
+import { makeStyles } from "@material-ui/core";
 import React from "react";
 import slugify from "slugify";
 import { Operator } from "../App";
+
+const useStyles = makeStyles({
+  block: {},
+  row: {},
+  item: {},
+  icon: {},
+  operatorName: {},
+  level: {},
+});
 
 interface Props {
   operator: Operator;
@@ -8,6 +18,7 @@ interface Props {
 
 const OperatorCollectionBlock = React.memo((props: Props) => {
   const { operator } = props;
+  const classes = useStyles();
   const potentialUrl = `https://res.cloudinary.com/samidare/image/upload/v1/arknights/potential/${operator.potential}`;
   const promotionUrl = `https://res.cloudinary.com/samidare/image/upload/v1/arknights/elite/${operator.promotion}`;
 
@@ -24,52 +35,42 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
   )}`;
 
   return (
-    <div className="collection-block">
+    <div className={classes.block}>
       <img src={imgUrl} alt={operator.name} />
-      <div className="collection-block-data-row">
-        <div className="operator-name-large">{operator.name}</div>
+      <div className={classes.row}>
+        <div className={classes.operatorName}>{operator.name}</div>
       </div>
-      <div className="collection-block-data-row">
-        <div className="collection-block-member">
-          {"⭐".repeat(operator.rarity)}
-        </div>
+      <div className={classes.row}>
+        <div className={classes.item}>{"⭐".repeat(operator.rarity)}</div>
       </div>
-      <div className="collection-block-data-row">
-        <div className="collection-block-member">
+      <div className={classes.row}>
+        <div className={classes.item}>
           <img
             src={potentialUrl}
-            className="collection-block-icon"
+            className={classes.icon}
             alt={`Potential ${operator.potential} icon`}
           />
         </div>
-        <div className="collection-block-member">
+        <div className={classes.item}>
           <img
             src={promotionUrl}
-            className="collection-block-icon"
+            className={classes.icon}
             alt={`Elite ${operator.promotion} icon`}
           />
         </div>
-        <div className="collection-block-member">
-          <div className="collection-block-level-large">{operator.level}</div>
+        <div className={classes.item}>
+          <div className={classes.level}>{operator.level}</div>
         </div>
       </div>
       {operator.skillLevel < 7 ? (
-        <div className="collection-block-data-row">
-          <div className="collection-block-member">
-            Skill Level {operator.skillLevel}
-          </div>
+        <div className={classes.row}>
+          <div className={classes.item}>Skill Level {operator.skillLevel}</div>
         </div>
       ) : (
-        <div className="collection-block-data-row">
-          <div className="collection-block-member">
-            {operator.skill1Mastery}
-          </div>
-          <div className="collection-block-member">
-            {operator.skill2Mastery}
-          </div>
-          <div className="collection-block-member">
-            {operator.skill3Mastery}
-          </div>
+        <div className={classes.row}>
+          <div className={classes.item}>{operator.skill1Mastery}</div>
+          <div className={classes.item}>{operator.skill2Mastery}</div>
+          <div className={classes.item}>{operator.skill3Mastery}</div>
         </div>
       )}
     </div>
