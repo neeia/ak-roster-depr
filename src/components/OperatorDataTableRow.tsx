@@ -25,7 +25,7 @@ const OperatorDataTableRow = React.memo((props: Props) => {
 
   const imgUrl = `https://res.cloudinary.com/samidare/image/upload/v1/arknights/operators/${slugify(
     intermediate,
-    { lower: true, replacement: "-" }
+    { lower: true, replacement: "-", remove: /-/g }
   )}`;
 
   return (
