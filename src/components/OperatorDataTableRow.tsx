@@ -3,6 +3,15 @@ import slugify from "slugify";
 import { Operator } from "../App";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
+import { makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles({
+  input: {
+    width: "48px",
+    backgroundColor: "#555555",
+    color: "white",
+  },
+});
 
 interface Props {
   operator: Operator;
@@ -15,6 +24,7 @@ interface Props {
 
 const OperatorDataTableRow = React.memo((props: Props) => {
   const { operator, onChange } = props;
+  const classes = useStyles();
 
   let intermediate = operator.name;
   if (operator.promotion === 2) {
@@ -32,6 +42,7 @@ const OperatorDataTableRow = React.memo((props: Props) => {
     <TableRow key={operator.name}>
       <TableCell align="right">
         <input
+          className={classes.input}
           name="owned"
           type="checkbox"
           checked={operator.owned}
@@ -43,7 +54,8 @@ const OperatorDataTableRow = React.memo((props: Props) => {
       <TableCell align="right">
         <img
           style={{ opacity: operator.owned ? 1 : 0.2 }}
-          className="table-icon-small"
+          width={48}
+          height={48}
           src={imgUrl}
           alt={operator.name}
         />
@@ -54,6 +66,7 @@ const OperatorDataTableRow = React.memo((props: Props) => {
       </TableCell>
       <TableCell align="right">
         <input
+          className={classes.input}
           name="potential"
           type="number"
           value={operator.potential}
@@ -65,6 +78,7 @@ const OperatorDataTableRow = React.memo((props: Props) => {
       </TableCell>
       <TableCell align="right">
         <input
+          className={classes.input}
           name="promotion"
           type="number"
           value={operator.promotion}
@@ -76,6 +90,7 @@ const OperatorDataTableRow = React.memo((props: Props) => {
       </TableCell>
       <TableCell align="right">
         <input
+          className={classes.input}
           name="level"
           type="number"
           value={operator.level}
@@ -87,6 +102,7 @@ const OperatorDataTableRow = React.memo((props: Props) => {
       </TableCell>
       <TableCell align="right">
         <input
+          className={classes.input}
           name="skillLevel"
           type="number"
           value={operator.skillLevel}
@@ -98,6 +114,7 @@ const OperatorDataTableRow = React.memo((props: Props) => {
       </TableCell>
       <TableCell align="right">
         <input
+          className={classes.input}
           name="skill1Mastery"
           type="number"
           value={operator.skill1Mastery}
@@ -111,6 +128,7 @@ const OperatorDataTableRow = React.memo((props: Props) => {
       </TableCell>
       <TableCell align="right">
         <input
+          className={classes.input}
           name="skill2Mastery"
           type="number"
           value={operator.skill2Mastery}
@@ -124,6 +142,7 @@ const OperatorDataTableRow = React.memo((props: Props) => {
       </TableCell>
       <TableCell align="right">
         <input
+          className={classes.input}
           name="skill3Mastery"
           type="number"
           value={operator.skill3Mastery}
