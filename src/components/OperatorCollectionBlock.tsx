@@ -4,14 +4,12 @@ import slugify from "slugify";
 import { Operator } from "../App";
 
 const useStyles = makeStyles({
-  block: {},
   row: {
     justifyContent: "space-between",
   },
   item: {
     display: "inline-block",
   },
-  operatorName: {},
   level: {
     fontSize: "48px",
     textAlign: "center",
@@ -41,11 +39,9 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
   )}`;
 
   return (
-    <div className={classes.block}>
+    <div>
       <img src={imgUrl} alt={operator.name} />
-      <div className={classes.row}>
-        <div className={classes.operatorName}>{operator.name}</div>
-      </div>
+      <div className={classes.row}>{operator.name}</div>
       <div className={classes.row}>
         <div className={classes.item}>{"⭐".repeat(operator.rarity)}</div>
       </div>
