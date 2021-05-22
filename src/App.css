@@ -9,24 +9,6 @@ input {
   color: white;
 }
 
-.collection-block-data-row {
-  justify-content: space-between;
-}
-
-.collection-block-icon {
-  height: 60px;
-  width: 60px;
-}
-
-.collection-block-level-large {
-  font-size: 48px;
-  text-align: center;
-}
-
-.collection-block-member {
-  display: inline-block;
-}
-
 .container {
   display: flex;
   flex-wrap: wrap;

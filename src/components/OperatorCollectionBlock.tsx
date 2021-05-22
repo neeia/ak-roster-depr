@@ -5,11 +5,17 @@ import { Operator } from "../App";
 
 const useStyles = makeStyles({
   block: {},
-  row: {},
-  item: {},
-  icon: {},
+  row: {
+    justifyContent: "space-between",
+  },
+  item: {
+    display: "inline-block",
+  },
   operatorName: {},
-  level: {},
+  level: {
+    fontSize: "48px",
+    textAlign: "center",
+  },
 });
 
 interface Props {
@@ -47,14 +53,16 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
         <div className={classes.item}>
           <img
             src={potentialUrl}
-            className={classes.icon}
+            width={60}
+            height={60}
             alt={`Potential ${operator.potential} icon`}
           />
         </div>
         <div className={classes.item}>
           <img
             src={promotionUrl}
-            className={classes.icon}
+            width={60}
+            height={60}
             alt={`Elite ${operator.promotion} icon`}
           />
         </div>
