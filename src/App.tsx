@@ -15,7 +15,6 @@ import TableHead from "@material-ui/core/TableHead";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
-import "./App.css";
 
 import OperatorDataTableRow from "./components/OperatorDataTableRow";
 import operatorJson from "./data/operators.json";
