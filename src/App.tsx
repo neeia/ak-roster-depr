@@ -20,6 +20,7 @@ import OperatorDataTableRow from "./components/OperatorDataTableRow";
 import operatorJson from "./data/operators.json";
 import OpForm from "./components/OpForm";
 import OperatorCollectionBlock from "./components/OperatorCollectionBlock";
+import useLocalStorage from './UseLocalStorage'
 
 const darkTheme = createMuiTheme({
   palette: {
@@ -41,7 +42,8 @@ export interface Operator {
 }
 
 function App() {
-  const [operators, setOperators] = useState<Record<string, Operator>>(
+  const [operators, setOperators] = useLocalStorage<any>(
+    "operators",
     Object.fromEntries(
       operatorJson.map((op) => [
         op.name,
@@ -60,7 +62,7 @@ function App() {
 
   const handleChange = React.useCallback(
     (operatorName: string, property: string, value: number | boolean) => {
-      setOperators((oldOperators) => {
+      setOperators((oldOperators : any) => {
         const copyOperators = { ...oldOperators };
         const copyOperatorData = { ...copyOperators[operatorName] };
         (copyOperatorData as any)[property] = value;
@@ -83,7 +85,7 @@ function App() {
   const [operatorFilter, setOperatorFilter] = useState<string>("");
 
   // tab value controller
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useLocalStorage("tabValue" ,0);
   const handleTabChange = (event: any, newValue: number) => {
     setValue(newValue);
   };
