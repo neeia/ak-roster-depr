@@ -4,6 +4,7 @@ import {
   Box,
   createMuiTheme,
   CssBaseline,
+  makeStyles,
   Tab,
   Tabs,
   ThemeProvider,
@@ -14,7 +15,6 @@ import TableHead from "@material-ui/core/TableHead";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
-import "./App.css";
 
 import OperatorDataTableRow from "./components/OperatorDataTableRow";
 import operatorJson from "./data/operators.json";
@@ -25,6 +25,15 @@ import useLocalStorage from './UseLocalStorage'
 const darkTheme = createMuiTheme({
   palette: {
     type: "dark",
+  },
+});
+
+const useStyles = makeStyles({
+  collectionContainer: {
+    display: "flex",
+    flexWrap: "wrap",
+    flexDirection: "column",
+    height: "100vh",
   },
 });
 
@@ -59,6 +68,7 @@ function App() {
       ])
     )
   );
+  const classes = useStyles();
 
   const handleChange = React.useCallback(
     (operatorName: string, property: string, value: number | boolean) => {
@@ -138,7 +148,7 @@ function App() {
         </Table>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <div className="container">
+        <div className={classes.collectionContainer}>
           {operatorJson
             .filter((op) => operators[op.name].potential > 0)
             .map((op) => (
