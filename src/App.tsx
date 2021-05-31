@@ -95,10 +95,12 @@ function App() {
   const [operatorFilter, setOperatorFilter] = useState<string>("");
 
   // tab value controller
-  const [value, setValue] = useLocalStorage("tabValue" ,0);
+  const [value, setValue] = useLocalStorage("tabValue", 0);
   const handleTabChange = (event: any, newValue: number) => {
     setValue(newValue);
   };
+
+  const [sortKey, setSortKey] = useLocalStorage("sortKey", {key: "level", descending: true});
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -137,6 +139,8 @@ function App() {
               .filter((op) =>
                 op.name.toLowerCase().includes(operatorFilter.toLowerCase())
               )
+              // .sort((a, b) => operatorComparator(operators[a.name], operators[b.name], sortKey) 
+              // || defaultSortComparator(operators[a.name], operators[b.name]))
               .map((op) => (
                 <OperatorDataTableRow
                   key={op.name}
@@ -190,3 +194,23 @@ interface TabProps {
   index: number;
   value: number;
 }
+
+function operatorComparator(a: Operator, b: Operator, orderBy: {key: string, descending: boolean}) {
+  var aValue = (a as any)[orderBy.key];
+  var bValue = (b as any)[orderBy.key];
+  if (orderBy.key === "level") {
+    aValue += a.promotion * 100;
+    bValue += b.promotion * 100;
+  }
+  const result = typeof aValue === "string" ? aValue.localeCompare(bValue) : aValue - bValue;
+  return orderBy.descending ? -result : result;
+}
+
+function defaultSortComparator(a: Operator, b: Operator) {
+  return (b.owned ? 1 : 0) - (a.owned ? 1 : 0) 
+  || b.promotion - a.promotion
+  || b.level - a.level 
+  || b.rarity - a.rarity 
+  || b.name.localeCompare(a.name);
+}
+
