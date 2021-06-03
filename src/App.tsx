@@ -6,6 +6,7 @@ import {
   CssBaseline,
   makeStyles,
   Tab,
+  TableSortLabel,
   Tabs,
   ThemeProvider,
   Typography,
@@ -35,10 +36,37 @@ const useStyles = makeStyles({
     flexDirection: "column",
     height: "100vh",
   },
+  visuallyHidden: {
+    border: 0,
+    clip: 'rect(0 0 0 0)',
+    height: 1,
+    margin: -1,
+    overflow: 'hidden', 
+    padding: 0,
+    position: 'absolute',
+    top: 20,
+    width: 1,
+  },
 });
+
+const headCells = [
+  { id: "Owned",        alignRight: true, disablePadding: false, label: "Owned",       },
+  { id: "Favorite",     alignRight: true, disablePadding: false, label: "Favorite",    },
+  { id: "Icon",         alignRight: true, disablePadding: false, label: "Icon",        },
+  { id: "Rarity",       alignRight: false, disablePadding: true, label: "Rarity",      },
+  { id: "Operator",     alignRight: false, disablePadding: true, label: "Operator",    },
+  { id: "Potential",    alignRight: true, disablePadding: false, label: "Potential",   },
+  { id: "Promotion",    alignRight: true, disablePadding: false, label: "Promotion",   },
+  { id: "Level",        alignRight: true, disablePadding: false, label: "Level",       },
+  { id: "Skill Level",  alignRight: true, disablePadding: false, label: "Skill Level", },
+  { id: "S1",           alignRight: true, disablePadding: false, label: "S1",          },
+  { id: "S2",           alignRight: true, disablePadding: false, label: "S2",          },
+  { id: "S3",           alignRight: true, disablePadding: false, label: "S3",          }
+];
 
 export interface Operator {
   name: string;
+  favorite: boolean;
   rarity: number;
   potential: number;
   promotion: number;
@@ -80,7 +108,7 @@ function App() {
         return copyOperators;
       });
     },
-    []
+    [setOperators]
   );
 
   // no clue what this is for
@@ -100,7 +128,14 @@ function App() {
     setValue(newValue);
   };
 
-  const [sortKey, setSortKey] = useLocalStorage("sortKey", {key: "level", descending: true});
+  const [orderBy, setOrderBy] = useLocalStorage("orderBy", {key: "favorite", descending: true});
+  const createSortHandler = (property: string) => () => {
+    handleRequestSort(property);
+  };
+  const handleRequestSort = (property: string) => {
+    const isAsc = orderBy.key === property && orderBy.descending === false;
+    setOrderBy({key: property, descending: isAsc ? true : false});
+  };
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -121,17 +156,27 @@ function App() {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell align="right">Owned</TableCell>
-              <TableCell align="right">Icon</TableCell>
-              <TableCell>Rarity</TableCell>
-              <TableCell>Operator</TableCell>
-              <TableCell align="right">Potential</TableCell>
-              <TableCell align="right">Promotion</TableCell>
-              <TableCell align="right">Level</TableCell>
-              <TableCell align="right">Skill Level</TableCell>
-              <TableCell align="right">S1</TableCell>
-              <TableCell align="right">S2</TableCell>
-              <TableCell align="right">S3</TableCell>
+              {headCells.map((headCell) => (
+                <TableCell
+                  key={headCell.id}
+                  align={headCell.alignRight ? "right" : "left"}
+                  padding={headCell.disablePadding ? "none" : "default"}
+                  sortDirection={orderBy.key === headCell.id ? (orderBy.descending ? "desc" : "asc") : false}
+                >
+                  <TableSortLabel
+                    active={orderBy.key === headCell.id}
+                    direction={orderBy.key === headCell.id && orderBy.descending ? "desc" : "asc"}
+                    onClick={createSortHandler(headCell.id)}
+                  >
+                    {headCell.label}
+                    {orderBy.key === headCell.id ? (
+                      <span className={classes.visuallyHidden}>
+                        {orderBy.descending ? "sorted descending" : "sorted ascending"}
+                      </span>
+                    ) : null}
+                  </TableSortLabel>
+                </TableCell>
+              ))}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -139,8 +184,8 @@ function App() {
               .filter((op) =>
                 op.name.toLowerCase().includes(operatorFilter.toLowerCase())
               )
-              // .sort((a, b) => operatorComparator(operators[a.name], operators[b.name], sortKey) 
-              // || defaultSortComparator(operators[a.name], operators[b.name]))
+              .sort((a, b) => operatorComparator(operators[a.name], operators[b.name], orderBy) 
+              || defaultSortComparator(operators[a.name], operators[b.name]))
               .map((op) => (
                 <OperatorDataTableRow
                   key={op.name}
@@ -155,6 +200,8 @@ function App() {
         <div className={classes.collectionContainer}>
           {operatorJson
             .filter((op) => operators[op.name].potential > 0)
+            .sort((a, b) => operatorComparator(operators[a.name], operators[b.name], orderBy) 
+            || defaultSortComparator(operators[a.name], operators[b.name]))
             .map((op) => (
               <OperatorCollectionBlock
                 key={op.name}
@@ -207,10 +254,11 @@ function operatorComparator(a: Operator, b: Operator, orderBy: {key: string, des
 }
 
 function defaultSortComparator(a: Operator, b: Operator) {
-  return (b.owned ? 1 : 0) - (a.owned ? 1 : 0) 
+  return (b.favorite ? 1 : 0) - (a.favorite ? 1 : 0) 
+  || (b.owned ? 1 : 0) - (a.owned ? 1 : 0) 
   || b.promotion - a.promotion
   || b.level - a.level 
   || b.rarity - a.rarity 
-  || b.name.localeCompare(a.name);
+  || a.name.localeCompare(b.name);
 }
 

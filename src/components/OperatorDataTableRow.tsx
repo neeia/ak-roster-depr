@@ -52,6 +52,17 @@ const OperatorDataTableRow = React.memo((props: Props) => {
         />
       </TableCell>
       <TableCell align="right">
+        <input
+          className={classes.input}
+          name="favorite"
+          type="checkbox"
+          checked={operator.favorite}
+          onChange={(e) =>
+            onChange(operator.name, e.target.name, e.target.checked)
+          }
+        />
+      </TableCell>
+      <TableCell align="right">
         <img
           style={{ opacity: operator.owned ? 1 : 0.2 }}
           width={48}
