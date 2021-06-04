@@ -41,7 +41,7 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
   return (
     <div>
       <img src={imgUrl} alt={operator.name} />
-      <div className={classes.row}>{operator.name}</div>
+      <div className={classes.row}>{operator.name+(operator.favorite?"*":"")}</div>
       <div className={classes.row}>
         <div className={classes.item}>{"⭐".repeat(operator.rarity)}</div>
       </div>
