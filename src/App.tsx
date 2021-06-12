@@ -23,6 +23,12 @@ import OpForm from "./components/OpForm";
 import OperatorCollectionBlock from "./components/OperatorCollectionBlock";
 import useLocalStorage from './UseLocalStorage'
 
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/firestore";
+import LoginForm from "./components/LoginForm";
+import RegisterForm from "./components/RegisterForm";
+
 const darkTheme = createMuiTheme({
   palette: {
     type: "dark",
@@ -50,18 +56,18 @@ const useStyles = makeStyles({
 });
 
 const headCells = [
-  { id: "Owned",        alignRight: true, disablePadding: false, label: "Owned",       },
-  { id: "Favorite",     alignRight: true, disablePadding: false, label: "Favorite",    },
-  { id: "Icon",         alignRight: true, disablePadding: false, label: "Icon",        },
-  { id: "Rarity",       alignRight: false, disablePadding: true, label: "Rarity",      },
-  { id: "Operator",     alignRight: false, disablePadding: true, label: "Operator",    },
-  { id: "Potential",    alignRight: true, disablePadding: false, label: "Potential",   },
-  { id: "Promotion",    alignRight: true, disablePadding: false, label: "Promotion",   },
-  { id: "Level",        alignRight: true, disablePadding: false, label: "Level",       },
-  { id: "Skill Level",  alignRight: true, disablePadding: false, label: "Skill Level", },
-  { id: "S1",           alignRight: true, disablePadding: false, label: "S1",          },
-  { id: "S2",           alignRight: true, disablePadding: false, label: "S2",          },
-  { id: "S3",           alignRight: true, disablePadding: false, label: "S3",          }
+  { id: "owned",          alignRight: false, disablePadding: false, enableSort: true, defaultDesc: true, label: "Owned",},
+  { id: "favorite",       alignRight: false, disablePadding: false, enableSort: true, defaultDesc: true, label: "Favorite",},
+  { id: "icon",           alignRight: false, disablePadding: false, enableSort: false, defaultDesc: true, label: "Icon",},
+  { id: "rarity",         alignRight: false, disablePadding: false, enableSort: true, defaultDesc: true, label: "Rarity",},
+  { id: "name",           alignRight: false, disablePadding: false, enableSort: true, defaultDesc: true, label: "Operator",},
+  { id: "potential",      alignRight: false, disablePadding: false, enableSort: true, defaultDesc: true, label: "Potential",},
+  { id: "promotion",      alignRight: false, disablePadding: false, enableSort: true, defaultDesc: true, label: "Promotion",},
+  { id: "level",          alignRight: false, disablePadding: false, enableSort: true, defaultDesc: true, label: "Level",},
+  { id: "skillLevel",     alignRight: false, disablePadding: false, enableSort: true, defaultDesc: true, label: "Skill Level", },
+  { id: "skill1Mastery",  alignRight: false, disablePadding: false, enableSort: false, defaultDesc: true, label: "S1",},
+  { id: "skill2Mastery",  alignRight: false, disablePadding: false, enableSort: false, defaultDesc: true, label: "S2",},
+  { id: "skill3Mastery",  alignRight: false, disablePadding: false, enableSort: false, defaultDesc: true, label: "S3",}
 ];
 
 export interface Operator {
@@ -78,6 +84,18 @@ export interface Operator {
   skill3Mastery?: number;
 }
 
+const firebaseConfig = {
+  apiKey: "AIzaSyDjpt2G4GFQjYbPT5Mrj6L2meeWEnsCEgU",
+  authDomain: "ak-roster.firebaseapp.com",
+  projectId: "ak-roster",
+  storageBucket: "ak-roster.appspot.com",
+  messagingSenderId: "1076086810652",
+  appId: "1:1076086810652:web:ed1da74b87a08bf4b657d9",
+  measurementId: "G-VZXJ8MY6D1"
+};
+!firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app();
+
+
 function App() {
   const [operators, setOperators] = useLocalStorage<any>(
     "operators",
@@ -86,10 +104,11 @@ function App() {
         op.name,
         {
           name: op.name,
+          favorite: false,
           rarity: op.rarity,
-          owned: false,
           potential: 0,
           promotion: 0,
+          owned: false,
           level: 0,
           skillLevel: 0,
         },
@@ -137,6 +156,13 @@ function App() {
     setOrderBy({key: property, descending: isAsc ? true : false});
   };
 
+  const handleLogin = (username: string, password: string) : boolean => {
+    return false;
+  }
+  const handleSignup = (username: string, password: string, passwordConfirm: string) : boolean => {
+    return false;
+  }
+
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
@@ -163,7 +189,7 @@ function App() {
                   padding={headCell.disablePadding ? "none" : "default"}
                   sortDirection={orderBy.key === headCell.id ? (orderBy.descending ? "desc" : "asc") : false}
                 >
-                  <TableSortLabel
+                  {(headCell.enableSort ? <TableSortLabel
                     active={orderBy.key === headCell.id}
                     direction={orderBy.key === headCell.id && orderBy.descending ? "desc" : "asc"}
                     onClick={createSortHandler(headCell.id)}
@@ -174,7 +200,7 @@ function App() {
                         {orderBy.descending ? "sorted descending" : "sorted ascending"}
                       </span>
                     ) : null}
-                  </TableSortLabel>
+                  </TableSortLabel> : headCell.label)}
                 </TableCell>
               ))}
             </TableRow>
@@ -209,6 +235,10 @@ function App() {
               />
             ))}
         </div>
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        <LoginForm handleLogin={(username: string, password: string) => handleLogin(username, password)}/>
+        <RegisterForm handleSignup={(username: string, password: string, passwordConfirm: string) => handleSignup(username, password, passwordConfirm)}/>
       </TabPanel>
     </ThemeProvider>
   );

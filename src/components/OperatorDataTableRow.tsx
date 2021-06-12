@@ -40,7 +40,7 @@ const OperatorDataTableRow = React.memo((props: Props) => {
 
   return (
     <TableRow key={operator.name}>
-      <TableCell align="right">
+      <TableCell align="left">
         <input
           className={classes.input}
           name="owned"
@@ -51,7 +51,7 @@ const OperatorDataTableRow = React.memo((props: Props) => {
           }
         />
       </TableCell>
-      <TableCell align="right">
+      <TableCell align="left">
         <input
           className={classes.input}
           name="favorite"
@@ -62,7 +62,7 @@ const OperatorDataTableRow = React.memo((props: Props) => {
           }
         />
       </TableCell>
-      <TableCell align="right">
+      <TableCell align="left">
         <img
           style={{ opacity: operator.owned ? 1 : 0.2 }}
           width={48}
@@ -75,7 +75,7 @@ const OperatorDataTableRow = React.memo((props: Props) => {
       <TableCell component="th" scope="row">
         {operator.name}
       </TableCell>
-      <TableCell align="right">
+      <TableCell align="left">
         <input
           className={classes.input}
           name="potential"
@@ -87,7 +87,7 @@ const OperatorDataTableRow = React.memo((props: Props) => {
           }
         />
       </TableCell>
-      <TableCell align="right">
+      <TableCell align="left">
         <input
           className={classes.input}
           name="promotion"
@@ -99,7 +99,7 @@ const OperatorDataTableRow = React.memo((props: Props) => {
           }
         />
       </TableCell>
-      <TableCell align="right">
+      <TableCell align="left">
         <input
           className={classes.input}
           name="level"
@@ -111,7 +111,7 @@ const OperatorDataTableRow = React.memo((props: Props) => {
           }
         />
       </TableCell>
-      <TableCell align="right">
+      <TableCell align="left">
         <input
           className={classes.input}
           name="skillLevel"
@@ -123,7 +123,7 @@ const OperatorDataTableRow = React.memo((props: Props) => {
           }
         />
       </TableCell>
-      <TableCell align="right">
+      <TableCell align="left">
         <input
           className={classes.input}
           name="skill1Mastery"
@@ -137,7 +137,7 @@ const OperatorDataTableRow = React.memo((props: Props) => {
           }
         />
       </TableCell>
-      <TableCell align="right">
+      <TableCell align="left">
         <input
           className={classes.input}
           name="skill2Mastery"
@@ -151,7 +151,7 @@ const OperatorDataTableRow = React.memo((props: Props) => {
           }
         />
       </TableCell>
-      <TableCell align="right">
+      <TableCell align="left">
         <input
           className={classes.input}
           name="skill3Mastery"
