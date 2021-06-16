@@ -26,8 +26,10 @@ import useLocalStorage from './UseLocalStorage'
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
+import "firebase/database";
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
+import Button from "./components/Button";
 
 const darkTheme = createMuiTheme({
   palette: {
@@ -91,10 +93,12 @@ const firebaseConfig = {
   storageBucket: "ak-roster.appspot.com",
   messagingSenderId: "1076086810652",
   appId: "1:1076086810652:web:ed1da74b87a08bf4b657d9",
-  measurementId: "G-VZXJ8MY6D1"
+  measurementId: "G-VZXJ8MY6D1",
+  databaseURL: "https://ak-roster-default-rtdb.firebaseio.com/"
 };
 !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app();
-
+// Get a reference to the database service
+const database = firebase.database();
 
 function App() {
   const [operators, setOperators] = useLocalStorage<any>(
@@ -156,11 +160,52 @@ function App() {
     setOrderBy({key: property, descending: isAsc ? true : false});
   };
 
+  let user : firebase.User | null = null;
+
   const handleLogin = (username: string, password: string) : boolean => {
+    firebase.auth().signInWithEmailAndPassword(username, password)
+      .then((userCredential) => {
+        // Signed in
+        user = userCredential.user;
+        return true;
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        return false;
+      });
     return false;
   }
   const handleSignup = (username: string, password: string, passwordConfirm: string) : boolean => {
+    firebase.auth().createUserWithEmailAndPassword(username, password)
+      .then((userCredential) => {
+        // Signed in 
+        user = userCredential.user;
+        return true;
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        return false;
+      });
     return false;
+  }
+  const handleLogout = () : boolean => {
+    firebase.auth().signOut().then(() => {
+      // Sign-out successful.
+      return true;
+    }).catch((error) => {
+      // An error happened.
+      return false;
+    });
+    return false;
+  }
+  const writeUserData = () : void => {
+    if (!user) return;
+    firebase.database().ref("users/" + user.uid).set({
+      accountName: "",
+      roster: operators
+    });
   }
 
   return (
@@ -174,7 +219,7 @@ function App() {
         >
           <Tab label="Roster" {...a11yProps(0)} />
           <Tab label="Collection" {...a11yProps(1)} />
-          <Tab label="Placeholder" {...a11yProps(2)} />
+          <Tab label="Account" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
@@ -237,8 +282,13 @@ function App() {
         </div>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <LoginForm handleLogin={(username: string, password: string) => handleLogin(username, password)}/>
-        <RegisterForm handleSignup={(username: string, password: string, passwordConfirm: string) => handleSignup(username, password, passwordConfirm)}/>
+        {user ? user["uid"] : "not logged"}
+        {( user ? <Button handleChange={writeUserData}/> :
+        <>
+          <LoginForm handleLogin={handleLogin}/>
+          <RegisterForm handleSignup={handleSignup}/>
+        </>
+        )}
       </TabPanel>
     </ThemeProvider>
   );

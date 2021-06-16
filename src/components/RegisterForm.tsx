@@ -2,9 +2,8 @@ import { useState } from "react";
 import { FormGroup } from '@material-ui/core';
 
 interface Props {
-  handleSignup: (username: string, password: string, passwordConfirm: string) => void;
+  handleSignup: (username: string, password: string, passwordConfirm: string) => boolean;
 }
-
 
 function RegisterForm(props: Props) {
   const [username, setUsername] = useState<string>("");
