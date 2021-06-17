@@ -3,12 +3,14 @@ interface Props {
 }
 
 function OpForm(props: Props) {
-  const { onChange } = props;
+  const change = props;
   return (
-    <label>Search:
-      <input onChange={(e) => onChange(e.target.value)} />
-    </label>
+    <>
+      {<label>Search:
+        <input onChange={(e) => change.onChange(e.target.value)} />
+      </label>}
+    </>
   );
-}
+};
 
 export default OpForm;
