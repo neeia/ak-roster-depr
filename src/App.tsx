@@ -160,27 +160,27 @@ function App() {
     setOrderBy({key: property, descending: isAsc ? true : false});
   };
 
-  let user : firebase.User | null = null;
+  const [user, setUser] = useState<firebase.User|null>(null);
 
-  const handleLogin = (username: string, password: string) : boolean => {
-    firebase.auth().signInWithEmailAndPassword(username, password)
-      .then((userCredential) => {
-        // Signed in
-        user = userCredential.user;
-        return true;
-      })
-      .catch((error) => {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        return false;
-      });
+  const handleLogin = async (username: string, password: string) : Promise<Boolean>  => {
+    try {
+      const newUser = await firebase.auth().signInWithEmailAndPassword(username, password);
+      setUser(newUser.user);
+      console.log(user?.uid);
+      return true;
+    } 
+    catch (error) {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      return false;
+    }
     return false;
   }
   const handleSignup = (username: string, password: string, passwordConfirm: string) : boolean => {
     firebase.auth().createUserWithEmailAndPassword(username, password)
       .then((userCredential) => {
         // Signed in 
-        user = userCredential.user;
+        setUser(userCredential.user);
         return true;
       })
       .catch((error) => {

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FormGroup } from '@material-ui/core';
 
 interface Props {
-  handleLogin: (username: string, password: string) => boolean;
+  handleLogin: (username: string, password: string) => void;
 }
 
 
