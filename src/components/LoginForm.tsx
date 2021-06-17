@@ -12,7 +12,7 @@ function LoginForm(props: Props) {
   const { handleLogin } = props;
   return (
     <FormGroup>
-      <form className="mui-form" onSubmit={() => handleLogin(username, password)}>
+      <form className="mui-form" onSubmit={(e) => { e.preventDefault(); handleLogin(username, password)}}>
         <label>Log In</label>
         <div className="mui-textfield">
           <input type="text" placeholder="Email" onChange={(e) => setUsername(e.target.value)} value={username} />

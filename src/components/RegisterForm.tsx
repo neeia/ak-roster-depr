@@ -12,7 +12,7 @@ function RegisterForm(props: Props) {
   const { handleSignup } = props;
   return (
     <FormGroup>
-      <form className="mui-form" onSubmit={() => handleSignup(username, password, passwordConfirm)}>
+    <form className="mui-form" onSubmit={(e) => { e.preventDefault(); handleSignup(username, password, passwordConfirm)}}>
         <label>Register</label>
         <div className="mui-textfield">
           <input type="text" placeholder="Email" onChange={(e) => setUsername(e.target.value)} value={username} />

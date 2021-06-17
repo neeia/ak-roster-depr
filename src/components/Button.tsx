@@ -11,7 +11,7 @@ function Button(props: Props) {
   const [password, setPassword] = useState<string>("");
   const { handleChange } = props;
   return (
-    <form className="mui-form" onSubmit={() => handleChange()}>
+    <form className="mui-form" onSubmit={(e) => { e.preventDefault(); handleChange() }}>
       <button type="submit" className="mui-btn mui-btn--raised">Store Changes</button>
     </form>
   );
