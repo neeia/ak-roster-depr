@@ -39,7 +39,7 @@ const OperatorDataTableRow = React.memo((props: Props) => {
   )}`;
 
   return (
-    <TableRow key={operator.name}>
+    <TableRow key={operator.id}>
       <TableCell align="left">
         <input
           className={classes.input}
@@ -47,7 +47,7 @@ const OperatorDataTableRow = React.memo((props: Props) => {
           type="checkbox"
           checked={operator.owned}
           onChange={(e) =>
-            onChange(operator.name, e.target.name, e.target.checked)
+            onChange(operator.id, e.target.name, e.target.checked)
           }
         />
       </TableCell>
@@ -58,7 +58,7 @@ const OperatorDataTableRow = React.memo((props: Props) => {
           type="checkbox"
           checked={operator.favorite}
           onChange={(e) =>
-            onChange(operator.name, e.target.name, e.target.checked)
+            onChange(operator.id, e.target.name, e.target.checked)
           }
         />
       </TableCell>
@@ -83,7 +83,7 @@ const OperatorDataTableRow = React.memo((props: Props) => {
           value={operator.potential}
           disabled={!operator.owned}
           onChange={(e) =>
-            onChange(operator.name, e.target.name, e.target.valueAsNumber)
+            onChange(operator.id, e.target.name, e.target.valueAsNumber)
           }
         />
       </TableCell>
@@ -95,7 +95,7 @@ const OperatorDataTableRow = React.memo((props: Props) => {
           value={operator.promotion}
           disabled={!operator.owned}
           onChange={(e) =>
-            onChange(operator.name, e.target.name, e.target.valueAsNumber)
+            onChange(operator.id, e.target.name, e.target.valueAsNumber)
           }
         />
       </TableCell>
@@ -107,7 +107,7 @@ const OperatorDataTableRow = React.memo((props: Props) => {
           value={operator.level}
           disabled={!operator.owned}
           onChange={(e) =>
-            onChange(operator.name, e.target.name, e.target.valueAsNumber)
+            onChange(operator.id, e.target.name, e.target.valueAsNumber)
           }
         />
       </TableCell>
@@ -119,7 +119,7 @@ const OperatorDataTableRow = React.memo((props: Props) => {
           value={operator.skillLevel}
           disabled={!operator.owned}
           onChange={(e) =>
-            onChange(operator.name, e.target.name, e.target.valueAsNumber)
+            onChange(operator.id, e.target.name, e.target.valueAsNumber)
           }
         />
       </TableCell>
@@ -133,7 +133,7 @@ const OperatorDataTableRow = React.memo((props: Props) => {
             operator.promotion < 2 || operator.skillLevel < 7 || !operator.owned
           }
           onChange={(e) =>
-            onChange(operator.name, e.target.name, e.target.valueAsNumber)
+            onChange(operator.id, e.target.name, e.target.valueAsNumber)
           }
         />
       </TableCell>
@@ -147,7 +147,7 @@ const OperatorDataTableRow = React.memo((props: Props) => {
             operator.promotion < 2 || operator.skillLevel < 7 || !operator.owned
           }
           onChange={(e) =>
-            onChange(operator.name, e.target.name, e.target.valueAsNumber)
+            onChange(operator.id, e.target.name, e.target.valueAsNumber)
           }
         />
       </TableCell>
@@ -161,7 +161,7 @@ const OperatorDataTableRow = React.memo((props: Props) => {
             operator.promotion < 2 || operator.skillLevel < 7 || !operator.owned
           }
           onChange={(e) =>
-            onChange(operator.name, e.target.name, e.target.valueAsNumber)
+            onChange(operator.id, e.target.name, e.target.valueAsNumber)
           }
         />
       </TableCell>

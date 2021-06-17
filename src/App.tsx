@@ -73,6 +73,7 @@ const headCells = [
 ];
 
 export interface Operator {
+  id: string;
   name: string;
   favorite: boolean;
   rarity: number;
@@ -105,8 +106,9 @@ function App() {
     "operators",
     Object.fromEntries(
       operatorJson.map((op) => [
-        op.name,
+        op.id,
         {
+          id: op.id,
           name: op.name,
           favorite: false,
           rarity: op.rarity,
@@ -122,12 +124,12 @@ function App() {
   const classes = useStyles();
 
   const handleChange = React.useCallback(
-    (operatorName: string, property: string, value: number | boolean) => {
+    (operatorID: string, property: string, value: number | boolean) => {
       setOperators((oldOperators : any) => {
         const copyOperators = { ...oldOperators };
-        const copyOperatorData = { ...copyOperators[operatorName] };
+        const copyOperatorData = { ...copyOperators[operatorID] };
         (copyOperatorData as any)[property] = value;
-        copyOperators[operatorName] = copyOperatorData;
+        copyOperators[operatorID] = copyOperatorData;
         return copyOperators;
       });
     },
@@ -170,11 +172,10 @@ function App() {
       return true;
     } 
     catch (error) {
-      var errorCode = error.code;
-      var errorMessage = error.message;
+      // var errorCode = error.code;
+      // var errorMessage = error.message;
       return false;
     }
-    return false;
   }
   const handleSignup = (username: string, password: string, passwordConfirm: string) : boolean => {
     firebase.auth().createUserWithEmailAndPassword(username, password)
@@ -184,8 +185,8 @@ function App() {
         return true;
       })
       .catch((error) => {
-        var errorCode = error.code;
-        var errorMessage = error.message;
+        // var errorCode = error.code;
+        // var errorMessage = error.message;
         return false;
       });
     return false;
@@ -200,6 +201,7 @@ function App() {
     });
     return false;
   }
+  
   const writeUserData = () : void => {
     if (!user) return;
     firebase.database().ref("users/" + user.uid).set({
@@ -255,12 +257,12 @@ function App() {
               .filter((op) =>
                 op.name.toLowerCase().includes(operatorFilter.toLowerCase())
               )
-              .sort((a, b) => operatorComparator(operators[a.name], operators[b.name], orderBy) 
-              || defaultSortComparator(operators[a.name], operators[b.name]))
+              .sort((a, b) => operatorComparator(operators[a.id], operators[b.id], orderBy) 
+              || defaultSortComparator(operators[a.id], operators[b.id]))
               .map((op) => (
                 <OperatorDataTableRow
-                  key={op.name}
-                  operator={operators[op.name]}
+                  key={op.id}
+                  operator={operators[op.id]}
                   onChange={handleChange}
                 />
               ))}
@@ -270,13 +272,13 @@ function App() {
       <TabPanel value={value} index={1}>
         <div className={classes.collectionContainer}>
           {operatorJson
-            .filter((op) => operators[op.name].potential > 0)
-            .sort((a, b) => operatorComparator(operators[a.name], operators[b.name], orderBy) 
-            || defaultSortComparator(operators[a.name], operators[b.name]))
+            .filter((op) => operators[op.id].potential > 0)
+            .sort((a, b) => operatorComparator(operators[a.id], operators[b.id], orderBy) 
+            || defaultSortComparator(operators[a.id], operators[b.id]))
             .map((op) => (
               <OperatorCollectionBlock
-                key={op.name}
-                operator={operators[op.name]}
+                key={op.id}
+                operator={operators[op.id]}
               />
             ))}
         </div>
