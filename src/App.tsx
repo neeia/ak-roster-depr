@@ -130,6 +130,7 @@ function App() {
         const copyOperatorData = { ...copyOperators[operatorID] };
         (copyOperatorData as any)[property] = value;
         copyOperators[operatorID] = copyOperatorData;
+        writeOperatorData(copyOperatorData.id, property, value);
         return copyOperators;
       });
     },
@@ -168,7 +169,6 @@ function App() {
     try {
       const newUser = await firebase.auth().signInWithEmailAndPassword(username, password);
       setUser(newUser.user);
-      console.log(user?.uid);
       return true;
     } 
     catch (error) {
@@ -194,6 +194,7 @@ function App() {
   const handleLogout = () : boolean => {
     firebase.auth().signOut().then(() => {
       // Sign-out successful.
+      setUser(null);
       return true;
     }).catch((error) => {
       // An error happened.
@@ -201,12 +202,18 @@ function App() {
     });
     return false;
   }
-  
+
   const writeUserData = () : void => {
     if (!user) return;
     firebase.database().ref("users/" + user.uid).set({
       accountName: "",
       roster: operators
+    });
+  }
+  const writeOperatorData = (opID: string, key: string, value: number | boolean) : void => {
+    if (!user) return;
+    firebase.database().ref("users/" + user.uid + "/roster/" + opID + "/opData/" + key).set({
+      value
     });
   }
 
@@ -285,7 +292,12 @@ function App() {
       </TabPanel>
       <TabPanel value={value} index={2}>
         {user ? user["uid"] : "not logged"}
-        {( user ? <Button handleChange={writeUserData}/> :
+        {( user ?
+        <>
+        <Button handleChange={writeUserData} text="Store Changes"/> 
+        <Button handleChange={handleLogout} text="Log out"/>
+        </>
+        :
         <>
           <LoginForm handleLogin={handleLogin}/>
           <RegisterForm handleSignup={handleSignup}/>
