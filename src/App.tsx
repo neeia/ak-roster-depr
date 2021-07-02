@@ -41,8 +41,8 @@ const useStyles = makeStyles({
   collectionContainer: {
     display: "flex",
     flexWrap: "wrap",
-    flexDirection: "column",
     height: "100vh",
+    width: "100%",
   },
   visuallyHidden: {
     border: 0,

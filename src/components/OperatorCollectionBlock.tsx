@@ -7,6 +7,7 @@ import { Operator } from "../App";
 const useStyles = makeStyles({
   opBox: {
     justifyContent: "space-between",
+    flexBasis: "45%",
   },
   row: {
     justifyContent: "space-between",
@@ -90,14 +91,17 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
           <img
             className={classes.masteryImage} 
             src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/mastery/${operator.skill1Mastery}`}
+            alt={`Skill 1 Mastery Level ${operator.skill1Mastery}`}
           />
           <img 
             className={classes.masteryImage} 
             src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/mastery/${operator.skill2Mastery}`}
+            alt={`Skill 2 Mastery Level ${operator.skill1Mastery}`}
           />
           <img 
             className={classes.masteryImage} 
             src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/mastery/${operator.skill3Mastery}`}
+            alt={`Skill 3 Mastery Level ${operator.skill1Mastery}`}
           />
         </div>
       )}
