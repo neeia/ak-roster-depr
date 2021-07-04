@@ -39,8 +39,8 @@ const darkTheme = createMuiTheme({
 
 const useStyles = makeStyles({
   collectionContainer: {
-    display: "flex",
-    flexWrap: "wrap",
+    display: "grid",
+    gridTemplateColumns: "auto auto",
     height: "100vh",
     width: "100%",
   },
@@ -99,7 +99,6 @@ const firebaseConfig = {
 };
 !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app();
 // Get a reference to the database service
-const database = firebase.database();
 
 function App() {
   const [operators, setOperators] = useLocalStorage<any>(
@@ -177,12 +176,17 @@ function App() {
       return false;
     }
   }
-  const handleSignup = (username: string, password: string, passwordConfirm: string) : boolean => {
-    firebase.auth().createUserWithEmailAndPassword(username, password)
+  const handleSignup = (email: string, username: string, password: string) : boolean => {
+    firebase.auth().createUserWithEmailAndPassword(email, password)
       .then((userCredential) => {
-        // Signed in 
-        setUser(userCredential.user);
-        return true;
+        if (userCredential != null && userCredential.user != null) {
+          // Signed in 
+          setUser(userCredential.user);
+          firebase.database().ref("phonebook/" + username).set(
+            userCredential.user.uid
+          ) 
+          return true;
+        }
       })
       .catch((error) => {
         // var errorCode = error.code;
@@ -215,6 +219,34 @@ function App() {
     firebase.database().ref("users/" + user.uid + "/roster/" + opID + "/opData/" + key).set({
       value
     });
+  }
+  const importUserData = () : void => {
+    if (!user) return;
+    firebase.database().ref("users/" + user.uid + "/roster/").get().then((snapshot) => {
+      if (snapshot.exists()) {
+        setOperators(snapshot.val());
+      }
+    });
+  }
+  
+  const renderUserCollection = (uid: number) : void => {
+    firebase.database().ref("users/" + uid + "/roster/").get().then((snapshot) => {
+      if (snapshot.exists()) {
+        setOperators(snapshot.val());
+      }
+    });
+  }
+
+  const renderCollection = (collection : typeof operators) : any => {
+    return collection.filter((op : Operator) => operators[op.id].potential > 0)
+    .sort((a : Operator, b : Operator) => operatorComparator(operators[a.id], operators[b.id], orderBy) 
+    || defaultSortComparator(operators[a.id], operators[b.id]))
+    .map((op : Operator) => (
+      <OperatorCollectionBlock
+        key={op.id}
+        operator={operators[op.id]}
+      />
+    ))
   }
 
   return (
@@ -278,16 +310,7 @@ function App() {
       </TabPanel>
       <TabPanel value={value} index={1}>
         <div className={classes.collectionContainer}>
-          {operatorJson
-            .filter((op) => operators[op.id].potential > 0)
-            .sort((a, b) => operatorComparator(operators[a.id], operators[b.id], orderBy) 
-            || defaultSortComparator(operators[a.id], operators[b.id]))
-            .map((op) => (
-              <OperatorCollectionBlock
-                key={op.id}
-                operator={operators[op.id]}
-              />
-            ))}
+          {renderCollection(operatorJson)}
         </div>
       </TabPanel>
       <TabPanel value={value} index={2}>
@@ -296,6 +319,7 @@ function App() {
         <>
         <Button handleChange={writeUserData} text="Store Changes"/> 
         <Button handleChange={handleLogout} text="Log out"/>
+        <Button handleChange={importUserData} text="Import Data"/>
         </>
         :
         <>
