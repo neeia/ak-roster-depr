@@ -231,13 +231,13 @@ function App() {
   }
 
   const renderCollection = (collection : typeof operators) : any => {
-    return collection.filter((op : Operator) => operators[op.id].potential > 0)
-    .sort((a : Operator, b : Operator) => operatorComparator(operators[a.id], operators[b.id], orderBy) 
-    || defaultSortComparator(operators[a.id], operators[b.id]))
-    .map((op : Operator) => (
+    return operatorJson.filter((op : any) => collection[op.id].potential > 0)
+    .sort((a : any, b : any) => operatorComparator(collection[a.id], collection[b.id], orderBy) 
+    || defaultSortComparator(collection[a.id], collection[b.id]))
+    .map((op : any) => (
       <OperatorCollectionBlock
         key={op.id}
-        operator={operators[op.id]}
+        operator={collection[op.id]}
       />
     ))
   }
@@ -253,7 +253,7 @@ function App() {
   const findUser = (username : string) : string => {
     firebase.database().ref("phonebook/" + username).get().then((snapshot) => {
       if (snapshot.exists()) {
-        viewUserCollection(snapshot.val());
+        return viewUserCollection(snapshot.val());
       }
     });
     return "";
@@ -321,7 +321,7 @@ function App() {
       </TabPanel>
       <TabPanel value={value} index={1}>
         <div className={classes.collectionContainer}>
-          {renderCollection(operatorJson)}
+          {renderCollection(operators)}
         </div>
       </TabPanel>
       <TabPanel value={value} index={2}>
