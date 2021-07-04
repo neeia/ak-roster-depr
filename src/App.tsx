@@ -30,6 +30,7 @@ import "firebase/database";
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
 import Button from "./components/Button";
+import SearchForm from "./components/SearchForm";
 
 const darkTheme = createMuiTheme({
   palette: {
@@ -228,14 +229,6 @@ function App() {
       }
     });
   }
-  
-  const renderUserCollection = (uid: number) : void => {
-    firebase.database().ref("users/" + uid + "/roster/").get().then((snapshot) => {
-      if (snapshot.exists()) {
-        setOperators(snapshot.val());
-      }
-    });
-  }
 
   const renderCollection = (collection : typeof operators) : any => {
     return collection.filter((op : Operator) => operators[op.id].potential > 0)
@@ -247,6 +240,23 @@ function App() {
         operator={operators[op.id]}
       />
     ))
+  }
+
+  var [collOperators, setCollOperators] = useState<typeof operators>();
+  const viewUserCollection = (uid : string) : void => {
+    firebase.database().ref("users/" + uid + "/roster/").get().then((snapshot) => {
+      if (snapshot.exists()) {
+        setCollOperators(snapshot.val());
+      }
+    })
+  }
+  const findUser = (username : string) : string => {
+    firebase.database().ref("phonebook/" + username).get().then((snapshot) => {
+      if (snapshot.exists()) {
+        viewUserCollection(snapshot.val());
+      }
+    });
+    return "";
   }
 
   return (
@@ -261,6 +271,7 @@ function App() {
           <Tab label="Roster" {...a11yProps(0)} />
           <Tab label="Collection" {...a11yProps(1)} />
           <Tab label="Account" {...a11yProps(2)} />
+          <Tab label="Lookup" {...a11yProps(3)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
@@ -327,6 +338,12 @@ function App() {
           <RegisterForm handleSignup={handleSignup}/>
         </>
         )}
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+        <SearchForm handleSubmit={findUser}/>
+        <div className={classes.collectionContainer}>
+          {(collOperators ? renderCollection(collOperators) : "")}
+        </div>
       </TabPanel>
     </ThemeProvider>
   );
