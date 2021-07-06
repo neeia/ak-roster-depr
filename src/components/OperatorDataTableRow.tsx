@@ -4,6 +4,7 @@ import { Operator } from "../App";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import { makeStyles } from "@material-ui/core";
+import ValidatedTextField from "./ValidatedTextField";
 
 const useStyles = makeStyles({
   input: {
@@ -76,26 +77,32 @@ const OperatorDataTableRow = React.memo((props: Props) => {
         {operator.name}
       </TableCell>
       <TableCell align="left">
-        <input
+        <ValidatedTextField
           className={classes.input}
           name="potential"
           type="number"
           value={operator.potential}
           disabled={!operator.owned}
+          validator={(value : string) : boolean => {
+            return !operator.owned || (+value > 0 && +value <= 6)
+          }}
           onChange={(e) =>
-            onChange(operator.id, e.target.name, e.target.valueAsNumber)
+            onChange(operator.id, e.target.name, +e.target.value)
           }
         />
       </TableCell>
       <TableCell align="left">
-        <input
+        <ValidatedTextField
           className={classes.input}
           name="promotion"
           type="number"
           value={operator.promotion}
           disabled={!operator.owned}
+          validator={(value : string) : boolean => {
+            return !operator.owned || (+value >= 0 && +value <= 2)
+          }}
           onChange={(e) =>
-            onChange(operator.id, e.target.name, e.target.valueAsNumber)
+            onChange(operator.id, e.target.name, +e.target.value)
           }
         />
       </TableCell>
