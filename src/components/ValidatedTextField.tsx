@@ -45,6 +45,7 @@ const ValidatedTextField: React.FC<Props & TextFieldProps> = ({
       inputRef={ref}
       onChange={handleChange}
       error={!isValid}
+      defaultValue={_value}
       {...rest}
     />
   );
