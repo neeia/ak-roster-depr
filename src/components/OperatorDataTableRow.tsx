@@ -97,9 +97,12 @@ const OperatorDataTableRow = React.memo((props: Props) => {
           name="promotion"
           type="number"
           value={operator.promotion}
-          disabled={!operator.owned}
+          disabled={!operator.owned || operator.rarity < 3}
           validator={(value : string) : boolean => {
-            return !operator.owned || (+value >= 0 && +value <= 2)
+            return !operator.owned 
+            || (+value === 0)
+            || (+operator.rarity >= 3 && +value === 1)
+            || (+operator.rarity >= 4 && +value === 2)
           }}
           onChange={(e) =>
             onChange(operator.id, e.target.name, +e.target.value)
@@ -107,31 +110,45 @@ const OperatorDataTableRow = React.memo((props: Props) => {
         />
       </TableCell>
       <TableCell align="left">
-        <input
+        <ValidatedTextField
           className={classes.input}
           name="level"
           type="number"
           value={operator.level}
           disabled={!operator.owned}
+          validator={(value : string) : boolean => {
+            return !operator.owned 
+            || (+value > 0
+              && ((+operator.rarity < 3 && +value <= 30)
+              || (+operator.rarity === 3 && +value <= [40, 55][+operator.promotion])
+              || (+operator.rarity === 4 && +value <= [45, 60, 70][+operator.promotion])
+              || (+operator.rarity === 5 && +value <= [50, 70, 80][+operator.promotion])
+              || (+operator.rarity === 6 && +value <= [50, 80, 90][+operator.promotion])))
+          }}
           onChange={(e) =>
-            onChange(operator.id, e.target.name, e.target.valueAsNumber)
+            onChange(operator.id, e.target.name, +e.target.value)
           }
         />
       </TableCell>
       <TableCell align="left">
-        <input
+        <ValidatedTextField
           className={classes.input}
           name="skillLevel"
           type="number"
           value={operator.skillLevel}
-          disabled={!operator.owned}
+          disabled={!operator.owned || operator.rarity < 3}
+          validator={(value : string) : boolean => {
+            return !operator.owned 
+            || (+operator.rarity < 3)
+            || (+value > 0 && +value <= [4, 7, 7][+operator.promotion])
+          }}
           onChange={(e) =>
-            onChange(operator.id, e.target.name, e.target.valueAsNumber)
+            onChange(operator.id, e.target.name, +e.target.value)
           }
         />
       </TableCell>
       <TableCell align="left">
-        <input
+        <ValidatedTextField
           className={classes.input}
           name="skill1Mastery"
           type="number"
@@ -139,13 +156,17 @@ const OperatorDataTableRow = React.memo((props: Props) => {
           disabled={
             operator.promotion < 2 || operator.skillLevel < 7 || !operator.owned
           }
+          validator={(value : string) : boolean => {
+            return !(operator.owned && operator.promotion === 2 && operator.skillLevel === 7)
+            || (+value >= 0 && +value <= 3)
+          }}
           onChange={(e) =>
-            onChange(operator.id, e.target.name, e.target.valueAsNumber)
+            onChange(operator.id, e.target.name, +e.target.value)
           }
         />
       </TableCell>
       <TableCell align="left">
-        <input
+        <ValidatedTextField
           className={classes.input}
           name="skill2Mastery"
           type="number"
@@ -153,22 +174,30 @@ const OperatorDataTableRow = React.memo((props: Props) => {
           disabled={
             operator.promotion < 2 || operator.skillLevel < 7 || !operator.owned
           }
+          validator={(value : string) : boolean => {
+            return !(operator.owned && operator.promotion === 2 && operator.skillLevel === 7)
+            || (+value >= 0 && +value <= 3)
+          }}
           onChange={(e) =>
-            onChange(operator.id, e.target.name, e.target.valueAsNumber)
+            onChange(operator.id, e.target.name, +e.target.value)
           }
         />
       </TableCell>
       <TableCell align="left">
-        <input
+        <ValidatedTextField
           className={classes.input}
           name="skill3Mastery"
           type="number"
           value={operator.skill3Mastery}
           disabled={
-            operator.promotion < 2 || operator.skillLevel < 7 || !operator.owned
+            operator.promotion < 2 || operator.skillLevel < 7 || !operator.owned || (operator.rarity < 6 && operator.name != "Amiya")
           }
+          validator={(value : string) : boolean => {
+            return !(operator.owned && operator.promotion === 2 && operator.skillLevel === 7 && operator.rarity === 6)
+            || ((operator.rarity === 6 || operator.name === "Amiya") && (+value >= 0 && +value <= 3))
+          }}
           onChange={(e) =>
-            onChange(operator.id, e.target.name, e.target.valueAsNumber)
+            onChange(operator.id, e.target.name, +e.target.value)
           }
         />
       </TableCell>
