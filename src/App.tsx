@@ -31,6 +31,7 @@ import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
 import Button from "./components/Button";
 import SearchForm from "./components/SearchForm";
+import ValidatedTextField from "./components/ValidatedTextField";
 
 const darkTheme = createMuiTheme({
   palette: {
@@ -57,6 +58,25 @@ const useStyles = makeStyles({
     width: 1,
   },
 });
+
+const defaultOperators = Object.fromEntries(
+  Object.entries(operatorJson).map(([key, op]) => 
+  {return [
+    op.id,
+    {
+      id: op.id,
+      name: op.name,
+      favorite: false,
+      rarity: op.rarity,
+      potential: 0,
+      promotion: 0,
+      owned: false,
+      level: 0,
+      skillLevel: 0,
+    }]
+  }
+  )
+)
 
 const headCells = [
   { id: "owned",          alignRight: false, disablePadding: false, enableSort: true, defaultDesc: true, label: "Owned",},
@@ -102,30 +122,14 @@ const firebaseConfig = {
 // Get a reference to the database service
 
 function App() {
-  const [operators, setOperators] = useLocalStorage<any>(
-    "operators",
-    Object.fromEntries(
-      operatorJson.map((op) => [
-        op.id,
-        {
-          id: op.id,
-          name: op.name,
-          favorite: false,
-          rarity: op.rarity,
-          potential: 0,
-          promotion: 0,
-          owned: false,
-          level: 0,
-          skillLevel: 0,
-        },
-      ])
-    )
+  const [operators, setOperators] = useLocalStorage<Record<string, Operator>>(
+    "operators", defaultOperators
   );
   const classes = useStyles();
 
   const handleChange = React.useCallback(
     (operatorID: string, property: string, value: number | boolean) => {
-      setOperators((oldOperators : any) => {
+      setOperators((oldOperators : Record<string, Operator>) : Record<string, Operator> => {
         const copyOperators = { ...oldOperators };
         const copyOperatorData = { ...copyOperators[operatorID] };
         (copyOperatorData as any)[property] = value;
@@ -149,12 +153,12 @@ function App() {
   const [operatorFilter, setOperatorFilter] = useState<string>("");
 
   // tab value controller
-  const [value, setValue] = useLocalStorage("tabValue", 0);
+  const [value, setValue] = useState<number>(0);
   const handleTabChange = (event: any, newValue: number) => {
     setValue(newValue);
   };
 
-  const [orderBy, setOrderBy] = useLocalStorage("orderBy", {key: "favorite", descending: true});
+  const [orderBy, setOrderBy] = useState({key: "favorite", descending: true});
   const createSortHandler = (property: string) => () => {
     handleRequestSort(property);
   };
@@ -185,7 +189,7 @@ function App() {
           setUser(userCredential.user);
           firebase.database().ref("phonebook/" + username).set(
             userCredential.user.uid
-          ) 
+          )
           return true;
         }
       })
@@ -217,7 +221,7 @@ function App() {
   }
   const writeOperatorData = (opID: string, key: string, value: number | boolean) : void => {
     if (!user) return;
-    firebase.database().ref("users/" + user.uid + "/roster/" + opID + "/opData/" + key).set({
+    firebase.database().ref("users/" + user.uid + "/roster/" + opID + key).set({
       value
     });
   }
@@ -231,7 +235,7 @@ function App() {
   }
 
   const renderCollection = (collection : typeof operators) : any => {
-    return operatorJson.filter((op : any) => collection[op.id].potential > 0)
+    return Object.values(operatorJson).filter((op : any) => collection[op.id].potential > 0)
     .sort((a : any, b : any) => operatorComparator(collection[a.id], collection[b.id], orderBy) 
     || defaultSortComparator(collection[a.id], collection[b.id]))
     .map((op : any) => (
@@ -257,6 +261,21 @@ function App() {
       }
     });
     return "";
+  }
+
+  const getIGN = () : string => {
+    if (!user) return "";
+    firebase.database().ref("users/" + user.uid + "/accuntName/").get().then((snapshot) => {
+      if (snapshot.exists()) {
+        return snapshot.val();
+      }
+    });
+    return "";
+  }
+
+  const setIGN = (ign : string) : void => {
+    if (!user) return;
+    firebase.database().ref("users/" + user.uid + "/accountName/").set(ign);
   }
 
   return (
@@ -303,7 +322,7 @@ function App() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {operatorJson
+            {Object.values(operatorJson)
               .filter((op) =>
                 op.name.toLowerCase().includes(operatorFilter.toLowerCase())
               )
@@ -325,12 +344,12 @@ function App() {
         </div>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        {user ? user["uid"] : "not logged"}
         {( user ?
         <>
-        <Button handleChange={writeUserData} text="Store Changes"/> 
-        <Button handleChange={handleLogout} text="Log out"/>
-        <Button handleChange={importUserData} text="Import Data"/>
+          <ValidatedTextField validator={(value : string) => {return true}} onChange={((e) => setIGN(e.target.value))}/>
+          <Button handleChange={writeUserData} text="Store Changes"/> 
+          <Button handleChange={handleLogout} text="Log out"/>
+          <Button handleChange={importUserData} text="Import Data"/>
         </>
         :
         <>

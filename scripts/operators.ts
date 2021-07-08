@@ -15,11 +15,12 @@ const subset = operators.map((entry: Operator & { id: string }) => {
       skillName
     };
   });
-  return {
-    // can't use object destructuring for "class" since it's reserved :(
-    id, name, rarity, isCnOnly, skills, class: entry.class
-  };
+  return [
+    id,
+    { id, name, rarity, isCnOnly, skills, class: entry.class }
+  ];
 });
+const operatorObject = Object.fromEntries(subset)
 const outDir = path.join(__dirname, "..", "src/data");
 fs.mkdirSync(outDir, { recursive: true });
-fs.writeFileSync(path.join(outDir, "operators.json"), JSON.stringify(subset, null, 2));
+fs.writeFileSync(path.join(outDir, "operators.json"), JSON.stringify(operatorObject, null, 2));

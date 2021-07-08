@@ -1,5 +1,5 @@
-[
-  {
+{
+  "char_002_amiya": {
     "id": "char_002_amiya",
     "name": "Amiya",
     "rarity": 5,
@@ -23,7 +23,7 @@
     ],
     "class": "Caster"
   },
-  {
+  "char_003_kalts": {
     "id": "char_003_kalts",
     "name": "Kal'tsit",
     "rarity": 6,
@@ -47,7 +47,7 @@
     ],
     "class": "Medic"
   },
-  {
+  "char_009_12fce": {
     "id": "char_009_12fce",
     "name": "12F",
     "rarity": 2,
@@ -55,7 +55,7 @@
     "skills": [],
     "class": "Caster"
   },
-  {
+  "char_010_chen": {
     "id": "char_010_chen",
     "name": "Ch'en",
     "rarity": 6,
@@ -79,7 +79,7 @@
     ],
     "class": "Guard"
   },
-  {
+  "char_017_huang": {
     "id": "char_017_huang",
     "name": "Blaze",
     "rarity": 6,
@@ -103,7 +103,7 @@
     ],
     "class": "Guard"
   },
-  {
+  "char_101_sora": {
     "id": "char_101_sora",
     "name": "Sora",
     "rarity": 5,
@@ -122,7 +122,7 @@
     ],
     "class": "Supporter"
   },
-  {
+  "char_1011_lava2": {
     "id": "char_1011_lava2",
     "name": "Lava the Purgatory",
     "rarity": 5,
@@ -141,7 +141,7 @@
     ],
     "class": "Caster"
   },
-  {
+  "char_1012_skadi2": {
     "id": "char_1012_skadi2",
     "name": "Skadi the Corrupting Heart",
     "rarity": 6,
@@ -165,7 +165,7 @@
     ],
     "class": "Supporter"
   },
-  {
+  "char_102_texas": {
     "id": "char_102_texas",
     "name": "Texas",
     "rarity": 5,
@@ -184,7 +184,7 @@
     ],
     "class": "Vanguard"
   },
-  {
+  "char_103_angel": {
     "id": "char_103_angel",
     "name": "Exusiai",
     "rarity": 6,
@@ -208,7 +208,7 @@
     ],
     "class": "Sniper"
   },
-  {
+  "char_106_franka": {
     "id": "char_106_franka",
     "name": "Franka",
     "rarity": 5,
@@ -227,7 +227,7 @@
     ],
     "class": "Guard"
   },
-  {
+  "char_107_liskam": {
     "id": "char_107_liskam",
     "name": "Liskarm",
     "rarity": 5,
@@ -246,7 +246,7 @@
     ],
     "class": "Defender"
   },
-  {
+  "char_108_silent": {
     "id": "char_108_silent",
     "name": "Silence",
     "rarity": 5,
@@ -265,7 +265,7 @@
     ],
     "class": "Medic"
   },
-  {
+  "char_109_fmout": {
     "id": "char_109_fmout",
     "name": "Gitano",
     "rarity": 4,
@@ -284,7 +284,7 @@
     ],
     "class": "Caster"
   },
-  {
+  "char_110_deepcl": {
     "id": "char_110_deepcl",
     "name": "Deepcolor",
     "rarity": 4,
@@ -303,7 +303,7 @@
     ],
     "class": "Supporter"
   },
-  {
+  "char_112_siege": {
     "id": "char_112_siege",
     "name": "Siege",
     "rarity": 6,
@@ -327,7 +327,7 @@
     ],
     "class": "Vanguard"
   },
-  {
+  "char_113_cqbw": {
     "id": "char_113_cqbw",
     "name": "W",
     "rarity": 6,
@@ -351,7 +351,7 @@
     ],
     "class": "Sniper"
   },
-  {
+  "char_115_headbr": {
     "id": "char_115_headbr",
     "name": "Zima",
     "rarity": 5,
@@ -370,7 +370,7 @@
     ],
     "class": "Vanguard"
   },
-  {
+  "char_117_myrrh": {
     "id": "char_117_myrrh",
     "name": "Myrrh",
     "rarity": 4,
@@ -389,7 +389,7 @@
     ],
     "class": "Medic"
   },
-  {
+  "char_118_yuki": {
     "id": "char_118_yuki",
     "name": "Shirayuki",
     "rarity": 4,
@@ -408,7 +408,7 @@
     ],
     "class": "Sniper"
   },
-  {
+  "char_120_hibisc": {
     "id": "char_120_hibisc",
     "name": "Hibiscus",
     "rarity": 3,
@@ -422,7 +422,7 @@
     ],
     "class": "Medic"
   },
-  {
+  "char_121_lava": {
     "id": "char_121_lava",
     "name": "Lava",
     "rarity": 3,
@@ -436,7 +436,7 @@
     ],
     "class": "Caster"
   },
-  {
+  "char_122_beagle": {
     "id": "char_122_beagle",
     "name": "Beagle",
     "rarity": 3,
@@ -450,7 +450,7 @@
     ],
     "class": "Defender"
   },
-  {
+  "char_123_fang": {
     "id": "char_123_fang",
     "name": "Fang",
     "rarity": 3,
@@ -464,7 +464,7 @@
     ],
     "class": "Vanguard"
   },
-  {
+  "char_124_kroos": {
     "id": "char_124_kroos",
     "name": "Kroos",
     "rarity": 3,
@@ -478,7 +478,7 @@
     ],
     "class": "Sniper"
   },
-  {
+  "char_126_shotst": {
     "id": "char_126_shotst",
     "name": "Meteor",
     "rarity": 4,
@@ -497,7 +497,7 @@
     ],
     "class": "Sniper"
   },
-  {
+  "char_127_estell": {
     "id": "char_127_estell",
     "name": "Estelle",
     "rarity": 4,
@@ -516,7 +516,7 @@
     ],
     "class": "Guard"
   },
-  {
+  "char_128_plosis": {
     "id": "char_128_plosis",
     "name": "Ptilopsis",
     "rarity": 5,
@@ -535,7 +535,7 @@
     ],
     "class": "Medic"
   },
-  {
+  "char_129_bluep": {
     "id": "char_129_bluep",
     "name": "Blue Poison",
     "rarity": 5,
@@ -554,7 +554,7 @@
     ],
     "class": "Sniper"
   },
-  {
+  "char_130_doberm": {
     "id": "char_130_doberm",
     "name": "Dobermann",
     "rarity": 4,
@@ -573,7 +573,7 @@
     ],
     "class": "Guard"
   },
-  {
+  "char_131_flameb": {
     "id": "char_131_flameb",
     "name": "Flamebringer",
     "rarity": 5,
@@ -592,7 +592,7 @@
     ],
     "class": "Guard"
   },
-  {
+  "char_133_mm": {
     "id": "char_133_mm",
     "name": "May",
     "rarity": 4,
@@ -611,7 +611,7 @@
     ],
     "class": "Sniper"
   },
-  {
+  "char_134_ifrit": {
     "id": "char_134_ifrit",
     "name": "Ifrit",
     "rarity": 6,
@@ -635,7 +635,7 @@
     ],
     "class": "Caster"
   },
-  {
+  "char_136_hsguma": {
     "id": "char_136_hsguma",
     "name": "Hoshiguma",
     "rarity": 6,
@@ -659,7 +659,7 @@
     ],
     "class": "Defender"
   },
-  {
+  "char_137_brownb": {
     "id": "char_137_brownb",
     "name": "Beehunter",
     "rarity": 4,
@@ -678,7 +678,7 @@
     ],
     "class": "Guard"
   },
-  {
+  "char_140_whitew": {
     "id": "char_140_whitew",
     "name": "Lappland",
     "rarity": 5,
@@ -697,7 +697,7 @@
     ],
     "class": "Guard"
   },
-  {
+  "char_141_nights": {
     "id": "char_141_nights",
     "name": "Haze",
     "rarity": 4,
@@ -716,7 +716,7 @@
     ],
     "class": "Caster"
   },
-  {
+  "char_143_ghost": {
     "id": "char_143_ghost",
     "name": "Specter",
     "rarity": 5,
@@ -735,7 +735,7 @@
     ],
     "class": "Guard"
   },
-  {
+  "char_144_red": {
     "id": "char_144_red",
     "name": "Projekt Red",
     "rarity": 5,
@@ -754,7 +754,7 @@
     ],
     "class": "Specialist"
   },
-  {
+  "char_145_prove": {
     "id": "char_145_prove",
     "name": "Provence",
     "rarity": 5,
@@ -773,7 +773,7 @@
     ],
     "class": "Sniper"
   },
-  {
+  "char_147_shining": {
     "id": "char_147_shining",
     "name": "Shining",
     "rarity": 6,
@@ -797,7 +797,7 @@
     ],
     "class": "Medic"
   },
-  {
+  "char_148_nearl": {
     "id": "char_148_nearl",
     "name": "Nearl",
     "rarity": 5,
@@ -816,7 +816,7 @@
     ],
     "class": "Defender"
   },
-  {
+  "char_149_scave": {
     "id": "char_149_scave",
     "name": "Scavenger",
     "rarity": 4,
@@ -835,7 +835,7 @@
     ],
     "class": "Vanguard"
   },
-  {
+  "char_150_snakek": {
     "id": "char_150_snakek",
     "name": "Cuora",
     "rarity": 4,
@@ -854,7 +854,7 @@
     ],
     "class": "Defender"
   },
-  {
+  "char_151_myrtle": {
     "id": "char_151_myrtle",
     "name": "Myrtle",
     "rarity": 4,
@@ -873,7 +873,7 @@
     ],
     "class": "Vanguard"
   },
-  {
+  "char_155_tiger": {
     "id": "char_155_tiger",
     "name": "Indra",
     "rarity": 5,
@@ -892,7 +892,7 @@
     ],
     "class": "Guard"
   },
-  {
+  "char_158_milu": {
     "id": "char_158_milu",
     "name": "Firewatch",
     "rarity": 5,
@@ -911,7 +911,7 @@
     ],
     "class": "Sniper"
   },
-  {
+  "char_159_peacok": {
     "id": "char_159_peacok",
     "name": "Conviction",
     "rarity": 4,
@@ -930,7 +930,7 @@
     ],
     "class": "Guard"
   },
-  {
+  "char_163_hpsts": {
     "id": "char_163_hpsts",
     "name": "Vulcan",
     "rarity": 5,
@@ -949,7 +949,7 @@
     ],
     "class": "Defender"
   },
-  {
+  "char_164_nightm": {
     "id": "char_164_nightm",
     "name": "Nightmare",
     "rarity": 5,
@@ -968,7 +968,7 @@
     ],
     "class": "Caster"
   },
-  {
+  "char_166_skfire": {
     "id": "char_166_skfire",
     "name": "Skyfire",
     "rarity": 5,
@@ -987,7 +987,7 @@
     ],
     "class": "Caster"
   },
-  {
+  "char_171_bldsk": {
     "id": "char_171_bldsk",
     "name": "Warfarin",
     "rarity": 5,
@@ -1006,7 +1006,7 @@
     ],
     "class": "Medic"
   },
-  {
+  "char_172_svrash": {
     "id": "char_172_svrash",
     "name": "SilverAsh",
     "rarity": 6,
@@ -1030,7 +1030,7 @@
     ],
     "class": "Guard"
   },
-  {
+  "char_173_slchan": {
     "id": "char_173_slchan",
     "name": "Cliffheart",
     "rarity": 5,
@@ -1049,7 +1049,7 @@
     ],
     "class": "Specialist"
   },
-  {
+  "char_174_slbell": {
     "id": "char_174_slbell",
     "name": "Pramanix",
     "rarity": 5,
@@ -1068,7 +1068,7 @@
     ],
     "class": "Supporter"
   },
-  {
+  "char_179_cgbird": {
     "id": "char_179_cgbird",
     "name": "Nightingale",
     "rarity": 6,
@@ -1092,7 +1092,7 @@
     ],
     "class": "Medic"
   },
-  {
+  "char_180_amgoat": {
     "id": "char_180_amgoat",
     "name": "Eyjafjalla",
     "rarity": 6,
@@ -1116,7 +1116,7 @@
     ],
     "class": "Caster"
   },
-  {
+  "char_181_flower": {
     "id": "char_181_flower",
     "name": "Perfumer",
     "rarity": 4,
@@ -1135,7 +1135,7 @@
     ],
     "class": "Medic"
   },
-  {
+  "char_183_skgoat": {
     "id": "char_183_skgoat",
     "name": "Earthspirit",
     "rarity": 4,
@@ -1154,7 +1154,7 @@
     ],
     "class": "Supporter"
   },
-  {
+  "char_185_frncat": {
     "id": "char_185_frncat",
     "name": "Mousse",
     "rarity": 4,
@@ -1173,7 +1173,7 @@
     ],
     "class": "Guard"
   },
-  {
+  "char_187_ccheal": {
     "id": "char_187_ccheal",
     "name": "Gavial",
     "rarity": 4,
@@ -1192,7 +1192,7 @@
     ],
     "class": "Medic"
   },
-  {
+  "char_188_helage": {
     "id": "char_188_helage",
     "name": "Hellagur",
     "rarity": 6,
@@ -1216,7 +1216,7 @@
     ],
     "class": "Guard"
   },
-  {
+  "char_190_clour": {
     "id": "char_190_clour",
     "name": "Vermeil",
     "rarity": 4,
@@ -1235,7 +1235,7 @@
     ],
     "class": "Sniper"
   },
-  {
+  "char_192_falco": {
     "id": "char_192_falco",
     "name": "Plume",
     "rarity": 3,
@@ -1249,7 +1249,7 @@
     ],
     "class": "Vanguard"
   },
-  {
+  "char_193_frostl": {
     "id": "char_193_frostl",
     "name": "Frostleaf",
     "rarity": 4,
@@ -1268,7 +1268,7 @@
     ],
     "class": "Guard"
   },
-  {
+  "char_195_glassb": {
     "id": "char_195_glassb",
     "name": "Istina",
     "rarity": 5,
@@ -1287,7 +1287,7 @@
     ],
     "class": "Supporter"
   },
-  {
+  "char_196_sunbr": {
     "id": "char_196_sunbr",
     "name": "Gummy",
     "rarity": 4,
@@ -1306,7 +1306,7 @@
     ],
     "class": "Defender"
   },
-  {
+  "char_197_poca": {
     "id": "char_197_poca",
     "name": "Rosa",
     "rarity": 6,
@@ -1330,7 +1330,7 @@
     ],
     "class": "Sniper"
   },
-  {
+  "char_198_blackd": {
     "id": "char_198_blackd",
     "name": "Courier",
     "rarity": 4,
@@ -1349,7 +1349,7 @@
     ],
     "class": "Vanguard"
   },
-  {
+  "char_199_yak": {
     "id": "char_199_yak",
     "name": "Matterhorn",
     "rarity": 4,
@@ -1368,7 +1368,7 @@
     ],
     "class": "Defender"
   },
-  {
+  "char_201_moeshd": {
     "id": "char_201_moeshd",
     "name": "Croissant",
     "rarity": 5,
@@ -1387,7 +1387,7 @@
     ],
     "class": "Defender"
   },
-  {
+  "char_2013_cerber": {
     "id": "char_2013_cerber",
     "name": "Ceobe",
     "rarity": 6,
@@ -1411,7 +1411,7 @@
     ],
     "class": "Caster"
   },
-  {
+  "char_2014_nian": {
     "id": "char_2014_nian",
     "name": "Nian",
     "rarity": 6,
@@ -1435,7 +1435,7 @@
     ],
     "class": "Defender"
   },
-  {
+  "char_2015_dusk": {
     "id": "char_2015_dusk",
     "name": "Dusk",
     "rarity": 6,
@@ -1459,7 +1459,7 @@
     ],
     "class": "Caster"
   },
-  {
+  "char_202_demkni": {
     "id": "char_202_demkni",
     "name": "Saria",
     "rarity": 6,
@@ -1483,7 +1483,7 @@
     ],
     "class": "Defender"
   },
-  {
+  "char_204_platnm": {
     "id": "char_204_platnm",
     "name": "Platinum",
     "rarity": 5,
@@ -1502,7 +1502,7 @@
     ],
     "class": "Sniper"
   },
-  {
+  "char_208_melan": {
     "id": "char_208_melan",
     "name": "Melantha",
     "rarity": 3,
@@ -1516,7 +1516,7 @@
     ],
     "class": "Guard"
   },
-  {
+  "char_209_ardign": {
     "id": "char_209_ardign",
     "name": "Cardigan",
     "rarity": 3,
@@ -1530,7 +1530,7 @@
     ],
     "class": "Defender"
   },
-  {
+  "char_210_stward": {
     "id": "char_210_stward",
     "name": "Steward",
     "rarity": 3,
@@ -1544,7 +1544,7 @@
     ],
     "class": "Caster"
   },
-  {
+  "char_211_adnach": {
     "id": "char_211_adnach",
     "name": "Adnachiel",
     "rarity": 3,
@@ -1558,7 +1558,7 @@
     ],
     "class": "Sniper"
   },
-  {
+  "char_212_ansel": {
     "id": "char_212_ansel",
     "name": "Ansel",
     "rarity": 3,
@@ -1572,7 +1572,7 @@
     ],
     "class": "Medic"
   },
-  {
+  "char_213_mostma": {
     "id": "char_213_mostma",
     "name": "Mostima",
     "rarity": 6,
@@ -1596,7 +1596,7 @@
     ],
     "class": "Caster"
   },
-  {
+  "char_214_kafka": {
     "id": "char_214_kafka",
     "name": "Kafka",
     "rarity": 5,
@@ -1615,7 +1615,7 @@
     ],
     "class": "Specialist"
   },
-  {
+  "char_215_mantic": {
     "id": "char_215_mantic",
     "name": "Manticore",
     "rarity": 5,
@@ -1634,7 +1634,7 @@
     ],
     "class": "Specialist"
   },
-  {
+  "char_218_cuttle": {
     "id": "char_218_cuttle",
     "name": "Andreana",
     "rarity": 5,
@@ -1653,7 +1653,7 @@
     ],
     "class": "Sniper"
   },
-  {
+  "char_219_meteo": {
     "id": "char_219_meteo",
     "name": "Meteorite",
     "rarity": 5,
@@ -1672,7 +1672,7 @@
     ],
     "class": "Sniper"
   },
-  {
+  "char_220_grani": {
     "id": "char_220_grani",
     "name": "Grani",
     "rarity": 5,
@@ -1691,7 +1691,7 @@
     ],
     "class": "Vanguard"
   },
-  {
+  "char_222_bpipe": {
     "id": "char_222_bpipe",
     "name": "Bagpipe",
     "rarity": 6,
@@ -1715,7 +1715,7 @@
     ],
     "class": "Vanguard"
   },
-  {
+  "char_225_haak": {
     "id": "char_225_haak",
     "name": "Aak",
     "rarity": 6,
@@ -1739,7 +1739,7 @@
     ],
     "class": "Specialist"
   },
-  {
+  "char_226_hmau": {
     "id": "char_226_hmau",
     "name": "Hung",
     "rarity": 5,
@@ -1758,7 +1758,7 @@
     ],
     "class": "Defender"
   },
-  {
+  "char_230_savage": {
     "id": "char_230_savage",
     "name": "Savage",
     "rarity": 5,
@@ -1777,7 +1777,7 @@
     ],
     "class": "Guard"
   },
-  {
+  "char_235_jesica": {
     "id": "char_235_jesica",
     "name": "Jessica",
     "rarity": 4,
@@ -1796,7 +1796,7 @@
     ],
     "class": "Sniper"
   },
-  {
+  "char_236_rope": {
     "id": "char_236_rope",
     "name": "Rope",
     "rarity": 4,
@@ -1815,7 +1815,7 @@
     ],
     "class": "Specialist"
   },
-  {
+  "char_237_gravel": {
     "id": "char_237_gravel",
     "name": "Gravel",
     "rarity": 4,
@@ -1834,7 +1834,7 @@
     ],
     "class": "Specialist"
   },
-  {
+  "char_240_wyvern": {
     "id": "char_240_wyvern",
     "name": "Vanilla",
     "rarity": 3,
@@ -1848,7 +1848,7 @@
     ],
     "class": "Vanguard"
   },
-  {
+  "char_241_panda": {
     "id": "char_241_panda",
     "name": "FEater",
     "rarity": 5,
@@ -1867,7 +1867,7 @@
     ],
     "class": "Specialist"
   },
-  {
+  "char_242_otter": {
     "id": "char_242_otter",
     "name": "Mayer",
     "rarity": 5,
@@ -1886,7 +1886,7 @@
     ],
     "class": "Supporter"
   },
-  {
+  "char_243_waaifu": {
     "id": "char_243_waaifu",
     "name": "Waai Fu",
     "rarity": 5,
@@ -1905,7 +1905,7 @@
     ],
     "class": "Specialist"
   },
-  {
+  "char_248_mgllan": {
     "id": "char_248_mgllan",
     "name": "Magallan",
     "rarity": 6,
@@ -1929,7 +1929,7 @@
     ],
     "class": "Supporter"
   },
-  {
+  "char_250_phatom": {
     "id": "char_250_phatom",
     "name": "Phantom",
     "rarity": 6,
@@ -1953,7 +1953,7 @@
     ],
     "class": "Specialist"
   },
-  {
+  "char_252_bibeak": {
     "id": "char_252_bibeak",
     "name": "Bibeak",
     "rarity": 5,
@@ -1972,7 +1972,7 @@
     ],
     "class": "Guard"
   },
-  {
+  "char_253_greyy": {
     "id": "char_253_greyy",
     "name": "Greyy",
     "rarity": 4,
@@ -1991,7 +1991,7 @@
     ],
     "class": "Caster"
   },
-  {
+  "char_254_vodfox": {
     "id": "char_254_vodfox",
     "name": "Shamare",
     "rarity": 5,
@@ -2010,7 +2010,7 @@
     ],
     "class": "Supporter"
   },
-  {
+  "char_258_podego": {
     "id": "char_258_podego",
     "name": "Podenco",
     "rarity": 4,
@@ -2029,7 +2029,7 @@
     ],
     "class": "Supporter"
   },
-  {
+  "char_260_durnar": {
     "id": "char_260_durnar",
     "name": "Dur-nar",
     "rarity": 4,
@@ -2048,7 +2048,7 @@
     ],
     "class": "Defender"
   },
-  {
+  "char_261_sddrag": {
     "id": "char_261_sddrag",
     "name": "Reed",
     "rarity": 5,
@@ -2067,7 +2067,7 @@
     ],
     "class": "Vanguard"
   },
-  {
+  "char_263_skadi": {
     "id": "char_263_skadi",
     "name": "Skadi",
     "rarity": 6,
@@ -2091,7 +2091,7 @@
     ],
     "class": "Guard"
   },
-  {
+  "char_264_f12yin": {
     "id": "char_264_f12yin",
     "name": "Mountain",
     "rarity": 6,
@@ -2115,7 +2115,7 @@
     ],
     "class": "Guard"
   },
-  {
+  "char_265_sophia": {
     "id": "char_265_sophia",
     "name": "Whislash",
     "rarity": 5,
@@ -2134,7 +2134,7 @@
     ],
     "class": "Guard"
   },
-  {
+  "char_271_spikes": {
     "id": "char_271_spikes",
     "name": "Arene",
     "rarity": 4,
@@ -2153,7 +2153,7 @@
     ],
     "class": "Guard"
   },
-  {
+  "char_272_strong": {
     "id": "char_272_strong",
     "name": "Jaye",
     "rarity": 4,
@@ -2172,7 +2172,7 @@
     ],
     "class": "Specialist"
   },
-  {
+  "char_274_astesi": {
     "id": "char_274_astesi",
     "name": "Astesia",
     "rarity": 5,
@@ -2191,7 +2191,7 @@
     ],
     "class": "Guard"
   },
-  {
+  "char_275_breeze": {
     "id": "char_275_breeze",
     "name": "Breeze",
     "rarity": 5,
@@ -2210,7 +2210,7 @@
     ],
     "class": "Medic"
   },
-  {
+  "char_277_sqrrel": {
     "id": "char_277_sqrrel",
     "name": "Shaw",
     "rarity": 4,
@@ -2229,7 +2229,7 @@
     ],
     "class": "Specialist"
   },
-  {
+  "char_278_orchid": {
     "id": "char_278_orchid",
     "name": "Orchid",
     "rarity": 3,
@@ -2243,7 +2243,7 @@
     ],
     "class": "Supporter"
   },
-  {
+  "char_279_excu": {
     "id": "char_279_excu",
     "name": "Executor",
     "rarity": 5,
@@ -2262,7 +2262,7 @@
     ],
     "class": "Sniper"
   },
-  {
+  "char_281_popka": {
     "id": "char_281_popka",
     "name": "Popukar",
     "rarity": 3,
@@ -2276,7 +2276,7 @@
     ],
     "class": "Guard"
   },
-  {
+  "char_282_catap": {
     "id": "char_282_catap",
     "name": "Catapult",
     "rarity": 3,
@@ -2290,7 +2290,7 @@
     ],
     "class": "Sniper"
   },
-  {
+  "char_283_midn": {
     "id": "char_283_midn",
     "name": "Midnight",
     "rarity": 3,
@@ -2304,7 +2304,7 @@
     ],
     "class": "Guard"
   },
-  {
+  "char_284_spot": {
     "id": "char_284_spot",
     "name": "Spot",
     "rarity": 3,
@@ -2318,7 +2318,7 @@
     ],
     "class": "Defender"
   },
-  {
+  "char_285_medic2": {
     "id": "char_285_medic2",
     "name": "Lancet-2",
     "rarity": 1,
@@ -2326,7 +2326,7 @@
     "skills": [],
     "class": "Medic"
   },
-  {
+  "char_286_cast3": {
     "id": "char_286_cast3",
     "name": "Castle-3",
     "rarity": 1,
@@ -2334,7 +2334,7 @@
     "skills": [],
     "class": "Guard"
   },
-  {
+  "char_289_gyuki": {
     "id": "char_289_gyuki",
     "name": "Matoimaru",
     "rarity": 4,
@@ -2353,7 +2353,7 @@
     ],
     "class": "Guard"
   },
-  {
+  "char_290_vigna": {
     "id": "char_290_vigna",
     "name": "Vigna",
     "rarity": 4,
@@ -2372,7 +2372,7 @@
     ],
     "class": "Vanguard"
   },
-  {
+  "char_291_aglina": {
     "id": "char_291_aglina",
     "name": "Angelina",
     "rarity": 6,
@@ -2396,7 +2396,7 @@
     ],
     "class": "Supporter"
   },
-  {
+  "char_293_thorns": {
     "id": "char_293_thorns",
     "name": "Thorns",
     "rarity": 6,
@@ -2420,7 +2420,7 @@
     ],
     "class": "Guard"
   },
-  {
+  "char_294_ayer": {
     "id": "char_294_ayer",
     "name": "Ayerscarpe",
     "rarity": 5,
@@ -2439,7 +2439,7 @@
     ],
     "class": "Guard"
   },
-  {
+  "char_298_susuro": {
     "id": "char_298_susuro",
     "name": "Sussurro",
     "rarity": 4,
@@ -2458,7 +2458,7 @@
     ],
     "class": "Medic"
   },
-  {
+  "char_301_cutter": {
     "id": "char_301_cutter",
     "name": "Cutter",
     "rarity": 4,
@@ -2477,7 +2477,7 @@
     ],
     "class": "Guard"
   },
-  {
+  "char_302_glaze": {
     "id": "char_302_glaze",
     "name": "Ambriel",
     "rarity": 4,
@@ -2496,7 +2496,7 @@
     ],
     "class": "Sniper"
   },
-  {
+  "char_304_zebra": {
     "id": "char_304_zebra",
     "name": "Heavyrain",
     "rarity": 5,
@@ -2515,7 +2515,7 @@
     ],
     "class": "Defender"
   },
-  {
+  "char_306_leizi": {
     "id": "char_306_leizi",
     "name": "Leizi",
     "rarity": 5,
@@ -2534,7 +2534,7 @@
     ],
     "class": "Caster"
   },
-  {
+  "char_308_swire": {
     "id": "char_308_swire",
     "name": "Swire",
     "rarity": 5,
@@ -2553,7 +2553,7 @@
     ],
     "class": "Guard"
   },
-  {
+  "char_311_mudrok": {
     "id": "char_311_mudrok",
     "name": "Mudrock",
     "rarity": 6,
@@ -2577,7 +2577,7 @@
     ],
     "class": "Defender"
   },
-  {
+  "char_325_bison": {
     "id": "char_325_bison",
     "name": "Bison",
     "rarity": 5,
@@ -2596,7 +2596,7 @@
     ],
     "class": "Defender"
   },
-  {
+  "char_326_glacus": {
     "id": "char_326_glacus",
     "name": "Glaucus",
     "rarity": 5,
@@ -2615,7 +2615,7 @@
     ],
     "class": "Supporter"
   },
-  {
+  "char_328_cammou": {
     "id": "char_328_cammou",
     "name": "Click",
     "rarity": 4,
@@ -2634,7 +2634,7 @@
     ],
     "class": "Caster"
   },
-  {
+  "char_332_archet": {
     "id": "char_332_archet",
     "name": "Archetto",
     "rarity": 6,
@@ -2658,7 +2658,7 @@
     ],
     "class": "Sniper"
   },
-  {
+  "char_333_sidero": {
     "id": "char_333_sidero",
     "name": "Sideroca",
     "rarity": 5,
@@ -2677,7 +2677,7 @@
     ],
     "class": "Guard"
   },
-  {
+  "char_336_folivo": {
     "id": "char_336_folivo",
     "name": "Scene",
     "rarity": 5,
@@ -2696,7 +2696,7 @@
     ],
     "class": "Supporter"
   },
-  {
+  "char_337_utage": {
     "id": "char_337_utage",
     "name": "Utage",
     "rarity": 4,
@@ -2715,7 +2715,7 @@
     ],
     "class": "Guard"
   },
-  {
+  "char_338_iris": {
     "id": "char_338_iris",
     "name": "Iris",
     "rarity": 5,
@@ -2734,7 +2734,7 @@
     ],
     "class": "Caster"
   },
-  {
+  "char_340_shwaz": {
     "id": "char_340_shwaz",
     "name": "Schwarz",
     "rarity": 6,
@@ -2758,7 +2758,7 @@
     ],
     "class": "Sniper"
   },
-  {
+  "char_343_tknogi": {
     "id": "char_343_tknogi",
     "name": "Tsukinogi",
     "rarity": 5,
@@ -2777,7 +2777,7 @@
     ],
     "class": "Supporter"
   },
-  {
+  "char_344_beewax": {
     "id": "char_344_beewax",
     "name": "Beeswax",
     "rarity": 5,
@@ -2796,7 +2796,7 @@
     ],
     "class": "Caster"
   },
-  {
+  "char_345_folnic": {
     "id": "char_345_folnic",
     "name": "Folinic",
     "rarity": 5,
@@ -2815,7 +2815,7 @@
     ],
     "class": "Medic"
   },
-  {
+  "char_346_aosta": {
     "id": "char_346_aosta",
     "name": "Aosta",
     "rarity": 5,
@@ -2834,7 +2834,7 @@
     ],
     "class": "Sniper"
   },
-  {
+  "char_347_jaksel": {
     "id": "char_347_jaksel",
     "name": "Jackie",
     "rarity": 4,
@@ -2853,7 +2853,7 @@
     ],
     "class": "Guard"
   },
-  {
+  "char_348_ceylon": {
     "id": "char_348_ceylon",
     "name": "Ceylon",
     "rarity": 5,
@@ -2872,7 +2872,7 @@
     ],
     "class": "Medic"
   },
-  {
+  "char_349_chiave": {
     "id": "char_349_chiave",
     "name": "Chiave",
     "rarity": 5,
@@ -2891,7 +2891,7 @@
     ],
     "class": "Vanguard"
   },
-  {
+  "char_350_surtr": {
     "id": "char_350_surtr",
     "name": "Surtr",
     "rarity": 6,
@@ -2915,7 +2915,7 @@
     ],
     "class": "Guard"
   },
-  {
+  "char_355_ethan": {
     "id": "char_355_ethan",
     "name": "Ethan",
     "rarity": 4,
@@ -2934,7 +2934,7 @@
     ],
     "class": "Specialist"
   },
-  {
+  "char_356_broca": {
     "id": "char_356_broca",
     "name": "Broca",
     "rarity": 5,
@@ -2953,7 +2953,7 @@
     ],
     "class": "Guard"
   },
-  {
+  "char_358_lisa": {
     "id": "char_358_lisa",
     "name": "Suzuran",
     "rarity": 6,
@@ -2977,7 +2977,7 @@
     ],
     "class": "Supporter"
   },
-  {
+  "char_362_saga": {
     "id": "char_362_saga",
     "name": "Saga",
     "rarity": 6,
@@ -3001,7 +3001,7 @@
     ],
     "class": "Vanguard"
   },
-  {
+  "char_363_toddi": {
     "id": "char_363_toddi",
     "name": "Toddifons",
     "rarity": 5,
@@ -3020,7 +3020,7 @@
     ],
     "class": "Sniper"
   },
-  {
+  "char_365_aprl": {
     "id": "char_365_aprl",
     "name": "April",
     "rarity": 5,
@@ -3039,7 +3039,7 @@
     ],
     "class": "Sniper"
   },
-  {
+  "char_366_acdrop": {
     "id": "char_366_acdrop",
     "name": "Aciddrop",
     "rarity": 4,
@@ -3058,7 +3058,7 @@
     ],
     "class": "Sniper"
   },
-  {
+  "char_367_swllow": {
     "id": "char_367_swllow",
     "name": "GreyThroat",
     "rarity": 5,
@@ -3077,7 +3077,7 @@
     ],
     "class": "Sniper"
   },
-  {
+  "char_369_bena": {
     "id": "char_369_bena",
     "name": "Bena",
     "rarity": 5,
@@ -3096,7 +3096,7 @@
     ],
     "class": "Specialist"
   },
-  {
+  "char_373_lionhd": {
     "id": "char_373_lionhd",
     "name": "Leonhardt",
     "rarity": 5,
@@ -3115,7 +3115,7 @@
     ],
     "class": "Caster"
   },
-  {
+  "char_376_therex": {
     "id": "char_376_therex",
     "name": "Thermal-EX",
     "rarity": 1,
@@ -3123,7 +3123,7 @@
     "skills": [],
     "class": "Specialist"
   },
-  {
+  "char_378_asbest": {
     "id": "char_378_asbest",
     "name": "Asbestos",
     "rarity": 5,
@@ -3142,7 +3142,7 @@
     ],
     "class": "Defender"
   },
-  {
+  "char_379_sesa": {
     "id": "char_379_sesa",
     "name": "Sesa",
     "rarity": 5,
@@ -3161,7 +3161,7 @@
     ],
     "class": "Sniper"
   },
-  {
+  "char_381_bubble": {
     "id": "char_381_bubble",
     "name": "Bubble",
     "rarity": 4,
@@ -3180,7 +3180,7 @@
     ],
     "class": "Defender"
   },
-  {
+  "char_383_snsant": {
     "id": "char_383_snsant",
     "name": "Snowsant",
     "rarity": 5,
@@ -3199,7 +3199,7 @@
     ],
     "class": "Specialist"
   },
-  {
+  "char_385_finlpp": {
     "id": "char_385_finlpp",
     "name": "Purestream",
     "rarity": 4,
@@ -3218,7 +3218,7 @@
     ],
     "class": "Medic"
   },
-  {
+  "char_388_mint": {
     "id": "char_388_mint",
     "name": "Mint",
     "rarity": 5,
@@ -3237,7 +3237,7 @@
     ],
     "class": "Caster"
   },
-  {
+  "char_391_rosmon": {
     "id": "char_391_rosmon",
     "name": "Rosmontis",
     "rarity": 6,
@@ -3261,7 +3261,7 @@
     ],
     "class": "Sniper"
   },
-  {
+  "char_400_weedy": {
     "id": "char_400_weedy",
     "name": "Weedy",
     "rarity": 6,
@@ -3285,7 +3285,7 @@
     ],
     "class": "Specialist"
   },
-  {
+  "char_401_elysm": {
     "id": "char_401_elysm",
     "name": "Elysium",
     "rarity": 5,
@@ -3304,7 +3304,7 @@
     ],
     "class": "Vanguard"
   },
-  {
+  "char_402_tuye": {
     "id": "char_402_tuye",
     "name": "Tuye",
     "rarity": 5,
@@ -3323,7 +3323,7 @@
     ],
     "class": "Medic"
   },
-  {
+  "char_405_absin": {
     "id": "char_405_absin",
     "name": "Absinthe",
     "rarity": 5,
@@ -3342,7 +3342,7 @@
     ],
     "class": "Caster"
   },
-  {
+  "char_411_tomimi": {
     "id": "char_411_tomimi",
     "name": "Tomimi",
     "rarity": 5,
@@ -3361,7 +3361,7 @@
     ],
     "class": "Caster"
   },
-  {
+  "char_415_flint": {
     "id": "char_415_flint",
     "name": "Flint",
     "rarity": 5,
@@ -3380,7 +3380,7 @@
     ],
     "class": "Guard"
   },
-  {
+  "char_416_zumama": {
     "id": "char_416_zumama",
     "name": "Eunectes",
     "rarity": 6,
@@ -3404,7 +3404,7 @@
     ],
     "class": "Defender"
   },
-  {
+  "char_423_blemsh": {
     "id": "char_423_blemsh",
     "name": "Blemishine",
     "rarity": 6,
@@ -3428,7 +3428,7 @@
     ],
     "class": "Defender"
   },
-  {
+  "char_426_billro": {
     "id": "char_426_billro",
     "name": "Carnelian",
     "rarity": 6,
@@ -3452,7 +3452,7 @@
     ],
     "class": "Caster"
   },
-  {
+  "char_436_whispr": {
     "id": "char_436_whispr",
     "name": "Whisperain",
     "rarity": 5,
@@ -3471,7 +3471,7 @@
     ],
     "class": "Medic"
   },
-  {
+  "char_440_pinecn": {
     "id": "char_440_pinecn",
     "name": "Pinecone",
     "rarity": 4,
@@ -3490,7 +3490,7 @@
     ],
     "class": "Sniper"
   },
-  {
+  "char_451_robin": {
     "id": "char_451_robin",
     "name": "Robin",
     "rarity": 5,
@@ -3509,7 +3509,7 @@
     ],
     "class": "Specialist"
   },
-  {
+  "char_452_bstalk": {
     "id": "char_452_bstalk",
     "name": "Beanstalk",
     "rarity": 4,
@@ -3528,7 +3528,7 @@
     ],
     "class": "Vanguard"
   },
-  {
+  "char_455_nothin": {
     "id": "char_455_nothin",
     "name": "Mr.Nothing",
     "rarity": 5,
@@ -3547,7 +3547,7 @@
     ],
     "class": "Specialist"
   },
-  {
+  "char_456_ash": {
     "id": "char_456_ash",
     "name": "Ash",
     "rarity": 6,
@@ -3571,7 +3571,7 @@
     ],
     "class": "Sniper"
   },
-  {
+  "char_457_blitz": {
     "id": "char_457_blitz",
     "name": "Blitz",
     "rarity": 5,
@@ -3590,7 +3590,7 @@
     ],
     "class": "Defender"
   },
-  {
+  "char_458_rfrost": {
     "id": "char_458_rfrost",
     "name": "Frost",
     "rarity": 5,
@@ -3609,7 +3609,7 @@
     ],
     "class": "Specialist"
   },
-  {
+  "char_459_tachak": {
     "id": "char_459_tachak",
     "name": "Tachanka",
     "rarity": 5,
@@ -3628,7 +3628,7 @@
     ],
     "class": "Guard"
   },
-  {
+  "char_469_indigo": {
     "id": "char_469_indigo",
     "name": "Indigo",
     "rarity": 4,
@@ -3647,7 +3647,7 @@
     ],
     "class": "Caster"
   },
-  {
+  "char_472_pasngr": {
     "id": "char_472_pasngr",
     "name": "Passenger",
     "rarity": 6,
@@ -3671,7 +3671,7 @@
     ],
     "class": "Caster"
   },
-  {
+  "char_474_glady": {
     "id": "char_474_glady",
     "name": "Gladiia",
     "rarity": 6,
@@ -3695,7 +3695,7 @@
     ],
     "class": "Specialist"
   },
-  {
+  "char_475_akafyu": {
     "id": "char_475_akafyu",
     "name": "Akafuyu",
     "rarity": 5,
@@ -3714,7 +3714,7 @@
     ],
     "class": "Guard"
   },
-  {
+  "char_478_kirara": {
     "id": "char_478_kirara",
     "name": "Kirara",
     "rarity": 5,
@@ -3733,7 +3733,7 @@
     ],
     "class": "Specialist"
   },
-  {
+  "char_485_pallas": {
     "id": "char_485_pallas",
     "name": "Pallas",
     "rarity": 6,
@@ -3757,7 +3757,7 @@
     ],
     "class": "Guard"
   },
-  {
+  "char_500_noirc": {
     "id": "char_500_noirc",
     "name": "Noir Corne",
     "rarity": 2,
@@ -3765,7 +3765,7 @@
     "skills": [],
     "class": "Defender"
   },
-  {
+  "char_501_durin": {
     "id": "char_501_durin",
     "name": "Durin",
     "rarity": 2,
@@ -3773,7 +3773,7 @@
     "skills": [],
     "class": "Caster"
   },
-  {
+  "char_502_nblade": {
     "id": "char_502_nblade",
     "name": "Yato",
     "rarity": 2,
@@ -3781,7 +3781,7 @@
     "skills": [],
     "class": "Vanguard"
   },
-  {
+  "char_503_rang": {
     "id": "char_503_rang",
     "name": "Rangers",
     "rarity": 2,
@@ -3789,7 +3789,7 @@
     "skills": [],
     "class": "Sniper"
   },
-  {
+  "char_1001_amiya2": {
     "id": "char_1001_amiya2",
     "name": "Amiya (Guard)",
     "rarity": 5,
@@ -3808,4 +3808,4 @@
     ],
     "class": "Guard"
   }
-]
+}

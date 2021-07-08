@@ -190,7 +190,7 @@ const OperatorDataTableRow = React.memo((props: Props) => {
           type="number"
           value={operator.skill3Mastery}
           disabled={
-            operator.promotion < 2 || operator.skillLevel < 7 || !operator.owned || (operator.rarity < 6 && operator.name != "Amiya")
+            operator.promotion < 2 || operator.skillLevel < 7 || !operator.owned || (operator.rarity < 6 && operator.name !== "Amiya")
           }
           validator={(value : string) : boolean => {
             return !(operator.owned && operator.promotion === 2 && operator.skillLevel === 7 && operator.rarity === 6)

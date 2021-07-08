@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 function useLocalStorage<T>(
   key: string,
   initialValue: T,
-): [T, (value: T) => void] {
+): [T, React.Dispatch<React.SetStateAction<T>>] {
   // Get from local storage then
   // parse stored json or return initialValue
   const readValue = () => {
@@ -27,7 +27,7 @@ function useLocalStorage<T>(
 
   // Return a wrapped version of useState's setter function that ...
   // ... persists the new value to localStorage.
-  const setValue = (value: T) => {
+  const setValue: React.Dispatch<React.SetStateAction<T>> = (value: React.SetStateAction<T>) => {
     // Prevent build error "window is undefined" but keeps working
     if (typeof window == 'undefined') {
       console.warn(

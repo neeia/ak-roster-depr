@@ -2,6 +2,7 @@ import { Box, makeStyles } from "@material-ui/core";
 import React from "react";
 import slugify from "slugify";
 import { Operator } from "../App";
+import operatorJson from "../data/operators.json";
 
 const useStyles = makeStyles({
   opBox: {
@@ -21,8 +22,11 @@ const useStyles = makeStyles({
   opName: {
     fontSize: "24px"
   },
+  skillImage: {
+    height: "120px"
+  },
   masteryImage: {
-    height: "160px"
+    height: "40px"
   },
 });
 
@@ -35,6 +39,7 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
   const classes = useStyles();
   const potentialUrl = `https://res.cloudinary.com/samidare/image/upload/v1/arknights/potential/${operator.potential}`;
   const promotionUrl = `https://res.cloudinary.com/samidare/image/upload/v1/arknights/elite/${operator.promotion}`;
+  const opInfo = (operatorJson as any)[operator.id];
 
   let intermediate = operator.name;
   if (operator.promotion === 2) {
@@ -83,31 +88,62 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
             />
         </Box>
       </Box>
-      {(operator.skillLevel < 7 || operator.promotion < 2) 
-        ? (<div className={classes.item}>R{operator.skillLevel}</div>)
-        : (
+      {(
         <div className={classes.item}>
-          {(operator.skill1Mastery == null ? "" :
-          <img
-            className={classes.masteryImage}
-            src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/mastery/${operator.skill1Mastery}`}
-            alt={`Skill 1 Mastery Level ${operator.skill1Mastery}`}
-          />
-          )}
-          {(operator.skill2Mastery == null ? "" :
-          <img 
-            className={classes.masteryImage} 
-            src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/mastery/${operator.skill2Mastery}`}
-            alt={`Skill 2 Mastery Level ${operator.skill1Mastery}`}
-          />
-          )}
-          {(operator.skill3Mastery == null ? "" :
-          <img 
-            className={classes.masteryImage} 
-            src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/mastery/${operator.skill3Mastery}`}
-            alt={`Skill 3 Mastery Level ${operator.skill1Mastery}`}
-          />
-          )}
+          {(operator.promotion === 2 && (operator.rarity === 6 || operator.name === "Amiya") ?
+            <Box className={classes.item} position="relative" height="160px" width="160px">
+              <img
+                className={classes.skillImage}
+                src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/skills/${opInfo.skills[0].iconId ?? opInfo.skills[0].skillId}`}
+                alt={`Skill 1 Icon  ${opInfo.skills[0].skillName}`}
+              />
+              <Box position="absolute" right={20} top={-20}>
+                {(operator.skill1Mastery == null ? "" :
+                  <img
+                    className={classes.masteryImage}
+                    src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/mastery/${operator.skill1Mastery}`}
+                    alt={`Skill 1 Mastery Level ${operator.skill1Mastery}`}
+                  />
+                )}
+              </Box>
+            </Box>
+          : "")}
+          {(operator.promotion === 2 && (operator.rarity === 6 || operator.name === "Amiya") ?
+            <Box className={classes.item} position="relative" height="160px" width="160px">
+              <img
+                className={classes.skillImage}
+                src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/skills/${opInfo.skills[1].iconId ?? opInfo.skills[1].skillId}`}
+                alt={`Skill 2 Icon  ${opInfo.skills[1].skillName}`}
+              />
+              <Box position="absolute" right={20} top={-20}>
+                {(operator.skill2Mastery == null ? "" :
+                  <img
+                    className={classes.masteryImage}
+                    src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/mastery/${operator.skill2Mastery}`}
+                    alt={`Skill 2 Mastery Level ${operator.skill1Mastery}`}
+                  />
+                )}
+              </Box>
+            </Box>
+          : "")}
+          {(operator.promotion === 2 && (operator.rarity === 6 || operator.name === "Amiya") ?
+            <Box className={classes.item} position="relative" height="160px" width="160px">
+              <img
+                className={classes.skillImage}
+                src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/skills/${opInfo.skills[2].iconId ?? opInfo.skills[2].skillId}`}
+                alt={`Skill 3 Icon ${opInfo.skills[2].skillName}`}
+              />
+              <Box position="absolute" right={20} top={-20}>
+                {(operator.skill3Mastery == null ? "" :
+                  <img
+                    className={classes.masteryImage}
+                    src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/mastery/${operator.skill3Mastery}`}
+                    alt={`Skill 3 Mastery Level ${operator.skill1Mastery}`}
+                  />
+                )}
+              </Box>
+            </Box>
+          : "")}
         </div>
         )
       }
