@@ -6,33 +6,28 @@ import {
   CssBaseline,
   makeStyles,
   Tab,
-  TableSortLabel,
   Tabs,
   ThemeProvider,
   Typography,
 } from "@material-ui/core";
-import Table from "@material-ui/core/Table";
-import TableHead from "@material-ui/core/TableHead";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableRow from "@material-ui/core/TableRow";
-
-import OperatorDataTableRow from "./components/OperatorDataTableRow";
-import operatorJson from "./data/operators.json";
-import OpForm from "./components/OpForm";
-import OperatorCollectionBlock from "./components/OperatorCollectionBlock";
-import useLocalStorage from "./UseLocalStorage";
 
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 import "firebase/database";
+
+import operatorJson from "./data/operators.json";
+
+import useLocalStorage from "./UseLocalStorage";
+
+import OpForm from "./components/OpForm";
+import OperatorCollectionBlock from "./components/OperatorCollectionBlock";
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
 import Button from "./components/Button";
 import SearchForm from "./components/SearchForm";
 import ValidatedTextField from "./components/ValidatedTextField";
-import { Virtuoso } from "react-virtuoso";
+import RosterTable from "./components/RosterTable";
 
 const darkTheme = createMuiTheme({
   palette: {
@@ -46,17 +41,6 @@ const useStyles = makeStyles({
     gridTemplateColumns: "auto auto",
     height: "100vh",
     width: "100%",
-  },
-  visuallyHidden: {
-    border: 0,
-    clip: "rect(0 0 0 0)",
-    height: 1,
-    margin: -1,
-    overflow: "hidden",
-    padding: 0,
-    position: "absolute",
-    top: 20,
-    width: 1,
   },
 });
 
@@ -78,105 +62,6 @@ const defaultOperators = Object.fromEntries(
     ];
   })
 );
-
-const headCells = [
-  {
-    id: "owned",
-    alignRight: false,
-    disablePadding: false,
-    enableSort: true,
-    defaultDesc: true,
-    label: "Owned",
-  },
-  {
-    id: "favorite",
-    alignRight: false,
-    disablePadding: false,
-    enableSort: true,
-    defaultDesc: true,
-    label: "Favorite",
-  },
-  {
-    id: "icon",
-    alignRight: false,
-    disablePadding: false,
-    enableSort: false,
-    defaultDesc: true,
-    label: "Icon",
-  },
-  {
-    id: "rarity",
-    alignRight: false,
-    disablePadding: false,
-    enableSort: true,
-    defaultDesc: true,
-    label: "Rarity",
-  },
-  {
-    id: "name",
-    alignRight: false,
-    disablePadding: false,
-    enableSort: true,
-    defaultDesc: true,
-    label: "Operator",
-  },
-  {
-    id: "potential",
-    alignRight: false,
-    disablePadding: false,
-    enableSort: true,
-    defaultDesc: true,
-    label: "Potential",
-  },
-  {
-    id: "promotion",
-    alignRight: false,
-    disablePadding: false,
-    enableSort: true,
-    defaultDesc: true,
-    label: "Promotion",
-  },
-  {
-    id: "level",
-    alignRight: false,
-    disablePadding: false,
-    enableSort: true,
-    defaultDesc: true,
-    label: "Level",
-  },
-  {
-    id: "skillLevel",
-    alignRight: false,
-    disablePadding: false,
-    enableSort: true,
-    defaultDesc: true,
-    label: "Skill Level",
-  },
-  {
-    id: "skill1Mastery",
-    alignRight: false,
-    disablePadding: false,
-    enableSort: false,
-    defaultDesc: true,
-    label: "S1",
-  },
-  {
-    id: "skill2Mastery",
-    alignRight: false,
-    disablePadding: false,
-    enableSort: false,
-    defaultDesc: true,
-    label: "S2",
-  },
-  {
-    id: "skill3Mastery",
-    alignRight: false,
-    disablePadding: false,
-    enableSort: false,
-    defaultDesc: true,
-    label: "S3",
-  },
-];
 
 export interface Operator {
   id: string;
@@ -244,15 +129,6 @@ function App() {
   const [value, setValue] = useState<number>(0);
   const handleTabChange = (event: any, newValue: number) => {
     setValue(newValue);
-  };
-
-  const [orderBy, setOrderBy] = useState({ key: "favorite", descending: true });
-  const createSortHandler = (property: string) => () => {
-    handleRequestSort(property);
-  };
-  const handleRequestSort = (property: string) => {
-    const isAsc = orderBy.key === property && orderBy.descending === false;
-    setOrderBy({ key: property, descending: isAsc ? true : false });
   };
 
   const [user, setUser] = useState<firebase.User | null>(null);
@@ -352,16 +228,17 @@ function App() {
   };
 
   const renderCollection = (collection: typeof operators): any => {
-    return Object.values(operatorJson)
-      .filter((op: any) => collection[op.id].potential > 0)
-      .sort(
-        (a: any, b: any) =>
-          operatorComparator(collection[a.id], collection[b.id], orderBy) ||
-          defaultSortComparator(collection[a.id], collection[b.id])
-      )
-      .map((op: any) => (
-        <OperatorCollectionBlock key={op.id} operator={collection[op.id]} />
-      ));
+    // return Object.values(operatorJson)
+    //   .filter((op: any) => collection[op.id].potential > 0)
+    //   .sort(
+    //     (a: any, b: any) =>
+    //       operatorComparator(collection[a.id], collection[b.id], orderBy) ||
+    //       defaultSortComparator(collection[a.id], collection[b.id])
+    //   )
+    //   .map((op: any) => (
+    //     <OperatorCollectionBlock key={op.id} operator={collection[op.id]} />
+    //   ));
+    return <></>;
   };
 
   var [collOperators, setCollOperators] = useState<typeof operators>();
@@ -428,73 +305,7 @@ function App() {
       </AppBar>
       <TabPanel value={value} index={0}>
         <OpForm onChange={setOperatorFilter} />
-        <Table>
-          <TableHead>
-            <TableRow>
-              {headCells.map((headCell) => (
-                <TableCell
-                  key={headCell.id}
-                  align={headCell.alignRight ? "right" : "left"}
-                  padding={headCell.disablePadding ? "none" : "default"}
-                  sortDirection={
-                    orderBy.key === headCell.id
-                      ? orderBy.descending
-                        ? "desc"
-                        : "asc"
-                      : false
-                  }
-                >
-                  {headCell.enableSort ? (
-                    <TableSortLabel
-                      active={orderBy.key === headCell.id}
-                      direction={
-                        orderBy.key === headCell.id && orderBy.descending
-                          ? "desc"
-                          : "asc"
-                      }
-                      onClick={createSortHandler(headCell.id)}
-                    >
-                      {headCell.label}
-                      {orderBy.key === headCell.id ? (
-                        <span className={classes.visuallyHidden}>
-                          {orderBy.descending
-                            ? "sorted descending"
-                            : "sorted ascending"}
-                        </span>
-                      ) : null}
-                    </TableSortLabel>
-                  ) : (
-                    headCell.label
-                  )}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            <Virtuoso
-              useWindowScroll
-              data={Object.values(operatorJson)
-                .filter((op) =>
-                  op.name.toLowerCase().includes(operatorFilter.toLowerCase())
-                )
-                .sort(
-                  (a, b) =>
-                    operatorComparator(
-                      operators[a.id],
-                      operators[b.id],
-                      orderBy
-                    ) || defaultSortComparator(operators[a.id], operators[b.id])
-                )}
-              itemContent={(_, op) => (
-                <OperatorDataTableRow
-                  key={op.id}
-                  operator={operators[op.id]}
-                  onChange={handleChange}
-                />
-              )}
-            />
-          </TableBody>
-        </Table>
+        <RosterTable operators={operators} onChange={handleChange} />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <div className={classes.collectionContainer}>
@@ -557,31 +368,4 @@ interface TabProps {
   children: any;
   index: number;
   value: number;
-}
-
-function operatorComparator(
-  a: Operator,
-  b: Operator,
-  orderBy: { key: string; descending: boolean }
-) {
-  var aValue = (a as any)[orderBy.key];
-  var bValue = (b as any)[orderBy.key];
-  if (orderBy.key === "level") {
-    aValue += a.promotion * 100;
-    bValue += b.promotion * 100;
-  }
-  const result =
-    typeof aValue === "string" ? aValue.localeCompare(bValue) : aValue - bValue;
-  return orderBy.descending ? -result : result;
-}
-
-function defaultSortComparator(a: Operator, b: Operator) {
-  return (
-    (b.favorite ? 1 : 0) - (a.favorite ? 1 : 0) ||
-    (b.owned ? 1 : 0) - (a.owned ? 1 : 0) ||
-    b.promotion - a.promotion ||
-    b.level - a.level ||
-    b.rarity - a.rarity ||
-    a.name.localeCompare(b.name)
-  );
 }
