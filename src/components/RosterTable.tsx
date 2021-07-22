@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, makeStyles, styled, TableCell } from "@material-ui/core";
+import { styled, TableCell } from "@material-ui/core";
 import {
   Table,
   Column,
@@ -9,6 +9,7 @@ import {
   TableCellRenderer,
 } from "react-virtualized";
 import { defaultSortComparator, Operator } from "../App";
+import ValidatedTextField from "./ValidatedTextField";
 
 const headCells = [
   {
@@ -109,20 +110,6 @@ const headCells = [
   },
 ];
 
-const useStyles = makeStyles({
-  visuallyHidden: {
-    border: 0,
-    clip: "rect(0 0 0 0)",
-    height: 1,
-    margin: -1,
-    overflow: "hidden",
-    padding: 0,
-    position: "absolute",
-    top: 20,
-    width: 1,
-  },
-});
-
 function operatorComparator(
   a: Operator,
   b: Operator,
@@ -150,7 +137,6 @@ interface Props {
 
 const RosterTable: React.FC<Props> = (props) => {
   const { operators, onChange } = props;
-  const classes = useStyles();
   const [orderBy, setOrderBy] = useState({ key: "favorite", descending: true });
 
   const createSortHandler = (property: string) => () => {
