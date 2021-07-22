@@ -228,9 +228,43 @@ const BodyCell: TableCellRenderer = (props) => {
     rowIndex,
   } = props;
 
+  let innerNode = undefined;
+  switch (dataKey) {
+    case "icon":
+      innerNode = <img />;
+      break;
+    case "name":
+    case "rarity":
+      innerNode = cellData;
+      break;
+    case "favorite":
+    case "owned":
+      innerNode = <input type="checkbox" name={dataKey} checked={cellData} />;
+      break;
+    case "potential":
+    case "promotion":
+    case "level":
+    case "skillLevel":
+    case "skill1Mastery":
+    case "skill2Mastery":
+    case "skill3Mastery":
+      innerNode = (
+        <ValidatedTextField
+          name={dataKey}
+          type="number"
+          value={cellData}
+          validator={() => true}
+          onChange={() => {}}
+        />
+      );
+      break;
+    default:
+      throw new Error(`Unknown operator property: ${dataKey}`);
+  }
+
   return (
     <StyledTableCell component="div" variant="body">
-      {`${cellData}`}
+      {innerNode}
     </StyledTableCell>
   );
 };
