@@ -1,16 +1,15 @@
 import React, { useState } from "react";
+import { Box, makeStyles, styled, TableCell } from "@material-ui/core";
 import {
   Table,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableSortLabel,
-  TableBody,
-  makeStyles,
-} from "@material-ui/core";
-import { Virtuoso } from "react-virtuoso";
-import OperatorDataTableRow from "./OperatorDataTableRow";
+  Column,
+  AutoSizer,
+  WindowScroller,
+  TableHeaderRenderer,
+  TableCellRenderer,
+} from "react-virtualized";
 import { Operator } from "../App";
+import { number } from "yargs";
 
 const headCells = [
   {
@@ -182,62 +181,82 @@ const RosterTable: React.FC<Props> = (props) => {
   );
 
   return (
-    <Table>
-      <TableHead>
-        <TableRow>
-          {headCells.map((headCell) => (
-            <TableCell
-              key={headCell.id}
-              align={headCell.alignRight ? "right" : "left"}
-              padding={headCell.disablePadding ? "none" : "default"}
-              sortDirection={
-                orderBy.key === headCell.id
-                  ? orderBy.descending
-                    ? "desc"
-                    : "asc"
-                  : false
-              }
+    <AutoSizer disableHeight>
+      {({ width }) => (
+        <WindowScroller>
+          {({ height, isScrolling, onChildScroll, scrollTop }) => (
+            <Table
+              autoHeight
+              width={width}
+              height={height}
+              isScrolling={isScrolling}
+              onScroll={onChildScroll}
+              scrollTop={scrollTop}
+              rowCount={sortedOperators.length}
+              rowHeight={48}
+              headerHeight={48}
+              rowGetter={({ index }) => sortedOperators[index]}
+              rowStyle={{ display: "flex" }}
             >
-              {headCell.enableSort ? (
-                <TableSortLabel
-                  active={orderBy.key === headCell.id}
-                  direction={
-                    orderBy.key === headCell.id && orderBy.descending
-                      ? "desc"
-                      : "asc"
-                  }
-                  onClick={createSortHandler(headCell.id)}
-                >
-                  {headCell.label}
-                  {orderBy.key === headCell.id ? (
-                    <span className={classes.visuallyHidden}>
-                      {orderBy.descending
-                        ? "sorted descending"
-                        : "sorted ascending"}
-                    </span>
-                  ) : null}
-                </TableSortLabel>
-              ) : (
-                headCell.label
-              )}
-            </TableCell>
-          ))}
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        <Virtuoso
-          useWindowScroll
-          data={sortedOperators}
-          itemContent={(_, op) => (
-            <OperatorDataTableRow
-              key={op.id}
-              operator={op}
-              onChange={onChange}
-            />
+              {headCells.map((headCell) => {
+                const {
+                  id,
+                  alignRight,
+                  disablePadding,
+                  enableSort,
+                  defaultDesc,
+                  label,
+                } = headCell;
+                return (
+                  <Column
+                    key={id}
+                    dataKey={id}
+                    width={100}
+                    label={label}
+                    headerRenderer={HeaderCell}
+                    cellRenderer={BodyCell}
+                  />
+                );
+              })}
+            </Table>
           )}
-        />
-      </TableBody>
-    </Table>
+        </WindowScroller>
+      )}
+    </AutoSizer>
   );
 };
 export default RosterTable;
+
+const StyledTableCell = styled(TableCell)({
+  display: "flex",
+  alignItems: "center",
+  flex: 1,
+});
+
+const HeaderCell: TableHeaderRenderer = (props) => {
+  const { columnData, dataKey, disableSort, label, sortBy, sortDirection } =
+    props;
+  return (
+    <StyledTableCell component="div" variant="head">
+      {label}
+    </StyledTableCell>
+  );
+};
+
+const BodyCell: TableCellRenderer = (props) => {
+  const {
+    cellData,
+    columnData,
+    columnIndex,
+    dataKey,
+    isScrolling,
+    rowData,
+    rowIndex,
+  } = props;
+
+  return (
+    <StyledTableCell component="div" variant="body">
+      {`${cellData}`}
+    </StyledTableCell>
+  );
+};
