@@ -8,8 +8,7 @@ import {
   TableHeaderRenderer,
   TableCellRenderer,
 } from "react-virtualized";
-import { Operator } from "../App";
-import { number } from "yargs";
+import { defaultSortComparator, Operator } from "../App";
 
 const headCells = [
   {
@@ -138,17 +137,6 @@ function operatorComparator(
   const result =
     typeof aValue === "string" ? aValue.localeCompare(bValue) : aValue - bValue;
   return orderBy.descending ? -result : result;
-}
-
-function defaultSortComparator(a: Operator, b: Operator) {
-  return (
-    (b.favorite ? 1 : 0) - (a.favorite ? 1 : 0) ||
-    (b.owned ? 1 : 0) - (a.owned ? 1 : 0) ||
-    b.promotion - a.promotion ||
-    b.level - a.level ||
-    b.rarity - a.rarity ||
-    a.name.localeCompare(b.name)
-  );
 }
 
 interface Props {

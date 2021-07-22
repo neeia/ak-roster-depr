@@ -228,17 +228,14 @@ function App() {
   };
 
   const renderCollection = (collection: typeof operators): any => {
-    // return Object.values(operatorJson)
-    //   .filter((op: any) => collection[op.id].potential > 0)
-    //   .sort(
-    //     (a: any, b: any) =>
-    //       operatorComparator(collection[a.id], collection[b.id], orderBy) ||
-    //       defaultSortComparator(collection[a.id], collection[b.id])
-    //   )
-    //   .map((op: any) => (
-    //     <OperatorCollectionBlock key={op.id} operator={collection[op.id]} />
-    //   ));
-    return <></>;
+    return Object.values(operatorJson)
+      .filter((op: any) => collection[op.id].potential > 0)
+      .sort((a: any, b: any) =>
+        defaultSortComparator(collection[a.id], collection[b.id])
+      )
+      .map((op: any) => (
+        <OperatorCollectionBlock key={op.id} operator={collection[op.id]} />
+      ));
   };
 
   var [collOperators, setCollOperators] = useState<typeof operators>();
@@ -364,4 +361,15 @@ interface TabProps {
   children: any;
   index: number;
   value: number;
+}
+
+export function defaultSortComparator(a: Operator, b: Operator) {
+  return (
+    (b.favorite ? 1 : 0) - (a.favorite ? 1 : 0) ||
+    (b.owned ? 1 : 0) - (a.owned ? 1 : 0) ||
+    b.promotion - a.promotion ||
+    b.level - a.level ||
+    b.rarity - a.rarity ||
+    a.name.localeCompare(b.name)
+  );
 }
