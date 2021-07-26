@@ -212,7 +212,7 @@ const RosterTable: React.FC<Props> = (props) => {
               disableByProperty(rowData, dataKey)
             }
             validator={
-              validatorForNumericProperty(dataKey, cellData.rarity, cellData.promotion)
+              validatorForNumericProperty(dataKey, rowData.rarity, rowData.promotion)
             }
             onChange={(e) =>
               onChange(rowData.id, e.target.name, +e.target.value)
@@ -223,8 +223,6 @@ const RosterTable: React.FC<Props> = (props) => {
       default:
         throw new Error(`Unknown operator property: ${dataKey}`);
     }
-
-    console.log(rowData);
 
     return (
       <StyledTableCell component="div" variant="body">
@@ -313,15 +311,15 @@ const disableByProperty = (
   op : Operator,
   property: string,
 ) => {
-  if (!op.owned) { return false; }
+  if (!op.owned) { return true; }
   switch (property) {
     case "potential":
     case "level":
-      return true;
+      return false;
     case "promotion":
     case "skillLevel":
-      return op.rarity > 2;
-    case "skill1Mastery":
+      return op.rarity < 3;
+    case "skill1Mastery": 
     case "skill2Mastery":
       return op.promotion < 2 || op.skillLevel < 7;
     case "skill3Mastery":
