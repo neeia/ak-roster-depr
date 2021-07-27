@@ -78,19 +78,6 @@ export interface Operator {
   skill3Mastery?: number;
 }
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDjpt2G4GFQjYbPT5Mrj6L2meeWEnsCEgU",
-  authDomain: "ak-roster.firebaseapp.com",
-  projectId: "ak-roster",
-  storageBucket: "ak-roster.appspot.com",
-  messagingSenderId: "1076086810652",
-  appId: "1:1076086810652:web:ed1da74b87a08bf4b657d9",
-  measurementId: "G-VZXJ8MY6D1",
-  databaseURL: "https://ak-roster-default-rtdb.firebaseio.com/",
-};
-!firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app();
-// Get a reference to the database service
-
 function App() {
   const [operators, setOperators] = useLocalStorage<Record<string, Operator>>(
     "operators",
@@ -106,7 +93,6 @@ function App() {
           const copyOperatorData = { ...copyOperators[operatorID] };
           (copyOperatorData as any)[property] = value;
           copyOperators[operatorID] = copyOperatorData;
-          writeOperatorData(copyOperatorData.id, property, value);
           return copyOperators;
         }
       );
@@ -131,102 +117,6 @@ function App() {
     setValue(newValue);
   };
 
-  const [user, setUser] = useState<firebase.User | null>(null);
-
-  const handleLogin = async (
-    username: string,
-    password: string
-  ): Promise<Boolean> => {
-    try {
-      const newUser = await firebase
-        .auth()
-        .signInWithEmailAndPassword(username, password);
-      setUser(newUser.user);
-      return true;
-    } catch (error) {
-      // var errorCode = error.code;
-      // var errorMessage = error.message;
-      return false;
-    }
-  };
-  const handleSignup = (
-    email: string,
-    username: string,
-    password: string
-  ): boolean => {
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        if (userCredential != null && userCredential.user != null) {
-          // Signed in
-          setUser(userCredential.user);
-          firebase
-            .database()
-            .ref("phonebook/" + username)
-            .set(userCredential.user.uid);
-          return true;
-        }
-      })
-      .catch((error) => {
-        // var errorCode = error.code;
-        // var errorMessage = error.message;
-        return false;
-      });
-    return false;
-  };
-  const handleLogout = (): boolean => {
-    firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        // Sign-out successful.
-        setUser(null);
-        return true;
-      })
-      .catch((error) => {
-        // An error happened.
-        return false;
-      });
-    return false;
-  };
-
-  const writeUserData = (): void => {
-    if (!user) return;
-    firebase
-      .database()
-      .ref("users/" + user.uid)
-      .set({
-        accountName: "",
-        roster: operators,
-      });
-  };
-  const writeOperatorData = (
-    opID: string,
-    key: string,
-    value: number | boolean
-  ): void => {
-    if (!user) return;
-    firebase
-      .database()
-      .ref("users/" + user.uid + "/roster/" + opID + key)
-      .set({
-        value,
-      });
-  };
-  const importUserData = (): void => {
-    if (!user) return;
-    firebase
-      .database()
-      .ref("users/" + user.uid + "/roster/")
-      .get()
-      .then((snapshot) => {
-        if (snapshot.exists()) {
-          setOperators(snapshot.val());
-        }
-      });
-  };
-
   const renderCollection = (collection: typeof operators): any => {
     return Object.values(operatorJson)
       .filter((op: any) => collection[op.id].potential > 0)
@@ -239,51 +129,6 @@ function App() {
   };
 
   var [collOperators, setCollOperators] = useState<typeof operators>();
-  const viewUserCollection = (uid: string): void => {
-    firebase
-      .database()
-      .ref("users/" + uid + "/roster/")
-      .get()
-      .then((snapshot) => {
-        if (snapshot.exists()) {
-          setCollOperators(snapshot.val());
-        }
-      });
-  };
-  const findUser = (username: string): string => {
-    firebase
-      .database()
-      .ref("phonebook/" + username)
-      .get()
-      .then((snapshot) => {
-        if (snapshot.exists()) {
-          return viewUserCollection(snapshot.val());
-        }
-      });
-    return "";
-  };
-
-  const getIGN = (): string => {
-    if (!user) return "";
-    firebase
-      .database()
-      .ref("users/" + user.uid + "/accuntName/")
-      .get()
-      .then((snapshot) => {
-        if (snapshot.exists()) {
-          return snapshot.val();
-        }
-      });
-    return "";
-  };
-
-  const setIGN = (ign: string): void => {
-    if (!user) return;
-    firebase
-      .database()
-      .ref("users/" + user.uid + "/accountName/")
-      .set(ign);
-  };
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -310,31 +155,14 @@ function App() {
         </div>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        {user ? (
-          <>
-            <ValidatedTextField
-              validator={(value: string) => {
-                return true;
-              }}
-              onChange={(e) => setIGN(e.target.value)}
-            />
-            <Button handleChange={writeUserData} text="Store Changes" />
-            <Button handleChange={handleLogout} text="Log out" />
-            <Button handleChange={importUserData} text="Import Data" />
-          </>
-        ) : (
-          <>
-            <LoginForm handleLogin={handleLogin} />
-            <RegisterForm handleSignup={handleSignup} />
-          </>
-        )}
+        <div />
       </TabPanel>
-      <TabPanel value={value} index={3}>
+      {/* <TabPanel value={value} index={3}>
         <SearchForm handleSubmit={findUser} />
         <div className={classes.collectionContainer}>
           {collOperators ? renderCollection(collOperators) : ""}
         </div>
-      </TabPanel>
+      </TabPanel> */}
     </ThemeProvider>
   );
 }
