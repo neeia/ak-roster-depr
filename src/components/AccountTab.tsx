@@ -28,67 +28,6 @@ interface Props {
 
 
 /* #region Methods */
-const [user, setUser] = useState<firebase.User | null>(null);
-
-
-const handleLogin = async (
-  username: string,
-  password: string
-): Promise<Boolean> => {
-  try {
-    const newUser = await firebase
-      .auth()
-      .signInWithEmailAndPassword(username, password);
-    setUser(newUser.user);
-    return true;
-  } catch (error) {
-    // var errorCode = error.code;
-    // var errorMessage = error.message;
-    return false;
-  }
-};
-const handleSignup = (
-  email: string,
-  username: string,
-  password: string
-): boolean => {
-  firebase
-    .auth()
-    .createUserWithEmailAndPassword(email, password)
-    .then((userCredential) => {
-      if (userCredential != null && userCredential.user != null) {
-        // Signed in
-        setUser(userCredential.user);
-        firebase
-          .database()
-          .ref("phonebook/" + username)
-          .set(userCredential.user.uid);
-        return true;
-      }
-    })
-    .catch((error) => {
-      // var errorCode = error.code;
-      // var errorMessage = error.message;
-      return false;
-    });
-  return false;
-};
-const handleLogout = (): boolean => {
-  firebase
-    .auth()
-    .signOut()
-    .then(() => {
-      // Sign-out successful.
-      setUser(null);
-      return true;
-    })
-    .catch((error) => {
-      // An error happened.
-      return false;
-    });
-  return false;
-};
-
 const viewUserCollection = (uid: string): void => {
   firebase
     .database()
@@ -113,54 +52,116 @@ const findUser = (username: string): string => {
   return "";
 };
 
-const getIGN = (): string => {
-  if (!user) return "";
-  firebase
-    .database()
-    .ref("users/" + user.uid + "/accuntName/")
-    .get()
-    .then((snapshot) => {
-      if (snapshot.exists()) {
-        return snapshot.val();
-      }
-    });
-  return "";
-};
-
-const setIGN = (ign: string): void => {
-  if (!user) return;
-  firebase
-    .database()
-    .ref("users/" + user.uid + "/accountName/")
-    .set(ign);
-};
 /* #endregion */
 
 const AccountTab: React.FC<Props> = (props) => {
   const { operators, updateFromRemote } = props;
+  
+  const [user, setUser] = useState<firebase.User | null>(null);
 
-const writeUserData = (): void => {
-  if (!user) return;
-  firebase
-    .database()
-    .ref("users/" + user.uid)
-    .set({
-      accountName: "",
-      roster: operators,
-    });
-};
-const importUserData = (): void => {
-  if (!user) return;
-  firebase
-    .database()
-    .ref("users/" + user.uid + "/roster/")
-    .get()
-    .then((snapshot) => {
-      if (snapshot.exists()) {
-        updateFromRemote(snapshot.val());
-      }
-    });
-};
+  
+  const handleLogin = async (
+    username: string,
+    password: string
+  ): Promise<Boolean> => {
+    try {
+      const newUser = await firebase
+        .auth()
+        .signInWithEmailAndPassword(username, password);
+      setUser(newUser.user);
+      return true;
+    } catch (error) {
+      // var errorCode = error.code;
+      // var errorMessage = error.message;
+      return false;
+    }
+  };
+  const handleSignup = (
+    email: string,
+    username: string,
+    password: string
+  ): boolean => {
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        if (userCredential != null && userCredential.user != null) {
+          // Signed in
+          setUser(userCredential.user);
+          firebase
+            .database()
+            .ref("phonebook/" + username)
+            .set(userCredential.user.uid);
+          return true;
+        }
+      })
+      .catch((error) => {
+        // var errorCode = error.code;
+        // var errorMessage = error.message;
+        return false;
+      });
+    return false;
+  };
+  const handleLogout = (): boolean => {
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        // Sign-out successful.
+        setUser(null);
+        return true;
+      })
+      .catch((error) => {
+        // An error happened.
+        return false;
+      });
+    return false;
+  };
+
+  const getIGN = (): string => {
+    if (!user) return "";
+    firebase
+      .database()
+      .ref("users/" + user.uid + "/accuntName/")
+      .get()
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          return snapshot.val();
+        }
+      });
+    return "";
+  };
+  
+  const setIGN = (ign: string): void => {
+    if (!user) return;
+    firebase
+      .database()
+      .ref("users/" + user.uid + "/accountName/")
+      .set(ign);
+  };
+  
+  const writeUserData = (): void => {
+    if (!user) return;
+    firebase
+      .database()
+      .ref("users/" + user.uid)
+      .set({
+        accountName: "",
+        roster: operators,
+      });
+  };
+  const importUserData = (): void => {
+    if (!user) return;
+    firebase
+      .database()
+      .ref("users/" + user.uid + "/roster/")
+      .get()
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          updateFromRemote(snapshot.val());
+        }
+      });
+  };
 
   useEffect(() => {
     const timeout = setTimeout(() => {

@@ -48,13 +48,17 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
     intermediate += " elite 1";
   }
 
-  const imgUrl = `https://res.cloudinary.com/samidare/image/upload/v1/arknights/operators/${slugify(
+  const opImgUrl = `https://res.cloudinary.com/samidare/image/upload/v1/arknights/operators/${slugify(
     intermediate,
     { lower: true, replacement: "-", remove: /-/g }
   )}`;
 
+  const skillImgUrl = `https://res.cloudinary.com/samidare/image/upload/v1/arknights/operators/${operator.skillLevel}`;
+
+  const skillBGImgUrl = `https://res.cloudinary.com/samidare/image/upload/v1/arknights/skill-levels/bg`;
+
   const opBoxStyle = {
-    backgroundImage: `url("${imgUrl}")`,
+    backgroundImage: `url("${opImgUrl}")`,
     backgroundRepeat: "no-repeat",
     backgroundSize: "auto",
   }
@@ -98,8 +102,20 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
                 alt={`Skill 1 Icon  ${opInfo.skills[0].skillName}`}
               />
               <Box position="absolute" right={20} top={-20}>
-                {(operator.skill1Mastery == null ? "" :
-                  <img
+                <img
+                  className={classes.masteryImage}
+                  src={skillBGImgUrl}
+                  alt={`Skill Level Background`}
+                />
+              </Box>
+              <Box position="absolute" right={20} top={-20}>
+                {(operator.skill1Mastery == null 
+                ? <img
+                    className={classes.masteryImage}
+                    src={skillImgUrl}
+                    alt={`Skill Level ${operator.skillLevel} icon`}
+                  />
+                : <img
                     className={classes.masteryImage}
                     src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/mastery/${operator.skill1Mastery}`}
                     alt={`Skill 1 Mastery Level ${operator.skill1Mastery}`}
@@ -116,11 +132,23 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
                 alt={`Skill 2 Icon  ${opInfo.skills[1].skillName}`}
               />
               <Box position="absolute" right={20} top={-20}>
-                {(operator.skill2Mastery == null ? "" :
-                  <img
+                <img
+                  className={classes.masteryImage}
+                  src={skillBGImgUrl}
+                  alt={`Skill Level Background`}
+                />
+              </Box>
+              <Box position="absolute" right={20} top={-20}>
+                {(operator.skill2Mastery == null 
+                ? <img
                     className={classes.masteryImage}
-                    src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/mastery/${operator.skill2Mastery}`}
-                    alt={`Skill 2 Mastery Level ${operator.skill1Mastery}`}
+                    src={skillImgUrl}
+                    alt={`Skill Level ${operator.skillLevel} icon`}
+                  />
+                : <img
+                    className={classes.masteryImage}
+                    src={`https://res.cloudinary.com/samidare/image/upload/v2/arknights/mastery/${operator.skill2Mastery}`}
+                    alt={`Skill 2 Mastery Level ${operator.skill2Mastery}`}
                   />
                 )}
               </Box>
@@ -134,11 +162,23 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
                 alt={`Skill 3 Icon ${opInfo.skills[2].skillName}`}
               />
               <Box position="absolute" right={20} top={-20}>
-                {(operator.skill3Mastery == null ? "" :
-                  <img
+                <img
+                  className={classes.masteryImage}
+                  src={skillBGImgUrl}
+                  alt={`Skill Level Background`}
+                />
+              </Box>
+              <Box position="absolute" right={20} top={-20}>
+                {(operator.skill3Mastery == null 
+                ? <img
                     className={classes.masteryImage}
-                    src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/mastery/${operator.skill3Mastery}`}
-                    alt={`Skill 3 Mastery Level ${operator.skill1Mastery}`}
+                    src={skillImgUrl}
+                    alt={`Skill Level ${operator.skillLevel} icon`}
+                  />
+                : <img
+                    className={classes.masteryImage}
+                    src={`https://res.cloudinary.com/samidare/image/upload/v3/arknights/mastery/${operator.skill3Mastery}`}
+                    alt={`Skill 3 Mastery Level ${operator.skill3Mastery}`}
                   />
                 )}
               </Box>
