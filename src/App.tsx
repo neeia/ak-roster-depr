@@ -118,7 +118,7 @@ function App() {
   };
 
   const renderCollection = (collection: typeof operators): any => {
-    return Object.values(operatorJson)
+    return Object.values(operators)
       .filter((op: any) => collection[op.id].potential > 0)
       .sort((a: any, b: any) =>
         defaultSortComparator(collection[a.id], collection[b.id])
