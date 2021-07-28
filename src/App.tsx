@@ -24,10 +24,10 @@ import OpForm from "./components/OpForm";
 import OperatorCollectionBlock from "./components/OperatorCollectionBlock";
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
-import Button from "./components/Button";
 import SearchForm from "./components/SearchForm";
 import ValidatedTextField from "./components/ValidatedTextField";
 import RosterTable from "./components/RosterTable";
+import AccountTab from "./components/AccountTab";
 
 const darkTheme = createMuiTheme({
   palette: {
@@ -155,7 +155,7 @@ function App() {
         </div>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <div />
+        <AccountTab operators={operators} updateFromRemote={(remoteOperators) => setOperators(remoteOperators)}/>
       </TabPanel>
       {/* <TabPanel value={value} index={3}>
         <SearchForm handleSubmit={findUser} />
