@@ -53,7 +53,7 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
     { lower: true, replacement: "-", remove: /-/g }
   )}`;
 
-  const skillImgUrl = `https://res.cloudinary.com/samidare/image/upload/v1/arknights/operators/${operator.skillLevel}`;
+  const skillImgUrl = `https://res.cloudinary.com/samidare/image/upload/v1/arknights/skill-levels/${operator.skillLevel}`;
 
   const skillBGImgUrl = `https://res.cloudinary.com/samidare/image/upload/v1/arknights/skill-levels/bg`;
 
@@ -109,7 +109,7 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
                 />
               </Box>
               <Box position="absolute" right={20} top={-20}>
-                {(operator.skill1Mastery == null 
+                {(operator.skill1Mastery == null || operator.skill1Mastery === 0
                 ? <img
                     className={classes.masteryImage}
                     src={skillImgUrl}
@@ -139,7 +139,7 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
                 />
               </Box>
               <Box position="absolute" right={20} top={-20}>
-                {(operator.skill2Mastery == null 
+                {(operator.skill2Mastery == null || operator.skill1Mastery === 0
                 ? <img
                     className={classes.masteryImage}
                     src={skillImgUrl}
@@ -169,7 +169,7 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
                 />
               </Box>
               <Box position="absolute" right={20} top={-20}>
-                {(operator.skill3Mastery == null 
+                {(operator.skill3Mastery == null || operator.skill1Mastery === 0
                 ? <img
                     className={classes.masteryImage}
                     src={skillImgUrl}
