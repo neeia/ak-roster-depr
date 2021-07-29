@@ -8,6 +8,7 @@ import {
   WindowScroller,
   TableHeaderRenderer,
   TableCellRenderer,
+  TableCellProps,
 } from "react-virtualized";
 import { defaultSortComparator, Operator } from "../App";
 import ValidatedTextField from "./ValidatedTextField";
@@ -157,78 +158,6 @@ const RosterTable: React.FC<Props> = (props) => {
       defaultSortComparator(operators[a.id], operators[b.id])
   );
 
-  const BodyCell: TableCellRenderer = (props) => {
-    const {
-      cellData,
-      columnData,
-      columnIndex,
-      dataKey,
-      isScrolling,
-      rowData,
-      rowIndex,
-    } = props;
-
-    let innerNode = undefined;
-    switch (dataKey) {
-      case "icon":
-        innerNode = 
-          <img
-            style={{ opacity: rowData.owned ? 1 : 0.2 }}
-            width={48}
-            height={48}
-            src={imageUrlByOp(rowData.name, rowData.promotion)}
-            alt={rowData.name}
-          />;
-        break;
-      case "name":
-      case "rarity":
-        innerNode = cellData;
-        break;
-      case "favorite":
-      case "owned":
-        innerNode = 
-          <input 
-            type="checkbox" 
-            name={dataKey} checked={cellData} 
-            onChange={(e) =>
-              onChange(rowData.id, dataKey, e.target.checked)
-            }
-          />;
-        break;
-      case "potential":
-      case "promotion":
-      case "level":
-      case "skillLevel":
-      case "skill1Mastery":
-      case "skill2Mastery":
-      case "skill3Mastery":
-        innerNode = (
-          <ValidatedTextField
-            name={dataKey}
-            type="number"
-            value={cellData}
-            disabled={
-              disableByProperty(rowData, dataKey)
-            }
-            validator={
-              validatorForNumericProperty(dataKey, rowData.rarity, rowData.promotion)
-            }
-            onChange={(e) =>
-              onChange(rowData.id, e.target.name, +e.target.value)
-            }
-          />
-        );
-        break;
-      default:
-        throw new Error(`Unknown operator property: ${dataKey}`);
-    }
-
-    return (
-      <StyledTableCell component="div" variant="body">
-        {innerNode}
-      </StyledTableCell>
-    );
-  };
 
   return (
     <AutoSizer disableHeight>
@@ -264,7 +193,7 @@ const RosterTable: React.FC<Props> = (props) => {
                     width={100}
                     label={label}
                     headerRenderer={HeaderCell}
-                    cellRenderer={BodyCell}
+                    cellRenderer={props => <BodyCell onChange={onChange} {...props} />}
                   />
                 );
               })}
@@ -289,6 +218,80 @@ const HeaderCell: TableHeaderRenderer = (props) => {
   return (
     <StyledTableCell component="div" variant="head">
       {label}
+    </StyledTableCell>
+  );
+};
+
+const BodyCell = (props: TableCellProps & { onChange: any }) => {
+  const {
+    cellData,
+    columnData,
+    columnIndex,
+    dataKey,
+    isScrolling,
+    rowData,
+    rowIndex,
+    onChange,
+  } = props;
+
+  let innerNode = undefined;
+  switch (dataKey) {
+    case "icon":
+      innerNode = 
+        <img
+          style={{ opacity: rowData.owned ? 1 : 0.2 }}
+          width={48}
+          height={48}
+          src={imageUrlByOp(rowData.name, rowData.promotion)}
+          alt={rowData.name}
+        />;
+      break;
+    case "name":
+    case "rarity":
+      innerNode = cellData;
+      break;
+    case "favorite":
+    case "owned":
+      innerNode = 
+        <input 
+          type="checkbox" 
+          name={dataKey} checked={cellData} 
+          onChange={(e) =>
+            onChange(rowData.id, dataKey, e.target.checked)
+          }
+        />;
+      break;
+    case "potential":
+    case "promotion":
+    case "level":
+    case "skillLevel":
+    case "skill1Mastery":
+    case "skill2Mastery":
+    case "skill3Mastery":
+      innerNode = (
+        <ValidatedTextField
+          name={dataKey}
+          type="number"
+          value={cellData}
+          disabled={
+            disableByProperty(rowData, dataKey)
+          }
+          validator={
+            validatorForNumericProperty(dataKey, rowData.rarity, rowData.promotion)
+          }
+          onChange={(e) =>
+            onChange(rowData.id, e.target.name, +e.target.value)
+          }
+        />
+      );
+      break;
+    default:
+      throw new Error(`Unknown operator property: ${dataKey}`);
+  }
+
+  return (
+    <StyledTableCell component="div" variant="body">
+      {innerNode}
     </StyledTableCell>
   );
 };
@@ -356,5 +359,5 @@ const validatorForNumericProperty = (
       throw new Error(`Unknown numeric property: ${property}`);
   }
   return (value: string) =>
-    !Number.isNaN(+value) && 0 <= +value && +value <= upper;
+    !Number.isNaN(+value) && Number.isInteger(+value) && 0 <= +value && +value <= upper;
 };
