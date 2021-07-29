@@ -152,11 +152,10 @@ const RosterTable: React.FC<Props> = (props) => {
   };
 
   const sortedOperators = Object.values(operators).sort(
-    (a, b) =>
+    (a: Operator, b: Operator) =>
       operatorComparator(operators[a.id], operators[b.id], orderBy) ||
       defaultSortComparator(operators[a.id], operators[b.id])
   );
-
 
   const BodyCell: TableCellRenderer = (props) => {
     const {
