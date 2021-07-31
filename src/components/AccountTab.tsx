@@ -24,6 +24,7 @@ const firebaseConfig = {
 interface Props {
   operators: Record<string, Operator>;
   updateFromRemote: (remoteOperators: Record<string, Operator>) => void;
+  setDirty: (flag: boolean) => void;
 }
 
 
@@ -55,7 +56,7 @@ const findUser = (username: string): string => {
 /* #endregion */
 
 const AccountTab: React.FC<Props> = (props) => {
-  const { operators, updateFromRemote } = props;
+  const { operators, updateFromRemote, setDirty } = props;
   
   const [user, setUser] = useState<firebase.User | null>(null);
 
@@ -163,25 +164,26 @@ const AccountTab: React.FC<Props> = (props) => {
       });
   };
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      writeUserData();
-    }, 30000);
-    return () => clearTimeout(timeout);
-  }, [operators]);
+  // useEffect(() => {
+  //   const timeout = setTimeout(() => {
+  //     setDirty(false);
+  //     writeUserData();
+  //   }, 10000);
+  //   return () => clearTimeout(timeout);
+  // }, [operators]);
 
   if (user) {
     return (
       <>
-        <ValidatedTextField
+        {/* <ValidatedTextField 
           validator={(value: string) => {
             return true;
           }}
           onChange={(e) => setIGN(e.target.value)}
-        />
-        <Button handleChange={writeUserData} text="Store Changes" />
+        /> */}
+        <Button handleChange={writeUserData} text="Save Data" />
+        <Button handleChange={importUserData} text="Load Data" />
         <Button handleChange={handleLogout} text="Log out" />
-        <Button handleChange={importUserData} text="Import Data" />
       </>
     );
   }

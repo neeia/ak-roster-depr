@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import slugify from "slugify";
-import { styled, TableCell } from "@material-ui/core";
+import { styled, TableCell, TextField } from "@material-ui/core";
 import {
   Table,
   Column,
@@ -269,18 +269,19 @@ const BodyCell = (props: TableCellProps & { onChange: any }) => {
     case "skill2Mastery":
     case "skill3Mastery":
       innerNode = (
-        <ValidatedTextField
+        <TextField
           name={dataKey}
           type="number"
           value={cellData}
           disabled={
             disableByProperty(rowData, dataKey)
           }
-          validator={
-            validatorForNumericProperty(dataKey, rowData.rarity, rowData.promotion)
+          error={
+            !disableByProperty(rowData, dataKey) && errorForNumericProperty(dataKey, rowData.rarity, rowData.promotion, cellData)
           }
           onChange={(e) =>
-            onChange(rowData.id, e.target.name, +e.target.value)
+            !errorForNumericProperty(dataKey, rowData.rarity, rowData.promotion, +e.target.value) 
+            && onChange(rowData.id, e.target.name, +e.target.value)
           }
         />
       );
@@ -329,26 +330,32 @@ const disableByProperty = (
     default:
       throw new Error(`Unknown numeric property: ${property}`);
   }
-};
+}
 
-const validatorForNumericProperty = (
+const errorForNumericProperty = (
   property: string,
   rarity: number,
-  promotion: number
+  promotion: number,
+  value: number,
 ) => {
+  let lower = 0;
   let upper = 0;
   switch (property) {
     case "potential":
+      lower = 1;
       upper = 6;
       break;
     case "promotion":
-      upper = (rarity === 3 ? 1 : 2)
+      lower = 0;
+      upper = (rarity === 3 ? 1 : 2);
       break;
     case "level":
+      lower = 1;
       upper = MAX_LEVEL_BY_RARITY[rarity][promotion];
       break;
     case "skillLevel":
-      upper = (promotion === 0 ? 4 : 7);
+      lower = 1;
+      upper = (promotion === 1 ? 4 : 7);
       break;
     case "skill1Mastery":
     case "skill2Mastery":
@@ -358,6 +365,5 @@ const validatorForNumericProperty = (
     default:
       throw new Error(`Unknown numeric property: ${property}`);
   }
-  return (value: string) =>
-    !Number.isNaN(+value) && Number.isInteger(+value) && 0 <= +value && +value <= upper;
+  return Number.isNaN(+value) || !Number.isInteger(+value) || +value < lower || +value > upper;
 };

@@ -7,7 +7,7 @@ import operatorJson from "../data/operators.json";
 const useStyles = makeStyles({
   opBox: {
     justifyContent: "space-between",
-    flexBasis: "45%",
+    marginBottom: "20px",
   },
   row: {
     justifyContent: "space-between",
@@ -16,17 +16,35 @@ const useStyles = makeStyles({
     display: "inline-block",
   },
   level: {
-    fontSize: "48px",
+    fontSize: "54px",
     textAlign: "center",
   },
+  fav: {
+    fontSize: "48px",
+  },
   opName: {
-    fontSize: "24px"
+    fontSize: "24px",
+  },
+  skillBox: {
+    justifyContent: "space-between",
+    height: "60px",
+    width: "120px",
+    marginLeft: "20px",
   },
   skillImage: {
-    height: "120px"
+    display: "inline-block",
+    height: "54px",
+  },
+  bgImage: {
+    height: "54px"
   },
   masteryImage: {
-    height: "40px"
+    height: "51px"
+  },
+  skillLvlBox: {
+    position:"absolute",
+    right: "0px",
+    top: "0px",
   },
 });
 
@@ -60,22 +78,22 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
   const opBoxStyle = {
     backgroundImage: `url("${opImgUrl}")`,
     backgroundRepeat: "no-repeat",
-    backgroundSize: "auto",
+    backgroundSize: "180px 180px",
   }
 
   return (
-    <div className="opBox">
+    <div className={classes.opBox}>
       <Box style={opBoxStyle} className={classes.item} position="relative" height="180px" width="240px">
         <Box position="absolute" left={0} bottom={0}>
           <div>{"⭐\n".repeat(operator.rarity)}</div>
         </Box>
-        <Box position="absolute" right={0} top={0}>
+        <Box position="absolute" right={0} top={60} width={60} height={60}>
           <div className={classes.level}>{operator.level}</div>
         </Box>
         <Box position="absolute" left={0} top={0}>
-          <div className={classes.level}>{operator.favorite ? "🤍":""}</div>
+          <div className={classes.fav}>{operator.favorite ? "🤍":""}</div>
         </Box>
-        <Box position="absolute" right={0} top={60}>
+        <Box position="absolute" right={0} bottom={-10}>
           <img
               src={potentialUrl}
               width={60}
@@ -83,7 +101,7 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
               alt={`Potential ${operator.potential} icon`}
           />
         </Box>
-        <Box position="absolute" right={0} bottom={0}>
+        <Box position="absolute" right={0} top={0}>
           <img
               src={promotionUrl}
               width={60}
@@ -94,21 +112,21 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
       </Box>
       {(
         <div className={classes.item}>
-          {(operator.promotion === 2 && (operator.rarity === 6 || operator.name === "Amiya") ?
-            <Box className={classes.item} position="relative" height="160px" width="160px">
+          {(operator.rarity > 2 ?
+            <Box className={classes.skillBox} position="relative">
               <img
                 className={classes.skillImage}
                 src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/skills/${opInfo.skills[0].iconId ?? opInfo.skills[0].skillId}`}
                 alt={`Skill 1 Icon  ${opInfo.skills[0].skillName}`}
               />
-              <Box position="absolute" right={20} top={-20}>
+              <Box className={classes.skillLvlBox}>
                 <img
-                  className={classes.masteryImage}
+                  className={classes.bgImage}
                   src={skillBGImgUrl}
                   alt={`Skill Level Background`}
                 />
               </Box>
-              <Box position="absolute" right={20} top={-20}>
+              <Box className={classes.skillLvlBox}>
                 {(operator.skill1Mastery == null || operator.skill1Mastery === 0
                 ? <img
                     className={classes.masteryImage}
@@ -123,22 +141,22 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
                 )}
               </Box>
             </Box>
-          : "")}
-          {(operator.promotion === 2 && (operator.rarity === 6 || operator.name === "Amiya") ?
-            <Box className={classes.item} position="relative" height="160px" width="160px">
+          : <div />)}
+          {(operator.rarity > 3 && operator.promotion > 0 ?
+            <Box className={classes.skillBox} position="relative">
               <img
                 className={classes.skillImage}
                 src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/skills/${opInfo.skills[1].iconId ?? opInfo.skills[1].skillId}`}
                 alt={`Skill 2 Icon  ${opInfo.skills[1].skillName}`}
               />
-              <Box position="absolute" right={20} top={-20}>
+              <Box className={classes.skillLvlBox}>
                 <img
-                  className={classes.masteryImage}
+                  className={classes.bgImage}
                   src={skillBGImgUrl}
                   alt={`Skill Level Background`}
                 />
               </Box>
-              <Box position="absolute" right={20} top={-20}>
+              <Box className={classes.skillLvlBox}>
                 {(operator.skill2Mastery == null || operator.skill1Mastery === 0
                 ? <img
                     className={classes.masteryImage}
@@ -153,22 +171,22 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
                 )}
               </Box>
             </Box>
-          : "")}
+          : <div />)}
           {(operator.promotion === 2 && (operator.rarity === 6 || operator.name === "Amiya") ?
-            <Box className={classes.item} position="relative" height="160px" width="160px">
+            <Box className={classes.skillBox} position="relative">
               <img
                 className={classes.skillImage}
                 src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/skills/${opInfo.skills[2].iconId ?? opInfo.skills[2].skillId}`}
                 alt={`Skill 3 Icon ${opInfo.skills[2].skillName}`}
               />
-              <Box position="absolute" right={20} top={-20}>
+              <Box className={classes.skillLvlBox}>
                 <img
-                  className={classes.masteryImage}
+                  className={classes.bgImage}
                   src={skillBGImgUrl}
                   alt={`Skill Level Background`}
                 />
               </Box>
-              <Box position="absolute" right={20} top={-20}>
+              <Box className={classes.skillLvlBox}>
                 {(operator.skill3Mastery == null || operator.skill1Mastery === 0
                 ? <img
                     className={classes.masteryImage}
@@ -183,7 +201,7 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
                 )}
               </Box>
             </Box>
-          : "")}
+          : <div />)}
         </div>
         )
       }

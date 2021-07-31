@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   AppBar,
   Box,
@@ -8,10 +8,8 @@ import {
   Tab,
   Tabs,
   ThemeProvider,
-  Typography,
 } from "@material-ui/core";
 
-import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 import "firebase/database";
@@ -22,10 +20,6 @@ import useLocalStorage from "./UseLocalStorage";
 
 import OpForm from "./components/OpForm";
 import OperatorCollectionBlock from "./components/OperatorCollectionBlock";
-import LoginForm from "./components/LoginForm";
-import RegisterForm from "./components/RegisterForm";
-import SearchForm from "./components/SearchForm";
-import ValidatedTextField from "./components/ValidatedTextField";
 import RosterTable from "./components/RosterTable";
 import AccountTab from "./components/AccountTab";
 
@@ -38,7 +32,8 @@ const darkTheme = createMuiTheme({
 const useStyles = makeStyles({
   collectionContainer: {
     display: "grid",
-    gridTemplateColumns: "auto auto",
+    // gridTemplateColumns: "33vw 33vw 33vw",
+    gridTemplateColumns: "24vw 24vw 24vw 24vw",
     height: "100vh",
     width: "100%",
   },
@@ -85,20 +80,64 @@ function App() {
   );
   const classes = useStyles();
 
+  const [dirty, setDirty] = useLocalStorage<boolean>("dirty", false);
+
   const handleChange = React.useCallback(
     (operatorID: string, property: string, value: number | boolean) => {
       setOperators(
         (oldOperators: Record<string, Operator>): Record<string, Operator> => {
           const copyOperators = { ...oldOperators };
           const copyOperatorData = { ...copyOperators[operatorID] };
-          (copyOperatorData as any)[property] = value;
-          copyOperators[operatorID] = copyOperatorData;
+          copyOperators[operatorID] = applyChangeWithInvariant(copyOperatorData, property, value);
+          setDirty(true);
           return copyOperators;
         }
       );
     },
     [setOperators]
   );
+
+  const applyChangeWithInvariant = (op: Operator, prop: string, value: number | boolean) => {
+    (op as any)[prop] = value;
+    switch (prop) {
+      case "owned":
+        if (value === true) {
+          op.potential = op.potential || 1;
+          op.level = op.level || 1;
+          op.skillLevel = (op.rarity > 2 ? op.skillLevel || 1 : 0);
+        }
+        break;
+      case "skillLevel":
+        if (op.name === "Amiya") {
+          handleChange("char_1001_amiya2", "skillLevel", value);
+        } else if (op.name === "Amiya (Guard)") {
+          // update amiya's stuff
+        }
+        break;
+      case "level":
+        if (op.name === "Amiya") {
+          // check if amiya guard is owned; then update her stuff
+        } else if (op.name === "Amiya (Guard)") {
+          // update amiya's stuff
+        }
+        break;
+    }
+    return op;
+  }
+
+  // Dirty & Close Warning
+  // useEffect(() => {window.onload = function() {
+  //   window.addEventListener("beforeunload", function (e) {
+  //     if (!dirty) {
+  //       return;
+  //     }
+
+  //     var confirmationMessage = "Not all changes have been backed up. Please save first.";
+
+  //     (e || window.event).returnValue = confirmationMessage; //Gecko + IE
+  //     return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
+  //   });
+  // };}, []);
 
   // no clue what this is for
   function a11yProps(index: number) {
@@ -119,7 +158,7 @@ function App() {
 
   const renderCollection = (collection: typeof operators): any => {
     return Object.values(operators)
-      .filter((op: any) => collection[op.id].potential > 0)
+      .filter((op: any) => collection[op.id].owned && collection[op.id].potential > 0)
       .sort((a: any, b: any) =>
         defaultSortComparator(collection[a.id], collection[b.id])
       )
@@ -155,7 +194,11 @@ function App() {
         </div>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <AccountTab operators={operators} updateFromRemote={(remoteOperators) => setOperators(remoteOperators)}/>
+        <AccountTab 
+          operators={operators} 
+          updateFromRemote={(remoteOperators) => setOperators(remoteOperators)}
+          setDirty={(flag: boolean) => setDirty(flag)}
+        />
       </TabPanel>
       {/* <TabPanel value={value} index={3}>
         <SearchForm handleSubmit={findUser} />
