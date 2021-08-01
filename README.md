@@ -1,4 +1,4 @@
-#Arknights Roster
+# Arknights Roster
 This is a collection tracker for [Arknights](https://www.arknights.global/), developed by Hypergryph (HG).
 The site is available at [neia.io/](https://neia.io/).
 
