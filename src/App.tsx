@@ -81,6 +81,16 @@ const firebaseConfig = {
   databaseURL: "https://ak-roster-default-rtdb.firebaseio.com/",
 };
 
+function checkValidUsername(user: string) : boolean {
+  console.log("checking valid " + user);
+  return user.length > 0
+    && !user.includes(".")
+    && !user.includes("#")
+    && !user.includes("$")
+    && !user.includes("[")
+    && !user.includes("]");
+}
+
 function App() {
   const [operators, setOperators] = useLocalStorage<Record<string, Operator>>(
     "operators",
@@ -89,8 +99,13 @@ function App() {
   const classes = useStyles();
 
   useEffect(() => {
-    console.log("initialize firebase");
     if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+    const [_, urlName] = window.location.pathname.split("/");
+    console.log(urlName);
+    if (checkValidUsername(urlName) && findUser(urlName)) {
+      console.log("verified" + urlName);
+      setValue(3);
+    }
   }, []);
 
   const [dirty, setDirty] = useLocalStorage<boolean>("dirty", false);
@@ -181,17 +196,18 @@ function App() {
   };
 
   var [collOperators, setCollOperators] = useState<typeof operators>();
-  const findUser = (username: string): string => {
+  const findUser = (username: string): boolean => {
     firebase
       .database()
       .ref("phonebook/" + username)
       .get()
       .then((snapshot) => {
         if (snapshot.exists()) {
-          return viewUserCollection(snapshot.val());
+          viewUserCollection(snapshot.val());
+          return true;
         }
       });
-    return "";
+    return false;
   };
   const viewUserCollection = (uid: string): void => {
     firebase
@@ -205,13 +221,6 @@ function App() {
       });
   };
   
-  const [_, urlName] = window.location.pathname.split("/");
-  console.log(urlName);
-  // this causes an error
-  // if (findUser(urlName)) {
-    
-  // }
-
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
