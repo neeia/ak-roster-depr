@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Operator } from "../App";
-import ValidatedTextField from "./ValidatedTextField";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 import Button from "./Button";
 import firebase from "firebase";
+import useLocalStorage from "../UseLocalStorage";
 
 interface Props {
   operators: Record<string, Operator>;
@@ -15,7 +15,7 @@ interface Props {
 const AccountTab: React.FC<Props> = (props) => {
   const { operators, updateFromRemote, setDirty } = props;
   
-  const [user, setUser] = useState<firebase.User | null>(null);
+  const [user, setUser] = useLocalStorage<firebase.User | null>("user", null);
 
   
   const handleLogin = async (
@@ -23,6 +23,7 @@ const AccountTab: React.FC<Props> = (props) => {
     password: string
   ): Promise<Boolean> => {
     try {
+      // firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
       const newUser = await firebase
         .auth()
         .signInWithEmailAndPassword(username, password);

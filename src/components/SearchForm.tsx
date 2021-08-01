@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FormGroup } from '@material-ui/core';
 
 interface Props {
-  handleSubmit: (username: string) => boolean;
+  handleSubmit: (username: string) => any;
 }
 
 function SearchForm(props: Props) {

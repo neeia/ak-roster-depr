@@ -82,7 +82,6 @@ const firebaseConfig = {
 };
 
 function checkValidUsername(user: string) : boolean {
-  console.log("checking valid " + user);
   return user.length > 0
     && !user.includes(".")
     && !user.includes("#")
@@ -100,11 +99,12 @@ function App() {
 
   useEffect(() => {
     if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+    // firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
     const [_, urlName] = window.location.pathname.split("/");
-    console.log(urlName);
-    if (checkValidUsername(urlName) && findUser(urlName)) {
-      console.log("verified" + urlName);
-      setValue(3);
+    if (checkValidUsername(urlName)) {
+      findUser(urlName).then(() => {
+        setValue(3);
+      })
     }
   }, []);
 
@@ -196,18 +196,18 @@ function App() {
   };
 
   var [collOperators, setCollOperators] = useState<typeof operators>();
-  const findUser = (username: string): boolean => {
-    firebase
+  const findUser = async (username: string): Promise<boolean> => {
+    const snapshot = await firebase
       .database()
       .ref("phonebook/" + username)
-      .get()
-      .then((snapshot) => {
-        if (snapshot.exists()) {
-          viewUserCollection(snapshot.val());
-          return true;
-        }
-      });
-    return false;
+      .get();
+    if (snapshot.exists()) {
+      viewUserCollection(snapshot.val());
+      return true;
+    }
+    else {
+      return false;
+    }
   };
   const viewUserCollection = (uid: string): void => {
     firebase

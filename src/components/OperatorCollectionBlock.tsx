@@ -142,11 +142,12 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
               </Box>
             </Box>
           : <div />)}
-          {(operator.rarity > 3 && operator.promotion > 0 ?
+          {(operator.rarity > 3 ?
             <Box className={classes.skillBox} position="relative">
               <img
                 className={classes.skillImage}
                 src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/skills/${opInfo.skills[1].iconId ?? opInfo.skills[1].skillId}`}
+                style={{ opacity: operator.promotion > 0 ? 1 : 0.2 }}
                 alt={`Skill 2 Icon  ${opInfo.skills[1].skillName}`}
               />
               <Box className={classes.skillLvlBox}>
@@ -161,22 +162,25 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
                 ? <img
                     className={classes.masteryImage}
                     src={skillImgUrl}
+                    style={{ opacity: operator.promotion > 0 ? 1 : 0.2 }}
                     alt={`Skill Level ${operator.skillLevel} icon`}
                   />
                 : <img
                     className={classes.masteryImage}
                     src={`https://res.cloudinary.com/samidare/image/upload/v2/arknights/mastery/${operator.skill2Mastery}`}
+                    style={{ opacity: operator.promotion > 0 ? 1 : 0.2 }}
                     alt={`Skill 2 Mastery Level ${operator.skill2Mastery}`}
                   />
                 )}
               </Box>
             </Box>
           : <div />)}
-          {(operator.promotion === 2 && (operator.rarity === 6 || operator.name === "Amiya") ?
+          {(operator.rarity === 6 || operator.name === "Amiya" ?
             <Box className={classes.skillBox} position="relative">
               <img
                 className={classes.skillImage}
                 src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/skills/${opInfo.skills[2].iconId ?? opInfo.skills[2].skillId}`}
+                style={{ opacity: operator.promotion === 2 ? 1 : 0.2 }}
                 alt={`Skill 3 Icon ${opInfo.skills[2].skillName}`}
               />
               <Box className={classes.skillLvlBox}>
@@ -191,11 +195,13 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
                 ? <img
                     className={classes.masteryImage}
                     src={skillImgUrl}
+                    style={{ opacity: operator.promotion === 2 ? 1 : 0.2 }}
                     alt={`Skill Level ${operator.skillLevel} icon`}
                   />
                 : <img
                     className={classes.masteryImage}
                     src={`https://res.cloudinary.com/samidare/image/upload/v3/arknights/mastery/${operator.skill3Mastery}`}
+                    style={{ opacity: operator.promotion === 2 ? 1 : 0.2 }}
                     alt={`Skill 3 Mastery Level ${operator.skill3Mastery}`}
                   />
                 )}

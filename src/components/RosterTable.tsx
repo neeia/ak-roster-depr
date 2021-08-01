@@ -356,7 +356,7 @@ const errorForNumericProperty = (
       break;
     case "skillLevel":
       lower = 1;
-      upper = (promotion === 1 ? 4 : 7);
+      upper = (promotion === 0 ? 4 : 7);
       break;
     case "skill1Mastery":
     case "skill2Mastery":
