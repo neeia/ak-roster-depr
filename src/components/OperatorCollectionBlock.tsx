@@ -158,7 +158,7 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
                 />
               </Box>
               <Box className={classes.skillLvlBox}>
-                {(operator.skill2Mastery == null || operator.skill1Mastery === 0
+                {(operator.skill2Mastery == null || operator.skill2Mastery === 0
                 ? <img
                     className={classes.masteryImage}
                     src={skillImgUrl}
@@ -191,7 +191,7 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
                 />
               </Box>
               <Box className={classes.skillLvlBox}>
-                {(operator.skill3Mastery == null || operator.skill1Mastery === 0
+                {(operator.skill3Mastery == null || operator.skill3Mastery === 0
                 ? <img
                     className={classes.masteryImage}
                     src={skillImgUrl}

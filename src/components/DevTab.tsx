@@ -25,6 +25,7 @@ const DevTab: React.FC<Props> = (props) => {
       <ul>
         <li>Fixed a bug where E1 operators were locked at skill level 4</li>
         <li>Fixed a bug where switching tab would log you out of your account</li>
+        <li>Fixed a bug where masteries would occasionally fail to display</li>
       </ul>
     </div>
   )
