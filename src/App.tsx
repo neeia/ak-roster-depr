@@ -19,6 +19,7 @@ import OperatorCollectionBlock from "./components/OperatorCollectionBlock";
 import RosterTable from "./components/RosterTable";
 import AccountTab from "./components/AccountTab";
 import SearchForm from "./components/SearchForm";
+import DevTab from "./components/DevTab";
 
 const darkTheme = createMuiTheme({
   palette: {
@@ -136,17 +137,13 @@ function App() {
         }
         break;
       case "skillLevel":
-        if (op.name === "Amiya") {
-          handleChange("char_1001_amiya2", "skillLevel", value);
-        } else if (op.name === "Amiya (Guard)") {
-          // update amiya's stuff
-        }
-        break;
-      case "level":
-        if (op.name === "Amiya") {
-          // check if amiya guard is owned; then update her stuff
-        } else if (op.name === "Amiya (Guard)") {
-          // update amiya's stuff
+      case "promotion":
+        if (op.skillLevel === 7 && op.promotion == 2) {
+          op.skill1Mastery = 0;
+          op.skill2Mastery = 0;
+          if (op.rarity === 6 || op.name === "Amiya") {
+            op.skill3Mastery = 0;
+          }
         }
         break;
     }
@@ -174,9 +171,6 @@ function App() {
       "aria-controls": `simple-tabpanel-${index}`,
     };
   }
-
-  // operator name search filter
-  const [operatorFilter, setOperatorFilter] = useState<string>("");
 
   // tab value controller
   const [value, setValue] = useState<number>(0);
@@ -234,10 +228,10 @@ function App() {
           <Tab label="Collection" {...a11yProps(1)} />
           <Tab label="Account" {...a11yProps(2)} />
           <Tab label="Lookup" {...a11yProps(3)} />
+          <Tab label="Dev Notes" {...a11yProps(4)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <OpForm onChange={setOperatorFilter} />
         <RosterTable operators={operators} onChange={handleChange} />
       </TabPanel>
       <TabPanel value={value} index={1}>
@@ -257,6 +251,9 @@ function App() {
         <div className={classes.collectionContainer}>
           {collOperators ? renderCollection(collOperators) : ""}
         </div>
+      </TabPanel>
+      <TabPanel value={value} index={4}>
+        <DevTab />
       </TabPanel>
     </ThemeProvider>
   );

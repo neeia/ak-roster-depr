@@ -16,7 +16,6 @@ const AccountTab: React.FC<Props> = (props) => {
   const { operators, updateFromRemote, setDirty } = props;
   
   const [user, setUser] = useLocalStorage<firebase.User | null>("user", null);
-
   
   const handleLogin = async (
     username: string,
@@ -51,6 +50,10 @@ const AccountTab: React.FC<Props> = (props) => {
             .database()
             .ref("phonebook/" + username)
             .set(userCredential.user.uid);
+          firebase
+            .database()
+            .ref("users/" + userCredential.user.uid + "/username/")
+            .set(username)
           return true;
         }
       })
@@ -138,6 +141,7 @@ const AccountTab: React.FC<Props> = (props) => {
           }}
           onChange={(e) => setIGN(e.target.value)}
         /> */}
+        {/* Share your collection with https://neia.io/ */}
         <Button handleChange={writeUserData} text="Save Data" />
         <Button handleChange={importUserData} text="Load Data" />
         <Button handleChange={handleLogout} text="Log out" />
@@ -148,7 +152,7 @@ const AccountTab: React.FC<Props> = (props) => {
     return (
       <>
         <LoginForm handleLogin={handleLogin} />
-        <RegisterForm handleSignup={handleSignup} />
+        {/* <RegisterForm handleSignup={handleSignup} /> */}
       </>
     );
   }

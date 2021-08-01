@@ -10,6 +10,7 @@ import {
   TableCellProps,
 } from "react-virtualized";
 import { defaultSortComparator, Operator } from "../App";
+import OpForm from "./OpForm";
 
 const MAX_LEVEL_BY_RARITY = [[0], [30], [30], [40, 55], [45, 60, 70], [50, 70, 80], [50, 80, 90]];
 
@@ -140,6 +141,9 @@ interface Props {
 const RosterTable: React.FC<Props> = (props) => {
   const { operators, onChange } = props;
   const [orderBy, setOrderBy] = useState({ key: "favorite", descending: true });
+  // operator name search filter
+  const [operatorFilter, setOperatorFilter] = useState<string>("");
+
 
   const createSortHandler = (property: string) => () => {
     handleRequestSort(property);
@@ -150,7 +154,9 @@ const RosterTable: React.FC<Props> = (props) => {
     setOrderBy({ key: property, descending: isAsc ? true : false });
   };
 
-  const sortedOperators = Object.values(operators).sort(
+  const sortedOperators = Object.values(operators)
+  .filter((op: Operator) => (op.name.toLowerCase().includes(operatorFilter)))
+  .sort(
     (a: Operator, b: Operator) =>
       operatorComparator(operators[a.id], operators[b.id], orderBy) ||
       defaultSortComparator(operators[a.id], operators[b.id])
@@ -158,51 +164,54 @@ const RosterTable: React.FC<Props> = (props) => {
 
 
   return (
-    <AutoSizer disableHeight>
-      {({ width }) => (
-        <WindowScroller>
-          {({ height, isScrolling, onChildScroll, scrollTop }) => (
-            <Table
-              autoHeight
-              width={width}
-              height={height}
-              isScrolling={isScrolling}
-              onScroll={onChildScroll}
-              scrollTop={scrollTop}
-              rowCount={sortedOperators.length}
-              rowHeight={48}
-              headerHeight={48}
-              rowGetter={({ index }) => sortedOperators[index]}
-              rowStyle={{
-                display: "flex", 
-                alignItems: "center",
-              }}
-            >
-              {headCells.map((headCell) => {
-                const {
-                  id,
-                  alignRight,
-                  disablePadding,
-                  enableSort,
-                  defaultDesc,
-                  label,
-                } = headCell;
-                return (
-                  <Column
-                    key={id}
-                    dataKey={id}
-                    width={100}
-                    label={label}
-                    headerRenderer={HeaderCell}
-                    cellRenderer={props => <BodyCell onChange={onChange} {...props} />}
-                  />
-                );
-              })}
-            </Table>
-          )}
-        </WindowScroller>
-      )}
-    </AutoSizer>
+    <>
+      <OpForm onChange={setOperatorFilter} />
+      <AutoSizer disableHeight>
+        {({ width }) => (
+          <WindowScroller>
+            {({ height, isScrolling, onChildScroll, scrollTop }) => (
+              <Table
+                autoHeight
+                width={width}
+                height={height}
+                isScrolling={isScrolling}
+                onScroll={onChildScroll}
+                scrollTop={scrollTop}
+                rowCount={sortedOperators.length}
+                rowHeight={48}
+                headerHeight={48}
+                rowGetter={({ index }) => sortedOperators[index]}
+                rowStyle={{
+                  display: "flex", 
+                  alignItems: "center",
+                }}
+              >
+                {headCells.map((headCell) => {
+                  const {
+                    id,
+                    alignRight,
+                    disablePadding,
+                    enableSort,
+                    defaultDesc,
+                    label,
+                  } = headCell;
+                  return (
+                    <Column
+                      key={id}
+                      dataKey={id}
+                      width={100}
+                      label={label}
+                      headerRenderer={HeaderCell}
+                      cellRenderer={props => <BodyCell onChange={onChange} {...props} />}
+                    />
+                  );
+                })}
+              </Table>
+            )}
+          </WindowScroller>
+        )}
+      </AutoSizer>
+    </>
   );
 };
 export default RosterTable;
