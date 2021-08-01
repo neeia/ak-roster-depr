@@ -10,18 +10,15 @@ import {
   ThemeProvider,
 } from "@material-ui/core";
 
-import "firebase/auth";
-import "firebase/firestore";
-import "firebase/database";
-
+import firebase from "firebase";
 import operatorJson from "./data/operators.json";
-
 import useLocalStorage from "./UseLocalStorage";
 
 import OpForm from "./components/OpForm";
 import OperatorCollectionBlock from "./components/OperatorCollectionBlock";
 import RosterTable from "./components/RosterTable";
 import AccountTab from "./components/AccountTab";
+import SearchForm from "./components/SearchForm";
 
 const darkTheme = createMuiTheme({
   palette: {
@@ -73,12 +70,28 @@ export interface Operator {
   skill3Mastery?: number;
 }
 
+const firebaseConfig = {
+  apiKey: "AIzaSyDjpt2G4GFQjYbPT5Mrj6L2meeWEnsCEgU",
+  authDomain: "ak-roster.firebaseapp.com",
+  projectId: "ak-roster",
+  storageBucket: "ak-roster.appspot.com",
+  messagingSenderId: "1076086810652",
+  appId: "1:1076086810652:web:ed1da74b87a08bf4b657d9",
+  measurementId: "G-VZXJ8MY6D1",
+  databaseURL: "https://ak-roster-default-rtdb.firebaseio.com/",
+};
+
 function App() {
   const [operators, setOperators] = useLocalStorage<Record<string, Operator>>(
     "operators",
     defaultOperators
   );
   const classes = useStyles();
+
+  useEffect(() => {
+    console.log("initialize firebase");
+    if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+  }, []);
 
   const [dirty, setDirty] = useLocalStorage<boolean>("dirty", false);
 
@@ -168,6 +181,36 @@ function App() {
   };
 
   var [collOperators, setCollOperators] = useState<typeof operators>();
+  const findUser = (username: string): string => {
+    firebase
+      .database()
+      .ref("phonebook/" + username)
+      .get()
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          return viewUserCollection(snapshot.val());
+        }
+      });
+    return "";
+  };
+  const viewUserCollection = (uid: string): void => {
+    firebase
+      .database()
+      .ref("users/" + uid + "/roster/")
+      .get()
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          setCollOperators(snapshot.val());
+        }
+      });
+  };
+  
+  const [_, urlName] = window.location.pathname.split("/");
+  console.log(urlName);
+  // this causes an error
+  // if (findUser(urlName)) {
+    
+  // }
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -200,12 +243,12 @@ function App() {
           setDirty={(flag: boolean) => setDirty(flag)}
         />
       </TabPanel>
-      {/* <TabPanel value={value} index={3}>
+      <TabPanel value={value} index={3}>
         <SearchForm handleSubmit={findUser} />
         <div className={classes.collectionContainer}>
           {collOperators ? renderCollection(collOperators) : ""}
         </div>
-      </TabPanel> */}
+      </TabPanel>
     </ThemeProvider>
   );
 }

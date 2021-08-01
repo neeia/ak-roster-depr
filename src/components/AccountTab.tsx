@@ -6,54 +6,11 @@ import RegisterForm from "./RegisterForm";
 import Button from "./Button";
 import firebase from "firebase";
 
-
-const firebaseConfig = {
-  apiKey: "AIzaSyDjpt2G4GFQjYbPT5Mrj6L2meeWEnsCEgU",
-  authDomain: "ak-roster.firebaseapp.com",
-  projectId: "ak-roster",
-  storageBucket: "ak-roster.appspot.com",
-  messagingSenderId: "1076086810652",
-  appId: "1:1076086810652:web:ed1da74b87a08bf4b657d9",
-  measurementId: "G-VZXJ8MY6D1",
-  databaseURL: "https://ak-roster-default-rtdb.firebaseio.com/",
-};
-!firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app();
-// Get a reference to the database service
-
-
 interface Props {
   operators: Record<string, Operator>;
   updateFromRemote: (remoteOperators: Record<string, Operator>) => void;
   setDirty: (flag: boolean) => void;
 }
-
-
-/* #region Methods */
-const viewUserCollection = (uid: string): void => {
-  firebase
-    .database()
-    .ref("users/" + uid + "/roster/")
-    .get()
-    .then((snapshot) => {
-      if (snapshot.exists()) {
-        // setCollOperators(snapshot.val());
-      }
-    });
-};
-const findUser = (username: string): string => {
-  firebase
-    .database()
-    .ref("phonebook/" + username)
-    .get()
-    .then((snapshot) => {
-      if (snapshot.exists()) {
-        return viewUserCollection(snapshot.val());
-      }
-    });
-  return "";
-};
-
-/* #endregion */
 
 const AccountTab: React.FC<Props> = (props) => {
   const { operators, updateFromRemote, setDirty } = props;
@@ -119,27 +76,27 @@ const AccountTab: React.FC<Props> = (props) => {
     return false;
   };
 
-  const getIGN = (): string => {
-    if (!user) return "";
-    firebase
-      .database()
-      .ref("users/" + user.uid + "/accuntName/")
-      .get()
-      .then((snapshot) => {
-        if (snapshot.exists()) {
-          return snapshot.val();
-        }
-      });
-    return "";
-  };
+  // const getIGN = (): string => {
+  //   if (!user) return "";
+  //   firebase
+  //     .database()
+  //     .ref("users/" + user.uid + "/accuntName/")
+  //     .get()
+  //     .then((snapshot) => {
+  //       if (snapshot.exists()) {
+  //         return snapshot.val();
+  //       }
+  //     });
+  //   return "";
+  // };
   
-  const setIGN = (ign: string): void => {
-    if (!user) return;
-    firebase
-      .database()
-      .ref("users/" + user.uid + "/accountName/")
-      .set(ign);
-  };
+  // const setIGN = (ign: string): void => {
+  //   if (!user) return;
+  //   firebase
+  //     .database()
+  //     .ref("users/" + user.uid + "/accountName/")
+  //     .set(ign);
+  // };
   
   const writeUserData = (): void => {
     if (!user) return;
@@ -147,7 +104,6 @@ const AccountTab: React.FC<Props> = (props) => {
       .database()
       .ref("users/" + user.uid)
       .set({
-        accountName: "",
         roster: operators,
       });
   };

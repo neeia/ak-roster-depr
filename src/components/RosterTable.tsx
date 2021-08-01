@@ -7,11 +7,9 @@ import {
   AutoSizer,
   WindowScroller,
   TableHeaderRenderer,
-  TableCellRenderer,
   TableCellProps,
 } from "react-virtualized";
 import { defaultSortComparator, Operator } from "../App";
-import ValidatedTextField from "./ValidatedTextField";
 
 const MAX_LEVEL_BY_RARITY = [[0], [30], [30], [40, 55], [45, 60, 70], [50, 70, 80], [50, 80, 90]];
 
@@ -175,7 +173,10 @@ const RosterTable: React.FC<Props> = (props) => {
               rowHeight={48}
               headerHeight={48}
               rowGetter={({ index }) => sortedOperators[index]}
-              rowStyle={{ display: "flex" }}
+              rowStyle={{
+                display: "flex", 
+                alignItems: "center",
+              }}
             >
               {headCells.map((headCell) => {
                 const {
