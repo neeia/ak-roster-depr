@@ -220,6 +220,7 @@ const StyledTableCell = styled(TableCell)({
   display: "flex",
   alignItems: "center",
   flex: 1,
+  marginRight: "8px",
 });
 
 const HeaderCell: TableHeaderRenderer = (props) => {
