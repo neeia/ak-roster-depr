@@ -37,6 +37,13 @@ const useStyles = makeStyles({
   },
 });
 
+const starterOperators = [
+  "Amiya",
+  "Rangers",
+  "Yato",
+  "Noir Corne"
+];
+
 const defaultOperators = Object.fromEntries(
   Object.entries(operatorJson).map(([key, op]) => {
     return [
@@ -48,7 +55,7 @@ const defaultOperators = Object.fromEntries(
         rarity: op.rarity,
         potential: 0,
         promotion: 0,
-        owned: false,
+        owned: starterOperators.includes(op.name),
         level: 0,
         skillLevel: 0,
       },
