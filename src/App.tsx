@@ -30,9 +30,9 @@ const darkTheme = createMuiTheme({
 const useStyles = makeStyles({
   collectionContainer: {
     display: "grid",
-    // gridTemplateColumns: "33vw 33vw 33vw",
-    gridTemplateColumns: "24vw 24vw 24vw 24vw",
-    height: "100vh",
+    gridTemplateColumns: "repeat(auto-fit, minmax(266px, 1fr))",
+    rowGap: "20px",
+    gap: "2px",
     width: "100%",
   },
 });

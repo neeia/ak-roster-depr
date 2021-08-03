@@ -2,49 +2,37 @@ import { Box, makeStyles } from "@material-ui/core";
 import React from "react";
 import slugify from "slugify";
 import { Operator } from "../App";
-import operatorJson from "../data/operators.json";
+import SkillDisplayBox from "./SkillDisplayBox";
 
 const useStyles = makeStyles({
   opBox: {
     justifyContent: "space-between",
-    marginBottom: "20px",
-  },
-  row: {
-    justifyContent: "space-between",
+    backgroundColor: "#444455",
+    padding: "12px",
+    margin: "12px",
+    border: "2px solid pink",
+    borderRadius: "5px",
   },
   item: {
     display: "inline-block",
   },
+  skillsDisplay: {
+    height: "42px",
+    justifyContent: "space-between",
+  },
   level: {
-    fontSize: "54px",
+    fontSize: "40px",
     textAlign: "center",
   },
+  icon: {
+    width: "60px",
+    height: "60px",
+  },
   fav: {
-    fontSize: "48px",
+    fontSize: "40px",
   },
   opName: {
     fontSize: "24px",
-  },
-  skillBox: {
-    justifyContent: "space-between",
-    height: "60px",
-    width: "120px",
-    marginLeft: "20px",
-  },
-  skillImage: {
-    display: "inline-block",
-    height: "54px",
-  },
-  bgImage: {
-    height: "54px"
-  },
-  masteryImage: {
-    height: "51px"
-  },
-  skillLvlBox: {
-    position:"absolute",
-    right: "0px",
-    top: "0px",
   },
 });
 
@@ -57,7 +45,6 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
   const classes = useStyles();
   const potentialUrl = `https://res.cloudinary.com/samidare/image/upload/v1/arknights/potential/${operator.potential}`;
   const promotionUrl = `https://res.cloudinary.com/samidare/image/upload/v1/arknights/elite/${operator.promotion}`;
-  const opInfo = (operatorJson as any)[operator.id];
 
   let intermediate = operator.name;
   if (operator.promotion === 2) {
@@ -71,19 +58,15 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
     { lower: true, replacement: "-", remove: /-/g }
   )}`;
 
-  const skillImgUrl = `https://res.cloudinary.com/samidare/image/upload/v1/arknights/skill-levels/${operator.skillLevel}`;
-
-  const skillBGImgUrl = `https://res.cloudinary.com/samidare/image/upload/v1/arknights/skill-levels/bg`;
-
   const opBoxStyle = {
     backgroundImage: `url("${opImgUrl}")`,
     backgroundRepeat: "no-repeat",
-    backgroundSize: "180px 180px",
+    backgroundSize: "160px 160px",
   }
 
   return (
     <div className={classes.opBox}>
-      <Box style={opBoxStyle} className={classes.item} position="relative" height="180px" width="240px">
+      <Box style={opBoxStyle} className={classes.item} position="relative" height="160px" width="220px">
         <Box position="absolute" left={0} bottom={0}>
           <div>{"⭐\n".repeat(operator.rarity)}</div>
         </Box>
@@ -96,122 +79,33 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
         <Box position="absolute" right={0} bottom={-10}>
           <img
               src={potentialUrl}
-              width={60}
-              height={60}
+              className={classes.icon}
               alt={`Potential ${operator.potential} icon`}
           />
         </Box>
         <Box position="absolute" right={0} top={0}>
           <img
               src={promotionUrl}
-              width={60}
-              height={60}
+              className={classes.icon}
               alt={`Elite ${operator.promotion} icon`}
             />
         </Box>
       </Box>
+      <div className={classes.opName}>{operator.name}</div>
       {(
-        <div className={classes.item}>
+        <div className={classes.skillsDisplay}>
           {(operator.rarity > 2 ?
-            <Box className={classes.skillBox} position="relative">
-              <img
-                className={classes.skillImage}
-                src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/skills/${opInfo.skills[0].iconId ?? opInfo.skills[0].skillId}`}
-                alt={`Skill 1 Icon  ${opInfo.skills[0].skillName}`}
-              />
-              <Box className={classes.skillLvlBox}>
-                <img
-                  className={classes.bgImage}
-                  src={skillBGImgUrl}
-                  alt={`Skill Level Background`}
-                />
-              </Box>
-              <Box className={classes.skillLvlBox}>
-                {(operator.skill1Mastery == null || operator.skill1Mastery === 0
-                ? <img
-                    className={classes.masteryImage}
-                    src={skillImgUrl}
-                    alt={`Skill Level ${operator.skillLevel} icon`}
-                  />
-                : <img
-                    className={classes.masteryImage}
-                    src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/mastery/${operator.skill1Mastery}`}
-                    alt={`Skill 1 Mastery Level ${operator.skill1Mastery}`}
-                  />
-                )}
-              </Box>
-            </Box>
+            <SkillDisplayBox operator={operator} skill={1} />
           : <div />)}
           {(operator.rarity > 3 ?
-            <Box className={classes.skillBox} position="relative">
-              <img
-                className={classes.skillImage}
-                src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/skills/${opInfo.skills[1].iconId ?? opInfo.skills[1].skillId}`}
-                style={{ opacity: operator.promotion > 0 ? 1 : 0.2 }}
-                alt={`Skill 2 Icon  ${opInfo.skills[1].skillName}`}
-              />
-              <Box className={classes.skillLvlBox}>
-                <img
-                  className={classes.bgImage}
-                  src={skillBGImgUrl}
-                  alt={`Skill Level Background`}
-                />
-              </Box>
-              <Box className={classes.skillLvlBox}>
-                {(operator.skill2Mastery == null || operator.skill2Mastery === 0
-                ? <img
-                    className={classes.masteryImage}
-                    src={skillImgUrl}
-                    style={{ opacity: operator.promotion > 0 ? 1 : 0.2 }}
-                    alt={`Skill Level ${operator.skillLevel} icon`}
-                  />
-                : <img
-                    className={classes.masteryImage}
-                    src={`https://res.cloudinary.com/samidare/image/upload/v2/arknights/mastery/${operator.skill2Mastery}`}
-                    style={{ opacity: operator.promotion > 0 ? 1 : 0.2 }}
-                    alt={`Skill 2 Mastery Level ${operator.skill2Mastery}`}
-                  />
-                )}
-              </Box>
-            </Box>
+            <SkillDisplayBox operator={operator} skill={2} />
           : <div />)}
           {(operator.rarity === 6 || operator.name === "Amiya" ?
-            <Box className={classes.skillBox} position="relative">
-              <img
-                className={classes.skillImage}
-                src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/skills/${opInfo.skills[2].iconId ?? opInfo.skills[2].skillId}`}
-                style={{ opacity: operator.promotion === 2 ? 1 : 0.2 }}
-                alt={`Skill 3 Icon ${opInfo.skills[2].skillName}`}
-              />
-              <Box className={classes.skillLvlBox}>
-                <img
-                  className={classes.bgImage}
-                  src={skillBGImgUrl}
-                  alt={`Skill Level Background`}
-                />
-              </Box>
-              <Box className={classes.skillLvlBox}>
-                {(operator.skill3Mastery == null || operator.skill3Mastery === 0
-                ? <img
-                    className={classes.masteryImage}
-                    src={skillImgUrl}
-                    style={{ opacity: operator.promotion === 2 ? 1 : 0.2 }}
-                    alt={`Skill Level ${operator.skillLevel} icon`}
-                  />
-                : <img
-                    className={classes.masteryImage}
-                    src={`https://res.cloudinary.com/samidare/image/upload/v3/arknights/mastery/${operator.skill3Mastery}`}
-                    style={{ opacity: operator.promotion === 2 ? 1 : 0.2 }}
-                    alt={`Skill 3 Mastery Level ${operator.skill3Mastery}`}
-                  />
-                )}
-              </Box>
-            </Box>
+            <SkillDisplayBox operator={operator} skill={3} />
           : <div />)}
         </div>
         )
       }
-      <div className={classes.opName}>{operator.name}</div>
     </div>
   );
 });
