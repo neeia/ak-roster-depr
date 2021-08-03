@@ -12,6 +12,24 @@ interface Props {
 const DevTab: React.FC<Props> = (props) => {
   return (
     <div>
+      <h1>August 03</h1>
+      <h2>News</h2>
+      <ul>
+        <li>Collection view redesigned</li>
+        <ul>
+          <li>Border and background color added</li>
+          <li>Spacing and arrangement adjusted</li>
+        </ul>
+        <li>Starters are no longer automatically owned upon first launch</li>
+      </ul>
+      <h1>August 02</h1>
+      <h2>News</h2>
+      <ul>
+        <li>Starters are now automatically owned upon first launch</li>
+        <li>Various UI improvements</li>
+        <li>Readme updated</li>
+        <li>Description updated</li>
+      </ul>
       <h1>August 01</h1>
       <h2>News</h2>
       <ul>

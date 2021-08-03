@@ -29,7 +29,7 @@ const useStyles = makeStyles({
     height: "60px",
   },
   fav: {
-    fontSize: "40px",
+    fontSize: "32px",
   },
   opName: {
     fontSize: "24px",
@@ -74,7 +74,7 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
           <div className={classes.level}>{operator.level}</div>
         </Box>
         <Box position="absolute" left={0} top={0}>
-          <div className={classes.fav}>{operator.favorite ? "🤍":""}</div>
+          <div className={classes.fav}>{operator.favorite ? "❤️":""}</div>
         </Box>
         <Box position="absolute" right={0} bottom={-10}>
           <img

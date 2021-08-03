@@ -55,7 +55,7 @@ const defaultOperators = Object.fromEntries(
         rarity: op.rarity,
         potential: 0,
         promotion: 0,
-        owned: starterOperators.includes(op.name),
+        owned: false, //starterOperators.includes(op.name),
         level: 0,
         skillLevel: 0,
       },
