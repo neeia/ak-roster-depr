@@ -14,99 +14,93 @@ import OpForm from "./OpForm";
 
 const MAX_LEVEL_BY_RARITY = [[0], [30], [30], [40, 55], [45, 60, 70], [50, 70, 80], [50, 80, 90]];
 
+enum Alignment {
+  LEFT = 0,
+  CENTER = 1,
+  RIGHT = 2,
+}
+
 const headCells = [
   {
     id: "owned",
-    alignRight: false,
-    disablePadding: false,
+    width: 100,
     enableSort: true,
     defaultDesc: true,
     label: "Owned",
   },
   {
     id: "favorite",
-    alignRight: false,
-    disablePadding: false,
+    width: 100,
     enableSort: true,
     defaultDesc: true,
     label: "Favorite",
   },
   {
     id: "icon",
-    alignRight: false,
-    disablePadding: false,
+    width: 75,
     enableSort: false,
     defaultDesc: true,
     label: "Icon",
   },
   {
     id: "rarity",
-    alignRight: false,
-    disablePadding: false,
+    width: 75,
     enableSort: true,
     defaultDesc: true,
     label: "Rarity",
   },
   {
     id: "name",
-    alignRight: false,
-    disablePadding: false,
+    width: 125,
     enableSort: true,
     defaultDesc: true,
-    label: "Operator",
+    label: "Name",
   },
   {
     id: "potential",
-    alignRight: false,
-    disablePadding: false,
+    width: 75,
     enableSort: true,
     defaultDesc: true,
-    label: "Potential",
+    label: "Pot.",
   },
   {
     id: "promotion",
-    alignRight: false,
-    disablePadding: false,
+    width: 75,
     enableSort: true,
     defaultDesc: true,
-    label: "Promotion",
+    label: "Elite",
   },
   {
     id: "level",
-    alignRight: false,
-    disablePadding: false,
+    width: 75,
     enableSort: true,
     defaultDesc: true,
     label: "Level",
   },
   {
     id: "skillLevel",
-    alignRight: false,
-    disablePadding: false,
+    width: 75,
     enableSort: true,
     defaultDesc: true,
-    label: "Skill Level",
+    label: "Skill Rank",
   },
   {
     id: "skill1Mastery",
-    alignRight: false,
-    disablePadding: false,
+    width: 75,
     enableSort: false,
     defaultDesc: true,
     label: "S1",
   },
   {
     id: "skill2Mastery",
-    alignRight: false,
-    disablePadding: false,
+    width: 75,
     enableSort: false,
     defaultDesc: true,
     label: "S2",
   },
   {
     id: "skill3Mastery",
-    alignRight: false,
-    disablePadding: false,
+    width: 75,
     enableSort: false,
     defaultDesc: true,
     label: "S3",
@@ -189,8 +183,7 @@ const RosterTable: React.FC<Props> = (props) => {
                 {headCells.map((headCell) => {
                   const {
                     id,
-                    alignRight,
-                    disablePadding,
+                    width,
                     enableSort,
                     defaultDesc,
                     label,
@@ -199,7 +192,7 @@ const RosterTable: React.FC<Props> = (props) => {
                     <Column
                       key={id}
                       dataKey={id}
-                      width={100}
+                      width={width}
                       label={label}
                       headerRenderer={HeaderCell}
                       cellRenderer={props => <BodyCell onChange={onChange} {...props} />}

@@ -44,23 +44,26 @@ const starterOperators = [
   "Noir Corne"
 ];
 
+// Converts an opJson entry into an Operator
+function opObject ([key, op] : any) : [string, Operator] {
+  return [
+    op.id,
+    {
+      id: op.id,
+      name: op.name,
+      favorite: false,
+      rarity: op.rarity,
+      potential: 0,
+      promotion: 0,
+      owned: false, //starterOperators.includes(op.name),
+      level: 0,
+      skillLevel: 0,
+    },
+  ];
+}
+
 const defaultOperators = Object.fromEntries(
-  Object.entries(operatorJson).map(([key, op]) => {
-    return [
-      op.id,
-      {
-        id: op.id,
-        name: op.name,
-        favorite: false,
-        rarity: op.rarity,
-        potential: 0,
-        promotion: 0,
-        owned: false, //starterOperators.includes(op.name),
-        level: 0,
-        skillLevel: 0,
-      },
-    ];
-  })
+  Object.entries(operatorJson).map(opObject)
 );
 
 export interface Operator {
@@ -104,6 +107,12 @@ function App() {
     defaultOperators
   );
   const classes = useStyles();
+
+  Object.entries(operatorJson).forEach((op) => {
+    if (!(op[0] in operators)) {
+      operators[op[0]] = opObject(op)[1];
+    }
+  })
 
   useEffect(() => {
     if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);

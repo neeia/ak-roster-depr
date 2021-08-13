@@ -126,17 +126,17 @@
     "id": "char_1011_lava2",
     "name": "Lava the Purgatory",
     "rarity": 5,
-    "isCnOnly": true,
+    "isCnOnly": false,
     "skills": [
       {
         "skillId": "skchr_lava2_1",
         "iconId": null,
-        "skillName": "焰淬匕首"
+        "skillName": "Flame Quenched Dagger"
       },
       {
         "skillId": "skchr_lava2_2",
         "iconId": null,
-        "skillName": "狱火之环"
+        "skillName": "Ring of Hellfire"
       }
     ],
     "class": "Caster"
@@ -164,6 +164,30 @@
       }
     ],
     "class": "Supporter"
+  },
+  "char_1013_chen2": {
+    "id": "char_1013_chen2",
+    "name": "Ch'en the Holungday",
+    "rarity": 6,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skchr_chen2_1",
+        "iconId": null,
+        "skillName": "高压冲击"
+      },
+      {
+        "skillId": "skchr_chen2_2",
+        "iconId": null,
+        "skillName": "“堇青之夜”"
+      },
+      {
+        "skillId": "skchr_chen2_3",
+        "iconId": null,
+        "skillName": "“假日风暴”"
+      }
+    ],
+    "class": "Sniper"
   },
   "char_102_texas": {
     "id": "char_102_texas",
@@ -1396,17 +1420,17 @@
       {
         "skillId": "skchr_cerber_1",
         "iconId": null,
-        "skillName": "\"Really Cold Axe\""
+        "skillName": "'Really Cold Axe'"
       },
       {
         "skillId": "skchr_cerber_2",
         "iconId": null,
-        "skillName": "\"Really Hot Knives\""
+        "skillName": "'Really Hot Knives'"
       },
       {
         "skillId": "skchr_cerber_3",
         "iconId": null,
-        "skillName": "\"Really Heavy Spear\""
+        "skillName": "'Really Heavy Spear'"
       }
     ],
     "class": "Caster"
@@ -1439,22 +1463,22 @@
     "id": "char_2015_dusk",
     "name": "Dusk",
     "rarity": 6,
-    "isCnOnly": true,
+    "isCnOnly": false,
     "skills": [
       {
         "skillId": "skchr_dusk_1",
         "iconId": null,
-        "skillName": "工笔入化"
+        "skillName": "Transcendental Stroke"
       },
       {
         "skillId": "skchr_dusk_2",
         "iconId": null,
-        "skillName": "泼墨淋漓"
+        "skillName": "Flowing Ink"
       },
       {
         "skillId": "skchr_dusk_3",
         "iconId": null,
-        "skillName": "写意胜形"
+        "skillName": "Image over Form"
       }
     ],
     "class": "Caster"
@@ -2638,22 +2662,22 @@
     "id": "char_332_archet",
     "name": "Archetto",
     "rarity": 6,
-    "isCnOnly": true,
+    "isCnOnly": false,
     "skills": [
       {
         "skillId": "skchr_archet_1",
         "iconId": null,
-        "skillName": "箭矢·散逸"
+        "skillName": "Dispersing Arrows"
       },
       {
         "skillId": "skchr_archet_2",
         "iconId": null,
-        "skillName": "箭矢·追猎"
+        "skillName": "Pursuing Arrows"
       },
       {
         "skillId": "skchr_archet_3",
         "iconId": null,
-        "skillName": "箭矢·暴风"
+        "skillName": "Thundering Arrows"
       }
     ],
     "class": "Sniper"
@@ -2719,17 +2743,17 @@
     "id": "char_338_iris",
     "name": "Iris",
     "rarity": 5,
-    "isCnOnly": true,
+    "isCnOnly": false,
     "skills": [
       {
         "skillId": "skchr_iris_1",
         "iconId": null,
-        "skillName": "童话守卫者"
+        "skillName": "Fairytale Guardian"
       },
       {
         "skillId": "skchr_iris_2",
         "iconId": null,
-        "skillName": "梦乡摇篮"
+        "skillName": "Dreamland’s Cradle"
       }
     ],
     "class": "Caster"
@@ -2981,22 +3005,22 @@
     "id": "char_362_saga",
     "name": "Saga",
     "rarity": 6,
-    "isCnOnly": true,
+    "isCnOnly": false,
     "skills": [
       {
         "skillId": "skcom_charge_cost[3]",
         "iconId": null,
-        "skillName": "冲锋号令·γ型"
+        "skillName": "Charge γ"
       },
       {
         "skillId": "skchr_saga_2",
         "iconId": null,
-        "skillName": "除恶"
+        "skillName": "Cleansing Evil"
       },
       {
         "skillId": "skchr_saga_3",
         "iconId": null,
-        "skillName": "怒目"
+        "skillName": "Fierce Glare"
       }
     ],
     "class": "Vanguard"
@@ -3175,7 +3199,7 @@
       {
         "skillId": "skchr_bubble_2",
         "iconId": null,
-        "skillName": "\"Beaten Up\""
+        "skillName": "'Beaten Up'"
       }
     ],
     "class": "Defender"
@@ -3256,7 +3280,7 @@
       {
         "skillId": "skchr_rosmon_3",
         "iconId": null,
-        "skillName": "“As You Wish”"
+        "skillName": "'As You Wish'"
       }
     ],
     "class": "Sniper"
@@ -3308,17 +3332,17 @@
     "id": "char_402_tuye",
     "name": "Tuye",
     "rarity": 5,
-    "isCnOnly": true,
+    "isCnOnly": false,
     "skills": [
       {
         "skillId": "skchr_tuye_1",
         "iconId": null,
-        "skillName": "水流环"
+        "skillName": "Aqua Loop"
       },
       {
         "skillId": "skchr_tuye_2",
         "iconId": null,
-        "skillName": "强心剂"
+        "skillName": "Cardiac Stimulant"
       }
     ],
     "class": "Medic"
@@ -3404,6 +3428,25 @@
     ],
     "class": "Defender"
   },
+  "char_421_crow": {
+    "id": "char_421_crow",
+    "name": "La Pluma",
+    "rarity": 5,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skchr_crow_1",
+        "iconId": null,
+        "skillName": "高速切割"
+      },
+      {
+        "skillId": "skchr_crow_2",
+        "iconId": null,
+        "skillName": "收割"
+      }
+    ],
+    "class": "Guard"
+  },
   "char_423_blemsh": {
     "id": "char_423_blemsh",
     "name": "Blemishine",
@@ -3471,6 +3514,30 @@
     ],
     "class": "Medic"
   },
+  "char_437_mizuki": {
+    "id": "char_437_mizuki",
+    "name": "Mizuki",
+    "rarity": 6,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skchr_mizuki_1",
+        "iconId": null,
+        "skillName": "唤醒"
+      },
+      {
+        "skillId": "skchr_mizuki_2",
+        "iconId": null,
+        "skillName": "囚徒困境"
+      },
+      {
+        "skillId": "skchr_mizuki_3",
+        "iconId": null,
+        "skillName": "镜花水月"
+      }
+    ],
+    "class": "Specialist"
+  },
   "char_440_pinecn": {
     "id": "char_440_pinecn",
     "name": "Pinecone",
@@ -3499,12 +3566,12 @@
       {
         "skillId": "skchr_robin_1",
         "iconId": null,
-        "skillName": "Binding “Clip”"
+        "skillName": "Binding 'Clip'"
       },
       {
         "skillId": "skchr_robin_2",
         "iconId": null,
-        "skillName": "Launching “Clip”"
+        "skillName": "Launching 'Clip'"
       }
     ],
     "class": "Specialist"
@@ -3513,17 +3580,17 @@
     "id": "char_452_bstalk",
     "name": "Beanstalk",
     "rarity": 4,
-    "isCnOnly": true,
+    "isCnOnly": false,
     "skills": [
       {
         "skillId": "skchr_bstalk_1",
         "iconId": null,
-        "skillName": "定点指令"
+        "skillName": "Sentinel Command"
       },
       {
         "skillId": "skchr_bstalk_2",
         "iconId": null,
-        "skillName": "“大家一起上”"
+        "skillName": "'Everyone Together!'"
       }
     ],
     "class": "Vanguard"
@@ -3532,17 +3599,17 @@
     "id": "char_455_nothin",
     "name": "Mr.Nothing",
     "rarity": 5,
-    "isCnOnly": true,
+    "isCnOnly": false,
     "skills": [
       {
         "skillId": "skchr_nothin_1",
         "iconId": null,
-        "skillName": "知难而退"
+        "skillName": "Cautious Retreat"
       },
       {
         "skillId": "skchr_nothin_2",
         "iconId": null,
-        "skillName": "阴晴圆缺"
+        "skillName": "Wax and Wane"
       }
     ],
     "class": "Specialist"
@@ -3753,6 +3820,25 @@
         "skillId": "skchr_pallas_3",
         "iconId": null,
         "skillName": "英勇的祝福"
+      }
+    ],
+    "class": "Guard"
+  },
+  "char_486_takila": {
+    "id": "char_486_takila",
+    "name": "Tequila",
+    "rarity": 5,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skchr_takila_1",
+        "iconId": null,
+        "skillName": "当机立断"
+      },
+      {
+        "skillId": "skchr_takila_2",
+        "iconId": null,
+        "skillName": "剑走偏锋"
       }
     ],
     "class": "Guard"
