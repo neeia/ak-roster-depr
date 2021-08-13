@@ -195,7 +195,7 @@ function App() {
   };
 
   const renderCollection = (collection: typeof operators): any => {
-    return Object.values(operators)
+    return Object.values(collection)
       .filter((op: any) => collection[op.id].owned && collection[op.id].potential > 0)
       .sort((a: any, b: any) =>
         defaultSortComparator(collection[a.id], collection[b.id])
