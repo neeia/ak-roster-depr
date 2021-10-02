@@ -126,7 +126,7 @@ function operatorComparator(
 interface Props {
   operators: Record<string, Operator>;
   onChange: (
-    operatorName: string,
+    operatorID: string,
     property: string,
     value: number | boolean
   ) => void;
