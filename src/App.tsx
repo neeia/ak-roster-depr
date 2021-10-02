@@ -20,6 +20,7 @@ import RosterTable from "./components/RosterTable";
 import AccountTab from "./components/AccountTab";
 import SearchForm from "./components/SearchForm";
 import DevTab from "./components/DevTab";
+import MobileOpSelectionScreen from "./components/MobileOpSelectionScreen";
 
 const darkTheme = createMuiTheme({
   palette: {
@@ -143,6 +144,7 @@ function App() {
   );
 
   const applyChangeWithInvariant = (op: Operator, prop: string, value: number | boolean) => {
+    if (!op.owned && prop !== "owned") return op;
     (op as any)[prop] = value;
     switch (prop) {
       case "owned":
@@ -195,7 +197,7 @@ function App() {
   };
 
   const renderCollection = (collection: typeof operators): any => {
-    return Object.values(operators)
+    return Object.values(collection)
       .filter((op: any) => collection[op.id].owned && collection[op.id].potential > 0)
       .sort((a: any, b: any) =>
         defaultSortComparator(collection[a.id], collection[b.id])
@@ -245,6 +247,7 @@ function App() {
           <Tab label="Account" {...a11yProps(2)} />
           <Tab label="Lookup" {...a11yProps(3)} />
           <Tab label="Dev Notes" {...a11yProps(4)} />
+          <Tab label="Mobile Beta" {...a11yProps(5)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
@@ -268,8 +271,11 @@ function App() {
           {collOperators ? renderCollection(collOperators) : ""}
         </div>
       </TabPanel>
-      <TabPanel value={value} index={4}>
+      {/* <TabPanel value={value} index={4}>
         <DevTab />
+      </TabPanel> */}
+      <TabPanel value={value} index={5}>
+        <MobileOpSelectionScreen operators={operators} onChange={handleChange} />
       </TabPanel>
     </ThemeProvider>
   );
