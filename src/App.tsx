@@ -149,9 +149,15 @@ function App() {
     switch (prop) {
       case "owned":
         if (value === true) {
-          op.potential = op.potential || 1;
-          op.level = op.level || 1;
+          op.potential = 1;
+          op.promotion = 0;
+          op.level = 1;
           op.skillLevel = (op.rarity > 2 ? op.skillLevel || 1 : 0);
+        } else {
+          op.potential = 0;
+          op.promotion = -1;
+          op.level = 0;
+          op.skillLevel = (op.rarity > 2 ? 0 : 0);
         }
         break;
       case "skillLevel":
