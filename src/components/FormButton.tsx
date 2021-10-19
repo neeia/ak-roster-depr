@@ -1,20 +1,20 @@
-import { Box, ButtonBase, makeStyles } from "@material-ui/core";
+import { ButtonBase } from "@material-ui/core";
 import React from "react";
 import { useBoxStyles } from "./BoxStyles"
 
 interface Props {
-  children: string;
   onClick: () => void;
+  toggled?: boolean;
 }
 
-const FormButton = React.memo((props: Props) => {
+const FormButton: React.FC<Props> = React.memo((props) => {
   const classes = useBoxStyles();
-  const { children, onClick } = props;
+  const { children, onClick, toggled } = props;
 
   return (
     <ButtonBase
       onClick={onClick}
-      className={classes.borderStyle}
+      className={toggled ? classes.highlightedBorderStyle : classes.borderStyle}
     >
       {children}
     </ButtonBase>

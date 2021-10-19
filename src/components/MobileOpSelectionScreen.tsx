@@ -1,10 +1,12 @@
-import { Box, Button, makeStyles } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
+import FormButton from "./FormButton";
 import React from "react";
 import slugify from "slugify";
 import { useState } from "react";
 import { Operator } from "../App"; 
 import operatorJson from "../data/operators.json";
 import MobileOpEditForm from "./MobileOpEditForm";
+import { useBoxStyles } from "./BoxStyles"
 
 const useStyles = makeStyles({
   displayBox: {
@@ -79,6 +81,7 @@ function sortComparator(a: any, b: any) {
 const MobileOpSelectionScreen = React.memo((props: Props) => {
   const classes = useStyles();
   const { operators, onChange } = props;
+  const boxStyle = useBoxStyles();
 
   const noneStr = "none";
   const [selectedClass, setSelectedClass] = useState(noneStr);
@@ -86,10 +89,9 @@ const MobileOpSelectionScreen = React.memo((props: Props) => {
 
   const classSelector = classList
   .map((cl: string) => (
-    <Button 
-      className={classes.item}
-      variant="outlined"
+    <FormButton
       onClick={(()=>{setSelectedClass(cl); setSelectedOp(noneStr)})}
+      toggled={selectedClass == cl}
     >
       {<div className={classes.classButtonContent}>
         <img 
@@ -98,7 +100,7 @@ const MobileOpSelectionScreen = React.memo((props: Props) => {
         />
         {/* <div className={classes.classNameText}>{cl}</div> */}
       </div>}
-    </Button>
+    </FormButton>
   ));
 
   const sortedOperators = Object.values(operatorJson)
@@ -106,7 +108,7 @@ const MobileOpSelectionScreen = React.memo((props: Props) => {
   .sort(sortComparator)
   .map((op: any) => (
     <div key={op.id}>{
-      <Button
+      <FormButton
         onClick={(()=>{setSelectedOp(op.id)})}
       >
       {<div className={classes.classButtonContent}>
@@ -119,7 +121,7 @@ const MobileOpSelectionScreen = React.memo((props: Props) => {
         />
         <div className={classes.classNameText}>{op.name}</div>
       </div>}
-      </Button>}
+      </FormButton>}
     </div>
   ));
 
