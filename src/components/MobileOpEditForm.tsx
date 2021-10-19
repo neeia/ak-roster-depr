@@ -3,9 +3,9 @@ import React from "react";
 import slugify from "slugify";
 import { useState } from "react";
 import { Operator } from "../App"; 
-import operatorJson from "../data/operators.json";
 import FormButton from "./FormButton";
 import { useBoxStyles } from "./BoxStyles"
+import { disableByProperty, errorForNumericProperty } from "./RosterTable";
 
 const useStyles = makeStyles({
   displayBox: {
@@ -61,9 +61,6 @@ const MobileOpEditForm = React.memo((props: Props) => {
   const classes = useStyles();
   const boxStyle = useBoxStyles();
 
-  const noneStr = "none";
-  const [selectedClass, setSelectedClass] = useState(noneStr);
-
   let intermediate = op.name;
   if (op.promotion === 2) {
     intermediate += " elite 2";
@@ -86,118 +83,175 @@ const MobileOpEditForm = React.memo((props: Props) => {
         src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/classes/${opClass}`}
       />
       {op.name}
+
+      {/* Owned, Favorite */}
       <div className={classes.editButtonContainer}>
         <FormButton 
           onClick={() => onChange(op.id, "owned", !op.owned)}
+          toggled={op.owned}
         >
           Owned
         </FormButton>
         <FormButton
           onClick={() => onChange(op.id, "favorite", !op.favorite)}
+          toggled={op.favorite}
         >
           Favorite
         </FormButton>
       </div>
-      <div className={classes.buttonContainer}>
-        <div className={classes.propContentContainer}>
-          <div className={classes.center}>
-            Potential
-          </div>
-          <div className = {classes.editButtonContainer}>
-            <FormButton 
-              onClick={() => onChange(op.id, "potential", op.potential - 1)}
-            >
-              -1
-            </FormButton>
-            <div className = {boxStyle.borderStyle}>
-              {op.potential}
+
+      {/* Potential and Promotion */}
+      {disableByProperty(op, "potential") ? "" : 
+        <div className={classes.buttonContainer}>
+
+          {/* Potential */}
+          <div className={classes.propContentContainer}>
+            <div className={classes.center}>
+              Potential
             </div>
-            <FormButton
-              onClick={() => onChange(op.id, "potential", op.potential + 1)}
-            >
-              +1
-            </FormButton>
-            <FormButton
-              onClick={() => onChange(op.id, "potential", 6)}
-            >
-              6
-            </FormButton>
+            <div className = {classes.editButtonContainer}>
+              <FormButton 
+                onClick={() => onChange(op.id, "potential", op.potential - 1)}
+                toggled={false}
+              >
+                -1
+              </FormButton>
+              <div className = {boxStyle.unborderStyle}>
+                {op.potential}
+              </div>
+              <FormButton
+                onClick={() => onChange(op.id, "potential", op.potential + 1)}
+              >
+                +1
+              </FormButton>
+              <FormButton
+                onClick={() => onChange(op.id, "potential", 6)}
+              >
+                6
+              </FormButton>
+            </div>
+          </div>
+
+          {/* Promotion */}
+          <div className={classes.propContentContainer}>
+            <div className={classes.center}>
+              Promotion
+            </div>
+            <div className = {classes.editButtonContainer}>
+              {[...Array(3)].map((x, i) =>
+                <FormButton 
+                  onClick={() => onChange(op.id, "promotion", i)}
+                  toggled={op.promotion==i}
+                >
+                  {i.toString()}
+                </FormButton>
+              )}
+            </div>
           </div>
         </div>
-        <div className={classes.propContentContainer}>
-          <div className={classes.center}>
-            Promotion
-          </div>
-          <div className = {classes.editButtonContainer}>
-            <FormButton onClick={() => onChange(op.id, "promotion", 0)}>0</FormButton>
-            <FormButton onClick={() => onChange(op.id, "promotion", 1)}>1</FormButton>
-            <FormButton onClick={() => onChange(op.id, "promotion", 2)}>2</FormButton>
+      }
+      {/* Level */}
+      {disableByProperty(op, "level") ? "" : 
+        <div className={classes.buttonContainer}>
+          <div className={classes.propContentContainer}>
+            <div className={classes.center}>
+              Level
+            </div>
+            <div className = {classes.editButtonContainer}>
+              <FormButton onClick={() => onChange(op.id, "level", op.level - 10)}>-10</FormButton>
+              <FormButton onClick={() => onChange(op.id, "level", op.level - 1)}>-1</FormButton>
+              <div className = {boxStyle.unborderStyle}>
+                {op.level}
+              </div>
+              <FormButton onClick={() => onChange(op.id, "level", op.level + 1)}>+1</FormButton>
+              <FormButton onClick={() => onChange(op.id, "level", op.level + 10)}>+10</FormButton>
+              <FormButton onClick={() => onChange(op.id, "level", 90)}>Max</FormButton>
+            </div>
           </div>
         </div>
-      </div>
+      }
+      {/* Skill Level */}
+      {disableByProperty(op, "skillLevel") ? "" : 
+        <div className={classes.buttonContainer}>
+          <div className={classes.propContentContainer}>
+            <div className={classes.center}>
+              Skill Level
+            </div>
+            <div className = {classes.editButtonContainer}>
+              {[...Array(7)].map((x, i) =>
+                <FormButton
+                  onClick={() => onChange(op.id, "skillLevel", i+1)}
+                  toggled={op.skillLevel==i+1}
+                >
+                  {i+1}
+                </FormButton>
+              )}
+            </div>
+          </div>
+        </div>
+      }
+
+      {/* Mastery */}
+      {disableByProperty(op, "skill1Mastery") ? "" : 
       <div className={classes.buttonContainer}>
-        <div className={classes.propContentContainer}>
-          <div className={classes.center}>
-            Level
-          </div>
-          <div className = {classes.editButtonContainer}>
-            <FormButton onClick={() => onChange(op.id, "level", op.level - 10)}>-10</FormButton>
-            <FormButton onClick={() => onChange(op.id, "level", op.level - 1)}>-1</FormButton>
-            {op.level}
-            <FormButton onClick={() => onChange(op.id, "level", op.level + 1)}>+1</FormButton>
-            <FormButton onClick={() => onChange(op.id, "level", op.level + 10)}>+10</FormButton>
-            <FormButton onClick={() => onChange(op.id, "level", 90)}>Max</FormButton>
-          </div>
-        </div>
-      </div>
-      <div className={classes.buttonContainer}>
-        <div className={classes.propContentContainer}>
-          <div className={classes.center}>
-            Skill Level
-          </div>
-          <div className = {classes.editButtonContainer}>
-            <FormButton onClick={() => onChange(op.id, "skillLevel", 1)}>1</FormButton>
-            <FormButton onClick={() => onChange(op.id, "skillLevel", 2)}>2</FormButton>
-            <FormButton onClick={() => onChange(op.id, "skillLevel", 3)}>3</FormButton>
-            <FormButton onClick={() => onChange(op.id, "skillLevel", 4)}>4</FormButton>
-            <FormButton onClick={() => onChange(op.id, "skillLevel", 5)}>5</FormButton>
-            <FormButton onClick={() => onChange(op.id, "skillLevel", 6)}>6</FormButton>
-            <FormButton onClick={() => onChange(op.id, "skillLevel", 7)}>7</FormButton>
+          {/* <SkillDisplayBox operator={op} skill={1} hideLevel={true}/> */}
+          <div className={classes.propContentContainer}>
+            <div className={classes.center}>
+              Skill 1 Mastery
+            </div>
+            <div className = {classes.editButtonContainer}>
+              {[...Array(4)].map((x, i) =>
+                <FormButton 
+                  onClick={() => onChange(op.id, "skill1Mastery", i)}
+                  toggled={op.skill1Mastery==i}
+                >
+                  {i.toString()}
+                </FormButton>
+              )}
+            </div>
           </div>
         </div>
-      </div>
-      <div className={classes.buttonContainer}>
-        <div className={classes.propContentContainer}>
-          <div className={classes.center}>
-            Skill 1 Mastery
-          </div>
-          <div className = {classes.editButtonContainer}>
-            <FormButton onClick={() => onChange(op.id, "skill1Mastery", 1)}>1</FormButton>
-            <FormButton onClick={() => onChange(op.id, "skill1Mastery", 2)}>2</FormButton>
-            <FormButton onClick={() => onChange(op.id, "skill1Mastery", 3)}>3</FormButton>
-          </div>
-        </div>
-        <div className={classes.propContentContainer}>
-          <div className={classes.center}>
-            Skill 2 Mastery
-          </div>
-          <div className = {classes.editButtonContainer}>
-            <FormButton onClick={() => onChange(op.id, "skill2Mastery", 1)}>1</FormButton>
-            <FormButton onClick={() => onChange(op.id, "skill2Mastery", 2)}>2</FormButton>
-            <FormButton onClick={() => onChange(op.id, "skill2Mastery", 3)}>3</FormButton>
+      }
+      {disableByProperty(op, "skill2Mastery") ? "" : 
+        <div className={classes.buttonContainer}>
+          {/* <SkillDisplayBox operator={op} skill={2} hideLevel={true}/> */}
+          <div className={classes.propContentContainer}>
+            <div className={classes.center}>
+              Skill 2 Mastery
+            </div>
+            <div className = {classes.editButtonContainer}>
+              {[...Array(4)].map((x, i) =>
+                <FormButton 
+                  onClick={() => onChange(op.id, "skill2Mastery", i)}
+                  toggled={op.skill2Mastery==i}
+                >
+                  {i.toString()}
+                </FormButton>
+              )}
+            </div>
           </div>
         </div>
-        <div className={classes.propContentContainer}>
-          <div className={classes.center}>
-            Skill 3 Mastery
-          </div>
-          <div className = {classes.editButtonContainer}>
-            <FormButton onClick={() => onChange(op.id, "skill3Mastery", 1)}>1</FormButton>
-            <FormButton onClick={() => onChange(op.id, "skill3Mastery", 2)}>2</FormButton>
-            <FormButton onClick={() => onChange(op.id, "skill3Mastery", 3)}>3</FormButton>
+      }
+      {disableByProperty(op, "skill3Mastery") ? "" : 
+        <div className={classes.buttonContainer}>
+          {/* <SkillDisplayBox operator={op} skill={3} hideLevel={true}/> */}
+          <div className={classes.propContentContainer}>
+            <div className={classes.center}>
+              Skill 3 Mastery
+            </div>
+            <div className = {classes.editButtonContainer}>
+              {[...Array(4)].map((x, i) =>
+                <FormButton 
+                  onClick={() => onChange(op.id, "skill3Mastery", i)}
+                  toggled={op.skill3Mastery==i}
+                >
+                  {i.toString()}
+                </FormButton>
+              )}
+            </div>
           </div>
         </div>
-      </div>
+      }
     </div>
   );
 });

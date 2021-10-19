@@ -314,7 +314,7 @@ const imageUrlByOp = (opName: string, promotion: number) => {
   )}`;
 }
 
-const disableByProperty = (
+export const disableByProperty = (
   op : Operator,
   property: string,
 ) => {
@@ -336,7 +336,7 @@ const disableByProperty = (
   }
 }
 
-const errorForNumericProperty = (
+export const errorForNumericProperty = (
   property: string,
   rarity: number,
   promotion: number,
