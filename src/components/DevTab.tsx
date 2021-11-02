@@ -13,6 +13,12 @@ const DevTab: React.FC<Props> = (props) => {
   return (
     <div>
       <h1>August 03</h1>
+      <h2>Bugfixes</h2>
+      <ul>
+        <li>Fixed a bug where new operator releases wouldn't be imported on refresh</li>
+        <li>Fixed a related bug where this would cause outdated saved data to crash and fail to render</li>
+      </ul>
+      <h1>August 03</h1>
       <h2>News</h2>
       <ul>
         <li>Collection view redesigned</li>
