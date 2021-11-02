@@ -20,6 +20,9 @@ import RosterTable from "./components/RosterTable";
 import AccountTab from "./components/AccountTab";
 import SearchForm from "./components/SearchForm";
 import DevTab from "./components/DevTab";
+import MobileOpSelectionScreen from "./components/MobileOpSelectionScreen";
+import useViewportWidth from "./components/UseWindowSize";
+import { disableByProperty, errorForNumericProperty, MAX_LEVEL_BY_RARITY } from "./components/RosterTable";
 
 const darkTheme = createMuiTheme({
   palette: {
@@ -129,6 +132,9 @@ function App() {
 
   const handleChange = React.useCallback(
     (operatorID: string, property: string, value: number | boolean) => {
+      if (isNaN(value as any)) {
+        return;
+      }
       setOperators(
         (oldOperators: Record<string, Operator>): Record<string, Operator> => {
           const copyOperators = { ...oldOperators };
@@ -143,13 +149,24 @@ function App() {
   );
 
   const applyChangeWithInvariant = (op: Operator, prop: string, value: number | boolean) => {
+    if (!op.owned && prop !== "owned") return op;
     (op as any)[prop] = value;
     switch (prop) {
+      case "potential":
+        op.potential = Math.min(Math.max(op.potential, 1), 6);
+        break;
       case "owned":
         if (value === true) {
-          op.potential = op.potential || 1;
-          op.level = op.level || 1;
+          op.potential = 1;
+          op.promotion = 0;
+          op.level = 1;
           op.skillLevel = (op.rarity > 2 ? op.skillLevel || 1 : 0);
+        } else {
+          op.favorite = false;
+          op.potential = 0;
+          op.promotion = -1;
+          op.level = 0;
+          op.skillLevel = (op.rarity > 2 ? 0 : 0);
         }
         break;
       case "skillLevel":
@@ -160,7 +177,18 @@ function App() {
           if (op.rarity === 6 || op.name === "Amiya") {
             op.skill3Mastery = 0;
           }
+        } else {
+          op.skill1Mastery = undefined;
+          op.skill2Mastery = undefined;
+          op.skill3Mastery = undefined;
         }
+        if (op.skillLevel > 4 && op.promotion == 0) {
+          op.skillLevel = 4;
+        }
+        op.level = Math.min(op.level, MAX_LEVEL_BY_RARITY[op.rarity][op.promotion]);
+        break;
+      case "level":
+        op.level = Math.max(Math.min(op.level, MAX_LEVEL_BY_RARITY[op.rarity][op.promotion]), 1);
         break;
     }
     return op;
@@ -240,15 +268,19 @@ function App() {
           onChange={handleTabChange}
           aria-label="simple tabs example"
         >
-          <Tab label="Roster" {...a11yProps(0)} />
+          <Tab label="Data Entry" {...a11yProps(0)} />
+          {/* <Tab label="Roster" {...a11yProps(1)} /> */}
           <Tab label="Collection" {...a11yProps(1)} />
           <Tab label="Account" {...a11yProps(2)} />
           <Tab label="Lookup" {...a11yProps(3)} />
-          <Tab label="Dev Notes" {...a11yProps(4)} />
+          {/* <Tab label="Dev Notes" {...a11yProps(4)} /> */}
         </Tabs>
       </AppBar>
-      <TabPanel value={value} index={0}>
+      {/* <TabPanel value={value} index={0}>
         <RosterTable operators={operators} onChange={handleChange} />
+      </TabPanel> */}
+      <TabPanel value={value} index={0}>
+        <MobileOpSelectionScreen operators={operators} onChange={handleChange} />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <div className={classes.collectionContainer}>
@@ -268,9 +300,9 @@ function App() {
           {collOperators ? renderCollection(collOperators) : ""}
         </div>
       </TabPanel>
-      <TabPanel value={value} index={4}>
+      {/* <TabPanel value={value} index={4}>
         <DevTab />
-      </TabPanel>
+      </TabPanel> */}
     </ThemeProvider>
   );
 }

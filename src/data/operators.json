@@ -2276,7 +2276,7 @@
       {
         "skillId": "skchr_excu_1",
         "iconId": null,
-        "skillName": "Muzzle’s Elegy"
+        "skillName": "Muzzle's Elegy"
       },
       {
         "skillId": "skchr_excu_2",
@@ -2524,17 +2524,17 @@
     "id": "char_304_zebra",
     "name": "Heavyrain",
     "rarity": 5,
-    "isCnOnly": true,
+    "isCnOnly": false,
     "skills": [
       {
         "skillId": "skchr_zebra_1",
         "iconId": null,
-        "skillName": "应急迷彩"
+        "skillName": "Emergency Camouflage"
       },
       {
         "skillId": "skchr_zebra_2",
         "iconId": null,
-        "skillName": "群体迷彩"
+        "skillName": "Group Camouflage"
       }
     ],
     "class": "Defender"
@@ -2753,7 +2753,7 @@
       {
         "skillId": "skchr_iris_2",
         "iconId": null,
-        "skillName": "Dreamland’s Cradle"
+        "skillName": "Dreamland's Cradle"
       }
     ],
     "class": "Caster"
@@ -3029,17 +3029,17 @@
     "id": "char_363_toddi",
     "name": "Toddifons",
     "rarity": 5,
-    "isCnOnly": true,
+    "isCnOnly": false,
     "skills": [
       {
         "skillId": "skchr_toddi_1",
         "iconId": null,
-        "skillName": "信号矢"
+        "skillName": "Signal Arrow"
       },
       {
         "skillId": "skchr_toddi_2",
         "iconId": null,
-        "skillName": "便携破城矢"
+        "skillName": "Portable Fortcracker Arrows"
       }
     ],
     "class": "Sniper"
@@ -3618,22 +3618,22 @@
     "id": "char_456_ash",
     "name": "Ash",
     "rarity": 6,
-    "isCnOnly": true,
+    "isCnOnly": false,
     "skills": [
       {
         "skillId": "skchr_ash_1",
         "iconId": null,
-        "skillName": "支援射击"
+        "skillName": "Supporting Fire"
       },
       {
         "skillId": "skchr_ash_2",
         "iconId": null,
-        "skillName": "突击战术"
+        "skillName": "Assault Tactics"
       },
       {
         "skillId": "skchr_ash_3",
         "iconId": null,
-        "skillName": "攻坚榴弹"
+        "skillName": "Breaching Rounds"
       }
     ],
     "class": "Sniper"
@@ -3642,17 +3642,17 @@
     "id": "char_457_blitz",
     "name": "Blitz",
     "rarity": 5,
-    "isCnOnly": true,
+    "isCnOnly": false,
     "skills": [
       {
         "skillId": "skchr_blitz_1",
         "iconId": null,
-        "skillName": "闪光护盾"
+        "skillName": "Flash Shield"
       },
       {
         "skillId": "skchr_blitz_2",
         "iconId": null,
-        "skillName": "突破防线"
+        "skillName": "Shield Bash"
       }
     ],
     "class": "Defender"
@@ -3661,17 +3661,17 @@
     "id": "char_458_rfrost",
     "name": "Frost",
     "rarity": 5,
-    "isCnOnly": true,
+    "isCnOnly": false,
     "skills": [
       {
         "skillId": "skchr_rfrost_1",
         "iconId": null,
-        "skillName": "陷阱部署"
+        "skillName": "Trap Deployment"
       },
       {
         "skillId": "skchr_rfrost_2",
         "iconId": null,
-        "skillName": "击倒猎物"
+        "skillName": "Incapacitated Prey"
       }
     ],
     "class": "Specialist"
@@ -3680,17 +3680,17 @@
     "id": "char_459_tachak",
     "name": "Tachanka",
     "rarity": 5,
-    "isCnOnly": true,
+    "isCnOnly": false,
     "skills": [
       {
         "skillId": "skchr_tachak_1",
         "iconId": null,
-        "skillName": "燃烧榴弹"
+        "skillName": "Incendiary Grenade"
       },
       {
         "skillId": "skchr_tachak_2",
         "iconId": null,
-        "skillName": "倾泻弹药"
+        "skillName": "Spray and Pray"
       }
     ],
     "class": "Guard"
@@ -3718,22 +3718,22 @@
     "id": "char_472_pasngr",
     "name": "Passenger",
     "rarity": 6,
-    "isCnOnly": true,
+    "isCnOnly": false,
     "skills": [
       {
         "skillId": "skchr_pasngr_1",
         "iconId": null,
-        "skillName": "电能之触"
+        "skillName": "Touch of Static"
       },
       {
         "skillId": "skchr_pasngr_2",
         "iconId": null,
-        "skillName": "聚焦指令"
+        "skillName": "Focus Command"
       },
       {
         "skillId": "skchr_pasngr_3",
         "iconId": null,
-        "skillName": "辉煌裂片"
+        "skillName": "Glorious Shards"
       }
     ],
     "class": "Caster"
