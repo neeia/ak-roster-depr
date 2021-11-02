@@ -7,25 +7,29 @@ import { Operator } from "../App";
 import operatorJson from "../data/operators.json";
 import MobileOpEditForm from "./MobileOpEditForm";
 import { useBoxStyles } from "./BoxStyles"
+import useViewportWidth from "./UseWindowSize";
 
 const useStyles = makeStyles({
-  displayBox: {
-    justifyContent: "space-between",
-    // backgroundColor: "#444455",
-    // padding: "12px",
-    // margin: "12px",
-    // border: "2px solid pink",
-    // borderRadius: "5px",
+  container: {
+    display: "inline-flex",
+    gap: "12px",
+    maxWidth: "70%",
   },
-  item: {
-    // margin: "12px",
+  column: {
+    flex: 1
   },
   classDisplay: {
-    // justifyContent: "space-between",
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(64px, 1fr))",
+    gridTemplateColumns: "repeat(8, minmax(100px, 1fr))",
+    rowGap: "4px",
     gap: "2px",
-    width: "100%",
+    marginBottom: "16px",
+  },
+  operatorDisplay: {
+    display: "grid",
+    gridTemplateColumns: "repeat(8, minmax(100px, 1fr))",
+    rowGap: "4px",
+    gap: "2px",
   },
   classIcon: {
     width: "48px",
@@ -35,20 +39,12 @@ const useStyles = makeStyles({
     width: "64px",
     height: "64px",
   },
-  classButtonContent: {
-    display: "block",
-  },
-  classNameText: {
+  smallText: {
     fontSize: "12px",
   },
-  operatorDisplay: {
-    // justifyContent: "space-between",
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(96px, 1fr))",
-    rowGap: "20px",
-    gap: "2px",
-    width: "100%",
-  },
+  flex: {
+    display: "flex",
+  }
 });
 
 interface Props {
@@ -78,6 +74,10 @@ function sortComparator(a: any, b: any) {
   );
 }
 
+function capitalize(str: string) : string {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
 const MobileOpSelectionScreen = React.memo((props: Props) => {
   const classes = useStyles();
   const { operators, onChange } = props;
@@ -87,53 +87,106 @@ const MobileOpSelectionScreen = React.memo((props: Props) => {
   const [selectedClass, setSelectedClass] = useState(noneStr);
   const [selectedOp, setSelectedOp] = useState(noneStr);
 
+  const width = useViewportWidth();
+
   const classSelector = classList
   .map((cl: string) => (
-    <FormButton
-      onClick={(()=>{setSelectedClass(cl); setSelectedOp(noneStr)})}
-      toggled={selectedClass == cl}
-    >
-      {<div className={classes.classButtonContent}>
-        <img 
-          className={classes.classIcon}
-          src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/classes/${cl}`}
-        />
-        {/* <div className={classes.classNameText}>{cl}</div> */}
-      </div>}
-    </FormButton>
+    <div className={classes.flex} id={cl}>
+      <FormButton
+        onClick={(()=>{
+          if (selectedClass === cl) {
+            setSelectedClass(noneStr);
+          } else {
+            setSelectedClass(cl);
+          }
+          setSelectedOp(noneStr);
+        })}
+        toggled={selectedClass == cl}
+      >
+        <div>
+          <img
+            className={classes.classIcon}
+            src={`https://res.cloudinary.com/samidare/image/upload/f_auto/v1/arknights/classes/${cl}`}
+          />
+          <div className={classes.smallText}>{capitalize(cl)}</div>
+        </div>
+      </FormButton>
+    </div>
   ));
 
   const sortedOperators = Object.values(operatorJson)
   .filter((op: any) => (op.class.toLowerCase() === selectedClass))
   .sort(sortComparator)
-  .map((op: any) => (
-    <div key={op.id}>{
-      <FormButton
-        onClick={(()=>{setSelectedOp(op.id)})}
-      >
-      {<div className={classes.classButtonContent}>
-        <img
-          className={classes.opIcon}
-          src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/operators/${slugify(
-              op.name, { lower: true, replacement: "-", remove: /-/g }
-            )}`
-          }
-        />
-        <div className={classes.classNameText}>{op.name}</div>
-      </div>}
-      </FormButton>}
-    </div>
-  ));
+  .map((op: any) => {
+    let opName = (
+      <span className={classes.smallText}>
+        {op.name.split(" the ")[0].split(" (")[0]}
+      </span>
+    )
+    return (
+      <div className={classes.flex} key={op.id}>{
+        <FormButton
+          onClick={(()=>{
+            if (selectedOp === op.id) {
+              setSelectedOp(noneStr);
+            } else {
+              setSelectedOp(op.id);
+            }
+          })}
+          toggled={selectedOp == op.id}
+        >
+          <div>
+            <img
+              className={classes.opIcon}
+              src={`https://res.cloudinary.com/samidare/image/upload/f_auto/v1/arknights/operators/${slugify(
+                  op.name, { lower: true, replacement: "-", remove: /-/g }
+                )}`
+              }
+            />
+            {opName}
+          </div>
+        </FormButton>}
+      </div>
+    )
+  });
+
+  if (width < 960) {
+    return (
+      <div className={classes.container}>
+        <div className={classes.column}>
+          <div className={classes.classDisplay}>
+            {classSelector}
+          </div>
+          <div className={classes.operatorDisplay}>
+            {selectedClass === noneStr ? "" 
+            : (selectedOp === noneStr ? sortedOperators
+              : <div className={boxStyle.boxStyle}>
+                  <MobileOpEditForm op={operators[selectedOp]} opClass={selectedClass} onChange={onChange}/>
+                </div>
+              )}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className={classes.displayBox}>
-      <div className={classes.classDisplay}>
-        {classSelector}
+    <div className={classes.container}>
+      <div className={classes.column}>
+        <div className={classes.classDisplay}>
+          {classSelector}
+        </div>
+        <div className={classes.operatorDisplay}>
+          {selectedClass === noneStr ? "" 
+          : sortedOperators}
+        </div>
       </div>
-      <div className={classes.operatorDisplay}>
-      {selectedClass === noneStr ? "" 
-      : (selectedOp === noneStr ? sortedOperators 
-      : <MobileOpEditForm op={operators[selectedOp]} opClass={selectedClass} onChange={onChange}/>)}
+      <div className={classes.column}>
+        {(selectedOp === noneStr ? "" 
+        : <div className={boxStyle.boxStyle}>
+            <MobileOpEditForm op={operators[selectedOp]} opClass={selectedClass} onChange={onChange}/>
+          </div>
+        )}
       </div>
     </div>
   );

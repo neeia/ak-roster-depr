@@ -1,4 +1,5 @@
 import { ButtonBase } from "@material-ui/core";
+import clsx from "clsx";
 import React from "react";
 import { useBoxStyles } from "./BoxStyles"
 
@@ -11,10 +12,15 @@ const FormButton: React.FC<Props> = React.memo((props) => {
   const classes = useBoxStyles();
   const { children, onClick, toggled } = props;
 
+  const buttonStyle = clsx({
+    [classes.boxStyle]: "true",
+    [classes.highlighted]: toggled
+  })
+
   return (
     <ButtonBase
       onClick={onClick}
-      className={toggled ? classes.highlightedBorderStyle : classes.borderStyle}
+      className={buttonStyle}
     >
       {children}
     </ButtonBase>

@@ -7,10 +7,10 @@ import SkillDisplayBox from "./SkillDisplayBox";
 const useStyles = makeStyles({
   opBox: {
     justifyContent: "space-between",
-    backgroundColor: "#444455",
+    backgroundColor: "#3e4551",
     padding: "12px",
     margin: "12px",
-    border: "2px solid pink",
+    border: "2px solid white",
     borderRadius: "5px",
   },
   item: {
@@ -43,8 +43,8 @@ interface Props {
 const OperatorCollectionBlock = React.memo((props: Props) => {
   const { operator } = props;
   const classes = useStyles();
-  const potentialUrl = `https://res.cloudinary.com/samidare/image/upload/v1/arknights/potential/${operator.potential}`;
-  const promotionUrl = `https://res.cloudinary.com/samidare/image/upload/v1/arknights/elite/${operator.promotion}`;
+  const potentialUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto/v1/arknights/potential/${operator.potential}`;
+  const promotionUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto/v1/arknights/elite/${operator.promotion}`;
 
   let intermediate = operator.name;
   if (operator.promotion === 2) {
@@ -53,7 +53,7 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
     intermediate += " elite 1";
   }
 
-  const opImgUrl = `https://res.cloudinary.com/samidare/image/upload/v1/arknights/operators/${slugify(
+  const opImgUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto/v1/arknights/operators/${slugify(
     intermediate,
     { lower: true, replacement: "-", remove: /-/g }
   )}`;

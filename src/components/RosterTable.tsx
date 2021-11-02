@@ -12,7 +12,7 @@ import {
 import { defaultSortComparator, Operator } from "../App";
 import OpForm from "./OpForm";
 
-const MAX_LEVEL_BY_RARITY = [[0], [30], [30], [40, 55], [45, 60, 70], [50, 70, 80], [50, 80, 90]];
+export const MAX_LEVEL_BY_RARITY = [[0], [30], [30], [40, 55], [45, 60, 70], [50, 70, 80], [50, 80, 90]];
 
 enum Alignment {
   LEFT = 0,
@@ -308,7 +308,7 @@ const imageUrlByOp = (opName: string, promotion: number) => {
   } else if (promotion === 1 && opName === "Amiya") {
     intermediate += " elite 1";
   }
-  return `https://res.cloudinary.com/samidare/image/upload/v1/arknights/operators/${slugify(
+  return `https://res.cloudinary.com/samidare/image/upload/f_auto/v1/arknights/operators/${slugify(
     intermediate,
     { lower: true, replacement: "-", remove: /-/g }
   )}`;

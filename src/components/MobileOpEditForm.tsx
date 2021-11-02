@@ -5,19 +5,20 @@ import { useState } from "react";
 import { Operator } from "../App"; 
 import FormButton from "./FormButton";
 import { useBoxStyles } from "./BoxStyles"
-import { disableByProperty, errorForNumericProperty } from "./RosterTable";
+import { disableByProperty, errorForNumericProperty, MAX_LEVEL_BY_RARITY } from "./RosterTable";
+import FormField from "./FormField";
 
 const useStyles = makeStyles({
   displayBox: {
     justifyContent: "space-between",
-    // backgroundColor: "#444455",
-    // padding: "12px",
-    // margin: "12px",
-    // border: "2px solid pink",
-    // borderRadius: "5px",
   },
-  item: {
-    // margin: "12px",
+  opName: {
+    marginLeft: "8px",
+    fontSize: "36px",
+  },
+  alterTitle: {
+    marginLeft: "2px",
+    fontSize: "18px",
   },
   classIcon: {
     width: "48px",
@@ -40,6 +41,9 @@ const useStyles = makeStyles({
   buttonContainer: {
     display: "flex",
     justifyContent: "space-evenly",
+  },
+  left: {
+    textAlign: "left"
   },
   center: {
     textAlign: "center"
@@ -72,18 +76,39 @@ const MobileOpEditForm = React.memo((props: Props) => {
     { lower: true, replacement: "-", remove: /-/g }
   )}`;
 
+  let opName = (
+    <span className={classes.opName}>
+      {op.name}
+    </span>
+  )
+  if (op.name.includes(" the ")) {
+    const splitName = op.name.split(" the ");
+    opName = (
+      <span>
+        <span className={classes.opName}>
+          {splitName[0]}
+        </span>
+        <span className={classes.alterTitle}>
+          {" the " + splitName[1]}
+        </span>
+      </span>
+    )
+  }
+  
   return (
     <div className={classes.displayBox}>
-      <img 
-        className={classes.opIcon}
-        src={imgUrl}
-      />
-      <img 
-        className={classes.classIcon}
-        src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/classes/${opClass}`}
-      />
-      {op.name}
-
+      <div className={classes.left}>
+        <img 
+          className={classes.opIcon}
+          src={imgUrl}
+        />
+        <img 
+          className={classes.classIcon}
+          src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/classes/${opClass}`}
+        />
+        {opName}
+      </div>
+      
       {/* Owned, Favorite */}
       <div className={classes.editButtonContainer}>
         <FormButton 
@@ -100,11 +125,10 @@ const MobileOpEditForm = React.memo((props: Props) => {
         </FormButton>
       </div>
 
+      <div className={classes.buttonContainer}>
       {/* Potential and Promotion */}
-      {disableByProperty(op, "potential") ? "" : 
-        <div className={classes.buttonContainer}>
-
-          {/* Potential */}
+        {/* Potential */}
+        {disableByProperty(op, "potential") ? "" : 
           <div className={classes.propContentContainer}>
             <div className={classes.center}>
               Potential
@@ -116,9 +140,12 @@ const MobileOpEditForm = React.memo((props: Props) => {
               >
                 -1
               </FormButton>
-              <div className = {boxStyle.unborderStyle}>
+              <div className={boxStyle.unborderStyle}>
                 {op.potential}
               </div>
+              {/* <FormField onChange={(e) => onChange(op.id, "potential", parseInt(e))}>
+                {op.potential}
+              </FormField> */}
               <FormButton
                 onClick={() => onChange(op.id, "potential", op.potential + 1)}
               >
@@ -131,8 +158,9 @@ const MobileOpEditForm = React.memo((props: Props) => {
               </FormButton>
             </div>
           </div>
-
-          {/* Promotion */}
+        }
+        {/* Promotion */}
+        {disableByProperty(op, "promotion") ? "" : 
           <div className={classes.propContentContainer}>
             <div className={classes.center}>
               Promotion
@@ -148,26 +176,34 @@ const MobileOpEditForm = React.memo((props: Props) => {
               )}
             </div>
           </div>
-        </div>
-      }
+        }
+      </div>
       {/* Level */}
       {disableByProperty(op, "level") ? "" : 
         <div className={classes.buttonContainer}>
-          <div className={classes.propContentContainer}>
-            <div className={classes.center}>
-              Level
-            </div>
-            <div className = {classes.editButtonContainer}>
-              <FormButton onClick={() => onChange(op.id, "level", op.level - 10)}>-10</FormButton>
-              <FormButton onClick={() => onChange(op.id, "level", op.level - 1)}>-1</FormButton>
-              <div className = {boxStyle.unborderStyle}>
-                {op.level}
-              </div>
-              <FormButton onClick={() => onChange(op.id, "level", op.level + 1)}>+1</FormButton>
-              <FormButton onClick={() => onChange(op.id, "level", op.level + 10)}>+10</FormButton>
-              <FormButton onClick={() => onChange(op.id, "level", 90)}>Max</FormButton>
-            </div>
+        <div className={classes.propContentContainer}>
+          <div className={classes.center}>
+            Level
           </div>
+          <div className = {classes.editButtonContainer}>
+            <FormButton onClick={() => onChange(op.id, "level", op.level - 10)}>-10</FormButton>
+            <FormButton onClick={() => onChange(op.id, "level", op.level - 1)}>-1</FormButton>
+            <div className={boxStyle.unborderStyle}>
+              {op.level}
+            </div>
+            {/* <FormField onChange={(e) => onChange(op.id, "level", parseInt(e))}>
+              {op.level}
+            </FormField> */}
+            <FormButton onClick={() => onChange(op.id, "level", op.level + 1)}>+1</FormButton>
+            <FormButton onClick={() => onChange(op.id, "level", op.level + 10)}>+10</FormButton>
+            <FormButton 
+              onClick={() => onChange(op.id, "level", MAX_LEVEL_BY_RARITY[op.rarity][op.promotion])}
+              toggled={op.level === MAX_LEVEL_BY_RARITY[op.rarity][op.promotion]}
+            >
+              Max
+            </FormButton>
+          </div>
+        </div>
         </div>
       }
       {/* Skill Level */}
@@ -178,7 +214,7 @@ const MobileOpEditForm = React.memo((props: Props) => {
               Skill Level
             </div>
             <div className = {classes.editButtonContainer}>
-              {[...Array(7)].map((x, i) =>
+              {[...Array((op.promotion > 0 ? 7 : 4))].map((x, i) =>
                 <FormButton
                   onClick={() => onChange(op.id, "skillLevel", i+1)}
                   toggled={op.skillLevel==i+1}
