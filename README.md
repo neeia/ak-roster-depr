@@ -1,5 +1,5 @@
 # Arknights Roster
-This is a collection tracker for [Arknights](https://www.arknights.global/), a game developed by Hypergryph.
+This is a collection and progress tracker for [Arknights](https://www.arknights.global/), a game developed by Hypergryph.
 The site is available at [neia.io](https://neia.io/).
 
 ## License
