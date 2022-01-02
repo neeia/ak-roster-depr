@@ -8,26 +8,34 @@ import operatorJson from "../data/operators.json";
 import MobileOpEditForm from "./MobileOpEditForm";
 import { useBoxStyles } from "./BoxStyles"
 import useViewportWidth from "./UseWindowSize";
+import clsx from "clsx";
 
 const useStyles = makeStyles({
   container: {
     display: "inline-flex",
     gap: "12px",
-    maxWidth: "70%",
   },
   column: {
     flex: 1
   },
-  classDisplay: {
+  gridDisplay: {
     display: "grid",
     gridTemplateColumns: "repeat(8, minmax(100px, 1fr))",
     rowGap: "4px",
     gap: "2px",
+  },
+  marginBottom: {
     marginBottom: "16px",
   },
-  operatorDisplay: {
+  mobileClassDisplay: {
     display: "grid",
-    gridTemplateColumns: "repeat(8, minmax(100px, 1fr))",
+    rowGap: "4px",
+    gap: "2px",
+    height: "1vh"
+  },
+  mobileOpDisplay: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fill, minmax(80px, 1fr))",
     rowGap: "4px",
     gap: "2px",
   },
@@ -44,7 +52,7 @@ const useStyles = makeStyles({
   },
   flex: {
     display: "flex",
-  }
+  },
 });
 
 interface Props {
@@ -106,7 +114,7 @@ const MobileOpSelectionScreen = React.memo((props: Props) => {
         <div>
           <img
             className={classes.classIcon}
-            src={`https://res.cloudinary.com/samidare/image/upload/f_auto/v1/arknights/classes/${cl}`}
+            src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/classes/${cl}`}
           />
           <div className={classes.smallText}>{capitalize(cl)}</div>
         </div>
@@ -136,35 +144,46 @@ const MobileOpSelectionScreen = React.memo((props: Props) => {
           toggled={selectedOp == op.id}
         >
           <div>
-            <img
-              className={classes.opIcon}
-              src={`https://res.cloudinary.com/samidare/image/upload/f_auto/v1/arknights/operators/${slugify(
-                  op.name, { lower: true, replacement: "-", remove: /-/g }
-                )}`
-              }
-            />
-            {opName}
+            <div>
+              <img
+                className={classes.opIcon}
+                src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/operators/${slugify(
+                    op.name, { lower: true, replacement: "-", remove: /-/g }
+                  )}`
+                }
+              />
+            </div>
+            <div>
+              {opName}
+              </div>
           </div>
         </FormButton>}
       </div>
     )
   });
 
+
+  const classDisplay = clsx({
+    [classes.gridDisplay]: "true",
+    [classes.marginBottom]: "true"
+  })
+
   if (width < 960) {
     return (
       <div className={classes.container}>
+        <div className={classes.mobileClassDisplay}>
+          {classSelector}
+        </div>
         <div className={classes.column}>
-          <div className={classes.classDisplay}>
-            {classSelector}
-          </div>
-          <div className={classes.operatorDisplay}>
-            {selectedClass === noneStr ? "" 
-            : (selectedOp === noneStr ? sortedOperators
-              : <div className={boxStyle.boxStyle}>
-                  <MobileOpEditForm op={operators[selectedOp]} opClass={selectedClass} onChange={onChange}/>
-                </div>
-              )}
-          </div>
+        {selectedClass === noneStr ? "" 
+          : (selectedOp === noneStr ?
+            <div className={classes.mobileOpDisplay}>
+              {sortedOperators}
+            </div>
+          : <div className={boxStyle.boxStyle}>
+              <MobileOpEditForm op={operators[selectedOp]} opClass={selectedClass} onChange={onChange}/>
+            </div>
+        )}
         </div>
       </div>
     );
@@ -173,10 +192,10 @@ const MobileOpSelectionScreen = React.memo((props: Props) => {
   return (
     <div className={classes.container}>
       <div className={classes.column}>
-        <div className={classes.classDisplay}>
+        <div className={classDisplay}>
           {classSelector}
         </div>
-        <div className={classes.operatorDisplay}>
+        <div className={classes.gridDisplay}>
           {selectedClass === noneStr ? "" 
           : sortedOperators}
         </div>
