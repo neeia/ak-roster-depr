@@ -12,7 +12,7 @@ import clsx from "clsx";
 
 const useStyles = makeStyles({
   container: {
-    display: "inline-flex",
+    display: "flex",
     gap: "12px",
   },
   column: {
@@ -35,13 +35,9 @@ const useStyles = makeStyles({
   },
   mobileOpDisplay: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(80px, 1fr))",
+    gridTemplateColumns: "repeat(auto-fill, minmax(100px, 1fr))",
     rowGap: "4px",
     gap: "2px",
-  },
-  classIcon: {
-    width: "48px",
-    height: "48px",
   },
   opIcon: {
     width: "64px",
@@ -75,6 +71,8 @@ const classList = [
   "specialist",
 ]
 
+export const COLOR_BY_RARITY = ["#000000", "#9f9f9f", "#dce537", "#00b2f6", "#dbb1db", "#fbae02", "#f96601"]
+
 function sortComparator(a: any, b: any) {
   return (
     b.rarity - a.rarity ||
@@ -102,19 +100,22 @@ const MobileOpSelectionScreen = React.memo((props: Props) => {
     <div className={classes.flex} id={cl}>
       <FormButton
         onClick={(()=>{
-          if (selectedClass === cl) {
+          if (selectedClass === cl && width >= 960) {
             setSelectedClass(noneStr);
           } else {
             setSelectedClass(cl);
           }
           setSelectedOp(noneStr);
         })}
-        toggled={selectedClass == cl}
+        toggled={selectedClass === cl}
       >
         <div>
           <img
-            className={classes.classIcon}
+            className="classIcon"
             src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/classes/${cl}`}
+            alt=""
+            width={48}
+            height={48}
           />
           <div className={classes.smallText}>{capitalize(cl)}</div>
         </div>
@@ -141,21 +142,23 @@ const MobileOpSelectionScreen = React.memo((props: Props) => {
               setSelectedOp(op.id);
             }
           })}
-          toggled={selectedOp == op.id}
+          toggled={selectedOp === op.id}
         >
           <div>
-            <div>
+            <div className={classes.opIcon}>
               <img
                 className={classes.opIcon}
                 src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/operators/${slugify(
                     op.name, { lower: true, replacement: "-", remove: /-/g }
                   )}`
                 }
+                alt=""
               />
             </div>
+            <div style={{ height: 2, backgroundColor: COLOR_BY_RARITY[op.rarity], marginBottom: 2 }} />
             <div>
               {opName}
-              </div>
+            </div>
           </div>
         </FormButton>}
       </div>
