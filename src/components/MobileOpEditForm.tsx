@@ -14,6 +14,10 @@ const useStyles = makeStyles({
     marginLeft: "8px",
     fontSize: "36px",
   },
+  opName: {
+    marginLeft: "8px",
+    fontSize: "36px",
+  },
   alterTitle: {
     marginLeft: "2px",
     fontSize: "18px",
@@ -101,11 +105,11 @@ const MobileOpEditForm = React.memo((props: Props) => {
           src={imgUrl}
           alt=""
         />
-        <img 
+        {/*<img
           className={classes.classIcon}
           src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/classes/${opClass}`}
           alt={opClass}
-        />
+        />*/}
         {opName}
       </div>
       
