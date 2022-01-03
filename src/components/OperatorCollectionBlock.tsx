@@ -43,8 +43,8 @@ const useStyles = makeStyles({
     textAlign: "center",
   },
   icon: {
-    width: "32px",
-    height: "32px",
+    width: "60px",
+    height: "60px",
   },
   iconMobile: {
     width: "30px",
@@ -62,6 +62,9 @@ const useStyles = makeStyles({
   },
   opName: {
     fontSize: "24px",
+  },
+  opNameMobile: {
+    fontSize: "16px",
   },
   alterTitle: {
     fontSize: "16px",
@@ -128,7 +131,7 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
           <Box position="absolute" left={64} top={-2}>
             <div className={classes.opName}>{opName}</div>
           </Box>
-          <Box position="absolute" right={0} top={30}>
+          <Box position="absolute" right={-40} top={30}>
             <div className={classes.skillsDisplay}>
               {(op.rarity > 2 ?
                 <SkillDisplayBox operator={op} skill={1} mobile={true} />
@@ -176,19 +179,21 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
           src={opImgUrl}
           alt=""
         />
-        <div style={{ width: 160, height: 3, backgroundColor: COLOR_BY_RARITY[op.rarity], marginBottom: 3 }} />
-        <Box position="absolute" right={0} top={60} width={60} height={60}>
-          <div className={classes.level}>{op.level}</div>
+        <Box position="absolute" left={0} bottom={-4}>
+          <div style={{ width: 160, height: 4, backgroundColor: COLOR_BY_RARITY[op.rarity] }} />
         </Box>
         <Box position="absolute" left={0} top={0}>
           <div className={classes.fav}>{op.favorite ? "❤️":""}</div>
         </Box>
-        <Box position="absolute" right={0} bottom={-10}>
+        <Box position="absolute" right={0} bottom={0}>
           <img
               src={potentialUrl}
               className={classes.icon}
               alt={`Potential ${op.potential} icon`}
           />
+        </Box>
+        <Box position="absolute" right={0} top={52} width={60} height={60}>
+          <div className={classes.level}>{op.level}</div>
         </Box>
         <Box position="absolute" right={0} top={0}>
           <img
