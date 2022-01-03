@@ -1,12 +1,10 @@
 import { makeStyles } from "@material-ui/core";
 import React from "react";
 import slugify from "slugify";
-import { useState } from "react";
 import { Operator } from "../App"; 
 import FormButton from "./FormButton";
 import { useBoxStyles } from "./BoxStyles"
-import { disableByProperty, errorForNumericProperty, MAX_LEVEL_BY_RARITY } from "./RosterTable";
-import FormField from "./FormField";
+import { disableByProperty, MAX_LEVEL_BY_RARITY } from "./RosterTable";
 
 const useStyles = makeStyles({
   displayBox: {
@@ -101,10 +99,12 @@ const MobileOpEditForm = React.memo((props: Props) => {
         <img 
           className={classes.opIcon}
           src={imgUrl}
+          alt=""
         />
         <img 
           className={classes.classIcon}
           src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/classes/${opClass}`}
+          alt={opClass}
         />
         {opName}
       </div>
@@ -169,7 +169,7 @@ const MobileOpEditForm = React.memo((props: Props) => {
               {[...Array(3)].map((x, i) =>
                 <FormButton 
                   onClick={() => onChange(op.id, "promotion", i)}
-                  toggled={op.promotion==i}
+                  toggled={op.promotion === i}
                 >
                   {i.toString()}
                 </FormButton>
@@ -217,7 +217,7 @@ const MobileOpEditForm = React.memo((props: Props) => {
               {[...Array((op.promotion > 0 ? 7 : 4))].map((x, i) =>
                 <FormButton
                   onClick={() => onChange(op.id, "skillLevel", i+1)}
-                  toggled={op.skillLevel==i+1}
+                  toggled={op.skillLevel === i+1}
                 >
                   {i+1}
                 </FormButton>
@@ -239,7 +239,7 @@ const MobileOpEditForm = React.memo((props: Props) => {
               {[...Array(4)].map((x, i) =>
                 <FormButton 
                   onClick={() => onChange(op.id, "skill1Mastery", i)}
-                  toggled={op.skill1Mastery==i}
+                  toggled={op.skill1Mastery === i}
                 >
                   {i.toString()}
                 </FormButton>
@@ -259,7 +259,7 @@ const MobileOpEditForm = React.memo((props: Props) => {
               {[...Array(4)].map((x, i) =>
                 <FormButton 
                   onClick={() => onChange(op.id, "skill2Mastery", i)}
-                  toggled={op.skill2Mastery==i}
+                  toggled={op.skill2Mastery === i}
                 >
                   {i.toString()}
                 </FormButton>
@@ -279,7 +279,7 @@ const MobileOpEditForm = React.memo((props: Props) => {
               {[...Array(4)].map((x, i) =>
                 <FormButton 
                   onClick={() => onChange(op.id, "skill3Mastery", i)}
-                  toggled={op.skill3Mastery==i}
+                  toggled={op.skill3Mastery === i}
                 >
                   {i.toString()}
                 </FormButton>
