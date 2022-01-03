@@ -14,10 +14,6 @@ const useStyles = makeStyles({
     marginLeft: "8px",
     fontSize: "36px",
   },
-  opName: {
-    marginLeft: "8px",
-    fontSize: "36px",
-  },
   alterTitle: {
     marginLeft: "2px",
     fontSize: "18px",
