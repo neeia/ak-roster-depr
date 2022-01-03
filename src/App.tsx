@@ -19,7 +19,7 @@ import OperatorCollectionBlock from "./components/OperatorCollectionBlock";
 import RosterTable from "./components/RosterTable";
 import AccountTab from "./components/AccountTab";
 import SearchForm from "./components/SearchForm";
-import DevTab from "./components/DevTab";
+import CollectionTab from "./components/CollectionTab";
 import MobileOpSelectionScreen from "./components/MobileOpSelectionScreen";
 import useViewportWidth from "./components/UseWindowSize";
 import { disableByProperty, errorForNumericProperty, MAX_LEVEL_BY_RARITY } from "./components/RosterTable";
@@ -273,7 +273,7 @@ function App() {
           onChange={handleTabChange}
           aria-label="simple tabs example"
         >
-          <Tab label="Data Entry" {...a11yProps(0)} />
+          <Tab label="Data" {...a11yProps(0)} />
           <Tab label="Collection" {...a11yProps(1)} />
           <Tab label="Account" {...a11yProps(2)} />
           <Tab label="Lookup" {...a11yProps(3)} />
@@ -283,9 +283,9 @@ function App() {
         <MobileOpSelectionScreen operators={operators} onChange={handleChange} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <div className={classes.collectionContainer}>
-          {renderCollection(operators)}
-        </div>
+        <CollectionTab
+          operators={operators}
+          />
       </TabPanel>
       <TabPanel value={value} index={2}>
         <AccountTab 
@@ -296,9 +296,9 @@ function App() {
       </TabPanel>
       <TabPanel value={value} index={3}>
         <SearchForm handleSubmit={findUser} />
-        <div className={classes.collectionContainer}>
-          {collOperators ? renderCollection(collOperators) : ""}
-        </div>
+        {collOperators ? <CollectionTab
+          operators={collOperators}
+        /> : ""}
       </TabPanel>
     </ThemeProvider>
   );
