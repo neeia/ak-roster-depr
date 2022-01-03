@@ -1,3 +1,6 @@
+import React from "react";
+import { Operator } from "../App";
+/*
 import React, { useState } from "react";
 import slugify from "slugify";
 import { styled, TableCell, TextField } from "@material-ui/core";
@@ -11,8 +14,17 @@ import {
 } from "react-virtualized";
 import { defaultSortComparator, Operator } from "../App";
 import OpForm from "./OpForm";
+*/
 
 export const MAX_LEVEL_BY_RARITY = [[0], [30], [30], [40, 55], [45, 60, 70], [50, 70, 80], [50, 80, 90]];
+
+
+const RosterTable: React.FC = () => {
+  return <div />
+};
+export default RosterTable;
+
+/*
 
 enum Alignment {
   LEFT = 0,
@@ -313,6 +325,7 @@ const imageUrlByOp = (opName: string, promotion: number) => {
     { lower: true, replacement: "-", remove: /-/g }
   )}`;
 }
+*/
 
 export const disableByProperty = (
   op : Operator,

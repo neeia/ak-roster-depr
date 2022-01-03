@@ -8,32 +8,36 @@ import operatorJson from "../data/operators.json";
 import MobileOpEditForm from "./MobileOpEditForm";
 import { useBoxStyles } from "./BoxStyles"
 import useViewportWidth from "./UseWindowSize";
+import clsx from "clsx";
 
 const useStyles = makeStyles({
   container: {
-    display: "inline-flex",
+    display: "flex",
     gap: "12px",
-    maxWidth: "70%",
   },
   column: {
     flex: 1
   },
-  classDisplay: {
+  gridDisplay: {
     display: "grid",
     gridTemplateColumns: "repeat(8, minmax(100px, 1fr))",
     rowGap: "4px",
     gap: "2px",
+  },
+  marginBottom: {
     marginBottom: "16px",
   },
-  operatorDisplay: {
+  mobileClassDisplay: {
     display: "grid",
-    gridTemplateColumns: "repeat(8, minmax(100px, 1fr))",
     rowGap: "4px",
     gap: "2px",
+    height: "1vh"
   },
-  classIcon: {
-    width: "48px",
-    height: "48px",
+  mobileOpDisplay: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fill, minmax(100px, 1fr))",
+    rowGap: "4px",
+    gap: "2px",
   },
   opIcon: {
     width: "64px",
@@ -44,7 +48,7 @@ const useStyles = makeStyles({
   },
   flex: {
     display: "flex",
-  }
+  },
 });
 
 interface Props {
@@ -66,6 +70,8 @@ const classList = [
   "supporter",
   "specialist",
 ]
+
+export const COLOR_BY_RARITY = ["#000000", "#9f9f9f", "#dce537", "#00b2f6", "#dbb1db", "#fbae02", "#f96601"]
 
 function sortComparator(a: any, b: any) {
   return (
@@ -94,19 +100,22 @@ const MobileOpSelectionScreen = React.memo((props: Props) => {
     <div className={classes.flex} id={cl}>
       <FormButton
         onClick={(()=>{
-          if (selectedClass === cl) {
+          if (selectedClass === cl && width >= 960) {
             setSelectedClass(noneStr);
           } else {
             setSelectedClass(cl);
           }
           setSelectedOp(noneStr);
         })}
-        toggled={selectedClass == cl}
+        toggled={selectedClass === cl}
       >
         <div>
           <img
-            className={classes.classIcon}
-            src={`https://res.cloudinary.com/samidare/image/upload/f_auto/v1/arknights/classes/${cl}`}
+            className="classIcon"
+            src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/classes/${cl}`}
+            alt=""
+            width={48}
+            height={48}
           />
           <div className={classes.smallText}>{capitalize(cl)}</div>
         </div>
@@ -133,38 +142,51 @@ const MobileOpSelectionScreen = React.memo((props: Props) => {
               setSelectedOp(op.id);
             }
           })}
-          toggled={selectedOp == op.id}
+          toggled={selectedOp === op.id}
         >
           <div>
-            <img
-              className={classes.opIcon}
-              src={`https://res.cloudinary.com/samidare/image/upload/f_auto/v1/arknights/operators/${slugify(
-                  op.name, { lower: true, replacement: "-", remove: /-/g }
-                )}`
-              }
-            />
-            {opName}
+            <div className={classes.opIcon}>
+              <img
+                className={classes.opIcon}
+                src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/operators/${slugify(
+                    op.name, { lower: true, replacement: "-", remove: /-/g }
+                  )}`
+                }
+                alt=""
+              />
+            </div>
+            <div style={{ height: 2, backgroundColor: COLOR_BY_RARITY[op.rarity], marginBottom: 2 }} />
+            <div>
+              {opName}
+            </div>
           </div>
         </FormButton>}
       </div>
     )
   });
 
+
+  const classDisplay = clsx({
+    [classes.gridDisplay]: "true",
+    [classes.marginBottom]: "true"
+  })
+
   if (width < 960) {
     return (
       <div className={classes.container}>
+        <div className={classes.mobileClassDisplay}>
+          {classSelector}
+        </div>
         <div className={classes.column}>
-          <div className={classes.classDisplay}>
-            {classSelector}
-          </div>
-          <div className={classes.operatorDisplay}>
-            {selectedClass === noneStr ? "" 
-            : (selectedOp === noneStr ? sortedOperators
-              : <div className={boxStyle.boxStyle}>
-                  <MobileOpEditForm op={operators[selectedOp]} opClass={selectedClass} onChange={onChange}/>
-                </div>
-              )}
-          </div>
+        {selectedClass === noneStr ? "" 
+          : (selectedOp === noneStr ?
+            <div className={classes.mobileOpDisplay}>
+              {sortedOperators}
+            </div>
+          : <div className={boxStyle.boxStyle}>
+              <MobileOpEditForm op={operators[selectedOp]} opClass={selectedClass} onChange={onChange}/>
+            </div>
+        )}
         </div>
       </div>
     );
@@ -173,10 +195,10 @@ const MobileOpSelectionScreen = React.memo((props: Props) => {
   return (
     <div className={classes.container}>
       <div className={classes.column}>
-        <div className={classes.classDisplay}>
+        <div className={classDisplay}>
           {classSelector}
         </div>
-        <div className={classes.operatorDisplay}>
+        <div className={classes.gridDisplay}>
           {selectedClass === noneStr ? "" 
           : sortedOperators}
         </div>

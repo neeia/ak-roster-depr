@@ -5,7 +5,8 @@ import operatorJson from "../data/operators.json";
 
 interface Props {
   operator: Operator;
-  skill : number;
+  skill: number;
+  mobile?: boolean
 }
 
 const useStyles = makeStyles({
@@ -16,10 +17,17 @@ const useStyles = makeStyles({
     display: "inline-block",
     height: "42px",
     width: "42px",
-    marginRight: "20px",
   },
   image: {
     height: "40px",
+  },
+  skillBoxMobile: {
+    display: "inline-block",
+    height: "32px",
+    width: "32px",
+  },
+  imageMobile: {
+    height: "30px",
   },
   skillPlaceAbsolute: {
     position: "absolute",
@@ -29,7 +37,7 @@ const useStyles = makeStyles({
 });
 
 const SkillDisplayBox = React.memo((props : Props) => {
-  const { operator, skill } = props;
+  const { operator, skill, mobile=false } = props;
   const classes = useStyles();
 
   const opInfo = (operatorJson as any)[operator.id];
@@ -41,36 +49,35 @@ const SkillDisplayBox = React.memo((props : Props) => {
   const skillMasteryUrl = `https://res.cloudinary.com/samidare/image/upload/v1/arknights/mastery/${skillMastery}`;
 
   return (
-    <Box className={classes.skillBox} position="relative">
+    <Box className={mobile ? classes.skillBoxMobile : classes.skillBox} position="relative">
       <Box className={classes.skillPlaceAbsolute}>
         <img
-          className={classes.image}
+          className={mobile ? classes.imageMobile : classes.image}
           src={skillImgUrl}
-          style={{ opacity: (operator.promotion >= skill - 1 ? 1 : 0.25) }}
-          alt={`Skill ${skill} Icon  ${opInfo.skills[0].skillName}`}
+          style={{ opacity: (operator.promotion >= skill - 1 ? 1 : 0.1) }}
+          alt={`Skill ${skill} ${opInfo.skills[0].skillName}`}
         />
       </Box>
       <Box className={classes.skillPlaceAbsolute}>
         <img
-          className={classes.image}
+          className={mobile ? classes.imageMobile : classes.image}
           src={skillBGImgUrl}
-          style={{ opacity: (operator.promotion >= skill - 1 ? 0.625 : 0.875) }}
-          alt={`Skill Level Background`}
+          style={{ opacity: 0.9 }}
+          alt={``}
         />
       </Box>
       <Box className={classes.skillPlaceAbsolute}>
         {(!skillMastery || skillMastery === 0
         ? <img
-            className={classes.image}
+            className={mobile ? classes.imageMobile : classes.image}
             src={skillLvlUrl}
-            style={{ opacity: (operator.promotion >= skill - 1 ? 1 : 0.5) }}
-            alt={`Skill Level ${operator.skillLevel} icon`}
+            style={{ opacity: (operator.promotion >= skill - 1 ? 1 : 0.1) }}
+            alt={`Level ${operator.skillLevel}`}
           />
         : <img
-            className={classes.image}
+            className={mobile ? classes.imageMobile : classes.image}
             src={skillMasteryUrl}
-            style={{ opacity: (operator.promotion >= skill - 1 ? 1 : 0.25) }}
-            alt={`Skill ${skill} Mastery Level ${operator.skill1Mastery}`}
+            alt={`${skill} Mastery Level ${skillMastery}`}
           />
         )}
       </Box>

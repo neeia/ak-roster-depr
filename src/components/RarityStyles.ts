@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core";
 
-export const useBoxStyles = makeStyles({
+export const useRarityStyles = makeStyles({
   boxStyle: {
     border: "1px solid grey",
     borderRadius: "8px",
@@ -10,8 +10,8 @@ export const useBoxStyles = makeStyles({
     textAlign: "center",
     flexGrow: 1,
   },
-  highlighted: {
-    backgroundColor: "#fdfdfd",
+  rarityOne: {
+    backgroundColor: "#000000",
     color: "#121212",
     "& img.classIcon": {
       mixBlendMode: "difference"
@@ -25,3 +25,4 @@ export const useBoxStyles = makeStyles({
     flexGrow: 1,
   },
 });
+[["000000", "9f9f9f", "dce537", "00b2f6", "dbb1db", "fbae02", "f96601"]]

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   AppBar,
   Box,
-  createMuiTheme,
+  createTheme,
   CssBaseline,
   makeStyles,
   Tab,
@@ -19,23 +19,28 @@ import OperatorCollectionBlock from "./components/OperatorCollectionBlock";
 import RosterTable from "./components/RosterTable";
 import AccountTab from "./components/AccountTab";
 import SearchForm from "./components/SearchForm";
-import DevTab from "./components/DevTab";
+import CollectionTab from "./components/CollectionTab";
 import MobileOpSelectionScreen from "./components/MobileOpSelectionScreen";
 import useViewportWidth from "./components/UseWindowSize";
 import { disableByProperty, errorForNumericProperty, MAX_LEVEL_BY_RARITY } from "./components/RosterTable";
+import { red, grey, yellow } from "@material-ui/core/colors";
 
-const darkTheme = createMuiTheme({
+const darkTheme = createTheme({
   palette: {
     type: "dark",
+    primary: {
+      main: grey[900],
+    },
+    secondary: {
+      main: yellow[600],
+    },
   },
 });
 
 const useStyles = makeStyles({
   collectionContainer: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(266px, 1fr))",
-    rowGap: "20px",
-    gap: "2px",
+    gridTemplateColumns: "repeat(auto-fit, 264px)",
     width: "100%",
   },
 });
@@ -120,7 +125,7 @@ function App() {
   useEffect(() => {
     if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
     // firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
-    const [_, urlName] = window.location.pathname.split("/");
+    const [, urlName] = window.location.pathname.split("/");
     if (checkValidUsername(urlName)) {
       findUser(urlName).then(() => {
         setValue(3);
@@ -171,7 +176,7 @@ function App() {
         break;
       case "skillLevel":
       case "promotion":
-        if (op.skillLevel === 7 && op.promotion == 2) {
+        if (op.skillLevel === 7 && op.promotion === 2) {
           op.skill1Mastery = 0;
           op.skill2Mastery = 0;
           if (op.rarity === 6 || op.name === "Amiya") {
@@ -182,7 +187,7 @@ function App() {
           op.skill2Mastery = undefined;
           op.skill3Mastery = undefined;
         }
-        if (op.skillLevel > 4 && op.promotion == 0) {
+        if (op.skillLevel > 4 && op.promotion === 0) {
           op.skillLevel = 4;
         }
         op.level = Math.min(op.level, MAX_LEVEL_BY_RARITY[op.rarity][op.promotion]);
@@ -229,7 +234,7 @@ function App() {
         defaultSortComparator(collection[a.id], collection[b.id])
       )
       .map((op: any) => (
-        <OperatorCollectionBlock key={op.id} operator={collection[op.id]} />
+        <OperatorCollectionBlock key={op.id} op={collection[op.id]} />
       ));
   };
 
@@ -268,24 +273,19 @@ function App() {
           onChange={handleTabChange}
           aria-label="simple tabs example"
         >
-          <Tab label="Data Entry" {...a11yProps(0)} />
-          {/* <Tab label="Roster" {...a11yProps(1)} /> */}
+          <Tab label="Data" {...a11yProps(0)} />
           <Tab label="Collection" {...a11yProps(1)} />
           <Tab label="Account" {...a11yProps(2)} />
           <Tab label="Lookup" {...a11yProps(3)} />
-          {/* <Tab label="Dev Notes" {...a11yProps(4)} /> */}
         </Tabs>
       </AppBar>
-      {/* <TabPanel value={value} index={0}>
-        <RosterTable operators={operators} onChange={handleChange} />
-      </TabPanel> */}
       <TabPanel value={value} index={0}>
         <MobileOpSelectionScreen operators={operators} onChange={handleChange} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <div className={classes.collectionContainer}>
-          {renderCollection(operators)}
-        </div>
+        <CollectionTab
+          operators={operators}
+          />
       </TabPanel>
       <TabPanel value={value} index={2}>
         <AccountTab 
@@ -296,13 +296,10 @@ function App() {
       </TabPanel>
       <TabPanel value={value} index={3}>
         <SearchForm handleSubmit={findUser} />
-        <div className={classes.collectionContainer}>
-          {collOperators ? renderCollection(collOperators) : ""}
-        </div>
+        {collOperators ? <CollectionTab
+          operators={collOperators}
+        /> : ""}
       </TabPanel>
-      {/* <TabPanel value={value} index={4}>
-        <DevTab />
-      </TabPanel> */}
     </ThemeProvider>
   );
 }
