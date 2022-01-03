@@ -54,16 +54,16 @@ const SkillDisplayBox = React.memo((props : Props) => {
         <img
           className={mobile ? classes.imageMobile : classes.image}
           src={skillImgUrl}
-          style={{ opacity: (operator.promotion >= skill - 1 ? 1 : 0.25) }}
-          alt={`Skill ${skill} Icon  ${opInfo.skills[0].skillName}`}
+          style={{ opacity: (operator.promotion >= skill - 1 ? 1 : 0.1) }}
+          alt={`Skill ${skill} ${opInfo.skills[0].skillName}`}
         />
       </Box>
       <Box className={classes.skillPlaceAbsolute}>
         <img
           className={mobile ? classes.imageMobile : classes.image}
           src={skillBGImgUrl}
-          style={{ opacity: (operator.promotion >= skill - 1 ? 0.625 : 0.875) }}
-          alt={`Skill Level Background`}
+          style={{ opacity: 0.9 }}
+          alt={``}
         />
       </Box>
       <Box className={classes.skillPlaceAbsolute}>
@@ -71,14 +71,13 @@ const SkillDisplayBox = React.memo((props : Props) => {
         ? <img
             className={mobile ? classes.imageMobile : classes.image}
             src={skillLvlUrl}
-            style={{ opacity: (operator.promotion >= skill - 1 ? 1 : 0.5) }}
-            alt={`Skill Level ${operator.skillLevel} icon`}
+            style={{ opacity: (operator.promotion >= skill - 1 ? 1 : 0.1) }}
+            alt={`Level ${operator.skillLevel}`}
           />
         : <img
             className={mobile ? classes.imageMobile : classes.image}
             src={skillMasteryUrl}
-            style={{ opacity: (operator.promotion >= skill - 1 ? 1 : 0.25) }}
-            alt={`Skill ${skill} Mastery Level ${operator.skill1Mastery}`}
+            alt={`${skill} Mastery Level ${skillMastery}`}
           />
         )}
       </Box>
