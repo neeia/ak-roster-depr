@@ -13,7 +13,7 @@ const FormField: React.FC<Props> = React.memo((props) => {
   return (
     <TextField
       className={classes.unborderStyle}
-      style={{maxWidth: 40}}
+      style={{maxWidth: 32}}
       onChange={(e) => onChange(e.target.value)}
       value={children}
     >

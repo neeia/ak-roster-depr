@@ -18,7 +18,6 @@ export const useBoxStyles = makeStyles({
     }
   },
   unborderStyle: {
-    padding: "6px 8px 0px 8px",
     marginLeft: "1px",
     marginRight: "1px",
     textAlign: "center",
