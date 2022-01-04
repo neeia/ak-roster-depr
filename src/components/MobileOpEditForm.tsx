@@ -5,6 +5,7 @@ import { Operator } from "../App";
 import FormButton from "./FormButton";
 import { useBoxStyles } from "./BoxStyles"
 import { disableByProperty, MAX_LEVEL_BY_RARITY } from "./RosterTable";
+import clsx from "clsx";
 
 const useStyles = makeStyles({
   displayBox: {
@@ -45,6 +46,9 @@ const useStyles = makeStyles({
   },
   center: {
     textAlign: "center"
+  },
+  unborder: {
+    border: "none"
   }
 });
 
@@ -92,6 +96,12 @@ const MobileOpEditForm = React.memo((props: Props) => {
       </span>
     )
   }
+
+  const unborderStyle = clsx({
+    [boxStyle.boxStyle]: "true",
+    [classes.unborder]: "true"
+  })
+
   
   return (
     <div className={classes.displayBox}>
@@ -140,7 +150,7 @@ const MobileOpEditForm = React.memo((props: Props) => {
               >
                 -1
               </FormButton>
-              <div className={boxStyle.unborderStyle}>
+              <div className={unborderStyle}>
                 {op.potential}
               </div>
               {/* <FormField onChange={(e) => onChange(op.id, "potential", parseInt(e))}>
@@ -188,7 +198,7 @@ const MobileOpEditForm = React.memo((props: Props) => {
           <div className = {classes.editButtonContainer}>
             <FormButton onClick={() => onChange(op.id, "level", op.level - 10)}>-10</FormButton>
             <FormButton onClick={() => onChange(op.id, "level", op.level - 1)}>-1</FormButton>
-            <div className={boxStyle.unborderStyle}>
+            <div className={unborderStyle}>
               {op.level}
             </div>
             {/* <FormField onChange={(e) => onChange(op.id, "level", parseInt(e))}>
