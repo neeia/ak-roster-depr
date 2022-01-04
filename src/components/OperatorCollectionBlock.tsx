@@ -1,21 +1,20 @@
 import { Box, makeStyles } from "@material-ui/core";
 import React from "react";
 import slugify from "slugify";
-import { Operator } from "../App";
+import { Operator, MOBILE_BREAKPOINT, TABLET_BREAKPOINT } from "../App";
 import SkillDisplayBox from "./SkillDisplayBox";
 import useViewportWidth from "./UseWindowSize";
-import { COLOR_BY_RARITY } from "./MobileOpSelectionScreen";
+import { COLOR_BY_RARITY } from "./DataTab";
 
 const useStyles = makeStyles({
   opBox: {
     justifyContent: "space-between",
     backgroundColor: "#333333",
-    padding: "12px",
-    margin: "12px",
+    padding: "8px",
     border: "1px solid white",
     borderRadius: "5px",
-    width: "240px",
-    height: "266px",
+    width: "236px",
+    height: "260px",
     boxShadow: "2px 2px 8px rgb(0 0 0 / 30%)"
   },
   opBoxMobile: {
@@ -25,7 +24,7 @@ const useStyles = makeStyles({
     margin: "8px",
     border: "1px solid white",
     borderRadius: "5px",
-    width: "80vw",
+    width: "300px",
     height: "80px",
   },
   item: {
@@ -62,9 +61,6 @@ const useStyles = makeStyles({
   },
   opName: {
     fontSize: "24px",
-  },
-  opNameMobile: {
-    fontSize: "16px",
   },
   alterTitle: {
     fontSize: "16px",
@@ -116,7 +112,7 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
         <span className={classes.opName}>
           {splitName[0]}
         </span>
-        {(width < 960 ? "" :
+        {(width < MOBILE_BREAKPOINT ? "" :
         <span className={classes.alterTitle}>
           {" the " + splitName[1]}
         </span>)}
@@ -124,14 +120,14 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
     )
   }
 
-  if (width < 960) {
+  if (width < MOBILE_BREAKPOINT) {
     return (
       <div className={classes.opBoxMobile}>
         <Box style={opBoxStyleMobile} className={classes.item} position="relative" height="80px" width="260px">
           <Box position="absolute" left={64} top={-2}>
             <div className={classes.opName}>{opName}</div>
           </Box>
-          <Box position="absolute" right={-40} top={30}>
+          <Box position="absolute" right={0} top={30}>
             <div className={classes.skillsDisplay}>
               {(op.rarity > 2 ?
                 <SkillDisplayBox operator={op} skill={1} mobile={true} />
