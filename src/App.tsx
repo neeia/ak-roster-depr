@@ -14,14 +14,10 @@ import firebase from "firebase";
 import operatorJson from "./data/operators.json";
 import useLocalStorage from "./UseLocalStorage";
 
-import OpForm from "./components/OpForm";
-import OperatorCollectionBlock from "./components/OperatorCollectionBlock";
-import RosterTable from "./components/RosterTable";
 import AccountTab from "./components/AccountTab";
 import SearchForm from "./components/SearchForm";
 import CollectionTab from "./components/CollectionTab";
-import MobileOpSelectionScreen from "./components/MobileOpSelectionScreen";
-import useViewportWidth from "./components/UseWindowSize";
+import DataTab from "./components/DataTab";
 import { disableByProperty, errorForNumericProperty, MAX_LEVEL_BY_RARITY } from "./components/RosterTable";
 import { red, grey, yellow } from "@material-ui/core/colors";
 
@@ -37,20 +33,8 @@ const darkTheme = createTheme({
   },
 });
 
-const useStyles = makeStyles({
-  collectionContainer: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, 264px)",
-    width: "100%",
-  },
-});
-
-const starterOperators = [
-  "Amiya",
-  "Rangers",
-  "Yato",
-  "Noir Corne"
-];
+export const MOBILE_BREAKPOINT = 900;
+export const TABLET_BREAKPOINT = 1300;
 
 // Converts an opJson entry into an Operator
 function opObject ([key, op] : any) : [string, Operator] {
@@ -63,7 +47,7 @@ function opObject ([key, op] : any) : [string, Operator] {
       rarity: op.rarity,
       potential: 0,
       promotion: 0,
-      owned: false, //starterOperators.includes(op.name),
+      owned: false,
       level: 0,
       skillLevel: 0,
     },
@@ -114,7 +98,6 @@ function App() {
     "operators",
     defaultOperators
   );
-  const classes = useStyles();
 
   Object.entries(operatorJson).forEach((op) => {
     if (!(op[0] in operators)) {
@@ -125,9 +108,10 @@ function App() {
   useEffect(() => {
     if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
     // firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
-    const [, urlName] = window.location.pathname.split("/");
-    if (checkValidUsername(urlName)) {
-      findUser(urlName).then(() => {
+    const [, type, tool, userName] = window.location.pathname.split("/");
+    window.history.pushState("object or string", "Title", "/ak/roster/" + (userName === undefined ? "" : userName));
+    if (userName != undefined && checkValidUsername(userName)) {
+      findUser(userName).then(() => {
         setValue(3);
       })
     }
@@ -227,17 +211,6 @@ function App() {
     setValue(newValue);
   };
 
-  const renderCollection = (collection: typeof operators): any => {
-    return Object.values(collection)
-      .filter((op: any) => collection[op.id].owned && collection[op.id].potential > 0)
-      .sort((a: any, b: any) =>
-        defaultSortComparator(collection[a.id], collection[b.id])
-      )
-      .map((op: any) => (
-        <OperatorCollectionBlock key={op.id} op={collection[op.id]} />
-      ));
-  };
-
   var [collOperators, setCollOperators] = useState<typeof operators>();
   const findUser = async (username: string): Promise<boolean> => {
     const snapshot = await firebase
@@ -280,7 +253,7 @@ function App() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <MobileOpSelectionScreen operators={operators} onChange={handleChange} />
+        <DataTab operators={operators} onChange={handleChange} />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <CollectionTab
