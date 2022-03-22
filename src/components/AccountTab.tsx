@@ -22,15 +22,17 @@ const AccountTab: React.FC<Props> = (props) => {
     password: string
   ): Promise<Boolean> => {
     try {
-      // firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+      firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
       const newUser = await firebase
         .auth()
         .signInWithEmailAndPassword(username, password);
       setUser(newUser.user);
       return true;
     } catch (error) {
-      // var errorCode = error.code;
-      // var errorMessage = error.message;
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log(errorCode);
+      console.log(errorMessage);
       return false;
     }
   };
@@ -58,8 +60,10 @@ const AccountTab: React.FC<Props> = (props) => {
         }
       })
       .catch((error) => {
-        // var errorCode = error.code;
-        // var errorMessage = error.message;
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log(errorCode);
+        console.log(errorMessage);
         return false;
       });
     return false;
@@ -74,42 +78,58 @@ const AccountTab: React.FC<Props> = (props) => {
         return true;
       })
       .catch((error) => {
-        // An error happened.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log(errorCode);
+        console.log(errorMessage);
         return false;
       });
     return false;
   };
 
-  // const getIGN = (): string => {
-  //   if (!user) return "";
-  //   firebase
-  //     .database()
-  //     .ref("users/" + user.uid + "/accuntName/")
-  //     .get()
-  //     .then((snapshot) => {
-  //       if (snapshot.exists()) {
-  //         return snapshot.val();
-  //       }
-  //     });
-  //   return "";
-  // };
+  const getUsername = (): string => {
+    if (!user) return "";
+    firebase
+      .database()
+      .ref("users/" + user.uid + "/meta/username/")
+      .get()
+      .then((snapshot) => {
+        console.log(snapshot.val());
+        if (snapshot.exists()) {
+          return snapshot.val();
+        }
+      });
+    return "";
+  };
+
+  const getIGN = (): string => {
+    if (!user) return "";
+    firebase
+      .database()
+      .ref("users/" + user.uid + "/meta/")
+      .get()
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          return snapshot.val();
+        }
+      });
+    return "";
+  };
   
-  // const setIGN = (ign: string): void => {
-  //   if (!user) return;
-  //   firebase
-  //     .database()
-  //     .ref("users/" + user.uid + "/accountName/")
-  //     .set(ign);
-  // };
+  const setIGN = (ign: string): void => {
+    if (!user) return;
+    firebase
+      .database()
+      .ref("users/" + user.uid + "/meta/")
+      .set(ign);
+  };
   
   const writeUserData = (): void => {
     if (!user) return;
     firebase
       .database()
-      .ref("users/" + user.uid)
-      .set({
-        roster: operators,
-      });
+      .ref("users/" + user.uid + "/roster/")
+      .set(operators);
   };
   const importUserData = (): void => {
     if (!user) return;
@@ -124,26 +144,22 @@ const AccountTab: React.FC<Props> = (props) => {
       });
   };
 
-  // useEffect(() => {
-  //   const timeout = setTimeout(() => {
-  //     setDirty(false);
-  //     writeUserData();
-  //   }, 10000);
-  //   return () => clearTimeout(timeout);
-  // }, [operators]);
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setDirty(false);
+      writeUserData();
+    }, 10000);
+    return () => clearTimeout(timeout);
+  }, [operators]);
 
   if (user) {
     return (
       <>
-        {/* <ValidatedTextField 
-          validator={(value: string) => {
-            return true;
-          }}
-          onChange={(e) => setIGN(e.target.value)}
-        /> */}
-        {/* Share your collection with https://neia.io/ */}
-        <Button handleChange={writeUserData} text="Save Data" />
-        <Button handleChange={importUserData} text="Load Data" />
+        <div>
+          Share your collection with https://neia.io/ak/roster/{getUsername()}
+        </div>
+        <Button handleChange={writeUserData} text="Manual Save" />
+        <Button handleChange={importUserData} text="Manual Load" />
         <Button handleChange={handleLogout} text="Log out" />
       </>
     );
@@ -152,7 +168,7 @@ const AccountTab: React.FC<Props> = (props) => {
     return (
       <>
         <LoginForm handleLogin={handleLogin} />
-        {/* <RegisterForm handleSignup={handleSignup} /> */}
+        <RegisterForm handleSignup={handleSignup} />
       </>
     );
   }
