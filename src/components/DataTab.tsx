@@ -172,7 +172,7 @@ const DataTab = React.memo((props: Props) => {
               <img
                 className={classes.opIcon}
                 src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/operators/${slugify(
-                    op.name, { lower: true, replacement: "-", remove: /-/g }
+                    op.name, { lower: true, replacement: "-", remove: /[-"]/g }
                   )}`
                 }
                 alt=""
