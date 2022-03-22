@@ -7,32 +7,34 @@ import { Operator, MOBILE_BREAKPOINT, TABLET_BREAKPOINT } from "../App";
 import operatorJson from "../data/operators.json";
 import MobileOpEditForm from "./MobileOpEditForm";
 import { useBoxStyles } from "./BoxStyles"
-import useViewportWidth from "./UseWindowSize";
+import useWindowSize, { Size } from "./UseWindowSize";
 import clsx from "clsx";
 
 const useStyles = makeStyles({
   container: {
     display: "flex",
-    gap: "12px",
-    justifyContent: "flex-start",
+    alignItems: "center",
+    flexDirection: "column",
   },
-  column: {
+  containerChild: {
     flex: 1,
     maxWidth: "1000px",
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "column",
   },
   opBox: {
-    flex: 1,
     maxWidth: "600px",
   },
   gridDisplay: {
-    display: "grid",
-    gridTemplateColumns: "repeat(8, minmax(100px, 120px))",
+    display: "flex",
+    
     rowGap: "4px",
     gap: "2px",
   },
   gridDisplaySecondary: {
     display: "grid",
-    gridTemplateColumns: "repeat(4, minmax(100px, 120px))",
+    gridTemplateColumns: "repeat(4, minmax(104px, 120px))",
     rowGap: "4px",
     gap: "2px",
   },
@@ -46,10 +48,8 @@ const useStyles = makeStyles({
     height: "1vh"
   },
   mobileOpDisplay: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(100px, 1fr))",
-    rowGap: "4px",
-    gap: "2px",
+    display: "flex",
+    flexWrap: "wrap",
   },
   opIcon: {
     width: "64px",
@@ -60,6 +60,7 @@ const useStyles = makeStyles({
   },
   flex: {
     display: "flex",
+    boxShadow: "2px 2px 8px rgb(0 0 0 / 30%)",
   },
 });
 
@@ -72,15 +73,15 @@ interface Props {
   ) => void;
 }
 
-const classList = [
-  "guard",
-  "vanguard",
-  "caster",
-  "sniper",
-  "defender",
-  "medic",
-  "supporter",
-  "specialist",
+export const classList = [
+  "Guard",
+  "Vanguard",
+  "Caster",
+  "Sniper",
+  "Defender",
+  "Medic",
+  "Supporter",
+  "Specialist",
 ]
 
 export const COLOR_BY_RARITY = ["#000000", "#9f9f9f", "#dce537", "#00b2f6", "#dbb1db", "#fbae02", "#f96601"]
@@ -92,10 +93,6 @@ function sortComparator(a: any, b: any) {
   );
 }
 
-function capitalize(str: string) : string {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
-
 const DataTab = React.memo((props: Props) => {
   const classes = useStyles();
   const { operators, onChange } = props;
@@ -105,14 +102,16 @@ const DataTab = React.memo((props: Props) => {
   const [selectedClass, setSelectedClass] = useState(noneStr);
   const [selectedOp, setSelectedOp] = useState(noneStr);
 
-  const width = useViewportWidth();
+  const size: Size = useWindowSize();
+  const width = size.width === undefined ? 1920 : size.width;
+
 
   const classSelector = classList
   .map((cl: string) => (
     <div className={classes.flex} id={cl}>
       <FormButton
         onClick={(() => {
-          if (selectedClass === cl && width > MOBILE_BREAKPOINT) {
+          if (selectedClass === cl && selectedOp === noneStr && width > MOBILE_BREAKPOINT) {
             setSelectedClass(noneStr);
           } else {
             setSelectedClass(cl);
@@ -126,28 +125,40 @@ const DataTab = React.memo((props: Props) => {
             className="classIcon"
             src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/classes/${cl}`}
             alt=""
-            width={48}
-            height={48}
+            width={width <= MOBILE_BREAKPOINT ? 36 : 48}
+            height={width <= MOBILE_BREAKPOINT ? 36 : 48}
           />
-          {width <= MOBILE_BREAKPOINT ? "" : <div className={classes.smallText}>{capitalize(cl)}</div>}
+          {width <= MOBILE_BREAKPOINT ? "" : <div className={classes.smallText}>{cl}</div>}
         </div>
       </FormButton>
     </div>
   ));
 
+  function titlefy(title: string): string {
+    return title ? " (" + title?.split(" ").map((value: string) => value.charAt(0)).join("") + ")" : "";
+    
+  }
+
+  const buttonStyle = clsx({
+    [classes.flex]: "true",
+    [boxStyle.boxStyle]: "true",
+  })
+
   const sortedOperators = Object.values(operatorJson)
-  .filter((op: any) => (op.class.toLowerCase() === selectedClass))
+  .filter((op: any) => (op.class === selectedClass))
   .sort(sortComparator)
   .map((op: any) => {
     let opName = (
       <span className={classes.smallText}>
         {op.name.split(" the ")[0].split(" (")[0]}
+        {(titlefy(op.name.split(" the ")[1]))}
+        {(titlefy(op.name.split(" (")[1]))}
       </span>
     )
     return (
       <div className={classes.flex} key={op.id}>{
         <FormButton
-          onClick={(()=>{
+          onClick={(() => {
             if (selectedOp === op.id) {
               setSelectedOp(noneStr);
             } else {
@@ -179,52 +190,50 @@ const DataTab = React.memo((props: Props) => {
 
 
   const classDisplay = clsx({
-    [classes.gridDisplay]: width > TABLET_BREAKPOINT,
+    [classes.mobileClassDisplay]: width <= MOBILE_BREAKPOINT,
     [classes.gridDisplaySecondary]: width <= TABLET_BREAKPOINT,
+    [classes.gridDisplay]: width > TABLET_BREAKPOINT,
     [classes.marginBottom]: "true"
   })
 
 
-  if (width < MOBILE_BREAKPOINT) {
-    return (
-      <div className={classes.container}>
-        <div className={classes.mobileClassDisplay}>
-          {classSelector}
-        </div>
-        <div className={classes.column}>
-        {selectedClass === noneStr ? "" 
-          : (selectedOp === noneStr ?
-            <div className={classes.mobileOpDisplay}>
-              {sortedOperators}
-            </div>
-          : <div className={boxStyle.boxStyle}>
-              <MobileOpEditForm op={operators[selectedOp]} opClass={selectedClass} onChange={onChange}/>
-            </div>
-        )}
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className={classes.container}>
-      <div className={classes.column}>
+      <div className={classes.containerChild}>
         <div className={classDisplay}>
           {classSelector}
         </div>
-        <div className={classDisplay}>
-          {selectedClass === noneStr ? "" 
-          : sortedOperators}
-        </div>
-      </div>
-      <div className={classes.opBox}>
-        {(selectedOp === noneStr ? "" 
-        : <div className={boxStyle.boxStyle}>
-            <MobileOpEditForm op={operators[selectedOp]} opClass={selectedClass} onChange={onChange}/>
+        {selectedOp === noneStr
+          ? (selectedClass === noneStr
+            ? ""
+            : <div className={classes.mobileOpDisplay}>
+              {sortedOperators}
+            </div>)
+          : <div className={classes.opBox}>
+            <MobileOpEditForm op={operators[selectedOp]} opClass={selectedClass} onChange={onChange} />
           </div>
-        )}
+        }
       </div>
     </div>
   );
+
+  //return (
+  //  <div className={classes.container}>
+  //    <div className={classes.column}>
+  //      <div className={classDisplay}>
+  //        {classSelector}
+  //      </div>
+  //      <div className={classDisplay}>
+  //        {selectedClass === noneStr ? "" 
+  //        : sortedOperators}
+  //      </div>
+  //    </div>
+  //    <div className={classes.opBox}>
+  //      {(selectedOp === noneStr ? "" 
+  //      : <MobileOpEditForm op={operators[selectedOp]} opClass={selectedClass} onChange={onChange}/>
+  //      )}
+  //    </div>
+  //  </div>
+  //);
 });
 export default DataTab;
