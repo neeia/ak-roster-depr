@@ -47,6 +47,7 @@ const useStyles = makeStyles({
     fontSize: "24px",
   },
   alterTitle: {
+    marginLeft: "8px",
     fontSize: "14px",
   },
   raritySix: {
@@ -104,7 +105,7 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
           {splitName[0]}
         </span>
         <span className={classes.alterTitle}>
-          {"  " + splitName[1]}
+          {splitName[1]}
         </span>
       </span>
     )
