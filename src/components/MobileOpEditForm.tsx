@@ -1,19 +1,21 @@
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, TextField } from "@material-ui/core";
 import React from "react";
 import slugify from "slugify";
 import { Operator } from "../App"; 
 import FormButton from "./FormButton";
 import { useBoxStyles } from "./BoxStyles"
-import { disableByProperty, MAX_LEVEL_BY_RARITY } from "./RosterTable";
+import { disableByProperty, errorForNumericProperty, MAX_LEVEL_BY_RARITY } from "./RosterTable";
 import clsx from "clsx";
 
 const useStyles = makeStyles({
   displayBox: {
     justifyContent: "space-between",
+    boxShadow: "2px 2px 8px rgb(0 0 0 / 30%)",
   },
   opName: {
     marginLeft: "8px",
     fontSize: "36px",
+    paddingTop: "12px",
   },
   alterTitle: {
     marginLeft: "2px",
@@ -36,19 +38,40 @@ const useStyles = makeStyles({
   editButtonContainer: {
     display: "flex",
     justifyContent: "space-evenly",
+    gap: "3px",
   },
   buttonContainer: {
     display: "flex",
     justifyContent: "space-evenly",
+    gap: "4px",
   },
-  left: {
-    textAlign: "left"
+  opImgNameBox: {
+    textAlign: "left",
+    display: "flex",
+    alignItems: "center",
+    paddingBottom: "12px",
   },
   center: {
     textAlign: "center"
   },
+  buttonContent: {
+    fontSize: "14px",
+    paddingTop: "2px",
+    paddingBottom: "4px",
+  },
   unborder: {
     border: "none"
+  },
+  hr: {
+    borderColor: "grey",
+    borderWidth: "2px"
+  },
+  textField: {
+    textAlign: "right",
+    maxWidth: "30px",
+  },
+  flex: {
+    flexGrow: 1,
   }
 });
 
@@ -82,30 +105,64 @@ const MobileOpEditForm = React.memo((props: Props) => {
     <span className={classes.opName}>
       {op.name}
     </span>
-  )
+  );
   if (op.name.includes(" the ")) {
     const splitName = op.name.split(" the ");
     opName = (
-      <span>
-        <span className={classes.opName}>
-          {splitName[0]}
-        </span>
+      <span className={classes.opName}>
+        {splitName[0]}
         <span className={classes.alterTitle}>
           {" the " + splitName[1]}
         </span>
       </span>
     )
-  }
+  };
 
   const unborderStyle = clsx({
     [boxStyle.boxStyle]: "true",
-    [classes.unborder]: "true"
-  })
+    [classes.unborder]: "true",
+  });
 
+
+  const boxBox = clsx({
+    [boxStyle.boxStyle]: "true",
+    [classes.displayBox]: "true",
+  });
+
+  const [potentialField, setPotentialField] = React.useState<number | string>(op.potential);
+  const [levelField, setLevelField] = React.useState<number | string>(op.level);
+
+  function updatePotential(pot: string | number) {
+    if (typeof pot === "number") {
+      onChange(op.id, "potential", pot);
+      setPotentialField(Math.min(Math.max(pot, 1), 6).toString());
+    }
+    else if (parseInt(pot)) {
+      onChange(op.id, "potential", parseInt(pot));
+      setPotentialField(Math.min(Math.max(parseInt(pot), 1), 6).toString());
+    }
+    else {
+      setPotentialField("");
+    }
+  };
+
+  function updateLevel(lvl: string | number) {
+    if (typeof lvl === "number") {
+      onChange(op.id, "level", lvl);
+      setLevelField(Math.max(Math.min(lvl, MAX_LEVEL_BY_RARITY[op.rarity][op.promotion]), 1).toString());
+    }
+    else if (parseInt(lvl)) {
+      onChange(op.id, "level", parseInt(lvl));
+      setLevelField(Math.max(Math.min(parseInt(lvl), MAX_LEVEL_BY_RARITY[op.rarity][op.promotion]), 1).toString());
+    }
+    else {
+      setLevelField("");
+    }
+  };
   
   return (
-    <div className={classes.displayBox}>
-      <div className={classes.left}>
+    <div className={boxBox}>
+      <div className={classes.opImgNameBox}>
         <img 
           className={classes.opIcon}
           src={imgUrl}
@@ -125,13 +182,17 @@ const MobileOpEditForm = React.memo((props: Props) => {
           onClick={() => onChange(op.id, "owned", !op.owned)}
           toggled={op.owned}
         >
-          Owned
+          <div className={classes.buttonContent}>
+            Owned
+          </div>
         </FormButton>
         <FormButton
           onClick={() => onChange(op.id, "favorite", !op.favorite)}
           toggled={op.favorite}
         >
-          Favorite
+          <div className={classes.buttonContent}>
+            Favorite
+          </div>
         </FormButton>
       </div>
 
@@ -145,26 +206,36 @@ const MobileOpEditForm = React.memo((props: Props) => {
             </div>
             <div className = {classes.editButtonContainer}>
               <FormButton 
-                onClick={() => onChange(op.id, "potential", op.potential - 1)}
+                onClick={() => updatePotential(op.potential - 1)}
                 toggled={false}
               >
-                -1
+                <div className={classes.buttonContent}>
+                  -1
+                </div>
               </FormButton>
-              <div className={unborderStyle}>
-                {op.potential}
+              <div className={classes.flex}>
+                <TextField
+                  className={classes.textField}
+                  value={potentialField}
+                  onChange={(e) =>
+                  {
+                    updatePotential(e.target.value)
+                  }}
+                />
               </div>
-              {/* <FormField onChange={(e) => onChange(op.id, "potential", parseInt(e))}>
-                {op.potential}
-              </FormField> */}
               <FormButton
-                onClick={() => onChange(op.id, "potential", op.potential + 1)}
+                onClick={() => updatePotential(op.potential + 1)}
               >
-                +1
+                <div className={classes.buttonContent}>
+                  +1
+                </div>
               </FormButton>
               <FormButton
-                onClick={() => onChange(op.id, "potential", 6)}
+                onClick={() => updatePotential(6)}
               >
-                6
+                <div className={classes.buttonContent}>
+                  6
+                </div>
               </FormButton>
             </div>
           </div>
@@ -181,7 +252,9 @@ const MobileOpEditForm = React.memo((props: Props) => {
                   onClick={() => onChange(op.id, "promotion", i)}
                   toggled={op.promotion === i}
                 >
-                  {i.toString()}
+                  <div className={classes.buttonContent}>
+                    {i.toString()}
+                  </div>
                 </FormButton>
               )}
             </div>
@@ -196,25 +269,40 @@ const MobileOpEditForm = React.memo((props: Props) => {
             Level
           </div>
           <div className = {classes.editButtonContainer}>
-            <FormButton onClick={() => onChange(op.id, "level", op.level - 10)}>-10</FormButton>
-            <FormButton onClick={() => onChange(op.id, "level", op.level - 1)}>-1</FormButton>
-            <div className={unborderStyle}>
-              {op.level}
+              <FormButton onClick={() => updateLevel(op.level - 10)}>-10</FormButton>
+              <FormButton onClick={() => updateLevel(op.level - 1)}>-1</FormButton>
+              <div className={classes.flex}>
+                <TextField
+                  className={classes.textField}
+                  value={levelField}
+                  onChange={(e) => {
+                    updateLevel(e.target.value)
+                  }}
+                />
+              </div>
+              <FormButton onClick={() => updateLevel(op.level + 1)}>
+                <div className={classes.buttonContent}>
+                  +1
+                </div></FormButton>
+              <FormButton onClick={() => updateLevel(op.level + 10)}>
+                <div className={classes.buttonContent}>
+                  +10
+                </div>
+              </FormButton>
+              <FormButton 
+                onClick={() => updateLevel(9999)}
+                toggled={op.level === MAX_LEVEL_BY_RARITY[op.rarity][op.promotion]}
+                >
+                  <div className={classes.buttonContent}>
+                    Max
+                  </div>
+              </FormButton>
             </div>
-            {/* <FormField onChange={(e) => onChange(op.id, "level", parseInt(e))}>
-              {op.level}
-            </FormField> */}
-            <FormButton onClick={() => onChange(op.id, "level", op.level + 1)}>+1</FormButton>
-            <FormButton onClick={() => onChange(op.id, "level", op.level + 10)}>+10</FormButton>
-            <FormButton 
-              onClick={() => onChange(op.id, "level", MAX_LEVEL_BY_RARITY[op.rarity][op.promotion])}
-              toggled={op.level === MAX_LEVEL_BY_RARITY[op.rarity][op.promotion]}
-            >
-              Max
-            </FormButton>
           </div>
         </div>
-        </div>
+      }
+      {disableByProperty(op, "skillLevel") ? "" :
+        <hr className={classes.hr} />
       }
       {/* Skill Level */}
       {disableByProperty(op, "skillLevel") ? "" : 
@@ -229,7 +317,9 @@ const MobileOpEditForm = React.memo((props: Props) => {
                   onClick={() => onChange(op.id, "skillLevel", i+1)}
                   toggled={op.skillLevel === i+1}
                 >
-                  {i+1}
+                  <div className={classes.buttonContent}>
+                    {i + 1}
+                  </div>
                 </FormButton>
               )}
             </div>
@@ -251,7 +341,9 @@ const MobileOpEditForm = React.memo((props: Props) => {
                   onClick={() => onChange(op.id, "skill1Mastery", i)}
                   toggled={op.skill1Mastery === i}
                 >
-                  {i.toString()}
+                  <div className={classes.buttonContent}>
+                    {i.toString()}
+                  </div>
                 </FormButton>
               )}
             </div>
@@ -271,7 +363,9 @@ const MobileOpEditForm = React.memo((props: Props) => {
                   onClick={() => onChange(op.id, "skill2Mastery", i)}
                   toggled={op.skill2Mastery === i}
                 >
-                  {i.toString()}
+                  <div className={classes.buttonContent}>
+                    {i.toString()}
+                  </div>
                 </FormButton>
               )}
             </div>
@@ -291,7 +385,9 @@ const MobileOpEditForm = React.memo((props: Props) => {
                   onClick={() => onChange(op.id, "skill3Mastery", i)}
                   toggled={op.skill3Mastery === i}
                 >
-                  {i.toString()}
+                  <div className={classes.buttonContent}>
+                    {i.toString()}
+                  </div>
                 </FormButton>
               )}
             </div>
