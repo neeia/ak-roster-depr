@@ -13,21 +13,33 @@ function RegisterForm(props: Props) {
   const { handleSignup } = props;
   return (
     <FormGroup>
-    <form className="mui-form" onSubmit={(e) => 
-      { e.preventDefault(); handleSignup(email, username, password)}}>
+      <form className="mui-form"
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSignup(email, username, password)
+        }}
+      >
         <label>Register</label>
         <div className="mui-textfield">
-          <input type="text" placeholder="Email (Kept Private)" onChange={(e) => setEmail(e.target.value)} value={email} />
+          <input type="text" placeholder="Username (Public)"
+            onChange={(e) => setUsername(e.target.value)}
+            value={username} />
         </div>
         <div className="mui-textfield">
-          <input type="text" placeholder="Public Username" onChange={(e) => setUsername(e.target.value)} value={username} />
+          <input type="text" placeholder="Email (Hidden)"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email} />
         </div>
         <div className="mui-textfield">
-          <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} value={password} />
+          <input type="password" placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
+            value={password} />
         </div>
         <div className="mui-textfield">
-          <input type="password" placeholder="Re-enter Password" onChange={(e) => setPasswordConfirm(e.target.value)} 
-          value={passwordConfirm} />
+          <input type="password" placeholder="Re-enter Password"
+            onChange={(e) => setPasswordConfirm(e.target.value)}
+            value={passwordConfirm}
+          />
         </div>
         {(password !== passwordConfirm ? <div>Passwords do not match.</div> : ""
         )}
