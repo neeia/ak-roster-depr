@@ -80,7 +80,7 @@ const OperatorCollectionBlock = ((props: Props) => {
   const potentialUrl = `https://res.cloudinary.com/samidare/image/upload/v1/arknights/potential/${op.potential}`;
   const promotionUrl = `https://res.cloudinary.com/samidare/image/upload/v1/arknights/elite/${op.promotion}`;
 
-  const size: Size = useWindowSize();
+  //const size: Size = useWindowSize();
   //const width = size.width === undefined ? 1920 : size.width;
 
   let intermediate = op.name;
