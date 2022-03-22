@@ -35,10 +35,10 @@ const CollectionTab = React.memo((props: Props) => {
 
   const size: Size = useWindowSize();
   const width = size.width === undefined ? 1920 : size.width;
-  const x = Math.round((width * 0.95) / 320);
+  const x = Math.round((width * 0.95) / 310);
   console.log("width: " + x);
   const height = size.height === undefined ? 1080 : size.height;
-  const y = Math.round((height - 200) / 100);
+  const y = Math.round((height - 200) / 80);
   console.log("height: " + y);
 
   const numOps = x * y;
