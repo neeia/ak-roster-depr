@@ -365,7 +365,8 @@ const DataEntryForm = React.memo((props: Props) => {
       case 1:
         return op.rarity > 3;
       case 2:
-        return op.rarity === 6 || op.name === "Amiya"
+        return op.rarity === 6 || op.name === "Amiya";
+      default: return undefined;
     }
   }
 
