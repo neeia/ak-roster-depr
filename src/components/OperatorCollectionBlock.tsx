@@ -4,6 +4,7 @@ import slugify from "slugify";
 import { Operator } from "../App";
 import SkillDisplayBox from "./SkillDisplayBox";
 import clsx from "clsx";
+import { useRarityStyles } from "./StyleRarityUnderline";
 
 const useStyles = makeStyles({
   opContainer: {
@@ -18,6 +19,7 @@ const useStyles = makeStyles({
     borderRadius: "4px",
     backgroundColor: "#333333",
     boxShadow: "2px 2px 8px rgb(0 0 0 / 30%)",
+    margin: "6px",
   },
   opIconArea: {
     gridArea: "img",
@@ -50,24 +52,6 @@ const useStyles = makeStyles({
     marginLeft: "8px",
     fontSize: "14px",
   },
-  raritySix: {
-    boxShadow: "0px 3px #f96601",
-  },
-  rarityFive: {
-    boxShadow: "0px 3px #fbae02",
-  },
-  rarityFour: {
-    boxShadow: "0px 3px #dbb1db",
-  },
-  rarityThree: {
-    boxShadow: "0px 3px #00b2f6",
-  },
-  rarityTwo: {
-    boxShadow: "0px 3px #dce537",
-  },
-  rarityOne: {
-    boxShadow: "0px 3px #9f9f9f",
-  }
 });
 
 interface Props {
@@ -77,6 +61,7 @@ interface Props {
 const OperatorCollectionBlock = React.memo((props: Props) => {
   const { op } = props;
   const classes = useStyles();
+  const rarity = useRarityStyles();
 
   let intermediate = op.name;
   if (op.promotion === 2) {
@@ -113,12 +98,12 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
 
   // merge operator portrait with rarity drop-shadow
   const opIconStyle = clsx({
-    [classes.rarityOne]: op.rarity == 1,
-    [classes.rarityTwo]: op.rarity == 2,
-    [classes.rarityThree]: op.rarity == 3,
-    [classes.rarityFour]: op.rarity == 4,
-    [classes.rarityFive]: op.rarity == 5,
-    [classes.raritySix]: op.rarity == 6,
+    [rarity.rarityOne]: op.rarity === 1,
+    [rarity.rarityTwo]: op.rarity === 2,
+    [rarity.rarityThree]: op.rarity === 3,
+    [rarity.rarityFour]: op.rarity === 4,
+    [rarity.rarityFive]: op.rarity === 5,
+    [rarity.raritySix]: op.rarity === 6,
     [classes.opIconArea]: true,
   })
 
@@ -127,6 +112,7 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
       <img
         src={opImgUrl}
         className={opIconStyle}
+        alt=""
       />
       <div className={classes.fav}>
         {op.favorite ? "❤️" : ""}

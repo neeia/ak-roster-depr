@@ -6,7 +6,6 @@ import operatorJson from "../data/operators.json";
 interface Props {
   operator: Operator;
   skill: number;
-  mobile?: boolean
 }
 
 const useStyles = makeStyles({
@@ -18,12 +17,6 @@ const useStyles = makeStyles({
   skillImg: {
     gridRow: 1,
     gridColumn: 1,
-    "& img.cover": {
-      mixBlendMode: "difference"
-    },
-    "& img.active": {
-      mixBlendMode: "difference"
-    },
   },
   image: {
     height: "30px",
@@ -32,7 +25,7 @@ const useStyles = makeStyles({
 });
 
 const SkillDisplayBox = React.memo((props : Props) => {
-  const { operator, skill, mobile=false } = props;
+  const { operator, skill } = props;
   const classes = useStyles();
 
   const opInfo = (operatorJson as any)[operator.id];

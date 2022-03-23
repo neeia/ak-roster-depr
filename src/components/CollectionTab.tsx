@@ -11,11 +11,6 @@ const useStyles = makeStyles({
   collectionContainer: {
     display: "flex",
     flexWrap: "wrap",
-    gap: "10px",
-  },
-  collectionContainerMobile: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, 320px)",
   },
 });
 
@@ -35,10 +30,10 @@ const CollectionTab = React.memo((props: Props) => {
 
   const size: Size = useWindowSize();
   const width = size.width === undefined ? 1920 : size.width;
-  const x = Math.round((width * 0.95) / 310);
+  const x = Math.floor((width * 0.95) / 310);
   console.log("width: " + x);
   const height = size.height === undefined ? 1080 : size.height;
-  const y = Math.round((height - 200) / 80);
+  const y = Math.floor((height - 120) / 86);
   console.log("height: " + y);
 
   const numOps = x * y;
@@ -73,7 +68,7 @@ const CollectionTab = React.memo((props: Props) => {
         filter={filter}
         setFilter={updateFilter}
       />
-      <div className={width <= MOBILE_BREAKPOINT ? classes.collectionContainerMobile : classes.collectionContainer}>
+      <div className={classes.collectionContainer}>
         {collection.slice(numOps * (page - 1), numOps * page)
           .filter((op: any) => {
             return filterType != none && filter != none ? op[filterType] === filter : true

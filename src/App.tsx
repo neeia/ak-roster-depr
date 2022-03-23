@@ -179,23 +179,35 @@ function App() {
       case "level":
         op.level = Math.max(Math.min(op.level, MAX_LEVEL_BY_RARITY[op.rarity][op.promotion]), 1);
         break;
+      case "skill1Mastery":
+      case "skill2Mastery":
+        if (op.rarity < 4) {
+          op.skill1Mastery = undefined;
+          op.skill2Mastery = undefined;
+        }
+        break;
+      case "skill3Mastery":
+        if (!(op.rarity === 6 || op.name === "Amiya")) {
+          op.skill3Mastery = undefined;
+        }
+        break;
     }
     return op;
   }
 
   // Dirty & Close Warning
-  // useEffect(() => {window.onload = function() {
-  //   window.addEventListener("beforeunload", function (e) {
-  //     if (!dirty) {
-  //       return;
-  //     }
+  useEffect(() => {window.onload = function() {
+    window.addEventListener("beforeunload", function (e) {
+      if (!dirty) {
+        return;
+      }
 
-  //     var confirmationMessage = "Not all changes have been backed up. Please save first.";
+      var confirmationMessage = "Not all changes have been backed up. Please save first.";
 
-  //     (e || window.event).returnValue = confirmationMessage; //Gecko + IE
-  //     return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
-  //   });
-  // };}, []);
+      (e || window.event).returnValue = confirmationMessage; //Gecko + IE
+      return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
+    });
+  };}, []);
 
   // no clue what this is for
   function a11yProps(index: number) {
