@@ -9,8 +9,7 @@ export const useBoxStyles = makeStyles({
     flexGrow: 1,
   },
   highlighted: {
-    backgroundColor: "#fdfdfd",
-    color: "#121212",
+    border: "2px solid #f7d98b",
     "& img.classIcon": {
       mixBlendMode: "difference"
     },
@@ -23,8 +22,6 @@ export const useBoxStyles = makeStyles({
     flexGrow: 1,
   },
   disabled: {
-    "& img": {
-      opacity: "0.3"
-    },
+    opacity: "0.3"
   },
 });
