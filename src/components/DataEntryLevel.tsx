@@ -36,7 +36,7 @@ const useStyles = makeStyles({
   promotionButton: {
     width:  "40px",
     height: "40px",
-    margin: "2px",
+    margin: "4px 2px 2px 2px",
     display: "grid",
     gridTemplateAreas: `"stack"`,
   },
