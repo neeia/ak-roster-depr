@@ -28,7 +28,7 @@ const darkTheme = createTheme({
       main: grey[900],
     },
     secondary: {
-      main: yellow[600],
+      main: `#f7d98b`,
     },
   },
 });
@@ -137,12 +137,16 @@ function App() {
     [setOperators]
   );
 
+  function minMax(min: number, value: number, max: number) {
+    return Math.min(Math.max(value, min), max);
+  }
+
   const applyChangeWithInvariant = (op: Operator, prop: string, value: number | boolean) => {
     if (!op.owned && prop !== "owned") return op;
     (op as any)[prop] = value;
     switch (prop) {
       case "potential":
-        op.potential = Math.min(Math.max(op.potential, 1), 6);
+        op.potential = minMax(1, op.potential, 6);
         break;
       case "owned":
         if (value === true) {
@@ -156,11 +160,24 @@ function App() {
           op.promotion = -1;
           op.level = 0;
           op.skillLevel = (op.rarity > 2 ? 0 : 0);
+          op.skill1Mastery = undefined;
+          op.skill2Mastery = undefined;
+          op.skill3Mastery = undefined;
         }
         break;
-      case "skillLevel":
       case "promotion":
-        if (op.skillLevel === 7 && op.promotion === 2) {
+        if (value != 2) {
+          op.skill1Mastery = undefined;
+          op.skill2Mastery = undefined;
+          op.skill3Mastery = undefined;
+        }
+        if (value === 0) {
+          op.skillLevel = Math.min(op.skillLevel, 4);
+        }
+        op.level = Math.min(op.level, MAX_LEVEL_BY_RARITY[op.rarity][op.promotion]);
+        break;
+      case "skillLevel":
+        if (value === 7 && op.promotion === 2) {
           op.skill1Mastery = 0;
           op.skill2Mastery = 0;
           if (op.rarity === 6 || op.name === "Amiya") {
@@ -174,7 +191,6 @@ function App() {
         if (op.skillLevel > 4 && op.promotion === 0) {
           op.skillLevel = 4;
         }
-        op.level = Math.min(op.level, MAX_LEVEL_BY_RARITY[op.rarity][op.promotion]);
         break;
       case "level":
         op.level = Math.max(Math.min(op.level, MAX_LEVEL_BY_RARITY[op.rarity][op.promotion]), 1);
