@@ -1,20 +1,21 @@
 import { ButtonBase, makeStyles, TextField } from "@material-ui/core";
 import React from "react";
 import slugify from "slugify";
-import { Operator } from "../App"; 
-import FormButton from "./FormButton";
+import { Operator } from "../App";
+import DataEntryCollect from "./DataEntryCollect";
+import DataEntryLevel from "./DataEntryLevel";
 import DataEntrySkillLevel from "./DataEntrySkillLevel";
 import { useBoxStyles } from "./BoxStyles"
-import { disableByProperty, errorForNumericProperty, MAX_LEVEL_BY_RARITY } from "./RosterTable";
 import clsx from "clsx";
 import operatorJson from "../data/operators.json";
 
 const useStyles = makeStyles({
   displayBox: {
-    display: "grid",
-    gridTemplateRows: "auto 0.6fr 1fr 1fr auto auto",
+    display: "flex",
+    flexDirection: "column",
     padding: "8px",
     boxShadow: "2px 2px 8px rgb(0 0 0 / 30%)",
+    alignItems: "center",
   },
   disabled: {
     opacity: "0.3",
@@ -53,6 +54,7 @@ const useStyles = makeStyles({
     gap: "4px",
   },
   opImgNameBox: {
+    alignSelf: "start",
     textAlign: "left",
     display: "flex",
     alignItems: "center",
@@ -69,9 +71,12 @@ const useStyles = makeStyles({
   unborder: {
     border: "none"
   },
-  hr: {
-    borderColor: "grey",
-    borderWidth: "2px"
+  horizontalDivider: {
+    backgroundColor: "#909090",
+    height: "2px",
+    width: "420px",
+    marginTop: "16px",
+    marginBottom: "24px",
   },
   textField: {
     textAlign: "right",
@@ -80,9 +85,6 @@ const useStyles = makeStyles({
   flex: {
     flexGrow: 1,
   },
-  noSkill: {
-    border: "2px solid gray",
-  }
 });
 
 interface Props {
@@ -143,7 +145,6 @@ const DataEntryForm = React.memo((props: Props) => {
   });
 
   const [potentialField, setPotentialField] = React.useState<number | string>(op.potential);
-  const [levelField, setLevelField] = React.useState<number | string>(op.level);
 
   function updatePotential(pot: string | number) {
     if (typeof pot === "number") {
@@ -159,19 +160,6 @@ const DataEntryForm = React.memo((props: Props) => {
     }
   };
 
-  function updateLevel(lvl: string | number) {
-    if (typeof lvl === "number") {
-      onChange(op.id, "level", lvl);
-      setLevelField(Math.max(Math.min(lvl, MAX_LEVEL_BY_RARITY[op.rarity][op.promotion]), 1).toString());
-    }
-    else if (parseInt(lvl)) {
-      onChange(op.id, "level", parseInt(lvl));
-      setLevelField(Math.max(Math.min(parseInt(lvl), MAX_LEVEL_BY_RARITY[op.rarity][op.promotion]), 1).toString());
-    }
-    else {
-      setLevelField("");
-    }
-  };
 
   return (
     <div className={boxBox}>
@@ -188,133 +176,10 @@ const DataEntryForm = React.memo((props: Props) => {
         />*/}
         {opName}
       </div>
-      
-      {/* Owned, Favorite */}
-      <div className={classes.editButtonContainer}>
-        <FormButton 
-          onClick={() => {
-            onChange(op.id, "owned", !op.owned);
-          }}
-          toggled={op.owned}
-        >
-          <div className={classes.buttonContent}>
-            Owned
-          </div>
-        </FormButton>
-        <FormButton
-          onClick={() => onChange(op.id, "favorite", !op.favorite)}
-          toggled={op.favorite}
-        >
-          <div className={classes.buttonContent}>
-            Favorite
-          </div>
-        </FormButton>
-      </div>
-
-      <div className={classes.buttonContainer}>
-      {/* Potential and Promotion */}
-        {/* Potential */}
-        {disableByProperty(op, "potential") ? "" : 
-          <div className={classes.propContentContainer}>
-            <div className={classes.center}>
-              Potential
-            </div>
-            <div className = {classes.editButtonContainer}>
-              <FormButton 
-                onClick={() => updatePotential(op.potential - 1)}
-                toggled={false}
-              >
-                <div className={classes.buttonContent}>
-                  -1
-                </div>
-              </FormButton>
-              <div className={classes.flex}>
-                <TextField
-                  className={classes.textField}
-                  value={potentialField}
-                  onChange={(e) =>
-                  {
-                    updatePotential(e.target.value)
-                  }}
-                />
-              </div>
-              <FormButton
-                onClick={() => updatePotential(op.potential + 1)}
-              >
-                <div className={classes.buttonContent}>
-                  +1
-                </div>
-              </FormButton>
-              <FormButton
-                onClick={() => updatePotential(6)}
-              >
-                <div className={classes.buttonContent}>
-                  6
-                </div>
-              </FormButton>
-            </div>
-          </div>
-        }
-        {/* Promotion */}
-        {disableByProperty(op, "promotion") ? "" : 
-          <div className={classes.propContentContainer}>
-            <div className={classes.center}>
-              Promotion
-            </div>
-            <div className = {classes.editButtonContainer}>
-              {[...Array(3)].map((x, i) =>
-                <FormButton 
-                  onClick={() => onChange(op.id, "promotion", i)}
-                  toggled={op.promotion === i}
-                >
-                  <div className={classes.buttonContent}>
-                    {i.toString()}
-                  </div>
-                </FormButton>
-              )}
-            </div>
-          </div>
-        }
-      </div>
-      {/* Level */}
-        <div className={classes.buttonContainer}>
-        <div className={classes.propContentContainer}>
-          <div className={classes.center}>
-            Level
-          </div>
-          <div className = {classes.editButtonContainer}>
-              <FormButton onClick={() => updateLevel(op.level - 10)}>-10</FormButton>
-              <FormButton onClick={() => updateLevel(op.level - 1)}>-1</FormButton>
-              <div className={classes.flex}>
-                <TextField
-                  className={classes.textField}
-                  value={levelField}
-                  onChange={(e) => {
-                    updateLevel(e.target.value)
-                  }}
-                />
-              </div>
-              <FormButton onClick={() => updateLevel(op.level + 1)}>
-                <div className={classes.buttonContent}>
-                  +1
-                </div></FormButton>
-              <FormButton onClick={() => updateLevel(op.level + 10)}>
-                <div className={classes.buttonContent}>
-                  +10
-                </div>
-              </FormButton>
-              <FormButton 
-                onClick={() => updateLevel(9999)}
-                toggled={op.level === MAX_LEVEL_BY_RARITY[op.rarity][op.promotion]}
-                >
-                  <div className={classes.buttonContent}>
-                    Max
-                  </div>
-              </FormButton>
-            </div>
-          </div>
-        </div>
-      <hr className={classes.hr} />
+      <DataEntryCollect op={op} onChange={onChange} />
+      <div className={classes.horizontalDivider} />
+      <DataEntryLevel op={op} onChange={onChange} />
+      <div className={classes.horizontalDivider} />
       <DataEntrySkillLevel op={op} onChange={onChange} />
     </div>
   );
