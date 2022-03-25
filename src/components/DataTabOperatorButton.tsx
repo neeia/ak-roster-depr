@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import slugify from "slugify";
 import { Operator } from "../App";
 import { makeStyles } from "@material-ui/core";
@@ -7,18 +7,29 @@ import clsx from "clsx";
 import FormButton from "./FormButton";
 
 const useStyles = makeStyles({
+  iconStack: {
+    display: "grid"
+  },
   opIcon: {
     width: "64px",
     height: "64px",
     marginBottom: "2px",
-  },
-  smallText: {
-    fontSize: "12px",
+    gridArea: "1 / 1",
+    textAlign: "left",
+    lineHeight: "112px",
   },
   opButton: {
     display: "flex",
+    width: "94px",
     flexDirection: "column",
     boxShadow: "2px 2px 8px rgb(0 0 0 / 30%)",
+  },
+  opName: {
+    fontSize: "12px",
+    marginTop: "4px",
+  },
+  unowned: {
+    opacity: "0.5",
   },
 });
 
@@ -39,7 +50,7 @@ const DataTabOperatorButton = React.memo((props: Props) => {
 
   // Process operator name
   let opName = (
-    <span className={classes.smallText}>
+    <span className={classes.opName}>
       {op.name.split(" the ")[0].split(" (")[0]}
       {(titlefy(op.name.split(" the ")[1]))}
       {(titlefy(op.name.split(" (")[1]))}
@@ -53,6 +64,7 @@ const DataTabOperatorButton = React.memo((props: Props) => {
     [rarity.rarityFive]: op.rarity === 5,
     [rarity.raritySix]: op.rarity === 6,
     [classes.opIcon]: true,
+    [classes.unowned]: !op.owned
   })
 
   let intermediate = op.name;
@@ -70,16 +82,17 @@ const DataTabOperatorButton = React.memo((props: Props) => {
 
   return (
     <FormButton className={classes.opButton} onClick={onClick} key={op.id}>
-      <div>
+      <div className={classes.iconStack}>
         <img
           className={opIconStyle}
           src={imgUrl}
           alt=""
         />
-        <div>
-          {opName}
+        <div className={classes.opIcon}>
+          {op.favorite ? "❤️" : ""}
         </div>
       </div>
+      {opName}
     </FormButton>
   );
 });
