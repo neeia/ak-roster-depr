@@ -14,8 +14,8 @@ interface Props {
 
 const AccountTab: React.FC<Props> = (props) => {
   const { operators, updateFromRemote, setDirty } = props;
-  
-  const [user, setUser] = useLocalStorage<firebase.User | null>("user", null);
+
+  const [user, setUser] = useState<firebase.User | null>(firebase.auth().currentUser);
   
   const handleLogin = async (
     username: string,
