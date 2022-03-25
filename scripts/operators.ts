@@ -1,9 +1,9 @@
 import path from "path";
 import fs from "fs";
-import operators from "./arknights-tools/src/data/operators.json";
-import { Operator } from "./arknights-tools/src/types";
+import operators from "./arknights-tools-skunkworks/data/operators.json";
+import { Operator } from "./operatortype";
 
-const subset = operators.map((entry: Operator & { id: string }) => {
+const subset = Object.values(operators).map((entry: Operator) => {
   // keep only these properties
   const { id, name, rarity, isCnOnly } = entry;
   const skills = entry.skills.map((skillEntry) => {
@@ -15,9 +15,10 @@ const subset = operators.map((entry: Operator & { id: string }) => {
       skillName
     };
   });
+  const modules = (entry.module === undefined ? [] : [entry.module])
   return [
     id,
-    { id, name, rarity, isCnOnly, skills, class: entry.class }
+    { id, name, rarity, isCnOnly, skills, class: entry.class, modules }
   ];
 });
 const operatorObject = Object.fromEntries(subset)
