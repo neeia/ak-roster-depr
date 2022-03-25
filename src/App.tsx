@@ -35,7 +35,7 @@ export const MOBILE_BREAKPOINT = 900;
 export const TABLET_BREAKPOINT = 1300;
 
 // Converts an opJson entry into an Operator
-function opObject ([key, op] : any) : [string, Operator] {
+function opObject ([_, op] : any) : [string, Operator] {
   return [
     op.id,
     {
@@ -55,6 +55,22 @@ function opObject ([key, op] : any) : [string, Operator] {
 const defaultOperators = Object.fromEntries(
   Object.entries(operatorJson).map(opObject)
 );
+
+export enum UIMode {
+  DESKTOP = 0,
+  TABLET = 1,
+  MOBILE = 2,
+}
+
+export function getUIMode(width: number) {
+  if (width > TABLET_BREAKPOINT) {
+    return UIMode.DESKTOP;
+  } else if (width > MOBILE_BREAKPOINT) {
+    return UIMode.TABLET;
+  } else {
+    return UIMode.MOBILE;
+  }
+}
 
 export interface Operator {
   id: string;
@@ -118,7 +134,7 @@ function App() {
 
   const [dirty, setDirty] = useLocalStorage<boolean>("dirty", false);
 
-  const handleChange = React.useCallback(
+  const changeOperators = React.useCallback(
     (operatorID: string, property: string, value: number | boolean) => {
       if (isNaN(value as any)) {
         return;
@@ -128,6 +144,36 @@ function App() {
           const copyOperators = { ...oldOperators };
           const copyOperatorData = { ...copyOperators[operatorID] };
           copyOperators[operatorID] = applyChangeWithInvariant(copyOperatorData, property, value);
+          setDirty(true);
+          return copyOperators;
+        }
+      );
+    },
+    [setOperators]
+  );
+
+  // the order of properties in which to apply changes to an operator
+  const orderOfOperations = [
+    "owned",
+    "favorite",
+    "potential",
+    "promotion",
+    "level",
+    "skillLevel",
+    "skill1Mastery",
+    "skill2Mastery",
+    "skill3Mastery",
+  ];
+  const changeOneOperator = React.useCallback(
+    (operatorID: string, newOp: Operator) => {
+      setOperators(
+        (oldOperators: Record<string, Operator>): Record<string, Operator> => {
+          const copyOperators = { ...oldOperators };
+          var copyOperatorData = { ...copyOperators[operatorID] };
+          orderOfOperations.forEach((prop: string) =>
+            copyOperatorData = applyChangeWithInvariant(copyOperatorData, prop, (newOp as any)[prop])
+          )
+          copyOperators[operatorID] = copyOperatorData;
           setDirty(true);
           return copyOperators;
         }
@@ -276,7 +322,7 @@ function App() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <DataTab operators={operators} onChange={handleChange} />
+        <DataTab operators={operators} onChange={changeOperators} />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <CollectionTab

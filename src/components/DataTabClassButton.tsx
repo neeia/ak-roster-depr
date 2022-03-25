@@ -1,4 +1,5 @@
 import React from "react";
+import { UIMode } from "../App";
 import { makeStyles } from "@material-ui/core";
 import FormButton from "./FormButton";
 
@@ -27,6 +28,7 @@ const useStyles = makeStyles({
 
 interface Props {
   cl: string;
+  uiMode: UIMode;
   onClick: () => void;
   toggled: boolean;
 }

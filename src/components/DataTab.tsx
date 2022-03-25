@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Operator } from "../App";
+import { Operator, TABLET_BREAKPOINT, MOBILE_BREAKPOINT, UIMode, getUIMode } from "../App";
 import useWindowSize, { Size } from "./UseWindowSize";
 import { makeStyles } from "@material-ui/core";
+import clsx from "clsx";
 import DataTabOperatorSelector from "./DataTabOperatorSelector";
 import DataTabClassSelector from "./DataTabClassSelector";
 import DataEntryForm from "./DataEntryForm";
@@ -14,7 +15,7 @@ const useStyles = makeStyles({
   },
   containerMobile: {
     display: "flex",
-    alignItems: "left",
+    alignItems: "center",
     flexDirection: "column",
   },
   containerChild: {
@@ -25,7 +26,7 @@ const useStyles = makeStyles({
   containerChildMobile: {
     flex: 1,
     display: "grid",
-    gridTemplateColumns: "auto 1fr",
+    gridTemplateRows: "auto 1fr",
     justifyContent: "center",
   },
 });
@@ -56,13 +57,14 @@ export const COLOR_BY_RARITY = ["#000000", "#9f9f9f", "#dce537", "#00b2f6", "#db
 const DataTab = React.memo((props: Props) => {
   const classes = useStyles();
   const { operators, onChange } = props;
+  const size: Size = useWindowSize();
+  const width = size.width === undefined ? 1920 : size.width;
+  let uiMode = getUIMode(width);
 
   const noneStr = "none";
   const [selectedClass, setSelectedClass] = useState(noneStr);
   const [selectedOp, setSelectedOp] = useState(noneStr);
 
-  const size: Size = useWindowSize();
-  const width = size.width === undefined ? 1920 : size.width;
 
   // Class Selector Component
   const classSelector = (
@@ -81,8 +83,14 @@ const DataTab = React.memo((props: Props) => {
     );
 
   return (
-    <div className={classes.container}>
-      <div className={classes.containerChild}>
+    <div className={clsx({
+      [classes.container]: uiMode === UIMode.DESKTOP || uiMode === UIMode.TABLET,
+      [classes.containerMobile]: uiMode === UIMode.MOBILE,
+    })}>
+      <div className={clsx({
+        [classes.containerChild]: uiMode === UIMode.DESKTOP || uiMode === UIMode.TABLET,
+        [classes.containerChildMobile]: uiMode === UIMode.MOBILE,
+      })}>
         {classSelector}
         {selectedOp === noneStr
           ? (selectedClass === noneStr
