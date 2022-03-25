@@ -4,7 +4,6 @@ import {
   Box,
   createTheme,
   CssBaseline,
-  makeStyles,
   Tab,
   Tabs,
   ThemeProvider,
@@ -18,8 +17,8 @@ import AccountTab from "./components/AccountTab";
 import SearchForm from "./components/SearchForm";
 import CollectionTab from "./components/CollectionTab";
 import DataTab from "./components/DataTab";
-import { disableByProperty, errorForNumericProperty, MAX_LEVEL_BY_RARITY } from "./components/RosterTable";
-import { red, grey, yellow } from "@material-ui/core/colors";
+import { MAX_LEVEL_BY_RARITY } from "./components/RosterTable";
+import { grey } from "@material-ui/core/colors";
 
 const darkTheme = createTheme({
   palette: {
