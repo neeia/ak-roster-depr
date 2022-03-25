@@ -4,6 +4,7 @@ import operatorJson from "../data/operators.json";
 import { disableByProperty } from "./RosterTable";
 import { ButtonBase, makeStyles } from "@material-ui/core";
 import FormButton from "./FormButton";
+import clsx from "clsx";
 
 const useStyles = makeStyles({
   skillContainer: {
@@ -118,12 +119,6 @@ const useStyles = makeStyles({
     height: "60px",
     marginRight: "4px",
   },
-  skillIconUnselected: {
-    width: "60px",
-    height: "60px",
-    marginRight: "4px",
-    opacity: "0.5",
-  },
   skillMasteryButton: {
     width:  "48px",
     height: "48px",
@@ -136,11 +131,8 @@ const useStyles = makeStyles({
     width: "36px",
     height: "36px",
   },
-  skillMasteryIconUnselected: {
-    gridArea: "stack",
-    width: "36px",
-    height: "36px",
-    opacity: "0.75",
+  unselected: {
+    opacity: "0.5",
   },
   noSkill: {
     border: "2px solid gray",
@@ -311,7 +303,10 @@ const DataEntrySkillLevel = React.memo((props: Props) => {
             {hasSkill(i)
               ?
               <img
-                className={op.promotion >= i ? classes.skillIcon : classes.skillIconUnselected}
+                className={clsx({
+                  [classes.skillIcon]: true,
+                  [classes.unselected]: op.promotion < i,
+                })}
                 src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/skills/${opInfo.skills[i].iconId ?? opInfo.skills[i].skillId}`}
                 alt={`Skill ${i}`}
               />
@@ -336,7 +331,10 @@ const DataEntrySkillLevel = React.memo((props: Props) => {
                   alt={""}
                 />
                 <img
-                  className={getSkillMastery(i + 1) === j ? classes.skillMasteryIcon : classes.skillMasteryIconUnselected}
+                  className={clsx({
+                    [classes.skillMasteryIcon]: true,
+                    [classes.unselected]: getSkillMastery(i + 1) === j,
+                  })}
                   src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/mastery/${j}`}
                   alt={`Mastery ${i+1}`}
                 />

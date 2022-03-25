@@ -2,6 +2,7 @@ import React from "react";
 import { Operator } from "../App";
 import { MAX_LEVEL_BY_RARITY } from "./RosterTable";
 import { ButtonBase, makeStyles, TextField } from "@material-ui/core";
+import clsx from "clsx";
 import FormButton from "./FormButton";
 
 const useStyles = makeStyles({
@@ -35,6 +36,9 @@ const useStyles = makeStyles({
     margin: "4px 2px 2px 2px",
     display: "grid",
     gridTemplateAreas: `"stack"`,
+  },
+  unselected: {
+    opacity: "0.5",
   },
   promotionIcon: {
     gridArea: "stack",
@@ -331,7 +335,10 @@ const DataEntryLevel = React.memo((props: Props) => {
                 disabled={disabled}
               >
                 <img
-                  className={classes.promotionIcon}
+                  className={clsx({
+                    [classes.promotionIcon]: true,
+                    [classes.unselected]: op.promotion === i,
+                  })}
                   src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/elite/${i}`}
                   alt={`Elite ${i} Button`}
                 />
