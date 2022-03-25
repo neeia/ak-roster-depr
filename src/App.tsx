@@ -44,7 +44,7 @@ function opObject ([key, op] : any) : [string, Operator] {
       favorite: false,
       rarity: op.rarity,
       potential: 0,
-      promotion: 0,
+      promotion: -1,
       owned: false,
       level: 0,
       skillLevel: 0,
@@ -69,6 +69,7 @@ export interface Operator {
   skill1Mastery?: number;
   skill2Mastery?: number;
   skill3Mastery?: number;
+  module?: boolean[];
 }
 
 const firebaseConfig = {
@@ -107,8 +108,8 @@ function App() {
     if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
     const [, path, userName] = window.location.pathname.split("/");
-    window.history.pushState("object or string", "Title", (path !== "u" || userName === undefined ? "" : "/u/" + userName));
-    if (path === "u" && userName != undefined && checkValidUsername(userName)) {
+    window.history.pushState("object or string", "Title", (path !== "u" || userName === undefined ? "/" : "/u/" + userName));
+    if (path === "u" && userName !== undefined && checkValidUsername(userName)) {
       findUser(userName).then(() => {
         setValue(3);
       })
@@ -164,10 +165,14 @@ function App() {
         }
         break;
       case "promotion":
-        if (value != 2) {
+        if (value !== 2) {
           op.skill1Mastery = undefined;
           op.skill2Mastery = undefined;
           op.skill3Mastery = undefined;
+        } else {
+          op = applyChangeWithInvariant(op, "skill1Mastery", 0);
+          op = applyChangeWithInvariant(op, "skill2Mastery", 0);
+          op = applyChangeWithInvariant(op, "skill3Mastery", 0);
         }
         if (value === 0) {
           op.skillLevel = Math.min(op.skillLevel, 4);
@@ -175,17 +180,9 @@ function App() {
         op.level = Math.min(op.level, MAX_LEVEL_BY_RARITY[op.rarity][op.promotion]);
         break;
       case "skillLevel":
-        if (value === 7 && op.promotion === 2) {
-          op.skill1Mastery = 0;
-          op.skill2Mastery = 0;
-          if (op.rarity === 6 || op.name === "Amiya") {
-            op.skill3Mastery = 0;
-          }
-        } else {
-          op.skill1Mastery = undefined;
-          op.skill2Mastery = undefined;
-          op.skill3Mastery = undefined;
-        }
+        op = applyChangeWithInvariant(op, "skill1Mastery", 0);
+        op = applyChangeWithInvariant(op, "skill2Mastery", 0);
+        op = applyChangeWithInvariant(op, "skill3Mastery", 0);
         if (op.skillLevel > 4 && op.promotion === 0) {
           op.skillLevel = 4;
         }
@@ -195,7 +192,7 @@ function App() {
         break;
       case "skill1Mastery":
       case "skill2Mastery":
-        if (op.rarity < 4) {
+        if (op.rarity < 4 || op.promotion !== 2 || op.skillLevel !== 7) {
           op.skill1Mastery = undefined;
           op.skill2Mastery = undefined;
         }
