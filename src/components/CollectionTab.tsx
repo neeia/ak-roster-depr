@@ -1,10 +1,10 @@
-import { makeStyles } from "@material-ui/core";
 import React, { useState } from "react";
 import { defaultSortComparator, Operator } from "../App";
-import CollectionTabNavbar from "./CollectionTabNavbar";
-import OperatorCollectionBlock from "./OperatorCollectionBlock";
 import operatorJson from "../data/operators.json";
 import useWindowSize, { Size } from "./UseWindowSize";
+import { makeStyles } from "@material-ui/core";
+import CollectionTabNavbar from "./CollectionTabNavbar";
+import OperatorCollectionBlock from "./OperatorCollectionBlock";
 
 
 const useStyles = makeStyles({

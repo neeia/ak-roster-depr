@@ -1,7 +1,7 @@
-import { ButtonBase } from "@material-ui/core";
-import clsx from "clsx";
 import React from "react";
+import { ButtonBase } from "@material-ui/core";
 import { useBoxStyles } from "./BoxStyles"
+import clsx from "clsx";
 
 interface Props {
   onClick: () => void;

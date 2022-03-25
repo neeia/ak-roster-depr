@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
+import firebase from "firebase";
 import { Operator } from "../App";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 import Button from "./Button";
-import firebase from "firebase";
-import useLocalStorage from "../UseLocalStorage";
 
 interface Props {
   operators: Record<string, Operator>;

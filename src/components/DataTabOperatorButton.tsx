@@ -1,10 +1,10 @@
-import { makeStyles } from "@material-ui/core";
-import FormButton from "./FormButton";
 import React from "react";
 import slugify from "slugify";
 import { Operator } from "../App";
-import clsx from "clsx";
+import { makeStyles } from "@material-ui/core";
 import { useRarityStyles } from "./StyleRarityUnderline";
+import clsx from "clsx";
+import FormButton from "./FormButton";
 
 const useStyles = makeStyles({
   opIcon: {

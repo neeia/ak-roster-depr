@@ -1,10 +1,10 @@
-import { makeStyles } from "@material-ui/core";
 import React from "react";
 import slugify from "slugify";
 import { Operator } from "../App";
-import SkillDisplayBox from "./SkillDisplayBox";
-import clsx from "clsx";
+import { makeStyles } from "@material-ui/core";
 import { useRarityStyles } from "./StyleRarityUnderline";
+import clsx from "clsx";
+import SkillDisplayBox from "./SkillDisplayBox";
 
 const useStyles = makeStyles({
   opContainer: {

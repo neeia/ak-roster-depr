@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from "react";
+import firebase from "firebase";
+import operatorJson from "./data/operators.json";
+import useLocalStorage from "./UseLocalStorage";
+import { MAX_LEVEL_BY_RARITY } from "./components/RosterTable";
 import {
   AppBar,
   Box,
@@ -8,17 +12,12 @@ import {
   Tabs,
   ThemeProvider,
 } from "@material-ui/core";
-
-import firebase from "firebase";
-import operatorJson from "./data/operators.json";
-import useLocalStorage from "./UseLocalStorage";
+import { grey } from "@material-ui/core/colors";
 
 import AccountTab from "./components/AccountTab";
 import SearchForm from "./components/SearchForm";
 import CollectionTab from "./components/CollectionTab";
 import DataTab from "./components/DataTab";
-import { MAX_LEVEL_BY_RARITY } from "./components/RosterTable";
-import { grey } from "@material-ui/core/colors";
 
 const darkTheme = createTheme({
   palette: {

@@ -1,9 +1,9 @@
-import { ButtonBase, makeStyles } from "@material-ui/core";
 import React from "react";
 import { Operator } from "../App";
-import FormButton from "./FormButton";
-import { disableByProperty } from "./RosterTable";
 import operatorJson from "../data/operators.json";
+import { disableByProperty } from "./RosterTable";
+import { ButtonBase, makeStyles } from "@material-ui/core";
+import FormButton from "./FormButton";
 
 const useStyles = makeStyles({
   skillContainer: {

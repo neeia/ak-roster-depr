@@ -3,7 +3,6 @@ interface Props {
   text: string;
 }
 
-
 function Button(props: Props) {
   const { handleChange, text } = props;
   return (
