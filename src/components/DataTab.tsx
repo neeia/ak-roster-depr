@@ -1,5 +1,4 @@
 import { makeStyles } from "@material-ui/core";
-import FormButton from "./FormButton";
 import React from "react";
 import { useState } from "react";
 import { Operator, MOBILE_BREAKPOINT, TABLET_BREAKPOINT } from "../App";
@@ -30,54 +29,6 @@ const useStyles = makeStyles({
     display: "grid",
     gridTemplateColumns: "auto 1fr",
     justifyContent: "center",
-  },
-  classDisplay: {
-    display: "flex",
-    justifyContent: "center",
-  },
-  classDisplayTablet: {
-    display: "flex",
-    justifyContent: "center",
-  },
-  classDisplayMobile: {
-    display: "grid",
-    gridTemplateColumns: "auto",
-    gridTemplateRows: "repeat(8, 1fr)",
-    height: "1vh",
-    marginRight: "12px",
-  },
-  classSelectorButtonArea: {
-    width: "72px",
-    height: "60px",
-    display: "flex",
-    justifyContent: "center",
-    alignContent: "center",
-    margin: "2px",
-  },
-  classButton: {
-    display: "flex",
-    flexDirection: "column",
-  },
-  classIcon: {
-    width: "32px",
-    height: "32px",
-    marginBottom: "4px",
-  },
-  marginBottom: {
-    marginBottom: "16px",
-  },
-  opIcon: {
-    width: "64px",
-    height: "64px",
-    marginBottom: "2px",
-  },
-  smallText: {
-    fontSize: "12px",
-  },
-  opButton: {
-    display: "flex",
-    flexDirection: "column",
-    boxShadow: "2px 2px 8px rgb(0 0 0 / 30%)",
   },
 });
 
@@ -130,13 +81,6 @@ const DataTab = React.memo((props: Props) => {
       activeClass={selectedClass}
     />
     );
-
-  const classDisplay = clsx({
-    [classes.classDisplay]: width > TABLET_BREAKPOINT,
-    [classes.classDisplayTablet]: width <= TABLET_BREAKPOINT,
-    [classes.classDisplayMobile]: width <= MOBILE_BREAKPOINT,
-    [classes.marginBottom]: "true"
-  })
 
   return (
     <div className={classes.container}>
