@@ -154,7 +154,7 @@ const DataTab = React.memo((props: Props) => {
                 return op.class === selectedClass;
               }}
               />)
-          : <DataEntryForm op={operators[selectedOp]} opClass={selectedClass} onChange={onChange} />
+          : <DataEntryForm op={operators[selectedOp]} onChange={onChange} />
         }
       </div>
     </div>
