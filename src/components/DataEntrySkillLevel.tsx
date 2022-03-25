@@ -1,11 +1,8 @@
-import { ButtonBase, makeStyles, TextField } from "@material-ui/core";
+import { ButtonBase, makeStyles } from "@material-ui/core";
 import React from "react";
-import slugify from "slugify";
 import { Operator } from "../App";
 import FormButton from "./FormButton";
-import { useBoxStyles } from "./BoxStyles"
-import { disableByProperty, errorForNumericProperty, MAX_LEVEL_BY_RARITY } from "./RosterTable";
-import clsx from "clsx";
+import { disableByProperty } from "./RosterTable";
 import operatorJson from "../data/operators.json";
 
 const useStyles = makeStyles({
@@ -92,10 +89,10 @@ const useStyles = makeStyles({
     backgroundColor: "#909090",
     width: "2px",
     height: "240px",
-    alignSelf: "start",
+    alignSelf: "end",
     marginLeft: "8px",
     marginRight: "8px",
-    marginTop: "32px",
+    marginBottom: "10px",
   },
   /* MASTERIES */
   skillMasteryContainer: {
@@ -175,11 +172,13 @@ const DataEntrySkillLevel = React.memo((props: Props) => {
           <img
             className={classes.skillLevelStack}
             src={skillBGImgUrl}
+            alt={""}
           />
           {op.skillLevel > 0
             ? <img
               className={classes.skillLevelStack}
               src={skillLvlImgUrl}
+              alt={`Skill Level ${op.skillLevel}`}
             />
             : <svg
               className={classes.skillLevelStack}
@@ -198,10 +197,12 @@ const DataEntrySkillLevel = React.memo((props: Props) => {
           <img
             className={classes.skillButtonStack}
             src={skillBGImgUrl}
+            alt={""}
           />
           <img
             className={classes.skillButtonStack}
             src={skillNxtImgUrl}
+            alt={`Jump to Skill Level ${nextSkillLevel}`}
           />
         </ButtonBase>
         <ButtonBase
@@ -215,10 +216,12 @@ const DataEntrySkillLevel = React.memo((props: Props) => {
           <img
             className={classes.skillButtonStack}
             src={skillBGImgUrl}
+            alt={""}
           />
           <img
             className={classes.skillButtonStack}
             src={skillPrvImgUrl}
+            alt={`Jump to Skill Level ${previousSkillLevel}`}
           />
         </ButtonBase>
         <ButtonBase
@@ -234,6 +237,7 @@ const DataEntrySkillLevel = React.memo((props: Props) => {
           >
             <rect x="0" y="0" className={classes.skillButtonHalf} fill="transparent" stroke="#808080" strokeWidth="1" />
             <path d="M 8 15 L 20 7 L 32 15" fill="transparent" stroke="white" strokeLinecap="round" strokeWidth="3" />
+            alt={`Plus 1`}
           </svg>
         </ButtonBase>
         <ButtonBase
@@ -249,6 +253,7 @@ const DataEntrySkillLevel = React.memo((props: Props) => {
           >
             <rect x="0" y="0" className={classes.skillButtonHalf} fill="transparent" stroke="#808080" strokeWidth="1" />
             <path d="M 8 5 L 20 13 L 32 5" fill="transparent" stroke="white" strokeLinecap="round" strokeWidth="3" />
+            alt={`Minus 1`}
           </svg>
         </ButtonBase>
       </div>
@@ -285,7 +290,10 @@ const DataEntrySkillLevel = React.memo((props: Props) => {
       {[...Array(3)].map((x, i) => {
         const disabled = !op.owned || !hasSkill(i) || disableByProperty(op, `skill${i + 1}Mastery`);
         return (
-          <div className={classes.skillMastery}>
+          <div
+            key={"skill" + (i+1) + "MasteryBlock"}
+            className={classes.skillMastery}
+          >
             {hasSkill(i)
               ? <div className={classes.skillName}>
                 {opInfo.skills[i].skillName}
@@ -299,15 +307,18 @@ const DataEntrySkillLevel = React.memo((props: Props) => {
               <img
                 className={classes.skillIcon}
                 src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/skills/${opInfo.skills[i].iconId ?? opInfo.skills[i].skillId}`}
+                alt={`Skill ${i}`}
               />
               : <svg
                 className={classes.skillIcon}
               >
                 <rect x="0" y="0" className={classes.skillIcon} fill="transparent" stroke="gray" strokeWidth="4" />
                 <path d="M 16 48 L 48 16" fill="transparent" stroke="gray" strokeWidth="3" />
+                alt={`Skill ${i}`}
               </svg>}
             {[...Array(4)].map((x, j) =>
               <FormButton
+                key={`mastery${j}Button`}
                 className={classes.skillMasteryButton}
                 onClick={() => onChange(op.id, `skill${i + 1}Mastery`, j)}
                 toggled={getSkillMastery(i + 1) === j}
@@ -316,10 +327,12 @@ const DataEntrySkillLevel = React.memo((props: Props) => {
                 <img
                   className={classes.skillMasteryIcon}
                   src={skillBGImgUrl}
+                  alt={""}
                 />
                 <img
                   className={getSkillMastery(i + 1) === j ? classes.skillMasteryIcon : classes.skillMasteryIconUnselected}
                   src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/mastery/${j}`}
+                  alt={`Mastery ${i+1}`}
                 />
               </FormButton>
             )}

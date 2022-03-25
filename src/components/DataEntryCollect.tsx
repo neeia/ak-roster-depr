@@ -1,4 +1,4 @@
-﻿import { ButtonBase, makeStyles } from "@material-ui/core";
+﻿import { makeStyles } from "@material-ui/core";
 import React from "react";
 import { Operator } from "../App";
 import FormButton from "./FormButton";
@@ -48,11 +48,10 @@ const useStyles = makeStyles({
   verticalDivider: {
     backgroundColor: "#909090",
     width: "2px",
-    height: "40px",
-    alignSelf: "start",
+    height: "44px",
+    alignSelf: "end",
     marginLeft: "8px",
     marginRight: "8px",
-    marginTop: "16px",
   },
   /* POTENTIAL */
   potentialContainer: {
@@ -127,7 +126,7 @@ const DataEntryCollect = React.memo((props: Props) => {
             onClick={() => onChange(op.id, "favorite", !op.favorite)}
             toggled={op.favorite}
           >
-            {op.favorite ? "❤️" : "🤍" }
+            {op.favorite ? "❤️" : "🤍"}
           </FormButton>
         </div>
       </div>
@@ -138,10 +137,11 @@ const DataEntryCollect = React.memo((props: Props) => {
           Potential
         </div>
         <div className={classes.potentialButtonContainer}>
-          {[...Array(6)].map((x, i) => {
+          {[...Array(6)].map((_, i) => {
             const disabled = !op.owned;
             return (
               <FormButton
+                key={`potential${i + 1}Button`}
                 className={classes.potentialButton}
                 onClick={() => onChange(op.id, "potential", i + 1)}
                 toggled={op.potential === i + 1}
@@ -149,7 +149,8 @@ const DataEntryCollect = React.memo((props: Props) => {
               >
                 <img
                   className={op.potential === i + 1 ? classes.potentialIcon : classes.potentialIconUnselected}
-                  src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/potential/${i+1}`}
+                  src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/potential/${i + 1}`}
+                  alt={`Potential ${i+1} Button`}
                 />
               </FormButton>
             )
