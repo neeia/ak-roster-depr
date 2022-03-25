@@ -29,8 +29,7 @@ const useStyles = makeStyles({
   },
   fav: {
     gridArea: "img",
-    fontSize: "16px",
-    alignSelf: "end",
+    fontSize: "18px",
   },
   opNameArea: {
     gridArea: "name",

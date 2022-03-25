@@ -15,7 +15,7 @@ const useStyles = makeStyles({
   },
   mobileOpDisplay: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(94px, max-content))",
+    gridTemplateColumns: "repeat(auto-fit, minmax(84px, max-content))",
     justifyContent: "center",
     gridGap: "2px",
   },
@@ -26,6 +26,11 @@ const useStyles = makeStyles({
   },
   smallText: {
     fontSize: "12px",
+  },
+  opButton: {
+    display: "flex",
+    flexDirection: "column",
+    boxShadow: "2px 2px 8px rgb(0 0 0 / 30%)",
   },
 });
 
