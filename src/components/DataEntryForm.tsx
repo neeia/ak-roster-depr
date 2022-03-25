@@ -1,4 +1,4 @@
-import { ButtonBase, makeStyles, TextField } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 import React from "react";
 import slugify from "slugify";
 import { Operator } from "../App";
@@ -7,7 +7,6 @@ import DataEntryLevel from "./DataEntryLevel";
 import DataEntrySkillLevel from "./DataEntrySkillLevel";
 import { useBoxStyles } from "./BoxStyles"
 import clsx from "clsx";
-import operatorJson from "../data/operators.json";
 
 const useStyles = makeStyles({
   displayBox: {
@@ -16,6 +15,8 @@ const useStyles = makeStyles({
     padding: "8px",
     boxShadow: "2px 2px 8px rgb(0 0 0 / 30%)",
     alignItems: "center",
+    width: "460px",
+    justifySelf: "center",
   },
   disabled: {
     opacity: "0.3",
@@ -101,7 +102,6 @@ const DataEntryForm = React.memo((props: Props) => {
   const { op, opClass, onChange } = props;
   const classes = useStyles();
   const boxStyle = useBoxStyles();
-  const opInfo = (operatorJson as any)[op.id];
 
   let intermediate = op.name;
   if (op.promotion === 2) {
@@ -133,32 +133,10 @@ const DataEntryForm = React.memo((props: Props) => {
     )
   }
 
-  const unborderStyle = clsx({
-    [boxStyle.boxStyle]: "true",
-    [classes.unborder]: "true",
-  });
-
-
   const boxBox = clsx({
     [boxStyle.boxStyle]: "true",
     [classes.displayBox]: "true",
   });
-
-  const [potentialField, setPotentialField] = React.useState<number | string>(op.potential);
-
-  function updatePotential(pot: string | number) {
-    if (typeof pot === "number") {
-      onChange(op.id, "potential", pot);
-      setPotentialField(Math.min(Math.max(pot, 1), 6).toString());
-    }
-    else if (parseInt(pot)) {
-      onChange(op.id, "potential", parseInt(pot));
-      setPotentialField(Math.min(Math.max(parseInt(pot), 1), 6).toString());
-    }
-    else {
-      setPotentialField("");
-    }
-  };
 
 
   return (

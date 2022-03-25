@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core";
 import React, { useState } from "react";
-import { defaultSortComparator, Operator, MOBILE_BREAKPOINT, TABLET_BREAKPOINT } from "../App";
+import { defaultSortComparator, Operator } from "../App";
 import CollectionTabNavbar from "./CollectionTabNavbar";
 import OperatorCollectionBlock from "./OperatorCollectionBlock";
 import operatorJson from "../data/operators.json";
@@ -71,7 +71,7 @@ const CollectionTab = React.memo((props: Props) => {
       <div className={classes.collectionContainer}>
         {collection.slice(numOps * (page - 1), numOps * page)
           .filter((op: any) => {
-            return filterType != none && filter != none ? op[filterType] === filter : true
+            return filterType !== none && filter !== none ? op[filterType] === filter : true
           })
           .map((op: any) => (
             <OperatorCollectionBlock key={op.id} op={operators[op.id]} />

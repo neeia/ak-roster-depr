@@ -1,12 +1,8 @@
 import { ButtonBase, makeStyles, TextField } from "@material-ui/core";
 import React from "react";
-import slugify from "slugify";
 import { Operator } from "../App";
 import FormButton from "./FormButton";
-import { useBoxStyles } from "./BoxStyles"
-import { disableByProperty, errorForNumericProperty, MAX_LEVEL_BY_RARITY } from "./RosterTable";
-import clsx from "clsx";
-import operatorJson from "../data/operators.json";
+import { MAX_LEVEL_BY_RARITY } from "./RosterTable";
 
 const useStyles = makeStyles({
   container: {
@@ -50,10 +46,9 @@ const useStyles = makeStyles({
     backgroundColor: "#909090",
     width: "2px",
     height: "120px",
-    alignSelf: "start",
+    alignSelf: "end",
     marginLeft: "8px",
     marginRight: "8px",
-    marginTop: "32px",
   },
   /* LEVEL */
   levelContainer: {
@@ -325,10 +320,11 @@ const DataEntryLevel = React.memo((props: Props) => {
         </div>
         {/* Promotion */}
         <div className={classes.promotionButtonContainer}>
-          {[...Array(3)].map((x, i) => {
+          {[...Array(3)].map((_, i) => {
             const disabled = !op.owned || !hasPromotionLevel(i);
             return (
               <FormButton
+                key={"promotion" + i + "Button"}
                 className={classes.promotionButton}
                 onClick={() => onChange(op.id, "promotion", i)}
                 toggled={op.promotion === i}
@@ -337,6 +333,7 @@ const DataEntryLevel = React.memo((props: Props) => {
                 <img
                   className={classes.promotionIcon}
                   src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/elite/${i}`}
+                  alt={`Elite ${i} Button`}
                 />
               </FormButton>
             )
