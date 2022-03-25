@@ -1,24 +1,29 @@
 import { useState, useEffect } from "react";
 
-const SSR_VIEWPORT_WIDTH = 1920;
+export interface Size {
+  width: number | undefined;
+  height: number | undefined;
+}
 
-const useViewportWidth = (): number => {
-  const [windowSize, setWindowSize] = useState(SSR_VIEWPORT_WIDTH);
+function useWindowSize() {
+  const [windowSize, setWindowSize] = useState<Size>({
+    width: undefined,
+    height: undefined,
+  });
 
   useEffect(() => {
-    const handleResize = () => {
-      if (typeof window !== "undefined") {
-        setWindowSize(window.innerWidth);
-      }
-    };
-
+    function handleResize() {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    }
     window.addEventListener("resize", handleResize);
-
     handleResize();
-
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return windowSize;
-};
-export default useViewportWidth;
+}
+
+export default useWindowSize;

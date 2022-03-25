@@ -1,9 +1,10 @@
 {
   "ExpandedNodes": [
     "",
+    "\\public",
+    "\\scripts",
     "\\src",
     "\\src\\components"
   ],
-  "SelectedNode": "\\src\\components\\MobileOpSelectionScreen.tsx",
   "PreviewInSolutionExplorer": false
 }
