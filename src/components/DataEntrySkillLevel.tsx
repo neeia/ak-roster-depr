@@ -118,6 +118,12 @@ const useStyles = makeStyles({
     height: "60px",
     marginRight: "4px",
   },
+  skillIconUnselected: {
+    width: "60px",
+    height: "60px",
+    marginRight: "4px",
+    opacity: "0.5",
+  },
   skillMasteryButton: {
     width:  "48px",
     height: "48px",
@@ -192,7 +198,7 @@ const DataEntrySkillLevel = React.memo((props: Props) => {
             disabled: classes.disabled
           }}
           onClick={() => (onChange(op.id, "skillLevel", nextSkillLevel))}
-          disabled={!op.owned || op.rarity < 3 || op.skillLevel >= 7}
+          disabled={!op.owned || op.rarity < 3 || op.skillLevel >= (op.promotion === 0 ? 4 : 7)}
         >
           <img
             className={classes.skillButtonStack}
@@ -230,7 +236,7 @@ const DataEntrySkillLevel = React.memo((props: Props) => {
             disabled: classes.disabled
           }}
           onClick={() => (onChange(op.id, "skillLevel", op.skillLevel + 1))}
-          disabled={!op.owned || op.rarity < 3 || op.skillLevel >= 7}
+          disabled={!op.owned || op.rarity < 3 || op.skillLevel >= (op.promotion === 0 ? 4 : 7)}
         >
           <svg
             className={classes.skillButtonHalf}
@@ -305,7 +311,7 @@ const DataEntrySkillLevel = React.memo((props: Props) => {
             {hasSkill(i)
               ?
               <img
-                className={classes.skillIcon}
+                className={op.promotion >= i ? classes.skillIcon : classes.skillIconUnselected}
                 src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/skills/${opInfo.skills[i].iconId ?? opInfo.skills[i].skillId}`}
                 alt={`Skill ${i}`}
               />
