@@ -107,9 +107,9 @@ function App() {
   useEffect(() => {
     if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
-    const [, type, tool, userName] = window.location.pathname.split("/");
-    window.history.pushState("object or string", "Title", "/ak/roster/" + (userName === undefined ? "" : userName));
-    if (userName != undefined && checkValidUsername(userName)) {
+    const [, path, userName] = window.location.pathname.split("/");
+    window.history.pushState("object or string", "Title", (path !== "u" || userName === undefined ? "" : "/u/" + userName));
+    if (path === "u" && userName != undefined && checkValidUsername(userName)) {
       findUser(userName).then(() => {
         setValue(3);
       })
