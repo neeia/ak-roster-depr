@@ -18,7 +18,7 @@ const useStyles = makeStyles({
     flexDirection: "column",
   },
   containerChild: {
-    width: "720px",
+    width: "800px",
     display: "grid",
     gridTemplateRows: "auto 1fr",
   },
