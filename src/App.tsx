@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   AppBar,
   Box,
-  createMuiTheme,
+  createTheme,
   CssBaseline,
   makeStyles,
   Tab,
@@ -14,38 +14,27 @@ import firebase from "firebase";
 import operatorJson from "./data/operators.json";
 import useLocalStorage from "./UseLocalStorage";
 
-import OpForm from "./components/OpForm";
-import OperatorCollectionBlock from "./components/OperatorCollectionBlock";
-import RosterTable from "./components/RosterTable";
 import AccountTab from "./components/AccountTab";
 import SearchForm from "./components/SearchForm";
-import DevTab from "./components/DevTab";
-import MobileOpSelectionScreen from "./components/MobileOpSelectionScreen";
-import useViewportWidth from "./components/UseWindowSize";
+import CollectionTab from "./components/CollectionTab";
+import DataTab from "./components/DataTab";
 import { disableByProperty, errorForNumericProperty, MAX_LEVEL_BY_RARITY } from "./components/RosterTable";
+import { red, grey, yellow } from "@material-ui/core/colors";
 
-const darkTheme = createMuiTheme({
+const darkTheme = createTheme({
   palette: {
     type: "dark",
+    primary: {
+      main: grey[900],
+    },
+    secondary: {
+      main: `#f7d98b`,
+    },
   },
 });
 
-const useStyles = makeStyles({
-  collectionContainer: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(266px, 1fr))",
-    rowGap: "20px",
-    gap: "2px",
-    width: "100%",
-  },
-});
-
-const starterOperators = [
-  "Amiya",
-  "Rangers",
-  "Yato",
-  "Noir Corne"
-];
+export const MOBILE_BREAKPOINT = 900;
+export const TABLET_BREAKPOINT = 1300;
 
 // Converts an opJson entry into an Operator
 function opObject ([key, op] : any) : [string, Operator] {
@@ -58,7 +47,7 @@ function opObject ([key, op] : any) : [string, Operator] {
       rarity: op.rarity,
       potential: 0,
       promotion: 0,
-      owned: false, //starterOperators.includes(op.name),
+      owned: false,
       level: 0,
       skillLevel: 0,
     },
@@ -109,7 +98,6 @@ function App() {
     "operators",
     defaultOperators
   );
-  const classes = useStyles();
 
   Object.entries(operatorJson).forEach((op) => {
     if (!(op[0] in operators)) {
@@ -120,9 +108,10 @@ function App() {
   useEffect(() => {
     if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
     // firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
-    const [_, urlName] = window.location.pathname.split("/");
-    if (checkValidUsername(urlName)) {
-      findUser(urlName).then(() => {
+    const [, type, tool, userName] = window.location.pathname.split("/");
+    window.history.pushState("object or string", "Title", "/ak/roster/" + (userName === undefined ? "" : userName));
+    if (userName != undefined && checkValidUsername(userName)) {
+      findUser(userName).then(() => {
         setValue(3);
       })
     }
@@ -148,12 +137,16 @@ function App() {
     [setOperators]
   );
 
+  function minMax(min: number, value: number, max: number) {
+    return Math.min(Math.max(value, min), max);
+  }
+
   const applyChangeWithInvariant = (op: Operator, prop: string, value: number | boolean) => {
     if (!op.owned && prop !== "owned") return op;
     (op as any)[prop] = value;
     switch (prop) {
       case "potential":
-        op.potential = Math.min(Math.max(op.potential, 1), 6);
+        op.potential = minMax(1, op.potential, 6);
         break;
       case "owned":
         if (value === true) {
@@ -167,11 +160,24 @@ function App() {
           op.promotion = -1;
           op.level = 0;
           op.skillLevel = (op.rarity > 2 ? 0 : 0);
+          op.skill1Mastery = undefined;
+          op.skill2Mastery = undefined;
+          op.skill3Mastery = undefined;
         }
         break;
-      case "skillLevel":
       case "promotion":
-        if (op.skillLevel === 7 && op.promotion == 2) {
+        if (value != 2) {
+          op.skill1Mastery = undefined;
+          op.skill2Mastery = undefined;
+          op.skill3Mastery = undefined;
+        }
+        if (value === 0) {
+          op.skillLevel = Math.min(op.skillLevel, 4);
+        }
+        op.level = Math.min(op.level, MAX_LEVEL_BY_RARITY[op.rarity][op.promotion]);
+        break;
+      case "skillLevel":
+        if (value === 7 && op.promotion === 2) {
           op.skill1Mastery = 0;
           op.skill2Mastery = 0;
           if (op.rarity === 6 || op.name === "Amiya") {
@@ -182,31 +188,42 @@ function App() {
           op.skill2Mastery = undefined;
           op.skill3Mastery = undefined;
         }
-        if (op.skillLevel > 4 && op.promotion == 0) {
+        if (op.skillLevel > 4 && op.promotion === 0) {
           op.skillLevel = 4;
         }
-        op.level = Math.min(op.level, MAX_LEVEL_BY_RARITY[op.rarity][op.promotion]);
         break;
       case "level":
         op.level = Math.max(Math.min(op.level, MAX_LEVEL_BY_RARITY[op.rarity][op.promotion]), 1);
+        break;
+      case "skill1Mastery":
+      case "skill2Mastery":
+        if (op.rarity < 4) {
+          op.skill1Mastery = undefined;
+          op.skill2Mastery = undefined;
+        }
+        break;
+      case "skill3Mastery":
+        if (!(op.rarity === 6 || op.name === "Amiya")) {
+          op.skill3Mastery = undefined;
+        }
         break;
     }
     return op;
   }
 
   // Dirty & Close Warning
-  // useEffect(() => {window.onload = function() {
-  //   window.addEventListener("beforeunload", function (e) {
-  //     if (!dirty) {
-  //       return;
-  //     }
+  useEffect(() => {window.onload = function() {
+    window.addEventListener("beforeunload", function (e) {
+      if (!dirty) {
+        return;
+      }
 
-  //     var confirmationMessage = "Not all changes have been backed up. Please save first.";
+      var confirmationMessage = "Not all changes have been backed up. Please save first.";
 
-  //     (e || window.event).returnValue = confirmationMessage; //Gecko + IE
-  //     return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
-  //   });
-  // };}, []);
+      (e || window.event).returnValue = confirmationMessage; //Gecko + IE
+      return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
+    });
+  };}, []);
 
   // no clue what this is for
   function a11yProps(index: number) {
@@ -220,17 +237,6 @@ function App() {
   const [value, setValue] = useState<number>(0);
   const handleTabChange = (event: any, newValue: number) => {
     setValue(newValue);
-  };
-
-  const renderCollection = (collection: typeof operators): any => {
-    return Object.values(collection)
-      .filter((op: any) => collection[op.id].owned && collection[op.id].potential > 0)
-      .sort((a: any, b: any) =>
-        defaultSortComparator(collection[a.id], collection[b.id])
-      )
-      .map((op: any) => (
-        <OperatorCollectionBlock key={op.id} operator={collection[op.id]} />
-      ));
   };
 
   var [collOperators, setCollOperators] = useState<typeof operators>();
@@ -268,24 +274,19 @@ function App() {
           onChange={handleTabChange}
           aria-label="simple tabs example"
         >
-          <Tab label="Data Entry" {...a11yProps(0)} />
-          {/* <Tab label="Roster" {...a11yProps(1)} /> */}
+          <Tab label="Data" {...a11yProps(0)} />
           <Tab label="Collection" {...a11yProps(1)} />
           <Tab label="Account" {...a11yProps(2)} />
           <Tab label="Lookup" {...a11yProps(3)} />
-          {/* <Tab label="Dev Notes" {...a11yProps(4)} /> */}
         </Tabs>
       </AppBar>
-      {/* <TabPanel value={value} index={0}>
-        <RosterTable operators={operators} onChange={handleChange} />
-      </TabPanel> */}
       <TabPanel value={value} index={0}>
-        <MobileOpSelectionScreen operators={operators} onChange={handleChange} />
+        <DataTab operators={operators} onChange={handleChange} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <div className={classes.collectionContainer}>
-          {renderCollection(operators)}
-        </div>
+        <CollectionTab
+          operators={operators}
+          />
       </TabPanel>
       <TabPanel value={value} index={2}>
         <AccountTab 
@@ -296,13 +297,10 @@ function App() {
       </TabPanel>
       <TabPanel value={value} index={3}>
         <SearchForm handleSubmit={findUser} />
-        <div className={classes.collectionContainer}>
-          {collOperators ? renderCollection(collOperators) : ""}
-        </div>
+        {collOperators ? <CollectionTab
+          operators={collOperators}
+        /> : ""}
       </TabPanel>
-      {/* <TabPanel value={value} index={4}>
-        <DevTab />
-      </TabPanel> */}
     </ThemeProvider>
   );
 }

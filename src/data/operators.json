@@ -27,22 +27,22 @@
     "id": "char_003_kalts",
     "name": "Kal'tsit",
     "rarity": 6,
-    "isCnOnly": true,
+    "isCnOnly": false,
     "skills": [
       {
         "skillId": "skchr_kalts_1",
         "iconId": null,
-        "skillName": "指令：结构加固"
+        "skillName": "Command: Structural Fortification"
       },
       {
         "skillId": "skchr_kalts_2",
         "iconId": null,
-        "skillName": "指令：战术协同"
+        "skillName": "Command: Tactical Coordination"
       },
       {
         "skillId": "skchr_kalts_3",
         "iconId": null,
-        "skillName": "指令：熔毁"
+        "skillName": "Command: Meltdown"
       }
     ],
     "class": "Medic"
@@ -145,22 +145,22 @@
     "id": "char_1012_skadi2",
     "name": "Skadi the Corrupting Heart",
     "rarity": 6,
-    "isCnOnly": true,
+    "isCnOnly": false,
     "skills": [
       {
         "skillId": "skchr_skadi2_1",
         "iconId": null,
-        "skillName": "同归殊途之吟"
+        "skillName": "Chant of Returning by Varied Paths"
       },
       {
         "skillId": "skchr_skadi2_2",
         "iconId": null,
-        "skillName": "同葬无光之愿"
+        "skillName": "Wish of Burial Beyond the Light"
       },
       {
         "skillId": "skchr_skadi2_3",
         "iconId": null,
-        "skillName": "\"潮涌，潮枯\""
+        "skillName": "'The Tide Surges, The Tide Recedes'"
       }
     ],
     "class": "Supporter"
@@ -188,6 +188,30 @@
       }
     ],
     "class": "Sniper"
+  },
+  "char_1014_nearl2": {
+    "id": "char_1014_nearl2",
+    "name": "Nearl the Radiant Knight",
+    "rarity": 6,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skchr_nearl2_1",
+        "iconId": null,
+        "skillName": "灿焰长刃"
+      },
+      {
+        "skillId": "skchr_nearl2_2",
+        "iconId": null,
+        "skillName": "逐夜烁光"
+      },
+      {
+        "skillId": "skchr_nearl2_3",
+        "iconId": null,
+        "skillName": "耀阳颔首"
+      }
+    ],
+    "class": "Guard"
   },
   "char_102_texas": {
     "id": "char_102_texas",
@@ -3105,17 +3129,17 @@
     "id": "char_369_bena",
     "name": "Bena",
     "rarity": 5,
-    "isCnOnly": true,
+    "isCnOnly": false,
     "skills": [
       {
         "skillId": "skchr_bena_1",
         "iconId": null,
-        "skillName": "奋力修剪"
+        "skillName": "Fervent Trimming"
       },
       {
         "skillId": "skchr_bena_2",
         "iconId": null,
-        "skillName": "快速修剪"
+        "skillName": "Rapid Trimming"
       }
     ],
     "class": "Specialist"
@@ -3309,6 +3333,33 @@
     ],
     "class": "Specialist"
   },
+  "char_4000_jnight": {
+    "id": "char_4000_jnight",
+    "name": "\"Justice Knight\"",
+    "rarity": 1,
+    "isCnOnly": true,
+    "skills": [],
+    "class": "Sniper"
+  },
+  "char_4004_pudd": {
+    "id": "char_4004_pudd",
+    "name": "Pudding",
+    "rarity": 4,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skcom_magic_rage[2]",
+        "iconId": null,
+        "skillName": "战术咏唱·β型"
+      },
+      {
+        "skillId": "skchr_pudd_2",
+        "iconId": null,
+        "skillName": "扩散电流"
+      }
+    ],
+    "class": "Caster"
+  },
   "char_401_elysm": {
     "id": "char_401_elysm",
     "name": "Elysium",
@@ -3428,6 +3479,30 @@
     ],
     "class": "Defender"
   },
+  "char_420_flamtl": {
+    "id": "char_420_flamtl",
+    "name": "Flametail",
+    "rarity": 6,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skchr_flamtl_1",
+        "iconId": null,
+        "skillName": "迅敏直觉"
+      },
+      {
+        "skillId": "skchr_flamtl_2",
+        "iconId": null,
+        "skillName": "“红松林”"
+      },
+      {
+        "skillId": "skchr_flamtl_3",
+        "iconId": null,
+        "skillName": "焰心"
+      }
+    ],
+    "class": "Vanguard"
+  },
   "char_421_crow": {
     "id": "char_421_crow",
     "name": "La Pluma",
@@ -3475,25 +3550,68 @@
     "id": "char_426_billro",
     "name": "Carnelian",
     "rarity": 6,
-    "isCnOnly": true,
+    "isCnOnly": false,
     "skills": [
       {
         "skillId": "skchr_billro_1",
         "iconId": null,
-        "skillName": "沙暴守卫"
+        "skillName": "Sandstorm Guardian"
       },
       {
         "skillId": "skchr_billro_2",
         "iconId": null,
-        "skillName": "沙缚镣锁"
+        "skillName": "Sand Fetters"
       },
       {
         "skillId": "skchr_billro_3",
         "iconId": null,
-        "skillName": "食噬之印"
+        "skillName": "Mark of Gluttony"
       }
     ],
     "class": "Caster"
+  },
+  "char_430_fartth": {
+    "id": "char_430_fartth",
+    "name": "Fartooth",
+    "rarity": 6,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skcom_quickattack[3]",
+        "iconId": null,
+        "skillName": "迅捷打击·γ型"
+      },
+      {
+        "skillId": "skchr_fartth_2",
+        "iconId": null,
+        "skillName": "同盟支援"
+      },
+      {
+        "skillId": "skchr_fartth_3",
+        "iconId": null,
+        "skillName": "光羽箭"
+      }
+    ],
+    "class": "Sniper"
+  },
+  "char_431_ashlok": {
+    "id": "char_431_ashlok",
+    "name": "Ashlock",
+    "rarity": 5,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skcom_atk_up[3]",
+        "iconId": null,
+        "skillName": "攻击力强化·γ型"
+      },
+      {
+        "skillId": "skchr_ashlok_2",
+        "iconId": null,
+        "skillName": "专注轰击"
+      }
+    ],
+    "class": "Defender"
   },
   "char_436_whispr": {
     "id": "char_436_whispr",
@@ -3556,6 +3674,25 @@
       }
     ],
     "class": "Sniper"
+  },
+  "char_449_glider": {
+    "id": "char_449_glider",
+    "name": "Honeyberry",
+    "rarity": 5,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skchr_glider_1",
+        "iconId": null,
+        "skillName": "精神护理"
+      },
+      {
+        "skillId": "skchr_glider_2",
+        "iconId": null,
+        "skillName": "振奋"
+      }
+    ],
+    "class": "Medic"
   },
   "char_451_robin": {
     "id": "char_451_robin",
@@ -3699,17 +3836,17 @@
     "id": "char_469_indigo",
     "name": "Indigo",
     "rarity": 4,
-    "isCnOnly": true,
+    "isCnOnly": false,
     "skills": [
       {
         "skillId": "skchr_indigo_1",
         "iconId": null,
-        "skillName": "灯塔守卫者"
+        "skillName": "Lighthouse Guardian"
       },
       {
         "skillId": "skchr_indigo_2",
         "iconId": null,
-        "skillName": "光影迷宫"
+        "skillName": "Labyrinth of Light"
       }
     ],
     "class": "Caster"
@@ -3738,26 +3875,45 @@
     ],
     "class": "Caster"
   },
+  "char_473_mberry": {
+    "id": "char_473_mberry",
+    "name": "Mulberry",
+    "rarity": 5,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skchr_mberry_1",
+        "iconId": null,
+        "skillName": "治愈云雾"
+      },
+      {
+        "skillId": "skchr_mberry_2",
+        "iconId": null,
+        "skillName": "安全区域"
+      }
+    ],
+    "class": "Medic"
+  },
   "char_474_glady": {
     "id": "char_474_glady",
     "name": "Gladiia",
     "rarity": 6,
-    "isCnOnly": true,
+    "isCnOnly": false,
     "skills": [
       {
         "skillId": "skchr_glady_1",
         "iconId": null,
-        "skillName": "缺水的大洋裂断"
+        "skillName": "Waterless Parting of the Great Ocean"
       },
       {
         "skillId": "skchr_glady_2",
         "iconId": null,
-        "skillName": "缺水的掌握怒海"
+        "skillName": "Waterless Grasp of the Raging Seas"
       },
       {
         "skillId": "skchr_glady_3",
         "iconId": null,
-        "skillName": "缺水的碎漩狂舞"
+        "skillName": "Waterless Dance of the Shattered Maelstrom"
       }
     ],
     "class": "Specialist"
@@ -3766,17 +3922,17 @@
     "id": "char_475_akafyu",
     "name": "Akafuyu",
     "rarity": 5,
-    "isCnOnly": true,
+    "isCnOnly": false,
     "skills": [
       {
         "skillId": "skchr_akafyu_1",
         "iconId": null,
-        "skillName": "信影流·雷刀之势"
+        "skillName": "Nobukage-ryu - Kaminari Gatana no Zei"
       },
       {
         "skillId": "skchr_akafyu_2",
         "iconId": null,
-        "skillName": "信影流·十文字胜"
+        "skillName": "Nobukage-ryu - Juumonji Masaru"
       }
     ],
     "class": "Guard"
@@ -3785,20 +3941,63 @@
     "id": "char_478_kirara",
     "name": "Kirara",
     "rarity": 5,
-    "isCnOnly": true,
+    "isCnOnly": false,
     "skills": [
       {
         "skillId": "skchr_kirara_1",
         "iconId": null,
-        "skillName": "锚击"
+        "skillName": "Anchor Strike"
       },
       {
         "skillId": "skchr_kirara_2",
         "iconId": null,
-        "skillName": "锚点捕捉"
+        "skillName": "Anchor Point Snap"
       }
     ],
     "class": "Specialist"
+  },
+  "char_479_sleach": {
+    "id": "char_479_sleach",
+    "name": "Saileach",
+    "rarity": 6,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skcom_assist_cost[3]",
+        "iconId": null,
+        "skillName": "支援号令·γ型"
+      },
+      {
+        "skillId": "skchr_sleach_2",
+        "iconId": null,
+        "skillName": "信仰传承"
+      },
+      {
+        "skillId": "skchr_sleach_3",
+        "iconId": null,
+        "skillName": "光辉旗帜"
+      }
+    ],
+    "class": "Vanguard"
+  },
+  "char_484_robrta": {
+    "id": "char_484_robrta",
+    "name": "Roberta",
+    "rarity": 4,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skchr_robrta_1",
+        "iconId": null,
+        "skillName": "叙拉古式上妆"
+      },
+      {
+        "skillId": "skchr_robrta_2",
+        "iconId": null,
+        "skillName": "全自动造型仪"
+      }
+    ],
+    "class": "Supporter"
   },
   "char_485_pallas": {
     "id": "char_485_pallas",
@@ -3842,6 +4041,44 @@
       }
     ],
     "class": "Guard"
+  },
+  "char_489_serum": {
+    "id": "char_489_serum",
+    "name": "Corroserum",
+    "rarity": 5,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skchr_serum_1",
+        "iconId": null,
+        "skillName": "专注力超载"
+      },
+      {
+        "skillId": "skchr_serum_2",
+        "iconId": null,
+        "skillName": "传导蚀滞弹"
+      }
+    ],
+    "class": "Caster"
+  },
+  "char_496_wildmn": {
+    "id": "char_496_wildmn",
+    "name": "Wild Mane",
+    "rarity": 5,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skchr_wildmn_1",
+        "iconId": null,
+        "skillName": "骑枪刺击"
+      },
+      {
+        "skillId": "skchr_wildmn_2",
+        "iconId": null,
+        "skillName": "夹枪冲锋"
+      }
+    ],
+    "class": "Vanguard"
   },
   "char_500_noirc": {
     "id": "char_500_noirc",

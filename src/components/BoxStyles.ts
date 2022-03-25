@@ -2,23 +2,26 @@ import { makeStyles } from "@material-ui/core";
 
 export const useBoxStyles = makeStyles({
   boxStyle: {
-    border: "1px solid grey",
+    border: "1px solid #808080",
     borderRadius: "8px",
-    padding: "6px 8px 6px 8px",
-    marginLeft: "1px",
-    marginRight: "1px",
+    padding: "4px",
     textAlign: "center",
     flexGrow: 1,
   },
   highlighted: {
-    backgroundColor: "#fdfdfd",
-    color: "#121212"
+    border: "2px solid #f7d98b",
+    "& img.classIcon": {
+      mixBlendMode: "difference"
+    },
+    flexGrow: 1.05,
   },
   unborderStyle: {
-    padding: "6px 8px 0px 8px",
     marginLeft: "1px",
     marginRight: "1px",
     textAlign: "center",
     flexGrow: 1,
+  },
+  disabled: {
+    opacity: "0.3"
   },
 });
