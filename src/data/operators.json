@@ -169,22 +169,22 @@
     "id": "char_1013_chen2",
     "name": "Ch'en the Holungday",
     "rarity": 6,
-    "isCnOnly": true,
+    "isCnOnly": false,
     "skills": [
       {
         "skillId": "skchr_chen2_1",
         "iconId": null,
-        "skillName": "高压冲击"
+        "skillName": "High-Pressure Splash"
       },
       {
         "skillId": "skchr_chen2_2",
         "iconId": null,
-        "skillName": "“堇青之夜”"
+        "skillName": "'Night of Violet'"
       },
       {
         "skillId": "skchr_chen2_3",
         "iconId": null,
-        "skillName": "“假日风暴”"
+        "skillName": "'Holiday Storm'"
       }
     ],
     "class": "Sniper"
@@ -231,6 +231,25 @@
       }
     ],
     "class": "Vanguard"
+  },
+  "char_1021_kroos2": {
+    "id": "char_1021_kroos2",
+    "name": "Kroos the Keen Glint",
+    "rarity": 5,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skchr_kroos2_1",
+        "iconId": null,
+        "skillName": "无痕"
+      },
+      {
+        "skillId": "skchr_kroos2_2",
+        "iconId": null,
+        "skillName": "封喉"
+      }
+    ],
+    "class": "Sniper"
   },
   "char_103_angel": {
     "id": "char_103_angel",
@@ -1531,6 +1550,30 @@
     ],
     "class": "Defender"
   },
+  "char_2023_ling": {
+    "id": "char_2023_ling",
+    "name": "Ling",
+    "rarity": 6,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skchr_ling_1",
+        "iconId": null,
+        "skillName": "重进酒"
+      },
+      {
+        "skillId": "skchr_ling_2",
+        "iconId": null,
+        "skillName": "笑鸣瑟"
+      },
+      {
+        "skillId": "skchr_ling_3",
+        "iconId": null,
+        "skillName": "宁作吾"
+      }
+    ],
+    "class": "Supporter"
+  },
   "char_204_platnm": {
     "id": "char_204_platnm",
     "name": "Platinum",
@@ -1549,6 +1592,30 @@
       }
     ],
     "class": "Sniper"
+  },
+  "char_206_gnosis": {
+    "id": "char_206_gnosis",
+    "name": "Gnosis",
+    "rarity": 6,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skchr_gnosis_1",
+        "iconId": null,
+        "skillName": "高速思考"
+      },
+      {
+        "skillId": "skchr_gnosis_2",
+        "iconId": null,
+        "skillName": "零度爆发"
+      },
+      {
+        "skillId": "skchr_gnosis_3",
+        "iconId": null,
+        "skillName": "失温症"
+      }
+    ],
+    "class": "Supporter"
   },
   "char_208_melan": {
     "id": "char_208_melan",
@@ -2506,6 +2573,30 @@
     ],
     "class": "Medic"
   },
+  "char_300_phenxi": {
+    "id": "char_300_phenxi",
+    "name": "Fiammetta",
+    "rarity": 6,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skchr_phenxi_1",
+        "iconId": null,
+        "skillName": "“你须直面”"
+      },
+      {
+        "skillId": "skchr_phenxi_2",
+        "iconId": null,
+        "skillName": "“你须愧悔”"
+      },
+      {
+        "skillId": "skchr_phenxi_3",
+        "iconId": null,
+        "skillName": "“你须偿还”"
+      }
+    ],
+    "class": "Sniper"
+  },
   "char_301_cutter": {
     "id": "char_301_cutter",
     "name": "Cutter",
@@ -2624,6 +2715,30 @@
       }
     ],
     "class": "Defender"
+  },
+  "char_322_lmlee": {
+    "id": "char_322_lmlee",
+    "name": "Lee",
+    "rarity": 6,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skchr_lmlee_1",
+        "iconId": null,
+        "skillName": "小惩大诫"
+      },
+      {
+        "skillId": "skchr_lmlee_2",
+        "iconId": null,
+        "skillName": "驱凶辟邪"
+      },
+      {
+        "skillId": "skchr_lmlee_3",
+        "iconId": null,
+        "skillName": "贵客盈门"
+      }
+    ],
+    "class": "Specialist"
   },
   "char_325_bison": {
     "id": "char_325_bison",
@@ -3171,6 +3286,30 @@
     "skills": [],
     "class": "Specialist"
   },
+  "char_377_gdglow": {
+    "id": "char_377_gdglow",
+    "name": "Goldenglow",
+    "rarity": 6,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skchr_gdglow_1",
+        "iconId": null,
+        "skillName": "火花四溅"
+      },
+      {
+        "skillId": "skchr_gdglow_2",
+        "iconId": null,
+        "skillName": "电流翻涌"
+      },
+      {
+        "skillId": "skchr_gdglow_3",
+        "iconId": null,
+        "skillName": "澄净闪耀"
+      }
+    ],
+    "class": "Caster"
+  },
   "char_378_asbest": {
     "id": "char_378_asbest",
     "name": "Asbestos",
@@ -3379,6 +3518,63 @@
     ],
     "class": "Vanguard"
   },
+  "char_4013_kjera": {
+    "id": "char_4013_kjera",
+    "name": "Kjera",
+    "rarity": 5,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skcom_atk_up[3]",
+        "iconId": null,
+        "skillName": "攻击力强化·γ型"
+      },
+      {
+        "skillId": "skchr_kjera_2",
+        "iconId": null,
+        "skillName": "心随意动"
+      }
+    ],
+    "class": "Caster"
+  },
+  "char_4016_kazema": {
+    "id": "char_4016_kazema",
+    "name": "Kazemaru",
+    "rarity": 5,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skchr_kazema_1",
+        "iconId": null,
+        "skillName": "纸艺·迅击"
+      },
+      {
+        "skillId": "skchr_kazema_2",
+        "iconId": null,
+        "skillName": "纸艺·双影"
+      }
+    ],
+    "class": "Specialist"
+  },
+  "char_4019_ncdeer": {
+    "id": "char_4019_ncdeer",
+    "name": "Nine-Colored Deer",
+    "rarity": 5,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skchr_ncdeer_1",
+        "iconId": null,
+        "skillName": "人间降吉"
+      },
+      {
+        "skillId": "skchr_ncdeer_2",
+        "iconId": null,
+        "skillName": "仙山去远"
+      }
+    ],
+    "class": "Supporter"
+  },
   "char_402_tuye": {
     "id": "char_402_tuye",
     "name": "Tuye",
@@ -3397,6 +3593,44 @@
       }
     ],
     "class": "Medic"
+  },
+  "char_4025_aprot2": {
+    "id": "char_4025_aprot2",
+    "name": "Shalem",
+    "rarity": 5,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skchr_aprot2_1",
+        "iconId": null,
+        "skillName": "速战速决"
+      },
+      {
+        "skillId": "skchr_aprot2_2",
+        "iconId": null,
+        "skillName": "燃命狂欢"
+      }
+    ],
+    "class": "Defender"
+  },
+  "char_4036_forcer": {
+    "id": "char_4036_forcer",
+    "name": "Enforcer",
+    "rarity": 5,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skchr_forcer_1",
+        "iconId": null,
+        "skillName": "护身射击"
+      },
+      {
+        "skillId": "skchr_forcer_2",
+        "iconId": null,
+        "skillName": "惊爆射击"
+      }
+    ],
+    "class": "Specialist"
   },
   "char_405_absin": {
     "id": "char_405_absin",
@@ -3507,20 +3741,39 @@
     "id": "char_421_crow",
     "name": "La Pluma",
     "rarity": 5,
-    "isCnOnly": true,
+    "isCnOnly": false,
     "skills": [
       {
         "skillId": "skchr_crow_1",
         "iconId": null,
-        "skillName": "高速切割"
+        "skillName": "Rapid Slashing"
       },
       {
         "skillId": "skchr_crow_2",
         "iconId": null,
-        "skillName": "收割"
+        "skillName": "Reap"
       }
     ],
     "class": "Guard"
+  },
+  "char_422_aurora": {
+    "id": "char_422_aurora",
+    "name": "Aurora",
+    "rarity": 5,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skchr_aurora_1",
+        "iconId": null,
+        "skillName": "固守家园"
+      },
+      {
+        "skillId": "skchr_aurora_2",
+        "iconId": null,
+        "skillName": "人工降雪"
+      }
+    ],
+    "class": "Defender"
   },
   "char_423_blemsh": {
     "id": "char_423_blemsh",
@@ -3636,22 +3889,22 @@
     "id": "char_437_mizuki",
     "name": "Mizuki",
     "rarity": 6,
-    "isCnOnly": true,
+    "isCnOnly": false,
     "skills": [
       {
         "skillId": "skchr_mizuki_1",
         "iconId": null,
-        "skillName": "唤醒"
+        "skillName": "Awaken"
       },
       {
         "skillId": "skchr_mizuki_2",
         "iconId": null,
-        "skillName": "囚徒困境"
+        "skillName": "Prisoner's Dilemma"
       },
       {
         "skillId": "skchr_mizuki_3",
         "iconId": null,
-        "skillName": "镜花水月"
+        "skillName": "Moon in the Water"
       }
     ],
     "class": "Specialist"
@@ -3879,17 +4132,17 @@
     "id": "char_473_mberry",
     "name": "Mulberry",
     "rarity": 5,
-    "isCnOnly": true,
+    "isCnOnly": false,
     "skills": [
       {
         "skillId": "skchr_mberry_1",
         "iconId": null,
-        "skillName": "治愈云雾"
+        "skillName": "Healing Haze"
       },
       {
         "skillId": "skchr_mberry_2",
         "iconId": null,
-        "skillName": "安全区域"
+        "skillName": "Safe Zone"
       }
     ],
     "class": "Medic"
@@ -3937,6 +4190,25 @@
     ],
     "class": "Guard"
   },
+  "char_476_blkngt": {
+    "id": "char_476_blkngt",
+    "name": "Blacknight",
+    "rarity": 5,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skchr_blkngt_1",
+        "iconId": null,
+        "skillName": "半醒"
+      },
+      {
+        "skillId": "skchr_blkngt_2",
+        "iconId": null,
+        "skillName": "安眠"
+      }
+    ],
+    "class": "Vanguard"
+  },
   "char_478_kirara": {
     "id": "char_478_kirara",
     "name": "Kirara",
@@ -3960,22 +4232,22 @@
     "id": "char_479_sleach",
     "name": "Saileach",
     "rarity": 6,
-    "isCnOnly": true,
+    "isCnOnly": false,
     "skills": [
       {
         "skillId": "skcom_assist_cost[3]",
         "iconId": null,
-        "skillName": "支援号令·γ型"
+        "skillName": "Support γ"
       },
       {
         "skillId": "skchr_sleach_2",
         "iconId": null,
-        "skillName": "信仰传承"
+        "skillName": "Inheritance of Faith"
       },
       {
         "skillId": "skchr_sleach_3",
         "iconId": null,
-        "skillName": "光辉旗帜"
+        "skillName": "Glorious Banner"
       }
     ],
     "class": "Vanguard"
@@ -3984,17 +4256,17 @@
     "id": "char_484_robrta",
     "name": "Roberta",
     "rarity": 4,
-    "isCnOnly": true,
+    "isCnOnly": false,
     "skills": [
       {
         "skillId": "skchr_robrta_1",
         "iconId": null,
-        "skillName": "叙拉古式上妆"
+        "skillName": "Siracusan-Style Makeup"
       },
       {
         "skillId": "skchr_robrta_2",
         "iconId": null,
-        "skillName": "全自动造型仪"
+        "skillName": "Full Auto Modeler"
       }
     ],
     "class": "Supporter"
@@ -4003,22 +4275,22 @@
     "id": "char_485_pallas",
     "name": "Pallas",
     "rarity": 6,
-    "isCnOnly": true,
+    "isCnOnly": false,
     "skills": [
       {
         "skillId": "skchr_pallas_1",
         "iconId": null,
-        "skillName": "胜利的连击"
+        "skillName": "Strikes of Victory"
       },
       {
         "skillId": "skchr_pallas_2",
         "iconId": null,
-        "skillName": "信念的长鞭"
+        "skillName": "Whip of Conviction"
       },
       {
         "skillId": "skchr_pallas_3",
         "iconId": null,
-        "skillName": "英勇的祝福"
+        "skillName": "Blessing of Heroism"
       }
     ],
     "class": "Guard"
@@ -4027,17 +4299,17 @@
     "id": "char_486_takila",
     "name": "Tequila",
     "rarity": 5,
-    "isCnOnly": true,
+    "isCnOnly": false,
     "skills": [
       {
         "skillId": "skchr_takila_1",
         "iconId": null,
-        "skillName": "当机立断"
+        "skillName": "Decisive Action"
       },
       {
         "skillId": "skchr_takila_2",
         "iconId": null,
-        "skillName": "剑走偏锋"
+        "skillName": "Esoteric Bladework"
       }
     ],
     "class": "Guard"
@@ -4060,6 +4332,25 @@
       }
     ],
     "class": "Caster"
+  },
+  "char_492_quercu": {
+    "id": "char_492_quercu",
+    "name": "Quercus",
+    "rarity": 5,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skchr_quercu_1",
+        "iconId": null,
+        "skillName": "大地的慈悲"
+      },
+      {
+        "skillId": "skchr_quercu_2",
+        "iconId": null,
+        "skillName": "生灵的回响"
+      }
+    ],
+    "class": "Supporter"
   },
   "char_496_wildmn": {
     "id": "char_496_wildmn",
