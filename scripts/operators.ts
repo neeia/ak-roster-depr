@@ -1,12 +1,19 @@
 import path from "path";
 import fs from "fs";
 import operators from "./arknights-tools-skunkworks/data/operators.json";
-import { Operator } from "./operatortype";
+import { Operator } from "./arknights-tools-skunkworks/scripts/output-types";
+
+interface OperatorSkill {
+  skillId: string;
+  iconId: string | null;
+  skillName: string;
+  masteries: any;
+}
 
 const subset = Object.values(operators).map((entry: Operator) => {
   // keep only these properties
   const { id, name, rarity, isCnOnly } = entry;
-  const skills = entry.skills.map((skillEntry) => {
+  const skills = entry.skills.map((skillEntry: OperatorSkill) => {
     // remove mastery data since we don't need it
     const { skillId, iconId, skillName } = skillEntry;
     return {
@@ -15,7 +22,7 @@ const subset = Object.values(operators).map((entry: Operator) => {
       skillName
     };
   });
-  const modules = (entry.module === undefined ? [] : [entry.module])
+  const modules = (entry.module === undefined ? [] : [entry.module.name])
   return [
     id,
     { id, name, rarity, isCnOnly, skills, class: entry.class, modules }
