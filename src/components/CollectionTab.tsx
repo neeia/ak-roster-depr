@@ -31,10 +31,8 @@ const CollectionTab = React.memo((props: Props) => {
   const size: Size = useWindowSize();
   const width = size.width === undefined ? 1920 : size.width;
   const x = Math.floor((width * 0.95) / 310);
-  console.log("width: " + x);
   const height = size.height === undefined ? 1080 : size.height;
   const y = Math.floor((height - 120) / 86);
-  console.log("height: " + y);
 
   const numOps = x * y;
   const [page, setPage] = useState(1);
