@@ -96,6 +96,20 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
       </span>
     )
   }
+  if (op.name.includes(" (")) {
+    const name = op.name.split(" (");
+    const title = name[1].split(")");
+    opName = (
+      <span>
+        <span className={classes.opName}>
+          {name[0]}
+        </span>
+        <span className={classes.alterTitle}>
+          {title[0]}
+        </span>
+      </span>
+    )
+  }
 
   // merge operator portrait with rarity drop-shadow
   const opIconStyle = clsx({
