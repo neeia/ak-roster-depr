@@ -1,10 +1,10 @@
-import { makeStyles } from "@material-ui/core";
 import React, { useState } from "react";
 import { defaultSortComparator, Operator } from "../App";
-import CollectionTabNavbar from "./CollectionTabNavbar";
-import OperatorCollectionBlock from "./OperatorCollectionBlock";
 import operatorJson from "../data/operators.json";
 import useWindowSize, { Size } from "./UseWindowSize";
+import { makeStyles } from "@material-ui/core";
+import CollectionTabNavbar from "./CollectionTabNavbar";
+import OperatorCollectionBlock from "./OperatorCollectionBlock";
 
 
 const useStyles = makeStyles({
@@ -31,10 +31,8 @@ const CollectionTab = React.memo((props: Props) => {
   const size: Size = useWindowSize();
   const width = size.width === undefined ? 1920 : size.width;
   const x = Math.floor((width * 0.95) / 310);
-  console.log("width: " + x);
   const height = size.height === undefined ? 1080 : size.height;
   const y = Math.floor((height - 120) / 86);
-  console.log("height: " + y);
 
   const numOps = x * y;
   const [page, setPage] = useState(1);

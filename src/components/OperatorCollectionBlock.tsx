@@ -1,10 +1,10 @@
-import { makeStyles } from "@material-ui/core";
 import React from "react";
 import slugify from "slugify";
 import { Operator } from "../App";
-import SkillDisplayBox from "./SkillDisplayBox";
-import clsx from "clsx";
+import { makeStyles } from "@material-ui/core";
 import { useRarityStyles } from "./StyleRarityUnderline";
+import clsx from "clsx";
+import SkillDisplayBox from "./SkillDisplayBox";
 
 const useStyles = makeStyles({
   opContainer: {
@@ -29,7 +29,8 @@ const useStyles = makeStyles({
   },
   fav: {
     gridArea: "img",
-    fontSize: "18px",
+    fontSize: "16px",
+    alignSelf: "end",
   },
   opNameArea: {
     gridArea: "name",
@@ -91,6 +92,20 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
         </span>
         <span className={classes.alterTitle}>
           {splitName[1]}
+        </span>
+      </span>
+    )
+  }
+  if (op.name.includes(" (")) {
+    const name = op.name.split(" (");
+    const title = name[1].split(")");
+    opName = (
+      <span>
+        <span className={classes.opName}>
+          {name[0]}
+        </span>
+        <span className={classes.alterTitle}>
+          {title[0]}
         </span>
       </span>
     )

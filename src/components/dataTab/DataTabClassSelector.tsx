@@ -1,7 +1,7 @@
-import { makeStyles } from "@material-ui/core";
 import React from "react";
-import { Operator, MOBILE_BREAKPOINT, TABLET_BREAKPOINT } from "../App";
-import useWindowSize, { Size } from "./UseWindowSize";
+import { UIMode, MOBILE_BREAKPOINT, TABLET_BREAKPOINT, getUIMode } from "../../App";
+import useWindowSize, { Size } from "../UseWindowSize";
+import { makeStyles } from "@material-ui/core";
 import clsx from "clsx";
 import DataTabClassButton from "./DataTabClassButton";
 
@@ -16,8 +16,7 @@ const useStyles = makeStyles({
   },
   classDisplayMobile: {
     display: "grid",
-    gridTemplateColumns: "auto",
-    gridTemplateRows: "repeat(8, 1fr)",
+    gridTemplateColumns: "repeat(4, 1fr)",
     height: "1vh",
     marginRight: "12px",
   },
@@ -35,9 +34,9 @@ interface Props {
 const DataTabClassSelector = React.memo((props: Props) => {
   const classes = useStyles();
   const { classList, onClick, activeClass } = props;
-
   const size: Size = useWindowSize();
   const width = size.width === undefined ? 1920 : size.width;
+  let uiMode = getUIMode(width);
 
   const classDisplay = clsx({
     [classes.classDisplay]: width > TABLET_BREAKPOINT,
@@ -52,6 +51,7 @@ const DataTabClassSelector = React.memo((props: Props) => {
         .map((cl: string) => (
           <DataTabClassButton
             cl={cl}
+            uiMode={uiMode}
             onClick={(() => onClick(cl))}
             toggled={activeClass === cl}
           />

@@ -1,13 +1,11 @@
-import { makeStyles } from "@material-ui/core";
-import FormButton from "./FormButton";
-import React from "react";
-import { useState } from "react";
-import { Operator, MOBILE_BREAKPOINT, TABLET_BREAKPOINT } from "../App";
-import DataEntryForm from "./DataEntryForm";
+import React, { useState } from "react";
+import { Operator, TABLET_BREAKPOINT, MOBILE_BREAKPOINT, UIMode, getUIMode } from "../App";
 import useWindowSize, { Size } from "./UseWindowSize";
+import { makeStyles } from "@material-ui/core";
 import clsx from "clsx";
-import DataTabOperatorSelector from "./DataTabOperatorSelector";
-import DataTabClassSelector from "./DataTabClassSelector";
+import DataTabOperatorSelector from "./dataTab/DataTabOperatorSelector";
+import DataTabClassSelector from "./dataTab/DataTabClassSelector";
+import DataEntryForm from "./dataTab/DataEntryForm";
 
 const useStyles = makeStyles({
   container: {
@@ -17,67 +15,19 @@ const useStyles = makeStyles({
   },
   containerMobile: {
     display: "flex",
-    alignItems: "left",
+    alignItems: "center",
     flexDirection: "column",
   },
   containerChild: {
-    width: "720px",
+    width: "800px",
     display: "grid",
     gridTemplateRows: "auto 1fr",
   },
   containerChildMobile: {
     flex: 1,
     display: "grid",
-    gridTemplateColumns: "auto 1fr",
+    gridTemplateRows: "auto 1fr",
     justifyContent: "center",
-  },
-  classDisplay: {
-    display: "flex",
-    justifyContent: "center",
-  },
-  classDisplayTablet: {
-    display: "flex",
-    justifyContent: "center",
-  },
-  classDisplayMobile: {
-    display: "grid",
-    gridTemplateColumns: "auto",
-    gridTemplateRows: "repeat(8, 1fr)",
-    height: "1vh",
-    marginRight: "12px",
-  },
-  classSelectorButtonArea: {
-    width: "72px",
-    height: "60px",
-    display: "flex",
-    justifyContent: "center",
-    alignContent: "center",
-    margin: "2px",
-  },
-  classButton: {
-    display: "flex",
-    flexDirection: "column",
-  },
-  classIcon: {
-    width: "32px",
-    height: "32px",
-    marginBottom: "4px",
-  },
-  marginBottom: {
-    marginBottom: "16px",
-  },
-  opIcon: {
-    width: "64px",
-    height: "64px",
-    marginBottom: "2px",
-  },
-  smallText: {
-    fontSize: "12px",
-  },
-  opButton: {
-    display: "flex",
-    flexDirection: "column",
-    boxShadow: "2px 2px 8px rgb(0 0 0 / 30%)",
   },
 });
 
@@ -107,13 +57,14 @@ export const COLOR_BY_RARITY = ["#000000", "#9f9f9f", "#dce537", "#00b2f6", "#db
 const DataTab = React.memo((props: Props) => {
   const classes = useStyles();
   const { operators, onChange } = props;
+  const size: Size = useWindowSize();
+  const width = size.width === undefined ? 1920 : size.width;
+  let uiMode = getUIMode(width);
 
   const noneStr = "none";
   const [selectedClass, setSelectedClass] = useState(noneStr);
   const [selectedOp, setSelectedOp] = useState(noneStr);
 
-  const size: Size = useWindowSize();
-  const width = size.width === undefined ? 1920 : size.width;
 
   // Class Selector Component
   const classSelector = (
@@ -131,16 +82,15 @@ const DataTab = React.memo((props: Props) => {
     />
     );
 
-  const classDisplay = clsx({
-    [classes.classDisplay]: width > TABLET_BREAKPOINT,
-    [classes.classDisplayTablet]: width <= TABLET_BREAKPOINT,
-    [classes.classDisplayMobile]: width <= MOBILE_BREAKPOINT,
-    [classes.marginBottom]: "true"
-  })
-
   return (
-    <div className={classes.container}>
-      <div className={classes.containerChild}>
+    <div className={clsx({
+      [classes.container]: uiMode === UIMode.DESKTOP || uiMode === UIMode.TABLET,
+      [classes.containerMobile]: uiMode === UIMode.MOBILE,
+    })}>
+      <div className={clsx({
+        [classes.containerChild]: uiMode === UIMode.DESKTOP || uiMode === UIMode.TABLET,
+        [classes.containerChildMobile]: uiMode === UIMode.MOBILE,
+      })}>
         {classSelector}
         {selectedOp === noneStr
           ? (selectedClass === noneStr
@@ -154,7 +104,7 @@ const DataTab = React.memo((props: Props) => {
                 return op.class === selectedClass;
               }}
               />)
-          : <DataEntryForm op={operators[selectedOp]} opClass={selectedClass} onChange={onChange} />
+          : <DataEntryForm op={operators[selectedOp]} onChange={onChange} />
         }
       </div>
     </div>

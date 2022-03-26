@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from "react";
+import firebase from "firebase";
+import operatorJson from "./data/operators.json";
+import useLocalStorage from "./UseLocalStorage";
+import { MAX_LEVEL_BY_RARITY } from "./components/RosterTable";
 import {
   AppBar,
   Box,
@@ -8,17 +12,12 @@ import {
   Tabs,
   ThemeProvider,
 } from "@material-ui/core";
-
-import firebase from "firebase";
-import operatorJson from "./data/operators.json";
-import useLocalStorage from "./UseLocalStorage";
+import { grey } from "@material-ui/core/colors";
 
 import AccountTab from "./components/AccountTab";
 import SearchForm from "./components/SearchForm";
 import CollectionTab from "./components/CollectionTab";
 import DataTab from "./components/DataTab";
-import { MAX_LEVEL_BY_RARITY } from "./components/RosterTable";
-import { grey } from "@material-ui/core/colors";
 
 const darkTheme = createTheme({
   palette: {
@@ -36,7 +35,7 @@ export const MOBILE_BREAKPOINT = 900;
 export const TABLET_BREAKPOINT = 1300;
 
 // Converts an opJson entry into an Operator
-function opObject ([key, op] : any) : [string, Operator] {
+function opObject ([_, op] : any) : [string, Operator] {
   return [
     op.id,
     {
@@ -45,7 +44,7 @@ function opObject ([key, op] : any) : [string, Operator] {
       favorite: false,
       rarity: op.rarity,
       potential: 0,
-      promotion: 0,
+      promotion: -1,
       owned: false,
       level: 0,
       skillLevel: 0,
@@ -56,6 +55,22 @@ function opObject ([key, op] : any) : [string, Operator] {
 const defaultOperators = Object.fromEntries(
   Object.entries(operatorJson).map(opObject)
 );
+
+export enum UIMode {
+  DESKTOP = 0,
+  TABLET = 1,
+  MOBILE = 2,
+}
+
+export function getUIMode(width: number) {
+  if (width > TABLET_BREAKPOINT) {
+    return UIMode.DESKTOP;
+  } else if (width > MOBILE_BREAKPOINT) {
+    return UIMode.TABLET;
+  } else {
+    return UIMode.MOBILE;
+  }
+}
 
 export interface Operator {
   id: string;
@@ -70,6 +85,7 @@ export interface Operator {
   skill1Mastery?: number;
   skill2Mastery?: number;
   skill3Mastery?: number;
+  module?: boolean[];
 }
 
 const firebaseConfig = {
@@ -108,8 +124,8 @@ function App() {
     if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
     const [, path, userName] = window.location.pathname.split("/");
-    window.history.pushState("object or string", "Title", (path !== "u" || userName === undefined ? "" : "/u/" + userName));
-    if (path === "u" && userName != undefined && checkValidUsername(userName)) {
+    window.history.pushState("object or string", "Title", (path !== "u" || userName === undefined ? "/" : "/u/" + userName));
+    if (path === "u" && userName !== undefined && checkValidUsername(userName)) {
       findUser(userName).then(() => {
         setValue(3);
       })
@@ -118,7 +134,7 @@ function App() {
 
   const [dirty, setDirty] = useLocalStorage<boolean>("dirty", false);
 
-  const handleChange = React.useCallback(
+  const changeOperators = React.useCallback(
     (operatorID: string, property: string, value: number | boolean) => {
       if (isNaN(value as any)) {
         return;
@@ -128,6 +144,36 @@ function App() {
           const copyOperators = { ...oldOperators };
           const copyOperatorData = { ...copyOperators[operatorID] };
           copyOperators[operatorID] = applyChangeWithInvariant(copyOperatorData, property, value);
+          setDirty(true);
+          return copyOperators;
+        }
+      );
+    },
+    [setOperators]
+  );
+
+  // the order of properties in which to apply changes to an operator
+  const orderOfOperations = [
+    "owned",
+    "favorite",
+    "potential",
+    "promotion",
+    "level",
+    "skillLevel",
+    "skill1Mastery",
+    "skill2Mastery",
+    "skill3Mastery",
+  ];
+  const changeOneOperator = React.useCallback(
+    (operatorID: string, newOp: Operator) => {
+      setOperators(
+        (oldOperators: Record<string, Operator>): Record<string, Operator> => {
+          const copyOperators = { ...oldOperators };
+          var copyOperatorData = { ...copyOperators[operatorID] };
+          orderOfOperations.forEach((prop: string) =>
+            copyOperatorData = applyChangeWithInvariant(copyOperatorData, prop, (newOp as any)[prop])
+          )
+          copyOperators[operatorID] = copyOperatorData;
           setDirty(true);
           return copyOperators;
         }
@@ -165,10 +211,14 @@ function App() {
         }
         break;
       case "promotion":
-        if (value != 2) {
+        if (value !== 2) {
           op.skill1Mastery = undefined;
           op.skill2Mastery = undefined;
           op.skill3Mastery = undefined;
+        } else {
+          op = applyChangeWithInvariant(op, "skill1Mastery", 0);
+          op = applyChangeWithInvariant(op, "skill2Mastery", 0);
+          op = applyChangeWithInvariant(op, "skill3Mastery", 0);
         }
         if (value === 0) {
           op.skillLevel = Math.min(op.skillLevel, 4);
@@ -176,17 +226,9 @@ function App() {
         op.level = Math.min(op.level, MAX_LEVEL_BY_RARITY[op.rarity][op.promotion]);
         break;
       case "skillLevel":
-        if (value === 7 && op.promotion === 2) {
-          op.skill1Mastery = 0;
-          op.skill2Mastery = 0;
-          if (op.rarity === 6 || op.name === "Amiya") {
-            op.skill3Mastery = 0;
-          }
-        } else {
-          op.skill1Mastery = undefined;
-          op.skill2Mastery = undefined;
-          op.skill3Mastery = undefined;
-        }
+        op = applyChangeWithInvariant(op, "skill1Mastery", 0);
+        op = applyChangeWithInvariant(op, "skill2Mastery", 0);
+        op = applyChangeWithInvariant(op, "skill3Mastery", 0);
         if (op.skillLevel > 4 && op.promotion === 0) {
           op.skillLevel = 4;
         }
@@ -196,7 +238,7 @@ function App() {
         break;
       case "skill1Mastery":
       case "skill2Mastery":
-        if (op.rarity < 4) {
+        if (op.rarity < 4 || op.promotion !== 2 || op.skillLevel !== 7) {
           op.skill1Mastery = undefined;
           op.skill2Mastery = undefined;
         }
@@ -280,7 +322,7 @@ function App() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <DataTab operators={operators} onChange={handleChange} />
+        <DataTab operators={operators} onChange={changeOperators} />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <CollectionTab

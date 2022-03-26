@@ -1,7 +1,7 @@
-import { makeStyles } from "@material-ui/core";
 import React from "react";
-import { Operator } from "../App";
-import operatorJson from "../data/operators.json";
+import { Operator } from "../../App";
+import operatorJson from "../../data/operators.json";
+import { makeStyles } from "@material-ui/core";
 import DataTabOperatorButton from "./DataTabOperatorButton";
 
 const useStyles = makeStyles({
@@ -15,7 +15,7 @@ const useStyles = makeStyles({
   },
   mobileOpDisplay: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(84px, max-content))",
+    gridTemplateColumns: "repeat(auto-fit, minmax(94px, max-content))",
     justifyContent: "center",
     gridGap: "2px",
   },
@@ -26,11 +26,6 @@ const useStyles = makeStyles({
   },
   smallText: {
     fontSize: "12px",
-  },
-  opButton: {
-    display: "flex",
-    flexDirection: "column",
-    boxShadow: "2px 2px 8px rgb(0 0 0 / 30%)",
   },
 });
 

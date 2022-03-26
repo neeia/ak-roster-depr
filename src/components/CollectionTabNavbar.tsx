@@ -1,6 +1,6 @@
-import { Box, capitalize, makeStyles, TextField } from "@material-ui/core";
 import React, { useState } from "react";
 import { classList, COLOR_BY_RARITY } from "./DataTab";
+import { Box, makeStyles, TextField } from "@material-ui/core";
 import FormButton from "./FormButton";
 
 const useStyles = makeStyles({
@@ -31,8 +31,6 @@ interface Props {
 const CollectionTabNavbar = React.memo((props: Props) => {
   const classes = useStyles();
   const { page, setPage, numPages, filterType, setFilterType, filter, setFilter } = props;
-
-  const none = "none";
 
   const [showFilter, setShowFilter] = useState(false);
 

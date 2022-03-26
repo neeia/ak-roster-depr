@@ -1,12 +1,12 @@
-import { makeStyles } from "@material-ui/core";
 import React from "react";
 import slugify from "slugify";
-import { Operator } from "../App";
+import { Operator } from "../../App";
+import { makeStyles } from "@material-ui/core";
+import { useBoxStyles } from "../BoxStyles"
+import clsx from "clsx";
 import DataEntryCollect from "./DataEntryCollect";
 import DataEntryLevel from "./DataEntryLevel";
 import DataEntrySkillLevel from "./DataEntrySkillLevel";
-import { useBoxStyles } from "./BoxStyles"
-import clsx from "clsx";
 
 const useStyles = makeStyles({
   displayBox: {
@@ -61,17 +61,6 @@ const useStyles = makeStyles({
     alignItems: "center",
     paddingBottom: "12px",
   },
-  center: {
-    textAlign: "center"
-  },
-  buttonContent: {
-    fontSize: "14px",
-    paddingTop: "2px",
-    paddingBottom: "4px",
-  },
-  unborder: {
-    border: "none"
-  },
   horizontalDivider: {
     backgroundColor: "#909090",
     height: "2px",
@@ -79,18 +68,10 @@ const useStyles = makeStyles({
     marginTop: "16px",
     marginBottom: "24px",
   },
-  textField: {
-    textAlign: "right",
-    maxWidth: "30px",
-  },
-  flex: {
-    flexGrow: 1,
-  },
 });
 
 interface Props {
   op: Operator;
-  opClass: string;
   onChange: (
     operatorId: string,
     property: string,
@@ -99,7 +80,7 @@ interface Props {
 }
 
 const DataEntryForm = React.memo((props: Props) => {
-  const { op, opClass, onChange } = props;
+  const { op, onChange } = props;
   const classes = useStyles();
   const boxStyle = useBoxStyles();
 
@@ -147,11 +128,6 @@ const DataEntryForm = React.memo((props: Props) => {
           src={imgUrl}
           alt=""
         />
-        {/*<img
-          className={classes.classIcon}
-          src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/classes/${opClass}`}
-          alt={opClass}
-        />*/}
         {opName}
       </div>
       <DataEntryCollect op={op} onChange={onChange} />
