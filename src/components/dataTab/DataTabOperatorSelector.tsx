@@ -1,6 +1,6 @@
 import React from "react";
-import { Operator } from "../App";
-import operatorJson from "../data/operators.json";
+import { Operator } from "../../App";
+import operatorJson from "../../data/operators.json";
 import { makeStyles } from "@material-ui/core";
 import DataTabOperatorButton from "./DataTabOperatorButton";
 

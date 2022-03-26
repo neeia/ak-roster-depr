@@ -3,9 +3,9 @@ import { Operator, TABLET_BREAKPOINT, MOBILE_BREAKPOINT, UIMode, getUIMode } fro
 import useWindowSize, { Size } from "./UseWindowSize";
 import { makeStyles } from "@material-ui/core";
 import clsx from "clsx";
-import DataTabOperatorSelector from "./DataTabOperatorSelector";
-import DataTabClassSelector from "./DataTabClassSelector";
-import DataEntryForm from "./DataEntryForm";
+import DataTabOperatorSelector from "./dataTab/DataTabOperatorSelector";
+import DataTabClassSelector from "./dataTab/DataTabClassSelector";
+import DataEntryForm from "./dataTab/DataEntryForm";
 
 const useStyles = makeStyles({
   container: {

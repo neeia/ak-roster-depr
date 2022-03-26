@@ -1,8 +1,8 @@
 import React from "react";
 import slugify from "slugify";
-import { Operator } from "../App";
+import { Operator } from "../../App";
 import { makeStyles } from "@material-ui/core";
-import { useBoxStyles } from "./BoxStyles"
+import { useBoxStyles } from "../BoxStyles"
 import clsx from "clsx";
 import DataEntryCollect from "./DataEntryCollect";
 import DataEntryLevel from "./DataEntryLevel";

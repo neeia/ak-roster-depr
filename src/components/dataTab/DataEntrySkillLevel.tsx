@@ -1,9 +1,9 @@
 import React from "react";
-import { Operator } from "../App";
-import operatorJson from "../data/operators.json";
-import { disableByProperty } from "./RosterTable";
+import { Operator } from "../../App";
+import operatorJson from "../../data/operators.json";
+import { disableByProperty } from "../RosterTable";
 import { ButtonBase, makeStyles } from "@material-ui/core";
-import FormButton from "./FormButton";
+import FormButton from "../FormButton";
 import clsx from "clsx";
 
 const useStyles = makeStyles({
@@ -305,7 +305,7 @@ const DataEntrySkillLevel = React.memo((props: Props) => {
               <img
                 className={clsx({
                   [classes.skillIcon]: true,
-                  [classes.unselected]: op.promotion < i,
+                  [classes.unselected]: !op.owned || op.promotion < i,
                 })}
                 src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/skills/${opInfo.skills[i].iconId ?? opInfo.skills[i].skillId}`}
                 alt={`Skill ${i}`}

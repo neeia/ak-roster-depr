@@ -1,7 +1,7 @@
 ﻿import React from "react";
-import { Operator } from "../App";
+import { Operator } from "../../App";
 import { makeStyles } from "@material-ui/core";
-import FormButton from "./FormButton";
+import FormButton from "../FormButton";
 
 const useStyles = makeStyles({
   container: {

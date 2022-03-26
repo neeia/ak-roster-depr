@@ -1,6 +1,6 @@
 import React from "react";
-import { UIMode, MOBILE_BREAKPOINT, TABLET_BREAKPOINT, getUIMode } from "../App";
-import useWindowSize, { Size } from "./UseWindowSize";
+import { UIMode, MOBILE_BREAKPOINT, TABLET_BREAKPOINT, getUIMode } from "../../App";
+import useWindowSize, { Size } from "../UseWindowSize";
 import { makeStyles } from "@material-ui/core";
 import clsx from "clsx";
 import DataTabClassButton from "./DataTabClassButton";

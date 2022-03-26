@@ -1,9 +1,9 @@
 import React from "react";
-import { Operator } from "../App";
-import { MAX_LEVEL_BY_RARITY } from "./RosterTable";
+import { Operator } from "../../App";
+import { MAX_LEVEL_BY_RARITY } from "../RosterTable";
 import { ButtonBase, makeStyles, TextField } from "@material-ui/core";
 import clsx from "clsx";
-import FormButton from "./FormButton";
+import FormButton from "../FormButton";
 
 const useStyles = makeStyles({
   container: {
