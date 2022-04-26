@@ -29,12 +29,12 @@ const SkillDisplayBox = React.memo((props : Props) => {
   const classes = useStyles();
 
   const opInfo = (operatorJson as any)[operator.id];
-  const skillImgUrl = `https://res.cloudinary.com/samidare/image/upload/v1/arknights/skills/${opInfo.skills[skill - 1].iconId 
+  const skillImgUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto/v1/arknights/skills/${opInfo.skills[skill - 1].iconId
     ?? opInfo.skills[skill - 1].skillId}`;
-  const skillLvlUrl = `https://res.cloudinary.com/samidare/image/upload/v1/arknights/skill-levels/${operator.skillLevel}`;
-  const skillBGImgUrl = `https://res.cloudinary.com/samidare/image/upload/v1/arknights/skill-levels/bg`;
+  const skillLvlUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto/v1/arknights/skill-levels/${operator.skillLevel}`;
+  const skillBGImgUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto/v1/arknights/skill-levels/bg`;
   const skillMastery = (operator as any)[`skill${skill}Mastery`];
-  const skillMasteryUrl = `https://res.cloudinary.com/samidare/image/upload/v1/arknights/mastery/${skillMastery}`;
+  const skillMasteryUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto/v1/arknights/mastery/${skillMastery}`;
 
   return (
     <div className={classes.skillBox}>
