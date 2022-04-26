@@ -56,6 +56,25 @@ const defaultOperators = Object.fromEntries(
   Object.entries(operatorJson).map(opObject)
 );
 
+function presetObject(_: any, index: number): [string, Operator] {
+  return [
+    index.toString(),
+    {
+      id: index.toString(),
+      name: `Untitled Preset ${index + 1}`,
+      favorite: false,
+      rarity: 6,
+      potential: 1,
+      promotion: 0,
+      owned: true,
+      level: 1,
+      skillLevel: 1,
+    },
+  ];
+}
+
+const defaultPresets = Object.fromEntries([...Array(6)].map(presetObject));
+
 export enum UIMode {
   DESKTOP = 0,
   TABLET = 1,
@@ -244,13 +263,33 @@ function App() {
         }
         break;
       case "skill3Mastery":
-        if (!(op.rarity === 6 || op.name === "Amiya")) {
+        if (op.promotion !== 2 || op.skillLevel !== 7 || !(op.rarity === 6 || op.name === "Amiya")) {
           op.skill3Mastery = undefined;
         }
         break;
     }
     return op;
   }
+
+  const [presets, setpresets] = useLocalStorage<Record<string, Operator>>(
+    "presets",
+    defaultPresets
+  );
+  const changePresets = React.useCallback(
+    (presetID: string, property: string, value: any) => {
+      setpresets(
+        (oldPresets: Record<string, Operator>): Record<string, Operator> => {
+          const copyPresets = { ...oldPresets };
+          const copyPresetData = { ...copyPresets[presetID] };
+          copyPresets[presetID] = applyChangeWithInvariant(copyPresetData, property, value);
+          setDirty(true);
+          return copyPresets;
+        }
+      );
+    },
+    [setpresets]
+  );
+
 
   // Dirty & Close Warning
   useEffect(() => {window.onload = function() {
@@ -322,7 +361,12 @@ function App() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <DataTab operators={operators} onChange={changeOperators} />
+        <DataTab
+          operators={operators}
+          changeOperators={changeOperators}
+          presets={presets}
+          changePresets={changePresets}
+        />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <CollectionTab
