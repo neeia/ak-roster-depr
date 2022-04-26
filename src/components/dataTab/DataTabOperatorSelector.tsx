@@ -15,9 +15,9 @@ const useStyles = makeStyles({
   },
   mobileOpDisplay: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(94px, max-content))",
+    gridTemplateColumns: "repeat(auto-fit, minmax(88px, max-content))",
     justifyContent: "center",
-    gridGap: "2px",
+    gridGap: "3px",
   },
   opIcon: {
     width: "64px",

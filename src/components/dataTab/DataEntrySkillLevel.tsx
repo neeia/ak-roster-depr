@@ -292,17 +292,20 @@ const DataEntrySkillLevel = React.memo((props: Props) => {
             key={"skill" + (i+1) + "MasteryBlock"}
             className={classes.skillMastery}
           >
-            {hasSkill(i)
+            {opInfo === undefined
               ? <div className={classes.skillName}>
-                {opInfo.skills[i].skillName}
+                {`Skill ${i+1}`}
               </div>
-              : <div className={classes.skillName}>
-                No Skill
-              </div>
+              : hasSkill(i)
+                ? <div className={classes.skillName}>
+                  {opInfo.skills[i].skillName}
+                </div>
+                : <div className={classes.skillName}>
+                  No Skill
+                </div>
             }
-            {hasSkill(i)
-              ?
-              <img
+            {hasSkill(i) && opInfo !== undefined
+              ? <img
                 className={clsx({
                   [classes.skillIcon]: true,
                   [classes.unselected]: !op.owned || op.promotion < i,
@@ -317,7 +320,7 @@ const DataEntrySkillLevel = React.memo((props: Props) => {
                 <path d="M 16 48 L 48 16" fill="transparent" stroke="gray" strokeWidth="3" />
                 alt={`Skill ${i}`}
               </svg>}
-            {[...Array(4)].map((x, j) =>
+            {[...Array(4)].map((_, j) =>
               <FormButton
                 key={`mastery${j}Button`}
                 className={classes.skillMasteryButton}
