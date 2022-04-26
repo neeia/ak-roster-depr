@@ -337,7 +337,7 @@ const DataEntryLevel = React.memo((props: Props) => {
                 <img
                   className={clsx({
                     [classes.promotionIcon]: true,
-                    [classes.unselected]: op.promotion === i,
+                    [classes.unselected]: op.promotion !== i,
                   })}
                   src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/elite/${i}`}
                   alt={`Elite ${i} Button`}
