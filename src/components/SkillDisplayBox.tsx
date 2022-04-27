@@ -11,17 +11,23 @@ interface Props {
 const useStyles = makeStyles({
   skillBox: {
     display: "grid",
-    height: "30px",
-    width: "30px",
   },
   skillImg: {
     gridRow: 1,
     gridColumn: 1,
   },
-  image: {
-    height: "30px",
+  imageBG: {
+    height: "20px",
+    opacity: ".75",
   },
-
+  imageActive: {
+    height: "20px",
+    opacity: ".95",
+  },
+  imageInactive: {
+    height: "20px",
+    opacity: ".1",
+  },
 });
 
 const SkillDisplayBox = React.memo((props : Props) => {
@@ -38,17 +44,17 @@ const SkillDisplayBox = React.memo((props : Props) => {
 
   return (
     <div className={classes.skillBox}>
-      <div className={classes.skillImg}>
+      {/*<div className={classes.skillImg}>
         <img
           className={classes.image}
           src={skillImgUrl}
           style={{ opacity: (operator.promotion >= skill - 1 ? 1 : 0.1) }}
           alt={`Skill ${skill} ${opInfo.skills[0].skillName}`}
         />
-      </div>
+      </div>*/}
       <div className={classes.skillImg}>
         <img
-          className={classes.image}
+          className={classes.imageBG}
           src={skillBGImgUrl}
           alt={``}
         />
@@ -56,13 +62,12 @@ const SkillDisplayBox = React.memo((props : Props) => {
       <div className={classes.skillImg}>
         {(!skillMastery || skillMastery === 0
           ? <img
-            className={classes.image}
+            className={operator.promotion >= skill - 1 ? classes.imageActive : classes.imageInactive}
             src={skillLvlUrl}
-            style={{ opacity: (operator.promotion >= skill - 1 ? 1 : 0.1) }}
             alt={`Level ${operator.skillLevel}`}
           />
           : <img
-            className={classes.image}
+            className={operator.promotion >= skill - 1 ? classes.imageActive : classes.imageInactive}
             src={skillMasteryUrl}
             alt={`${skill} Mastery Level ${skillMastery}`}
           />
