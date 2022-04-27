@@ -33,10 +33,11 @@ interface Props {
   operators: Record<string, Operator>;
   onClick: (op: Operator) => void;
   filter?: (op: any) => boolean;
+  toggleGroup?: string[];
 }
 
 const DataTabOperatorSelector = React.memo((props: Props) => {
-  const { operators, onClick, filter } = props;
+  const { operators, onClick, filter, toggleGroup } = props;
   const classes = useStyles();
 
   function sortComparator(a: any, b: any) {
@@ -51,10 +52,16 @@ const DataTabOperatorSelector = React.memo((props: Props) => {
     <div className={classes.mobileOpDisplay}>
       {
         Object.values(operatorJson)
+          .filter((op: any) => op.class !== "Token" && op.class !== "Trap")
           .filter(filter ?? (()=> true))
           .sort(sortComparator)
           .map((op: any) => {
-            return <DataTabOperatorButton op={operators[op.id]} onClick={() => onClick(op)} />;
+            return <DataTabOperatorButton
+              op={operators[op.id]}
+              key={op.id}
+              onClick={() => onClick(op)}
+              toggleGroup={toggleGroup ?? []}
+            />;
           })
       }
     </div>)

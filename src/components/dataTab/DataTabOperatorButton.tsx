@@ -18,7 +18,7 @@ const useStyles = makeStyles({
   },
   opIcon: {
     width: "64px",
-    height: "64px",
+    height: "67px",
     marginBottom: "4px",
     gridArea: "1 / 1",
     textAlign: "left",
@@ -46,12 +46,13 @@ const useStyles = makeStyles({
 interface Props {
   op: Operator;
   onClick: () => void;
+  toggleGroup?: string[]
 }
 
 const DataTabOperatorButton = React.memo((props: Props) => {
   const classes = useStyles();
   const rarity = useRarityStyles();
-  const { op, onClick } = props;
+  const { op, onClick, toggleGroup } = props;
 
   const reg = /( the )|\(/g;
   const nameSplitTitle = op.name.split(reg);
@@ -94,14 +95,18 @@ const DataTabOperatorButton = React.memo((props: Props) => {
   } else if (elt === 1 && op.name === "Amiya") {
     intermediate += " elite 1";
   }
-  const imgUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto/v1/arknights/operators/${slugify(
+  const imgUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto,h_256,w_256/v1/arknights/operators/${slugify(
     intermediate,
     { lower: true, replacement: "-", remove: /[-"]/g }
   )}`;
 
 
   return (
-    <FormButton className={classes.opButton} onClick={onClick} key={op.id}>
+    <FormButton
+      className={classes.opButton}
+      onClick={onClick}
+      toggled={toggleGroup?.includes(op.id) ?? false}
+    >
       <div className={classes.iconStack}>
         <img
           className={opIconStyle}

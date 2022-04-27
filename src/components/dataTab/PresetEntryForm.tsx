@@ -6,7 +6,6 @@ import clsx from "clsx";
 import DataEntryCollect from "./DataEntryCollect";
 import DataEntryLevel from "./DataEntryLevel";
 import DataEntrySkillLevel from "./DataEntrySkillLevel";
-import FormButton from "../FormButton";
 
 const useStyles = makeStyles({
   displayBox: {
@@ -95,7 +94,6 @@ const PresetEntryForm = React.memo((props: Props) => {
         size="small"
         margin="none"
         className={classes.opName}
-        defaultValue={op.name}
         value={op.name}
         onChange={(e) => onChange(op.id, "name", e.target.value)}
         inputProps={{

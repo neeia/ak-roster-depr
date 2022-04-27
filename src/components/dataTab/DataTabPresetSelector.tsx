@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Operator } from "../../App";
 import { makeStyles } from "@material-ui/core";
 import FormButton from "../FormButton";
 import { MdFormatPaint, MdMode } from "react-icons/md";
+import { SELECT_STATE } from "../DataTab";
 
 const useStyles = makeStyles({
   presetContainer: {
@@ -51,22 +52,26 @@ interface Props {
   presets: Record<string, Operator>;
   onClick: (psID: string) => void;
   activeID: string;
-  batchMode: boolean;
-  setBatchMode: (mode: boolean) => void;
+  selectState: SELECT_STATE;
+  setSelectState: (mode: SELECT_STATE) => void;
 }
 
 const DataTabPresetSelector = React.memo((props: Props) => {
   const classes = useStyles();
-  const { presets, onClick, activeID, batchMode, setBatchMode } = props;
+  const { presets, onClick, activeID, selectState, setSelectState } = props;
+
+  const [selectedPreset, setSelectedPreset] = useState("")
 
   return (
     <div className={classes.presetContainer}>
       <div className={classes.presetGrid}>
         {Object.values(presets)
           .map((ps: Operator) => (
-            <div className={classes.classSelectorButtonArea}>
+            <div
+              className={classes.classSelectorButtonArea}
+              key={ps.id}
+            >
               <FormButton
-                key={ps.id}
                 className={classes.button}
                 onClick={(() => onClick(ps.id))}
                 toggled={activeID === ps.id}
@@ -79,17 +84,17 @@ const DataTabPresetSelector = React.memo((props: Props) => {
       <div className={classes.verticalDivider} />
       <div className={classes.presetButtonContainer}>
         <FormButton
-          onClick={() => setBatchMode(false)}
-          disabled={activeID === "none"}
-          toggled={activeID !== "none" && !batchMode}
+          onClick={() => setSelectState(SELECT_STATE.PsEdit)}
+          disabled={selectState !== SELECT_STATE.PsEdit}
+          toggled={selectState === SELECT_STATE.PsEdit}
         >
           <MdMode size={26} className={classes.svg} />
           Edit
         </FormButton>
         <FormButton
-          onClick={() => setBatchMode(true)}
-          disabled={activeID === "none"}
-          toggled={activeID !== "none" && batchMode}
+          onClick={() => setSelectState(SELECT_STATE.Batch)}
+          disabled={selectState !== SELECT_STATE.PsEdit}
+          toggled={selectState === SELECT_STATE.Batch}
         >
           <MdFormatPaint size={26} className={classes.svg}  />
           Batch
