@@ -90,7 +90,7 @@ const DataEntryForm = React.memo((props: Props) => {
   } else if (op.promotion === 1 && op.name === "Amiya") {
     intermediate += " elite 1";
   }
-  const imgUrl = `https://res.cloudinary.com/samidare/image/upload/v1/arknights/operators/${slugify(
+  const imgUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto,h_64,w_64/v1/arknights/operators/${slugify(
     intermediate,
     { lower: true, replacement: "-", remove: /[-"]/g }
   )}`;
