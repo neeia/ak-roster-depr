@@ -153,7 +153,7 @@ function App() {
 
   const [dirty, setDirty] = useLocalStorage<boolean>("dirty", false);
 
-  const changeOperators = React.useCallback(
+  const changePropertyOfOperator = React.useCallback(
     (operatorID: string, property: string, value: number | boolean) => {
       if (isNaN(value as any)) {
         return;
@@ -271,13 +271,13 @@ function App() {
     return op;
   }
 
-  const [presets, setpresets] = useLocalStorage<Record<string, Operator>>(
+  const [presets, setPresets] = useLocalStorage<Record<string, Operator>>(
     "presets",
     defaultPresets
   );
   const changePresets = React.useCallback(
     (presetID: string, property: string, value: any) => {
-      setpresets(
+      setPresets(
         (oldPresets: Record<string, Operator>): Record<string, Operator> => {
           const copyPresets = { ...oldPresets };
           const copyPresetData = { ...copyPresets[presetID] };
@@ -287,7 +287,16 @@ function App() {
         }
       );
     },
-    [setpresets]
+    [setPresets]
+  );
+
+  const applyBatch = React.useCallback(
+    (source: Operator, target: string[]) => {
+      target.forEach((opId: string) => {
+        changeOneOperator(opId, source)
+      })
+    },
+    [setOperators]
   );
 
 
@@ -363,9 +372,10 @@ function App() {
       <TabPanel value={value} index={0}>
         <DataTab
           operators={operators}
-          changeOperators={changeOperators}
+          changeOperators={changePropertyOfOperator}
           presets={presets}
           changePresets={changePresets}
+          applyBatch={applyBatch}
         />
       </TabPanel>
       <TabPanel value={value} index={1}>
