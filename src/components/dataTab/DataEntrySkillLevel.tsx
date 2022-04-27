@@ -136,6 +136,12 @@ const useStyles = makeStyles({
   },
   noSkill: {
     border: "2px solid gray",
+  },
+  svg: {
+    "&:focus": {
+      boxShadow: "0px 0px 0px 1px #fcf3dc inset",
+      background: "#505050"
+    }
   }
 });
 
@@ -186,7 +192,7 @@ const DataEntrySkillLevel = React.memo((props: Props) => {
         </div>
         <ButtonBase
           classes={{
-            root: classes.skillLevelNext,
+            root: clsx({ [classes.skillLevelNext]: true, [classes.svg]: true }),
             disabled: classes.disabled
           }}
           onClick={() => (onChange(op.id, "skillLevel", nextSkillLevel))}
@@ -205,7 +211,7 @@ const DataEntrySkillLevel = React.memo((props: Props) => {
         </ButtonBase>
         <ButtonBase
           classes={{
-            root: classes.skillLevelPrevious,
+            root: clsx({ [classes.skillLevelPrevious]: true, [classes.svg]: true }),
             disabled: classes.disabled
           }}
           onClick={() => (onChange(op.id, "skillLevel", previousSkillLevel))}
@@ -224,7 +230,7 @@ const DataEntrySkillLevel = React.memo((props: Props) => {
         </ButtonBase>
         <ButtonBase
           classes={{
-            root: classes.skillLevelRaise,
+            root: clsx({ [classes.skillLevelRaise]: true, [classes.svg]: true }),
             disabled: classes.disabled
           }}
           onClick={() => (onChange(op.id, "skillLevel", op.skillLevel + 1))}
@@ -240,7 +246,7 @@ const DataEntrySkillLevel = React.memo((props: Props) => {
         </ButtonBase>
         <ButtonBase
           classes={{
-            root: classes.skillLevelDecrease,
+            root: clsx({ [classes.skillLevelDecrease]: true, [classes.svg]: true }),
             disabled: classes.disabled
           }}
           onClick={() => (onChange(op.id, "skillLevel", op.skillLevel - 1))}
