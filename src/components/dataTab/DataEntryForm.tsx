@@ -1,12 +1,14 @@
 import React from "react";
 import slugify from "slugify";
 import { Operator } from "../../App";
-import { makeStyles } from "@material-ui/core";
+import { ButtonBase, makeStyles } from "@material-ui/core";
 import { useBoxStyles } from "../BoxStyles"
 import clsx from "clsx";
 import DataEntryCollect from "./DataEntryCollect";
 import DataEntryLevel from "./DataEntryLevel";
 import DataEntrySkillLevel from "./DataEntrySkillLevel";
+import { MdClose } from "react-icons/md";
+import { SELECT_STATE } from "../DataTab";
 
 const useStyles = makeStyles({
   displayBox: {
@@ -17,6 +19,7 @@ const useStyles = makeStyles({
     alignItems: "center",
     width: "460px",
     justifySelf: "center",
+    position: "relative",
   },
   disabled: {
     opacity: "0.3",
@@ -68,6 +71,20 @@ const useStyles = makeStyles({
     marginTop: "16px",
     marginBottom: "24px",
   },
+  xBox: {
+    position: "absolute",
+    top: "3px",
+    right: "6px",
+    width: "36px",
+    height: "36px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    "&:focus": {
+      border: "1px solid #fcf3dc",
+      background: "#505050",
+    }
+  }
 });
 
 interface Props {
@@ -77,10 +94,11 @@ interface Props {
     property: string,
     value: number | boolean
   ) => void;
+  setSelectState: (state: SELECT_STATE) => void
 }
 
 const DataEntryForm = React.memo((props: Props) => {
-  const { op, onChange } = props;
+  const { op, onChange, setSelectState } = props;
   const classes = useStyles();
   const boxStyle = useBoxStyles();
 
@@ -119,9 +137,18 @@ const DataEntryForm = React.memo((props: Props) => {
     [classes.displayBox]: "true",
   });
 
-
   return (
     <div className={boxBox}>
+      <ButtonBase
+        tabIndex={0}
+        className={classes.xBox}
+        onClick={(e) => {
+          e.preventDefault();
+          setSelectState(SELECT_STATE.Grid)
+        }}
+      >
+        <MdClose size={32}/>
+      </ButtonBase>
       <div className={classes.opImgNameBox}>
         <img 
           className={classes.opIcon}
