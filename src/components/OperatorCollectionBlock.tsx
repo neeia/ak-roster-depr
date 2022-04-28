@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core";
 import { useRarityStyles } from "./StyleRarityUnderline";
 import clsx from "clsx";
 import SkillDisplayBox from "./SkillDisplayBox";
+import { MdFavorite } from "react-icons/md";
 
 const useStyles = makeStyles({
   opContainer: {
@@ -18,10 +19,12 @@ const useStyles = makeStyles({
     borderRadius: "4px",
     backgroundColor: "#40403E",
     boxShadow: "2px 2px 8px rgb(0 0 0 / 30%)",
-    margin: "4px 16px 20px 16px",
+    margin: "2px 16px 6px 12px",
   },
   opNameArea: {
     gridArea: "name",
+    display: "grid",
+    gridTemplateColumns: "1fr auto"
   },
   opName: {
     fontSize: "14px",
@@ -46,9 +49,8 @@ const useStyles = makeStyles({
     height: "120px",
   },
   fav: {
-    gridArea: "img",
-    fontSize: "16px",
-    alignSelf: "end",
+    alignSelf: "center",
+    justifySelf: "end",
   },
   imgArea: {
     gridArea: "img",
@@ -81,15 +83,18 @@ const useStyles = makeStyles({
     fontSize: "9px",
     lineHeight: "3px",
     display: "flex",
+    textDecoration: "none",
+    border: "none",
   },
   promotionBox: {
     gridArea: "elite",
-    width: "24px",
+    width: "20px",
     height: "32px",
     display: "flex",
     alignItems: "end",
     justifyContent: "center",
     marginBottom: "4px",
+    marginLeft: "-2px",
   },
   promotionIcon: {
     width: "32px",
@@ -97,13 +102,16 @@ const useStyles = makeStyles({
   },
   promotionBoxLabel: {
     gridArea: "elite",
-    width: "24px",
+    width: "20px",
     fontSize: "9px",
     lineHeight: "14px",
     color: "#EEEEEE",
     display: "grid",
     alignItems: "start",
     justifyContent: "center",
+    textDecoration: "none",
+    border: "none",
+    marginLeft: "-2px",
   },
   potentialBox: {
     display: "grid",
@@ -129,17 +137,26 @@ const useStyles = makeStyles({
   },
   opSkillArea: {
     position: "absolute",
-    top: "8px",
+    top: "4px",
     right: "-16px",
     gridArea: "skill",
     display: "flex",
     flexDirection: "column",
     alignSelf: "center",
-    gap: "4px",
-    marginLeft: "-6px"
+    gap: "2px",
+    marginRight: "-4px"
+  },
+  skillIcon: {
+    height: "24px",
+  },
+  topSkill: {
+    marginLeft: "-2px",
   },
   middleSkill: {
-    marginLeft: "0px",
+    marginLeft: "4px",
+  },
+  bottomSkill: {
+    marginLeft: "6px",
   },
 });
 
@@ -159,9 +176,9 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
     intermediate += " elite 1";
   }
 
-  const potentialUrl = `https://res.cloudinary.com/samidare/image/upload/v1/arknights/potential/${op.potential}`;
-  const promotionUrl = `https://res.cloudinary.com/samidare/image/upload/v1/arknights/elite/${op.promotion}`;
-  const opImgUrl = `https://res.cloudinary.com/samidare/image/upload/v1/arknights/operators/${slugify(
+  const potentialUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto,h_96,w_96/v1/arknights/potential/${op.potential}`;
+  const promotionUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto,h_128,w_128/v1/arknights/elite/${op.promotion}`;
+  const opImgUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto/v1/arknights/operators/${slugify(
     intermediate,
     { lower: true, replacement: "-", remove: /[-"]/g }
   )}`;
@@ -194,12 +211,12 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
     const title = name[1].split(")");
     opName = (
       <span>
-        <span className={classes.opName}>
-          {name[0]}
-        </span>
-        <span className={classes.alterTitle}>
+        <div className={classes.alterName}>
           {title[0]}
-        </span>
+        </div>
+        <div className={classes.alterTitle}>
+          {name[0]}
+        </div>
       </span>
     )
   }
@@ -215,7 +232,7 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
       <img
         src={potentialUrl}
         className={classes.potentialIcon}
-        alt={`Potential ${op.potential} icon`}
+        alt={`Potential ${op.potential}`}
       />
     </div>
 
@@ -229,16 +246,19 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
           <rect x="0" y="0" className={classes.promotionBox}
             fill="#323232" fillOpacity="0.95" stroke="#808080" strokeWidth="2" />
         </svg>
-        <div className={classes.promotionBoxLabel}>
-          E{op.promotion}
-        </div>
         <div className={classes.promotionBox}>
           <img
             src={promotionUrl}
             className={classes.promotionIcon}
-            alt={`Elite ${op.promotion} icon`}
+            alt={``}
           />
         </div>
+        <abbr
+          className={classes.promotionBoxLabel}
+          title={`E${op.promotion}`}
+        >
+          E{op.promotion}
+        </abbr>
         <svg
           className={classes.levelBubble}
         >
@@ -246,9 +266,12 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
             fill="#323232" fillOpacity="0.95" stroke="#808080" strokeWidth="2" />
         </svg >
         <div className={classes.levelBubble} >
-          <div className={classes.levelBubbleLabel}>
+          <abbr
+            className={classes.levelBubbleLabel}
+            title={`Level`}
+          >
             LV
-          </div>
+          </abbr>
           {op.level}
         </div >
       </div >
@@ -258,15 +281,19 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
     <div className={classes.imgArea}>
       <div className={classes.opSkillArea}>
         {(op.rarity > 2 ?
-          <SkillDisplayBox operator={op} skill={1} />
+          <div className={classes.topSkill}>
+            <SkillDisplayBox operator={op} skill={1} className={classes.skillIcon} />
+          </div>
           : <div />)}
         {(op.rarity > 3 ?
           <div className={classes.middleSkill}>
-            <SkillDisplayBox operator={op} skill={2} />
+            <SkillDisplayBox operator={op} skill={2} className={classes.skillIcon} />
           </div>
           : <div />)}
         {(op.rarity === 6 || op.name === "Amiya" ?
-          <SkillDisplayBox operator={op} skill={3} />
+          <div className={classes.bottomSkill}>
+            <SkillDisplayBox operator={op} skill={3} className={classes.skillIcon} />
+          </div>
           : <div />)}
       </div>
     </div>
@@ -286,17 +313,21 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
     <div className={classes.opContainer}>
       <div className={classes.opNameArea}>
         {opName}
+        {op.favorite
+          ? <MdFavorite
+            className={classes.fav}
+            size={18}
+            color={"#ff4d4d"}
+          />
+          : ""}
       </div>
       <img
         src={opImgUrl}
         className={opIconStyle}
         alt=""
       />
-      {/*<div className={classes.fav}>
-        {op.favorite ? "❤️" : ""}
-      </div>*/}
-      {levelBubble}
       {skillBlock}
+      {levelBubble}
     </div>
   );
 });

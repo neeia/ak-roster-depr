@@ -11,6 +11,7 @@ const useStyles = makeStyles({
   collectionContainer: {
     display: "flex",
     flexWrap: "wrap",
+    gap: "12px 16px",
   },
 });
 
@@ -23,10 +24,13 @@ const CollectionTab = React.memo((props: Props) => {
   const { operators } = props;
 
   const size: Size = useWindowSize();
+  const widthOfBox = 160 + 16;
+  const heightOfBox = 140 + 12;
+  
   const width = size.width === undefined ? 1920 : size.width;
-  const x = Math.floor((width * 0.95) / 310);
+  const x = Math.floor((width * 0.99) / widthOfBox);
   const height = size.height === undefined ? 1080 : size.height;
-  const y = Math.floor((height - 120) / 86);
+  const y = Math.floor((height - 120) / heightOfBox);
 
   const none = "none";
   const [filterType, setFilterType] = useState(none);
