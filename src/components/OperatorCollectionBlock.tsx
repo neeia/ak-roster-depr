@@ -19,7 +19,7 @@ const useStyles = makeStyles({
     borderRadius: "4px",
     backgroundColor: "#40403E",
     boxShadow: "2px 2px 8px rgb(0 0 0 / 30%)",
-    margin: "2px 16px 6px 12px",
+    margin: "0px 16px 6px 12px",
   },
   opNameArea: {
     gridArea: "name",
