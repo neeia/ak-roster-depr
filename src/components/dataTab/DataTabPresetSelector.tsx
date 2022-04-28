@@ -54,13 +54,12 @@ interface Props {
   activeID: string;
   selectState: SELECT_STATE;
   setSelectState: (mode: SELECT_STATE) => void;
+  applyBatch: () => void;
 }
 
 const DataTabPresetSelector = React.memo((props: Props) => {
   const classes = useStyles();
-  const { presets, onClick, activeID, selectState, setSelectState } = props;
-
-  const [selectedPreset, setSelectedPreset] = useState("")
+  const { presets, onClick, activeID, selectState, setSelectState, applyBatch } = props;
 
   return (
     <div className={classes.presetContainer}>
@@ -84,20 +83,20 @@ const DataTabPresetSelector = React.memo((props: Props) => {
       <div className={classes.verticalDivider} />
       <div className={classes.presetButtonContainer}>
         <FormButton
-          onClick={() => setSelectState(SELECT_STATE.PsEdit)}
-          disabled={selectState !== SELECT_STATE.PsEdit}
+          onClick={() => setSelectState(selectState === SELECT_STATE.PsEdit ? SELECT_STATE.Grid : SELECT_STATE.PsEdit)}
+          disabled={activeID === ""}
           toggled={selectState === SELECT_STATE.PsEdit}
         >
           <MdMode size={26} className={classes.svg} />
           Edit
         </FormButton>
         <FormButton
-          onClick={() => setSelectState(SELECT_STATE.Batch)}
-          disabled={selectState !== SELECT_STATE.PsEdit}
+          onClick={() => selectState === SELECT_STATE.OpEdit ? applyBatch() : setSelectState(SELECT_STATE.Batch)}
+          disabled={activeID === "" || selectState === SELECT_STATE.Batch}
           toggled={selectState === SELECT_STATE.Batch}
         >
           <MdFormatPaint size={26} className={classes.svg}  />
-          Batch
+          {selectState === SELECT_STATE.OpEdit ? "Apply" : "Batch"}
         </FormButton>
       </div>
     </div>

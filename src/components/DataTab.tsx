@@ -9,6 +9,7 @@ import DataEntryForm from "./dataTab/DataEntryForm";
 import DataTabPresetSelector from "./dataTab/DataTabPresetSelector";
 import FormButton from "./FormButton";
 import PresetEntryForm from "./dataTab/PresetEntryForm";
+import { MdCancel, MdCheckCircle } from "react-icons/md";
 
 const useStyles = makeStyles({
   container: {
@@ -52,6 +53,9 @@ const useStyles = makeStyles({
     gridTemplateColumns: "1fr 1fr",
     gap: "4px",
   },
+  svg: {
+    marginRight: "4px",
+  }
 });
 
 interface Props {
@@ -91,10 +95,10 @@ const DataTab = React.memo((props: Props) => {
   const width = size.width === undefined ? 1920 : size.width;
   let uiMode = getUIMode(width);
 
-  const noneStr = "";
   const [selectedOperator, setSelectedOperator] = React.useState("")
+  const [selectedPreset, setSelectedPreset] = useState("")
   const [selectState, setSelectState] = React.useState(SELECT_STATE.Grid);
-  const [selectedClass, setSelectedClass] = useState(noneStr);
+  const [selectedClass, setSelectedClass] = useState("");
   const [selectBatchOps, setSelectBatchOps] = useState<string[]>([])
 
   // Class Selector Component
@@ -103,7 +107,7 @@ const DataTab = React.memo((props: Props) => {
       classList={classList}
       onClick={((cl: string) => {
         if (selectedClass === cl) {
-          setSelectedClass(noneStr);
+          setSelectedClass("");
         } else {
           setSelectedClass(cl);
         }
@@ -116,17 +120,22 @@ const DataTab = React.memo((props: Props) => {
     <DataTabPresetSelector
       presets={presets}
       onClick={((psID: string) => {
-        if (selectedOperator === psID) {
-          setSelectedOperator(noneStr);
-          setSelectState(SELECT_STATE.Grid)
+        if (selectedPreset === psID) {
+          setSelectedPreset("");
+          if (selectState === SELECT_STATE.PsEdit) {
+            setSelectedOperator("");
+            setSelectState(SELECT_STATE.Grid);
+          }
         } else {
-          setSelectedOperator(psID);
-          setSelectState(SELECT_STATE.PsEdit)
+          setSelectedPreset(psID);
         }
       })}
-      activeID={selectedOperator}
+      activeID={selectedPreset}
       selectState={selectState}
       setSelectState={setSelectState}
+      applyBatch={() => {
+        applyBatch(presets[selectedPreset], [selectedOperator])
+      }}
     />
   );
 
@@ -138,28 +147,32 @@ const DataTab = React.memo((props: Props) => {
         setSelectedOperator(op.id);
         setSelectState(SELECT_STATE.OpEdit)
       }}
-      filter={(op: any) => selectedClass === noneStr || op.class === selectedClass}
+      filter={(op: any) => selectedClass === "" || op.class === selectedClass}
     />
 
   const batchSelectionGrid =
     <div>
       <div className={classes.label}>
-        Select:
+        Batch Mode:
         <div className={classes.buttonPair}>
           <FormButton
             onClick={() => {
-              setSelectState(SELECT_STATE.PsEdit);
+              selectedPreset === "" ? setSelectState(SELECT_STATE.Grid) : setSelectState(SELECT_STATE.PsEdit);
               setSelectBatchOps([]);
             }}
           >
+            <MdCancel className={classes.svg} size={14} />
             Cancel
           </FormButton>
           <FormButton
             onClick={() => {
-              applyBatch(presets[selectedOperator], selectBatchOps);
+              setSelectState(SELECT_STATE.Grid)
+              applyBatch(presets[selectedPreset], selectBatchOps);
               setSelectBatchOps([])
             }}
+            disabled={selectedPreset === ""}
           >
+            <MdCheckCircle className={classes.svg} size={14} />
             Apply
           </FormButton>
         </div>
@@ -171,17 +184,15 @@ const DataTab = React.memo((props: Props) => {
         onClick={((op: Operator) => {
           const index = selectBatchOps.indexOf(op.id);
           if (index > -1) {
-            console.log("Removing " + op.name + " from " + selectBatchOps)
             selectBatchOps.splice(index, 1)
-            setSelectBatchOps(selectBatchOps);
+            setSelectBatchOps(selectBatchOps => [...selectBatchOps]);
           }
           else {
-            console.log("Adding " + op.name + " to " + selectBatchOps)
             setSelectBatchOps(selectBatchOps => [...selectBatchOps, op.id]);
           }
         }
         )}
-        filter={(op: any) => selectedClass === noneStr || op.class === selectedClass}
+        filter={(op: any) => selectedClass === "" || op.class === selectedClass}
       />
     </div >
 
@@ -192,7 +203,7 @@ const DataTab = React.memo((props: Props) => {
         : batchSelectionGrid
       : selectState === SELECT_STATE.OpEdit
         ? <DataEntryForm op={operators[selectedOperator]} onChange={changeOperators} setSelectState={setSelectState} />
-        : <PresetEntryForm op={presets[selectedOperator]} onChange={changePresets} />
+        : <PresetEntryForm op={presets[selectedPreset]} onChange={changePresets} />
 
 
 
