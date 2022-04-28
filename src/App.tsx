@@ -75,22 +75,6 @@ function presetObject(_: any, index: number): [string, Operator] {
 
 const defaultPresets = Object.fromEntries([...Array(6)].map(presetObject));
 
-export enum UIMode {
-  DESKTOP = 0,
-  TABLET = 1,
-  MOBILE = 2,
-}
-
-export function getUIMode(width: number) {
-  if (width > TABLET_BREAKPOINT) {
-    return UIMode.DESKTOP;
-  } else if (width > MOBILE_BREAKPOINT) {
-    return UIMode.TABLET;
-  } else {
-    return UIMode.MOBILE;
-  }
-}
-
 export interface Operator {
   id: string;
   name: string;

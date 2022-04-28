@@ -1,28 +1,31 @@
 import React from "react";
-import { UIMode } from "../../App";
+import { MOBILE_BREAKPOINT, TABLET_BREAKPOINT } from "../../App";
 import { makeStyles } from "@material-ui/core";
 import FormButton from "../FormButton";
 
 const useStyles = makeStyles({
   classSelectorButtonArea: {
-    width: "72px",
-    height: "60px",
     display: "flex",
+    width: "46px",
     justifyContent: "center",
     alignContent: "center",
     margin: "2px",
   },
   classButton: {
     display: "flex",
-    flexDirection: "column",
   },
   classIcon: {
     width: "32px",
     height: "32px",
-    marginBottom: "4px",
+    margin: "2px",
+  },
+  classIconMobile: {
+    width: "16px",
+    height: "16px",
+    margin: "2px",
   },
   smallText: {
-    fontSize: "12px",
+    fontSize: "14px",
   },
 });
 
@@ -37,23 +40,18 @@ const DataTabClassButton = React.memo((props: Props) => {
   const { cl, onClick, toggled } = props;
 
   return (
-    <div className={classes.classSelectorButtonArea}>
-      <FormButton
-        key={cl}
-        className={classes.classButton}
-        onClick={onClick}
-        toggled={toggled}
-      >
-        <img
-          className={classes.classIcon}
-          src={`https://res.cloudinary.com/samidare/image/upload/f_auto,h_128,w_128/v1/arknights/classes/${cl}`}
-          alt={""}
-        />
-        <div className={classes.smallText}>
-          {cl}
-        </div>
-      </FormButton>
-    </div>
+    <FormButton
+      key={cl}
+      className={classes.classSelectorButtonArea}
+      onClick={onClick}
+      toggled={toggled}
+    >
+      <img
+        className={classes.classIcon}
+        src={`https://res.cloudinary.com/samidare/image/upload/f_auto,h_128,w_128/v1/arknights/classes/${cl}`}
+        alt={""}
+      />
+    </FormButton>
     );
 });
 export default DataTabClassButton;

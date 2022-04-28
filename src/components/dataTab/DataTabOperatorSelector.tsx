@@ -5,27 +5,16 @@ import { makeStyles } from "@material-ui/core";
 import DataTabOperatorButton from "./DataTabOperatorButton";
 
 const useStyles = makeStyles({
-  container: {
-    display: "flex",
-    alignItems: "center",
-    flexDirection: "column",
-  },
-  marginBottom: {
-    marginBottom: "16px",
-  },
-  mobileOpDisplay: {
+  opDisplay: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(88px, max-content))",
+    gridTemplateColumns: "repeat(auto-fit, 90px)",
     justifyContent: "center",
     gridGap: "3px",
+    margin: "0px",
+    padding: "0px",
   },
-  opIcon: {
-    width: "64px",
-    height: "64px",
-    marginBottom: "2px",
-  },
-  smallText: {
-    fontSize: "12px",
+  li: {
+    listStyleType: "none",
   },
 });
 
@@ -49,21 +38,22 @@ const DataTabOperatorSelector = React.memo((props: Props) => {
 
   // Operator Selector Component
   return (
-    <div className={classes.mobileOpDisplay}>
+    <ul className={classes.opDisplay}>
       {
         Object.values(operatorJson)
           .filter((op: any) => op.class !== "Token" && op.class !== "Trap")
-          .filter(filter ?? (()=> true))
+          .filter(filter ?? (() => true))
           .sort(sortComparator)
           .map((op: any) => {
-            return <DataTabOperatorButton
-              op={operators[op.id]}
-              key={op.id}
-              onClick={() => onClick(op)}
-              toggleGroup={toggleGroup ?? []}
-            />;
+            return <li className={classes.li} key={op.id}>
+              <DataTabOperatorButton
+                op={operators[op.id]}
+                onClick={() => onClick(op)}
+                toggleGroup={toggleGroup ?? []}
+              />
+            </li>
           })
       }
-    </div>)
+    </ul>)
 });
 export default DataTabOperatorSelector;

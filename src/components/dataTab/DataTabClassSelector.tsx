@@ -1,26 +1,19 @@
 import React from "react";
-import { UIMode, MOBILE_BREAKPOINT, TABLET_BREAKPOINT, getUIMode } from "../../App";
 import useWindowSize, { Size } from "../UseWindowSize";
 import { makeStyles } from "@material-ui/core";
-import clsx from "clsx";
 import DataTabClassButton from "./DataTabClassButton";
 
 const useStyles = makeStyles({
   classDisplay: {
     display: "flex",
+    flexWrap: "wrap",
     justifyContent: "center",
+    gridGap: "3px",
+    margin: "0px",
+    padding: "0px",
   },
-  classDisplayTablet: {
-    display: "flex",
-    justifyContent: "center",
-  },
-  classDisplayMobile: {
-    display: "grid",
-    gridTemplateColumns: "repeat(4, 1fr)",
-    marginRight: "12px",
-  },
-  marginBottom: {
-    marginBottom: "6px",
+  li: {
+    listStyleType: "none",
   },
 });
 
@@ -35,27 +28,21 @@ const DataTabClassSelector = React.memo((props: Props) => {
   const { classList, onClick, activeClass } = props;
   const size: Size = useWindowSize();
   const width = size.width;
-  let uiMode = getUIMode(width);
-
-  const classDisplay = clsx({
-    [classes.classDisplay]: width > TABLET_BREAKPOINT,
-    [classes.classDisplayTablet]: width <= TABLET_BREAKPOINT,
-    [classes.classDisplayMobile]: width <= MOBILE_BREAKPOINT,
-    [classes.marginBottom]: "true"
-  })
 
   return (
-    <div className={classDisplay}>
+    <ul className={classes.classDisplay}>
       {classList
         .map((cl: string) => (
-          <DataTabClassButton
-            cl={cl}
-            key={cl}
-            onClick={(() => onClick(cl))}
-            toggled={activeClass === cl}
-          />
-        ))}
-    </div>
+          <li className={classes.li} key={cl}>
+            <DataTabClassButton
+              cl={cl}
+              onClick={(() => onClick(cl))}
+              toggled={activeClass === cl}
+            />
+          </li>
+        ))
+      }
+    </ul>
   );
 });
 export default DataTabClassSelector;

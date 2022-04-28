@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core";
 import { useRarityStyles } from "../StyleRarityUnderline";
 import clsx from "clsx";
 import FormButton from "../FormButton";
+import { MdFavorite } from "react-icons/md";
 
 const useStyles = makeStyles({
   opButton: {
@@ -19,13 +20,19 @@ const useStyles = makeStyles({
   opIcon: {
     width: "64px",
     height: "67px",
-    marginBottom: "4px",
+    marginBottom: "2px",
+    gridArea: "1 / 1",
+    textAlign: "left",
+    lineHeight: "112px",
+  },
+  fav: {
     gridArea: "1 / 1",
     textAlign: "left",
     lineHeight: "112px",
   },
   opNameContainer: {
     height: "20px",
+    marginBottom: "1px",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -67,7 +74,13 @@ const DataTabOperatorButton = React.memo((props: Props) => {
         title={op.name}
         className={nameIsLong ? classes.lineWrap : classes.opName}
       >
-        {name}
+        {nameIsLong
+          ? <span>
+            {name.split(" ")[0]}
+            <br />
+            {name.split(" ")[1]}
+          </span>
+          : name}
       </abbr>
     </span>
     :
@@ -113,12 +126,16 @@ const DataTabOperatorButton = React.memo((props: Props) => {
           src={imgUrl}
           alt=""
         />
-        <div className={classes.opIcon}>
-          {op.favorite ? "❤️" : ""}
-        </div>
+        {op.favorite
+          ? <MdFavorite
+            className={classes.fav}
+            size={18}
+            color={"#ff4d4d"}
+          />
+          : ""}
       </div>
       {opName}
     </FormButton>
-  );
+  )
 });
 export default DataTabOperatorButton;
