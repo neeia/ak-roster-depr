@@ -28,7 +28,6 @@ const useStyles = makeStyles({
 
 interface Props {
   cl: string;
-  uiMode: UIMode;
   onClick: () => void;
   toggled: boolean;
 }
@@ -47,8 +46,8 @@ const DataTabClassButton = React.memo((props: Props) => {
       >
         <img
           className={classes.classIcon}
-          src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/classes/${cl}`}
-          alt={cl}
+          src={`https://res.cloudinary.com/samidare/image/upload/f_auto,h_128,w_128/v1/arknights/classes/${cl}`}
+          alt={""}
         />
         <div className={classes.smallText}>
           {cl}

@@ -7,26 +7,36 @@ import clsx from "clsx";
 import FormButton from "../FormButton";
 
 const useStyles = makeStyles({
+  opButton: {
+    display: "flex",
+    width: "90px",
+    flexDirection: "column",
+    boxShadow: "2px 2px 8px rgb(0 0 0 / 30%)",
+  },
   iconStack: {
     display: "grid"
   },
   opIcon: {
     width: "64px",
-    height: "64px",
-    marginBottom: "2px",
+    height: "67px",
+    marginBottom: "4px",
     gridArea: "1 / 1",
     textAlign: "left",
     lineHeight: "112px",
   },
-  opButton: {
+  opNameContainer: {
+    height: "20px",
     display: "flex",
-    width: "94px",
     flexDirection: "column",
-    boxShadow: "2px 2px 8px rgb(0 0 0 / 30%)",
+    justifyContent: "center",
   },
   opName: {
-    fontSize: "12px",
-    marginTop: "4px",
+    fontSize: "13px",
+  },
+  lineWrap: {
+    marginTop: "2px",
+    fontSize: "11px",
+    lineHeight: "10px",
   },
   unowned: {
     opacity: "0.5",
@@ -36,24 +46,35 @@ const useStyles = makeStyles({
 interface Props {
   op: Operator;
   onClick: () => void;
+  toggleGroup?: string[]
 }
 
 const DataTabOperatorButton = React.memo((props: Props) => {
   const classes = useStyles();
   const rarity = useRarityStyles();
-  const { op, onClick } = props;
+  const { op, onClick, toggleGroup } = props;
 
-  // turns Skadi the Corrupting Heart into Skadi (CH)
-  function titlefy(title: string): string {
-    return title ? " (" + title?.split(" ").map((value: string) => value.charAt(0)).join("") + ")" : "";
-  }
+  const reg = /( the )|\(/g;
+  const nameSplitTitle = op.name.split(reg);
+  const name = nameSplitTitle.length > 1 ? nameSplitTitle[2].split(")")[0] : nameSplitTitle[0];
+  const nameIsLong = name.split(" ").length > 1 && name.length > 11;
 
   // Process operator name
-  let opName = (
-    <span className={classes.opName}>
-      {op.name.split(" the ")[0].split(" (")[0]}
-      {(titlefy(op.name.split(" the ")[1]))}
-      {(titlefy(op.name.split(" (")[1]))}
+  let opName = (nameSplitTitle.length > 1
+    ?
+    <span className={classes.opNameContainer}>
+      <abbr
+        title={op.name}
+        className={nameIsLong ? classes.lineWrap : classes.opName}
+      >
+        {name}
+      </abbr>
+    </span>
+    :
+    <span className={classes.opNameContainer}>
+      <div className={nameIsLong ? classes.lineWrap : classes.opName} >
+        {name}
+      </div>
     </span>
   )
   const opIconStyle = clsx({
@@ -74,14 +95,18 @@ const DataTabOperatorButton = React.memo((props: Props) => {
   } else if (elt === 1 && op.name === "Amiya") {
     intermediate += " elite 1";
   }
-  const imgUrl = `https://res.cloudinary.com/samidare/image/upload/v1/arknights/operators/${slugify(
+  const imgUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto,h_256,w_256/v1/arknights/operators/${slugify(
     intermediate,
     { lower: true, replacement: "-", remove: /[-"]/g }
   )}`;
 
 
   return (
-    <FormButton className={classes.opButton} onClick={onClick} key={op.id}>
+    <FormButton
+      className={classes.opButton}
+      onClick={onClick}
+      toggled={toggleGroup?.includes(op.id) ?? false}
+    >
       <div className={classes.iconStack}>
         <img
           className={opIconStyle}

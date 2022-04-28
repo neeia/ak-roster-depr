@@ -56,6 +56,25 @@ const defaultOperators = Object.fromEntries(
   Object.entries(operatorJson).map(opObject)
 );
 
+function presetObject(_: any, index: number): [string, Operator] {
+  return [
+    index.toString(),
+    {
+      id: index.toString(),
+      name: `Untitled Preset ${index + 1}`,
+      favorite: false,
+      rarity: 6,
+      potential: 1,
+      promotion: 0,
+      owned: true,
+      level: 1,
+      skillLevel: 1,
+    },
+  ];
+}
+
+const defaultPresets = Object.fromEntries([...Array(6)].map(presetObject));
+
 export enum UIMode {
   DESKTOP = 0,
   TABLET = 1,
@@ -134,7 +153,7 @@ function App() {
 
   const [dirty, setDirty] = useLocalStorage<boolean>("dirty", false);
 
-  const changeOperators = React.useCallback(
+  const changePropertyOfOperator = React.useCallback(
     (operatorID: string, property: string, value: number | boolean) => {
       if (isNaN(value as any)) {
         return;
@@ -174,7 +193,6 @@ function App() {
             copyOperatorData = applyChangeWithInvariant(copyOperatorData, prop, (newOp as any)[prop])
           )
           copyOperators[operatorID] = copyOperatorData;
-          setDirty(true);
           return copyOperators;
         }
       );
@@ -198,43 +216,53 @@ function App() {
           op.potential = 1;
           op.promotion = 0;
           op.level = 1;
-          op.skillLevel = (op.rarity > 2 ? op.skillLevel || 1 : 0);
+          op.skillLevel = (op.rarity > 2 ? 1 : 0);
         } else {
           op.favorite = false;
           op.potential = 0;
           op.promotion = -1;
           op.level = 0;
-          op.skillLevel = (op.rarity > 2 ? 0 : 0);
+          op.skillLevel = 0;
           op.skill1Mastery = undefined;
           op.skill2Mastery = undefined;
           op.skill3Mastery = undefined;
+          op.module = undefined;
         }
         break;
       case "promotion":
-        if (value !== 2) {
-          op.skill1Mastery = undefined;
-          op.skill2Mastery = undefined;
-          op.skill3Mastery = undefined;
-        } else {
-          op = applyChangeWithInvariant(op, "skill1Mastery", 0);
-          op = applyChangeWithInvariant(op, "skill2Mastery", 0);
-          op = applyChangeWithInvariant(op, "skill3Mastery", 0);
+        if (op.rarity < 3) {
+          op.promotion = 0
+        } else if (op.rarity === 3) {
+          op.promotion = Math.min(1, op.promotion)
         }
         if (value === 0) {
           op.skillLevel = Math.min(op.skillLevel, 4);
         }
+        if (value === 2) {
+          op = applyChangeWithInvariant(op, "skill1Mastery", 0);
+          op = applyChangeWithInvariant(op, "skill2Mastery", 0);
+          op = applyChangeWithInvariant(op, "skill3Mastery", 0);
+        } else {
+          op.skill1Mastery = undefined;
+          op.skill2Mastery = undefined;
+          op.skill3Mastery = undefined;
+        }
         op.level = Math.min(op.level, MAX_LEVEL_BY_RARITY[op.rarity][op.promotion]);
         break;
+      case "level":
+        op.level = minMax(1, op.level, MAX_LEVEL_BY_RARITY[op.rarity][op.promotion]);
+        break;
       case "skillLevel":
+        op.skillLevel = minMax(1, op.skillLevel, 7);
         op = applyChangeWithInvariant(op, "skill1Mastery", 0);
         op = applyChangeWithInvariant(op, "skill2Mastery", 0);
         op = applyChangeWithInvariant(op, "skill3Mastery", 0);
+        if (op.rarity < 3) {
+          op.skillLevel = 0;
+        }
         if (op.skillLevel > 4 && op.promotion === 0) {
           op.skillLevel = 4;
         }
-        break;
-      case "level":
-        op.level = Math.max(Math.min(op.level, MAX_LEVEL_BY_RARITY[op.rarity][op.promotion]), 1);
         break;
       case "skill1Mastery":
       case "skill2Mastery":
@@ -244,7 +272,7 @@ function App() {
         }
         break;
       case "skill3Mastery":
-        if (!(op.rarity === 6 || op.name === "Amiya")) {
+        if (op.promotion !== 2 || op.skillLevel !== 7 || !(op.rarity === 6 || op.name === "Amiya")) {
           op.skill3Mastery = undefined;
         }
         break;
@@ -252,19 +280,57 @@ function App() {
     return op;
   }
 
+  const [presets, setPresets] = useLocalStorage<Record<string, Operator>>(
+    "presets",
+    defaultPresets
+  );
+  const changePresets = React.useCallback(
+    (presetID: string, property: string, value: any) => {
+      setPresets(
+        (oldPresets: Record<string, Operator>): Record<string, Operator> => {
+          const copyPresets = { ...oldPresets };
+          const copyPresetData = { ...copyPresets[presetID] };
+          copyPresets[presetID] = applyChangeWithInvariant(copyPresetData, property, value);
+          return copyPresets;
+        }
+      );
+    },
+    [setPresets]
+  );
+
+  const applyBatch = React.useCallback(
+    (source: Operator, target: string[]) => {
+      setOperators(
+        (oldOperators: Record<string, Operator>): Record<string, Operator> => {
+          const copyOperators = { ...oldOperators };
+          target.forEach((opId: string) => {
+            var copyOperatorData = { ...copyOperators[opId] };
+            orderOfOperations.forEach((prop: string) =>
+              copyOperatorData = applyChangeWithInvariant(copyOperatorData, prop, (source as any)[prop])
+            )
+            copyOperators[opId] = copyOperatorData;
+          })
+          return copyOperators;
+        }
+      );
+    },
+    [setOperators]
+  );
+
+
   // Dirty & Close Warning
-  useEffect(() => {window.onload = function() {
-    window.addEventListener("beforeunload", function (e) {
-      if (!dirty) {
-        return;
-      }
+  //useEffect(() => {window.onload = function() {
+  //  window.addEventListener("beforeunload", function (e) {
+  //    if (!dirty) {
+  //      return;
+  //    }
 
-      var confirmationMessage = "Not all changes have been backed up. Please save first.";
+  //    var confirmationMessage = "Not all changes have been backed up. Please save first.";
 
-      (e || window.event).returnValue = confirmationMessage; //Gecko + IE
-      return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
-    });
-  };}, []);
+  //    (e || window.event).returnValue = confirmationMessage; //Gecko + IE
+  //    return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
+  //  });
+  //};}, []);
 
   // no clue what this is for
   function a11yProps(index: number) {
@@ -322,7 +388,13 @@ function App() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <DataTab operators={operators} onChange={changeOperators} />
+        <DataTab
+          operators={operators}
+          changeOperators={changePropertyOfOperator}
+          presets={presets}
+          changePresets={changePresets}
+          applyBatch={applyBatch}
+        />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <CollectionTab

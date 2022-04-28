@@ -7,13 +7,17 @@ export const useBoxStyles = makeStyles({
     padding: "4px",
     textAlign: "center",
     flexGrow: 1,
+    "&:focus": {
+      boxShadow: "0px 0px 0px 1px #fcf3dc inset",
+      background: "#505050",
+    }
   },
   highlighted: {
-    border: "2px solid #f7d98b",
+    border: "1px solid #f7d98b",
+    boxShadow: "0px 0px 0px 1px #f7d98b inset",
     "& img.classIcon": {
       mixBlendMode: "difference"
     },
-    flexGrow: 1.05,
   },
   unborderStyle: {
     marginLeft: "1px",

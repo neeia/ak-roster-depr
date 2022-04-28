@@ -17,11 +17,10 @@ const useStyles = makeStyles({
   classDisplayMobile: {
     display: "grid",
     gridTemplateColumns: "repeat(4, 1fr)",
-    height: "1vh",
     marginRight: "12px",
   },
   marginBottom: {
-    marginBottom: "16px",
+    marginBottom: "6px",
   },
 });
 
@@ -35,7 +34,7 @@ const DataTabClassSelector = React.memo((props: Props) => {
   const classes = useStyles();
   const { classList, onClick, activeClass } = props;
   const size: Size = useWindowSize();
-  const width = size.width === undefined ? 1920 : size.width;
+  const width = size.width;
   let uiMode = getUIMode(width);
 
   const classDisplay = clsx({
@@ -51,7 +50,7 @@ const DataTabClassSelector = React.memo((props: Props) => {
         .map((cl: string) => (
           <DataTabClassButton
             cl={cl}
-            uiMode={uiMode}
+            key={cl}
             onClick={(() => onClick(cl))}
             toggled={activeClass === cl}
           />

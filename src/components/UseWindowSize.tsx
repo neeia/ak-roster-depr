@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 
 export interface Size {
-  width: number | undefined;
-  height: number | undefined;
+  width: number;
+  height: number;
 }
 
 function useWindowSize() {
-  const [windowSize, setWindowSize] = useState<Size>({
+  const [windowSize, setWindowSize] = useState<Partial<Size>>({
     width: undefined,
     height: undefined,
   });
@@ -23,7 +23,7 @@ function useWindowSize() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  return windowSize;
+  return windowSize as Size;
 }
 
 export default useWindowSize;
