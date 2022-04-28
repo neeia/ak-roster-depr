@@ -350,7 +350,7 @@ const DataEntryLevel = React.memo((props: Props) => {
                     [classes.promotionIcon]: true,
                     [classes.unselected]: op.promotion !== i,
                   })}
-                  src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/elite/${i}`}
+                  src={`https://res.cloudinary.com/samidare/image/upload/f_auto,h_128,w_128/v1/arknights/elite/${i}`}
                   alt={`Elite ${i} Button`}
                 />
               </FormButton>
