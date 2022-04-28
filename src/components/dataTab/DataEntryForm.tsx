@@ -3,6 +3,7 @@ import slugify from "slugify";
 import { Operator } from "../../App";
 import { ButtonBase, makeStyles } from "@material-ui/core";
 import { useBoxStyles } from "../BoxStyles"
+import { useDataStyles } from "./DataTabSharedStyles";
 import clsx from "clsx";
 import DataEntryCollect from "./DataEntryCollect";
 import DataEntryLevel from "./DataEntryLevel";
@@ -17,7 +18,8 @@ const useStyles = makeStyles({
     padding: "8px",
     boxShadow: "2px 2px 8px rgb(0 0 0 / 30%)",
     alignItems: "center",
-    width: "460px",
+    width: "100%",
+    maxWidth: "460px",
     justifySelf: "center",
     position: "relative",
   },
@@ -64,13 +66,6 @@ const useStyles = makeStyles({
     alignItems: "center",
     paddingBottom: "12px",
   },
-  horizontalDivider: {
-    backgroundColor: "#909090",
-    height: "2px",
-    width: "420px",
-    marginTop: "16px",
-    marginBottom: "24px",
-  },
   xBox: {
     position: "absolute",
     top: "3px",
@@ -101,6 +96,7 @@ const DataEntryForm = React.memo((props: Props) => {
   const { op, onChange, setSelectState } = props;
   const classes = useStyles();
   const boxStyle = useBoxStyles();
+  const style = useDataStyles();
 
   let intermediate = op.name;
   if (op.promotion === 2) {
@@ -158,9 +154,9 @@ const DataEntryForm = React.memo((props: Props) => {
         {opName}
       </div>
       <DataEntryCollect op={op} onChange={onChange} />
-      <div className={classes.horizontalDivider} />
+      <div className={style.horizontalDivider} />
       <DataEntryLevel op={op} onChange={onChange} />
-      <div className={classes.horizontalDivider} />
+      <div className={style.horizontalDivider} />
       <DataEntrySkillLevel op={op} onChange={onChange} />
     </div>
   );

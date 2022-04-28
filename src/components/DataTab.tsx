@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Operator, TABLET_BREAKPOINT, MOBILE_BREAKPOINT, UIMode, getUIMode } from "../App";
+import { Operator } from "../App";
 import useWindowSize, { Size } from "./UseWindowSize";
 import { makeStyles } from "@material-ui/core";
-import clsx from "clsx";
+import { useDataStyles } from "./dataTab/DataTabSharedStyles";
 import DataTabOperatorSelector from "./dataTab/DataTabOperatorSelector";
 import DataTabClassSelector from "./dataTab/DataTabClassSelector";
 import DataEntryForm from "./dataTab/DataEntryForm";
@@ -10,6 +10,7 @@ import DataTabPresetSelector from "./dataTab/DataTabPresetSelector";
 import FormButton from "./FormButton";
 import PresetEntryForm from "./dataTab/PresetEntryForm";
 import { MdCancel, MdCheckCircle } from "react-icons/md";
+import Drawer from "./Drawer";
 
 const useStyles = makeStyles({
   container: {
@@ -18,29 +19,11 @@ const useStyles = makeStyles({
     flexDirection: "column",
     fontSize: "16px"
   },
-  containerMobile: {
-    display: "flex",
-    alignItems: "center",
-    flexDirection: "column",
-  },
   containerChild: {
-    width: "800px",
+    width: "100%",
+    maxWidth: "1200px",
     display: "grid",
     gridTemplateRows: "auto auto 1fr",
-  },
-  containerChildMobile: {
-    flex: 1,
-    display: "grid",
-    gridTemplateRows: "auto auto 1fr",
-    justifyContent: "center",
-  },
-  horizontalDivider: {
-    backgroundColor: "#909090",
-    height: "2px",
-    width: "480px",
-    marginTop: "6px",
-    marginBottom: "12px",
-    justifySelf: "center",
   },
   label: {
     fontSize: "16px",
@@ -55,6 +38,12 @@ const useStyles = makeStyles({
   },
   svg: {
     marginRight: "4px",
+  },
+  h1: {
+    display: "inline",
+    fontSize: "1em",
+    margin: "0px",
+    fontWeight: "normal",
   }
 });
 
@@ -90,10 +79,9 @@ export const COLOR_BY_RARITY = ["#000000", "#9f9f9f", "#dce537", "#00b2f6", "#db
 
 const DataTab = React.memo((props: Props) => {
   const classes = useStyles();
+  const style = useDataStyles();
   const { operators, changeOperators, presets, changePresets, applyBatch } = props;
   const size: Size = useWindowSize();
-  const width = size.width === undefined ? 1920 : size.width;
-  let uiMode = getUIMode(width);
 
   const [selectedOperator, setSelectedOperator] = React.useState("")
   const [selectedPreset, setSelectedPreset] = useState("")
@@ -152,7 +140,7 @@ const DataTab = React.memo((props: Props) => {
 
   const batchSelectionGrid =
     <div>
-      <div className={classes.label}>
+      <div className={style.label}>
         Batch Mode:
         <div className={classes.buttonPair}>
           <FormButton
@@ -176,7 +164,7 @@ const DataTab = React.memo((props: Props) => {
             Apply
           </FormButton>
         </div>
-        <div className={classes.horizontalDivider} />
+        <div className={style.horizontalDivider} />
       </div>
       <DataTabOperatorSelector
         operators={operators}
@@ -208,25 +196,32 @@ const DataTab = React.memo((props: Props) => {
 
 
   return (
-    <div className={clsx({
-      [classes.container]: uiMode === UIMode.DESKTOP || uiMode === UIMode.TABLET,
-      [classes.containerMobile]: uiMode === UIMode.MOBILE,
-    })}>
-      <div className={clsx({
-        [classes.containerChild]: uiMode === UIMode.DESKTOP || uiMode === UIMode.TABLET,
-        [classes.containerChildMobile]: uiMode === UIMode.MOBILE,
-      })}>
-        <div className={classes.label}>
-          Filter:
-        </div>
-        {classSelector}
+    <div className={classes.container}>
+      <div className={classes.containerChild}>
+        <Drawer
+          label={"Info"}
+        >
+          <span>
+            <h1 className={classes.h1}>
+              Arknights Roster (Krooster) is an operator collection tracker.
+            </h1>
+            <div>
+              Select an operator to get started, or create some presets to make batch changes.
+            </div>
+          </span>
+        </Drawer>
+        <Drawer
+          label={"Filter"}
+        >
+          {classSelector}
+        </Drawer>
         {/* Rarity, Fav, Owned, CLEAR FILTER BUTTON */}
-        <div className={classes.horizontalDivider} />
-        <div className={classes.label}>
-          Presets:
-        </div>
-        {presetSelector}
-        <div className={classes.horizontalDivider} />
+        <Drawer
+          label={"Presets"}
+        >
+          {presetSelector}
+        </Drawer>
+        <div className={style.horizontalDivider} />
         {opEditForm}
       </div>
     </div>

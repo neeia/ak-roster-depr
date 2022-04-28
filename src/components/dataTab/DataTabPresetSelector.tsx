@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Operator } from "../../App";
 import { makeStyles } from "@material-ui/core";
 import FormButton from "../FormButton";
@@ -12,14 +12,14 @@ const useStyles = makeStyles({
     alignItems: "center",
   },
   presetGrid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(6, 1fr)",
+    display: "flex",
+    flexWrap: "wrap",
     justifyContent: "center",
-    flexGrow: 0
   },
   presetButtonContainer: {
-    display: "grid",
-    gridTemplateColumns: "1fr 1fr",
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "center",
     gap: "2px",
   },
   verticalDivider: {
@@ -27,11 +27,11 @@ const useStyles = makeStyles({
     width: "2px",
     height: "32px",
     alignSelf: "center",
-    marginLeft: "8px",
+    marginLeft: "4px",
     marginRight: "8px",
   },
   classSelectorButtonArea: {
-    width: "80px",
+    width: "72px",
     height: "36px",
     display: "flex",
     justifyContent: "center",
@@ -45,6 +45,9 @@ const useStyles = makeStyles({
   },
   svg: {
     marginRight: "4px"
+  },
+  button2: {
+    width: "76px",
   }
 });
 
@@ -83,6 +86,7 @@ const DataTabPresetSelector = React.memo((props: Props) => {
       <div className={classes.verticalDivider} />
       <div className={classes.presetButtonContainer}>
         <FormButton
+          className={classes.button2}
           onClick={() => setSelectState(selectState === SELECT_STATE.PsEdit ? SELECT_STATE.Grid : SELECT_STATE.PsEdit)}
           disabled={activeID === ""}
           toggled={selectState === SELECT_STATE.PsEdit}
@@ -91,6 +95,7 @@ const DataTabPresetSelector = React.memo((props: Props) => {
           Edit
         </FormButton>
         <FormButton
+          className={classes.button2}
           onClick={() => selectState === SELECT_STATE.OpEdit ? applyBatch() : setSelectState(SELECT_STATE.Batch)}
           disabled={activeID === "" || selectState === SELECT_STATE.Batch}
           toggled={selectState === SELECT_STATE.Batch}

@@ -2,23 +2,13 @@ import React from "react";
 import { Operator } from "../../App";
 import operatorJson from "../../data/operators.json";
 import { disableByProperty } from "../RosterTable";
-import { ButtonBase, makeStyles } from "@material-ui/core";
+import { ButtonBase, Grid, Hidden, makeStyles } from "@material-ui/core";
 import FormButton from "../FormButton";
 import clsx from "clsx";
+import { useDataStyles } from "./DataTabSharedStyles";
+import DataLabel from "./DataLabel";
 
 const useStyles = makeStyles({
-  skillContainer: {
-    display: "grid",
-    gridTemplateColumns: "auto auto 1fr",
-  },
-  label: {
-    fontSize: "18px",
-    marginBottom: "4px",
-    lineHeight: "20px",
-    width: "96px",
-    borderBottom: "2px solid #909090",
-    justifySelf: "center",
-  },
   /* SKILL LEVEL */
   skillLevelContainer: {
     display: "flex",
@@ -32,7 +22,6 @@ const useStyles = makeStyles({
     display: "grid",
     gridTemplateRows: "1fr auto 1fr",
     gridTemplateColumns: "1fr auto 1fr",
-    margin: "4px",
   },
   skillLevel: {
     gridArea: "2 / 2",
@@ -85,22 +74,7 @@ const useStyles = makeStyles({
     width: "40px",
     height: "20px",
   },
-  /* DIVIDER */
-  skillVerticalDivider: {
-    backgroundColor: "#909090",
-    width: "2px",
-    height: "240px",
-    alignSelf: "end",
-    marginLeft: "8px",
-    marginRight: "8px",
-    marginBottom: "10px",
-  },
   /* MASTERIES */
-  skillMasteryContainer: {
-    display: "grid",
-    gridTemplateRows: "auto 1fr 1fr 1fr",
-    width: "275px",
-  },
   skillMastery: {
     display: "grid",
     gridTemplateAreas: `"name name name name name"
@@ -112,15 +86,15 @@ const useStyles = makeStyles({
   },
   skillName: {
     gridArea: "name",
-    fontSize: "16px",
+    fontSize: "13px",
   },
   skillIcon: {
-    width:  "60px",
+    width: "60px",
     height: "60px",
     marginRight: "4px",
   },
   skillMasteryButton: {
-    width:  "48px",
+    width: "48px",
     height: "48px",
     marginLeft: "2px",
     display: "grid",
@@ -157,6 +131,7 @@ interface Props {
 const DataEntrySkillLevel = React.memo((props: Props) => {
   const { op, onChange } = props;
   const classes = useStyles();
+  const style = useDataStyles();
   const opInfo = (operatorJson as any)[op.id];
 
   const skillLvlImgUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto,h_192,w_192/v1/arknights/skill-levels/${op.skillLevel}`;
@@ -167,101 +142,102 @@ const DataEntrySkillLevel = React.memo((props: Props) => {
   const skillNxtImgUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto,h_192,w_192/v1/arknights/skill-levels/${nextSkillLevel}`;
 
   const skillLevelSection = (
-    <div className={classes.skillLevelContainer}>
-      <div className={classes.label}>
-        Skill Level
-      </div>
-      <div className={classes.skillLevelInputContainer}>
-        <div className={classes.skillLevel}>
-          <img
-            className={classes.skillLevelStack}
-            src={skillBGImgUrl}
-            alt={""}
-          />
-          {op.skillLevel > 0
-            ? <img
+    <Grid item xs={12} sm={4}>
+      <Grid container>
+        <DataLabel label={"Skill Level"} part={false} />
+        <DataLabel label={"Skill Level"} part={true} />
+        <Grid item xs={7} sm={12} className={clsx({ [classes.skillLevelInputContainer]: true, [style.block]: true })}>
+          <div className={classes.skillLevel}>
+            <img
               className={classes.skillLevelStack}
-              src={skillLvlImgUrl}
-              alt={`Skill Level ${op.skillLevel}`}
+              src={skillBGImgUrl}
+              alt={""}
             />
-            : <svg
-              className={classes.skillLevelStack}
+            {op.skillLevel > 0
+              ? <img
+                className={classes.skillLevelStack}
+                src={skillLvlImgUrl}
+                alt={`Skill Level ${op.skillLevel}`}
+              />
+              : <svg
+                className={classes.skillLevelStack}
+              >
+                <path d="M 18 24 H 30" fill="transparent" stroke="#808080" strokeLinecap="butt" strokeWidth="3" />
+              </svg>}
+          </div>
+          <ButtonBase
+            classes={{
+              root: clsx({ [classes.skillLevelNext]: true, [classes.svg]: true }),
+              disabled: classes.disabled
+            }}
+            onClick={() => (onChange(op.id, "skillLevel", nextSkillLevel))}
+            disabled={!op.owned || op.rarity < 3 || op.skillLevel >= (op.promotion === 0 ? 4 : 7)}
+          >
+            <img
+              className={classes.skillButtonStack}
+              src={skillBGImgUrl}
+              alt={""}
+            />
+            <img
+              className={classes.skillButtonStack}
+              src={skillNxtImgUrl}
+              alt={`Jump to Skill Level ${nextSkillLevel}`}
+            />
+          </ButtonBase>
+          <ButtonBase
+            classes={{
+              root: clsx({ [classes.skillLevelPrevious]: true, [classes.svg]: true }),
+              disabled: classes.disabled
+            }}
+            onClick={() => (onChange(op.id, "skillLevel", previousSkillLevel))}
+            disabled={!op.owned || op.rarity < 3 || op.skillLevel <= 1}
+          >
+            <img
+              className={classes.skillButtonStack}
+              src={skillBGImgUrl}
+              alt={""}
+            />
+            <img
+              className={classes.skillButtonStack}
+              src={skillPrvImgUrl}
+              alt={`Jump to Skill Level ${previousSkillLevel}`}
+            />
+          </ButtonBase>
+          <ButtonBase
+            classes={{
+              root: clsx({ [classes.skillLevelRaise]: true, [classes.svg]: true }),
+              disabled: classes.disabled
+            }}
+            onClick={() => (onChange(op.id, "skillLevel", op.skillLevel + 1))}
+            disabled={!op.owned || op.rarity < 3 || op.skillLevel >= (op.promotion === 0 ? 4 : 7)}
+          >
+            <svg
+              className={classes.skillButtonHalf}
             >
-              <path d="M 18 24 H 30" fill="transparent" stroke="#808080" strokeLinecap="butt" strokeWidth="3" />
-            </svg>}
-        </div>
-        <ButtonBase
-          classes={{
-            root: clsx({ [classes.skillLevelNext]: true, [classes.svg]: true }),
-            disabled: classes.disabled
-          }}
-          onClick={() => (onChange(op.id, "skillLevel", nextSkillLevel))}
-          disabled={!op.owned || op.rarity < 3 || op.skillLevel >= (op.promotion === 0 ? 4 : 7)}
-        >
-          <img
-            className={classes.skillButtonStack}
-            src={skillBGImgUrl}
-            alt={""}
-          />
-          <img
-            className={classes.skillButtonStack}
-            src={skillNxtImgUrl}
-            alt={`Jump to Skill Level ${nextSkillLevel}`}
-          />
-        </ButtonBase>
-        <ButtonBase
-          classes={{
-            root: clsx({ [classes.skillLevelPrevious]: true, [classes.svg]: true }),
-            disabled: classes.disabled
-          }}
-          onClick={() => (onChange(op.id, "skillLevel", previousSkillLevel))}
-          disabled={!op.owned || op.rarity < 3 || op.skillLevel <= 1}
-        >
-          <img
-            className={classes.skillButtonStack}
-            src={skillBGImgUrl}
-            alt={""}
-          />
-          <img
-            className={classes.skillButtonStack}
-            src={skillPrvImgUrl}
-            alt={`Jump to Skill Level ${previousSkillLevel}`}
-          />
-        </ButtonBase>
-        <ButtonBase
-          classes={{
-            root: clsx({ [classes.skillLevelRaise]: true, [classes.svg]: true }),
-            disabled: classes.disabled
-          }}
-          onClick={() => (onChange(op.id, "skillLevel", op.skillLevel + 1))}
-          disabled={!op.owned || op.rarity < 3 || op.skillLevel >= (op.promotion === 0 ? 4 : 7)}
-        >
-          <svg
-            className={classes.skillButtonHalf}
+              <rect x="0" y="0" className={classes.skillButtonHalf} fill="transparent" stroke="#808080" strokeWidth="1" />
+              <path d="M 8 15 L 20 7 L 32 15" fill="transparent" stroke="white" strokeLinecap="round" strokeWidth="3" />
+              alt={`Plus 1`}
+            </svg>
+          </ButtonBase>
+          <ButtonBase
+            classes={{
+              root: clsx({ [classes.skillLevelDecrease]: true, [classes.svg]: true }),
+              disabled: classes.disabled
+            }}
+            onClick={() => (onChange(op.id, "skillLevel", op.skillLevel - 1))}
+            disabled={!op.owned || op.rarity < 3 || op.skillLevel <= 1}
           >
-            <rect x="0" y="0" className={classes.skillButtonHalf} fill="transparent" stroke="#808080" strokeWidth="1" />
-            <path d="M 8 15 L 20 7 L 32 15" fill="transparent" stroke="white" strokeLinecap="round" strokeWidth="3" />
-            alt={`Plus 1`}
-          </svg>
-        </ButtonBase>
-        <ButtonBase
-          classes={{
-            root: clsx({ [classes.skillLevelDecrease]: true, [classes.svg]: true }),
-            disabled: classes.disabled
-          }}
-          onClick={() => (onChange(op.id, "skillLevel", op.skillLevel - 1))}
-          disabled={!op.owned || op.rarity < 3 || op.skillLevel <= 1}
-        >
-          <svg
-            className={classes.skillButtonHalf}
-          >
-            <rect x="0" y="0" className={classes.skillButtonHalf} fill="transparent" stroke="#808080" strokeWidth="1" />
-            <path d="M 8 5 L 20 13 L 32 5" fill="transparent" stroke="white" strokeLinecap="round" strokeWidth="3" />
-            alt={`Minus 1`}
-          </svg>
-        </ButtonBase>
-      </div>
-    </div>);
+            <svg
+              className={classes.skillButtonHalf}
+            >
+              <rect x="0" y="0" className={classes.skillButtonHalf} fill="transparent" stroke="#808080" strokeWidth="1" />
+              <path d="M 8 5 L 20 13 L 32 5" fill="transparent" stroke="white" strokeLinecap="round" strokeWidth="3" />
+              alt={`Minus 1`}
+            </svg>
+          </ButtonBase>
+        </Grid>
+      </Grid>
+    </Grid>);
 
   // returns whether an operator has a skill of the given number
   const hasSkill = (skill: number) => {
@@ -287,81 +263,95 @@ const DataEntrySkillLevel = React.memo((props: Props) => {
   }
 
   const skillMasterySection = (
-    <div className={classes.skillMasteryContainer}>
-      <div className={classes.label}>
-        Masteries
-      </div>
-      {[...Array(3)].map((x, i) => {
-        const disabled = !op.owned || !hasSkill(i) || disableByProperty(op, `skill${i + 1}Mastery`);
-        return (
-          <div
-            key={"skill" + (i+1) + "MasteryBlock"}
-            className={classes.skillMastery}
-          >
-            {opInfo === undefined
-              ? <div className={classes.skillName}>
-                {`Skill ${i+1}`}
+    <Grid item xs={12} sm={7}>
+      <Grid container>
+        <DataLabel label={"Masteries"} part={false} />
+        <DataLabel label={"Masteries"} part={true} />
+        <Grid item xs={7} sm={12}>
+          {[...Array(3)].map((x, i) => {
+            const disabled = !op.owned || !hasSkill(i) || disableByProperty(op, `skill${i + 1}Mastery`);
+            return (
+              <div
+                key={"skill" + (i + 1) + "MasteryBlock"}
+                className={classes.skillMastery}
+              >
+                {opInfo === undefined
+                  ? <div className={classes.skillName}>
+                    {`Skill ${i + 1}`}
+                  </div>
+                  : hasSkill(i)
+                    ? <div className={classes.skillName}>
+                      {opInfo.skills[i].skillName}
+                    </div>
+                    : <div className={classes.skillName}>
+                      No Skill
+                    </div>
+                }
+                <Hidden xsDown>
+                  {hasSkill(i) && opInfo !== undefined
+                    ? <img
+                      className={clsx({
+                        [classes.skillIcon]: true,
+                        [classes.unselected]: !op.owned || op.promotion < i,
+                      })}
+                      src={`https://res.cloudinary.com/samidare/image/upload/f_auto,h_240,w_240/v1/arknights/skills/${opInfo.skills[i].iconId ?? opInfo.skills[i].skillId}`}
+                      alt={`Skill ${i}`}
+                    />
+                    : <svg
+                      className={classes.skillIcon}
+                    >
+                      <rect x="0" y="0" className={classes.skillIcon} fill="transparent" stroke="gray" strokeWidth="4" />
+                      <path d="M 16 48 L 48 16" fill="transparent" stroke="gray" strokeWidth="3" />
+                      alt={`Skill ${i}`}
+                    </svg>}
+                </Hidden>
+                {[...Array(4)].map((_, j) =>
+                  <FormButton
+                    key={`mastery${j}Button`}
+                    className={classes.skillMasteryButton}
+                    onClick={() => onChange(op.id, `skill${i + 1}Mastery`, j)}
+                    toggled={getSkillMastery(i + 1) === j}
+                    disabled={disabled}
+                  >
+                    <img
+                      className={classes.skillMasteryIcon}
+                      src={skillBGImgUrl}
+                      alt={""}
+                    />
+                    <img
+                      className={clsx({
+                        [classes.skillMasteryIcon]: true,
+                        [classes.unselected]: getSkillMastery(i + 1) === j,
+                      })}
+                      src={`https://res.cloudinary.com/samidare/image/upload/f_auto,h_144,w_144/v1/arknights/mastery/${j}`}
+                      alt={`Mastery ${i + 1}`}
+                    />
+                  </FormButton>
+                )}
               </div>
-              : hasSkill(i)
-                ? <div className={classes.skillName}>
-                  {opInfo.skills[i].skillName}
-                </div>
-                : <div className={classes.skillName}>
-                  No Skill
-                </div>
-            }
-            {hasSkill(i) && opInfo !== undefined
-              ? <img
-                className={clsx({
-                  [classes.skillIcon]: true,
-                  [classes.unselected]: !op.owned || op.promotion < i,
-                })}
-                src={`https://res.cloudinary.com/samidare/image/upload/f_auto,h_240,w_240/v1/arknights/skills/${opInfo.skills[i].iconId ?? opInfo.skills[i].skillId}`}
-                alt={`Skill ${i}`}
-              />
-              : <svg
-                className={classes.skillIcon}
-              >
-                <rect x="0" y="0" className={classes.skillIcon} fill="transparent" stroke="gray" strokeWidth="4" />
-                <path d="M 16 48 L 48 16" fill="transparent" stroke="gray" strokeWidth="3" />
-                alt={`Skill ${i}`}
-              </svg>}
-            {[...Array(4)].map((_, j) =>
-              <FormButton
-                key={`mastery${j}Button`}
-                className={classes.skillMasteryButton}
-                onClick={() => onChange(op.id, `skill${i + 1}Mastery`, j)}
-                toggled={getSkillMastery(i + 1) === j}
-                disabled={disabled}
-              >
-                <img
-                  className={classes.skillMasteryIcon}
-                  src={skillBGImgUrl}
-                  alt={""}
-                />
-                <img
-                  className={clsx({
-                    [classes.skillMasteryIcon]: true,
-                    [classes.unselected]: getSkillMastery(i + 1) === j,
-                  })}
-                  src={`https://res.cloudinary.com/samidare/image/upload/f_auto,h_144,w_144/v1/arknights/mastery/${j}`}
-                  alt={`Mastery ${i+1}`}
-                />
-              </FormButton>
-            )}
-          </div>
-        );
-      })}
-    </div>);
+            );
+          })}
+        </Grid>
+      </Grid>
+    </Grid>);
 
   return (
-    <div className={classes.skillContainer}>
+    <Grid container>
       {/* Skill Level */}
       {skillLevelSection}
-      <div className={classes.skillVerticalDivider} />
+      <Hidden xsDown>
+        <Grid item sm={1} className={style.dividerContainer}>
+          <hr className={style.verticalDivider} />
+        </Grid>
+      </Hidden>
+      <Hidden smUp>
+        <Grid item xs={12}>
+          <hr className={style.horizontalDivider} />
+        </Grid>
+      </Hidden>
       {/* Mastery */}
       {skillMasterySection}
-    </div>
+    </Grid>
   );
 });
 export default DataEntrySkillLevel;

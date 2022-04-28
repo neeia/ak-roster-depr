@@ -1,58 +1,24 @@
 import React from "react";
 import { Operator } from "../../App";
 import { MAX_LEVEL_BY_RARITY } from "../RosterTable";
-import { ButtonBase, makeStyles, TextField } from "@material-ui/core";
+import { ButtonBase, Grid, Hidden, makeStyles, TextField } from "@material-ui/core";
 import clsx from "clsx";
 import FormButton from "../FormButton";
+import { useDataStyles } from "./DataTabSharedStyles";
+import DataLabel from "./DataLabel";
 
 const useStyles = makeStyles({
-  container: {
-    display: "grid",
-    gridTemplateColumns: "auto auto 1fr",
-  },
-  label: {
-    fontSize: "18px",
-    marginBottom: "4px",
-    lineHeight: "20px",
-    width: "96px",
-    borderBottom: "2px solid #909090",
-    justifySelf: "center",
-  },
   /* PROMOTION */
-  promotionContainer: {
-    display: "grid",
-    gridTemplateRows: "auto 1fr",
-    width: "150px",
-    justifyItems: "center",
-  },
-  promotionButtonContainer: {
-    display: "grid",
-    gridTemplateColumns: "1fr 1fr 1fr",
-    justifyItems: "center",
-  },
   promotionButton: {
-    width:  "40px",
+    width: "calc(100% - 2px)",
     height: "40px",
-    margin: "4px 2px 2px 2px",
-    display: "grid",
-    gridTemplateAreas: `"stack"`,
   },
   unselected: {
     opacity: "0.5",
   },
   promotionIcon: {
-    gridArea: "stack",
-    width:  "32px",
+    width: "32px",
     height: "32px",
-  },
-  /* DIVIDER */
-  verticalDivider: {
-    backgroundColor: "#909090",
-    width: "2px",
-    height: "120px",
-    alignSelf: "end",
-    marginLeft: "8px",
-    marginRight: "8px",
   },
   /* LEVEL */
   levelContainer: {
@@ -67,7 +33,6 @@ const useStyles = makeStyles({
     display: "grid",
     gridTemplateRows: "1fr auto 1fr",
     gridTemplateColumns: "1fr auto 1fr",
-    margin: "4px",
   },
   level: {
     gridArea: "2 / 2",
@@ -81,10 +46,10 @@ const useStyles = makeStyles({
   },
   levelText: {
     width: "56px",
-    gridArea: "1 / 1 / 1 / 1",
+    gridArea: "1 / 1",
   },
   levelTextInput: {
-    paddingTop:    "12px",
+    paddingTop: "12px",
     paddingBottom: "12px",
     fontSize: "24px",
     textAlign: "center",
@@ -109,8 +74,33 @@ const useStyles = makeStyles({
     gridArea: "minmax",
     width: "40px",
     height: "40px",
+    borderRadius: "0px",
     marginLeft: "6px",
     marginRight: "6px",
+  },
+  levelMin: {
+    gridArea: "0 / 0",
+    width: "40px",
+    height: "22px",
+    fontSize: "12px",
+    justifySelf: "end",
+    alignSelf: "end",
+    display: "grid",
+    borderRadius: "0px",
+    marginRight: "-6px",
+    marginBottom: "-6px",
+  },
+  levelMax: {
+    gridArea: "2 / 0",
+    width: "40px",
+    height: "22px",
+    fontSize: "12px",
+    justifySelf: "start",
+    alignSelf: "end",
+    display: "grid",
+    borderRadius: "0px",
+    marginLeft: "-6px",
+    marginBottom: "-6px",
   },
   levelRaise: {
     gridArea: "1 / 2",
@@ -186,6 +176,7 @@ interface Props {
 const DataEntryLevel = React.memo((props: Props) => {
   const { op, onChange } = props;
   const classes = useStyles();
+  const style = useDataStyles();
 
   const [levelField, setLevelField] = React.useState<number | string>(op.level);
 
@@ -209,160 +200,203 @@ const DataEntryLevel = React.memo((props: Props) => {
     if (elite === 2) return op.rarity > 3;
   }
 
+  const promotionSection = (
+    <Grid item xs={12} sm={4}>
+      <Grid container>
+        <DataLabel label={"Promotion"} part={false} />
+        <DataLabel label={"Promotion"} part={true} />
+        {/* Promotion */}
+        <Grid item xs={7} sm={12} className={style.block}>
+          <Grid container>
+            {[...Array(3)].map((_, i) => {
+              const disabled = !op.owned || !hasPromotionLevel(i);
+              return (
+                <Grid item xs={4}>
+                  <FormButton
+                    key={"promotion" + i + "Button"}
+                    className={classes.promotionButton}
+                    onClick={() => onChange(op.id, "promotion", i)}
+                    toggled={op.promotion === i}
+                    disabled={disabled}
+                  >
+                    <img
+                      className={clsx({
+                        [classes.promotionIcon]: true,
+                        [classes.unselected]: op.promotion !== i,
+                      })}
+                      src={`https://res.cloudinary.com/samidare/image/upload/f_auto,h_128,w_128/v1/arknights/elite/${i}`}
+                      alt={`Elite ${i} Button`}
+                    />
+                  </FormButton>
+                </Grid>
+              )
+            }
+            )}
+          </Grid>
+        </Grid>
+      </Grid>
+    </Grid>
+  );
+
   const levelSection = (
-    <div className={classes.levelContainer}>
-      <div className={classes.label}>
-        Level
-      </div>
-      <div className={classes.levelInputContainer}>
-        <div className={classes.levelPrevious}>
-          <FormButton
-            className={classes.levelMinMax}
-            onClick={() => updateLevel(1)}
-            disabled={!op.owned || op.level === 1}
-          >
-            Min
-          </FormButton>
-          <ButtonBase
-            classes={{
-              root: clsx({ [classes.levelButtonHalfVert]: true, [classes.svg]: true }),
-              disabled: classes.disabled
-            }}
-            onClick={() => updateLevel(op.level - 10)}
-            disabled={!op.owned || op.level <= 1}
-          >
-            <div className={classes.levelButtonTextRight} >
-              10
+    <Grid item xs={12} sm={7}>
+      <Grid container>
+        <DataLabel label={"Level"} part={false} />
+        <DataLabel label={"Level"} part={true} />
+        <Grid item xs={7} sm={12}>
+          <div className={clsx({ [classes.levelInputContainer]: true, [style.block]: true })}>
+            <Hidden smUp>
+              <FormButton
+                className={classes.levelMin}
+                onClick={() => updateLevel(1)}
+                disabled={!op.owned || op.level === 1}
+              >
+                Min
+              </FormButton>
+            </Hidden>
+            <div className={classes.levelPrevious}>
+              <Hidden xsDown>
+                <FormButton
+                  className={classes.levelMinMax}
+                  onClick={() => updateLevel(1)}
+                  disabled={!op.owned || op.level === 1}
+                >
+                  Min
+                </FormButton>
+              </Hidden>
+              <ButtonBase
+                classes={{
+                  root: clsx({ [classes.levelButtonHalfVert]: true, [classes.svg]: true }),
+                  disabled: classes.disabled
+                }}
+                onClick={() => updateLevel(op.level - 10)}
+                disabled={!op.owned || op.level <= 1}
+              >
+                <div className={classes.levelButtonTextRight} >
+                  10
+                </div>
+                <svg
+                  className={classes.levelButtonHalfVert}
+                >
+                  <rect x="0" y="0" className={classes.levelButtonHalfVert} fill="transparent" stroke="#808080" strokeWidth="1" />
+                  <path d="M 12 8 L  5 20 L 12 32" fill="transparent" stroke="white" strokeLinecap="round" strokeWidth="3" />
+                  <path d="M 22 8 L 15 20 L 22 32" fill="transparent" stroke="white" strokeLinecap="round" strokeWidth="3" />
+                </svg>
+              </ButtonBase>
             </div>
-            <svg
-              className={classes.levelButtonHalfVert}
+            <ButtonBase
+              classes={{
+                root: clsx({ [classes.levelDecrease]: true, [classes.svg]: true }),
+                disabled: classes.disabled
+              }}
+              onClick={() => updateLevel(op.level - 1)}
+              disabled={!op.owned || op.level <= 1}
             >
-              <rect x="0" y="0" className={classes.levelButtonHalfVert} fill="transparent" stroke="#808080" strokeWidth="1" />
-              <path d="M 12 8 L  5 20 L 12 32" fill="transparent" stroke="white" strokeLinecap="round" strokeWidth="3" />
-              <path d="M 22 8 L 15 20 L 22 32" fill="transparent" stroke="white" strokeLinecap="round" strokeWidth="3" />
-            </svg>
-          </ButtonBase>
-        </div>
-        <ButtonBase
-          classes={{
-            root: clsx({ [classes.levelDecrease]: true, [classes.svg]: true }),
-            disabled: classes.disabled
-          }}
-          onClick={() => updateLevel(op.level - 1)}
-          disabled={!op.owned || op.level <= 1}
-        >
-          <svg
-            className={classes.levelButtonHalf}
-          >
-            <rect x="0" y="0" className={classes.levelButtonHalf} fill="transparent" stroke="#808080" strokeWidth="1" />
-            <path d="M 8 5 L 20 13 L 32 5" fill="transparent" stroke="white" strokeLinecap="round" strokeWidth="3" />
-          </svg>
-        </ButtonBase>
-        <div className={classes.level}>
-          <TextField
-            variant="outlined"
-            size="small"
-            margin="none"
-            className={classes.levelText}
-            defaultValue={op.level}
-            value={op.owned ? (levelField === "" ? levelField : op.level) : ""}
-            onChange={(e) => updateLevel(e.target.value)}
-            inputProps={{
-              className: classes.levelTextInput,
-              inputMode: 'numeric',
-              pattern: '[0-9]*'
-            }}
-          />
-          {op.level > 0
-            ? ""
-            : <svg
-              className={classes.levelText}
-            >
-              <path d="M 22 28 H 34" fill="transparent" stroke="#808080" strokeLinecap="butt" strokeWidth="3" />
-            </svg>}
-        </div>
-        <ButtonBase
-          classes={{
-            root: clsx({ [classes.levelRaise]: true, [classes.svg]: true }),
-            disabled: classes.disabled
-          }}
-          onClick={() => updateLevel(op.level + 1)}
-          disabled={!op.owned || op.level >= MAX_LEVEL_BY_RARITY[op.rarity][op.promotion]}
-        >
-          <svg
-            className={classes.levelButtonHalf}
-          >
-            <rect x="0" y="0" className={classes.levelButtonHalf} fill="transparent" stroke="#808080" strokeWidth="1" />
-            <path d="M 8 15 L 20 7 L 32 15" fill="transparent" stroke="white" strokeLinecap="round" strokeWidth="3" />
-          </svg>
-        </ButtonBase>
-        <div className={classes.levelNext}>
-          <ButtonBase
-            classes={{
-              root: clsx({ [classes.levelButtonHalfVert]: true, [classes.svg]: true }),
-              disabled: classes.disabled
-            }}
-            onClick={() => updateLevel(op.level + 10)}
-            disabled={!op.owned || op.level >= MAX_LEVEL_BY_RARITY[op.rarity][op.promotion]}
-          >
-            <div className={classes.levelButtonTextLeft} >
-              10
+              <svg
+                className={classes.levelButtonHalf}
+              >
+                <rect x="0" y="0" className={classes.levelButtonHalf} fill="transparent" stroke="#808080" strokeWidth="1" />
+                <path d="M 8 5 L 20 13 L 32 5" fill="transparent" stroke="white" strokeLinecap="round" strokeWidth="3" />
+              </svg>
+            </ButtonBase>
+            <div className={classes.level}>
+              <TextField
+                variant="outlined"
+                size="small"
+                margin="none"
+                className={classes.levelText}
+                value={op.owned ? (levelField === "" ? levelField : op.level) : ""}
+                onChange={(e) => updateLevel(e.target.value)}
+                inputProps={{
+                  className: classes.levelTextInput,
+                  inputMode: 'numeric',
+                  pattern: '[0-9]*'
+                }}
+              />
+              {op.level > 0
+                ? ""
+                : <svg
+                  className={classes.levelText}
+                >
+                  <path d="M 22 28 H 34" fill="transparent" stroke="#808080" strokeLinecap="butt" strokeWidth="3" />
+                </svg>}
             </div>
-            <svg
-              className={classes.levelButtonHalfVert}
+            <ButtonBase
+              classes={{
+                root: clsx({ [classes.levelRaise]: true, [classes.svg]: true }),
+                disabled: classes.disabled
+              }}
+              onClick={() => updateLevel(op.level + 1)}
+              disabled={!op.owned || op.level >= MAX_LEVEL_BY_RARITY[op.rarity][op.promotion]}
             >
-              <rect x="0" y="0" className={classes.levelButtonHalfVert} fill="transparent" stroke="#808080" strokeWidth="1" />
-              <path d="M 18 8 L 25 20 L 18 32" fill="transparent" stroke="white" strokeLinecap="round" strokeWidth="3" />
-              <path d="M 28 8 L 35 20 L 28 32" fill="transparent" stroke="white" strokeLinecap="round" strokeWidth="3" />
-            </svg>
-          </ButtonBase>
-          <FormButton
-            className={classes.levelMinMax}
-            onClick={() => updateLevel(MAX_LEVEL_BY_RARITY[op.rarity][op.promotion])}
-            disabled={!op.owned || op.level === MAX_LEVEL_BY_RARITY[op.rarity][op.promotion]}
-          >
-            Max
-          </FormButton>
-        </div>
-      </div>
-    </div>);
+              <svg
+                className={classes.levelButtonHalf}
+              >
+                <rect x="0" y="0" className={classes.levelButtonHalf} fill="transparent" stroke="#808080" strokeWidth="1" />
+                <path d="M 8 15 L 20 7 L 32 15" fill="transparent" stroke="white" strokeLinecap="round" strokeWidth="3" />
+              </svg>
+            </ButtonBase>
+            <div className={classes.levelNext}>
+              <ButtonBase
+                classes={{
+                  root: clsx({ [classes.levelButtonHalfVert]: true, [classes.svg]: true }),
+                  disabled: classes.disabled
+                }}
+                onClick={() => updateLevel(op.level + 10)}
+                disabled={!op.owned || op.level >= MAX_LEVEL_BY_RARITY[op.rarity][op.promotion]}
+              >
+                <div className={classes.levelButtonTextLeft} >
+                  10
+                </div>
+                <svg
+                  className={classes.levelButtonHalfVert}
+                >
+                  <rect x="0" y="0" className={classes.levelButtonHalfVert} fill="transparent" stroke="#808080" strokeWidth="1" />
+                  <path d="M 18 8 L 25 20 L 18 32" fill="transparent" stroke="white" strokeLinecap="round" strokeWidth="3" />
+                  <path d="M 28 8 L 35 20 L 28 32" fill="transparent" stroke="white" strokeLinecap="round" strokeWidth="3" />
+                </svg>
+              </ButtonBase>
+              <Hidden xsDown>
+                <FormButton
+                  className={classes.levelMinMax}
+                  onClick={() => updateLevel(MAX_LEVEL_BY_RARITY[op.rarity][op.promotion])}
+                  disabled={!op.owned || op.level === MAX_LEVEL_BY_RARITY[op.rarity][op.promotion]}
+                >
+                  Max
+                </FormButton>
+              </Hidden>
+            </div>
+            <Hidden smUp>
+              <FormButton
+                className={classes.levelMax}
+                onClick={() => updateLevel(MAX_LEVEL_BY_RARITY[op.rarity][op.promotion])}
+                disabled={!op.owned || op.level === MAX_LEVEL_BY_RARITY[op.rarity][op.promotion]}
+              >
+                Max
+              </FormButton>
+            </Hidden>
+          </div>
+        </Grid>
+      </Grid>
+    </Grid>);
 
   return (
-    <div className={classes.container}>
-      <div className={classes.promotionContainer}>
-        <div className={classes.label}>
-          Promotion
-        </div>
-        {/* Promotion */}
-        <div className={classes.promotionButtonContainer}>
-          {[...Array(3)].map((_, i) => {
-            const disabled = !op.owned || !hasPromotionLevel(i);
-            return (
-              <FormButton
-                key={"promotion" + i + "Button"}
-                className={classes.promotionButton}
-                onClick={() => onChange(op.id, "promotion", i)}
-                toggled={op.promotion === i}
-                disabled={disabled}
-              >
-                <img
-                  className={clsx({
-                    [classes.promotionIcon]: true,
-                    [classes.unselected]: op.promotion !== i,
-                  })}
-                  src={`https://res.cloudinary.com/samidare/image/upload/f_auto,h_128,w_128/v1/arknights/elite/${i}`}
-                  alt={`Elite ${i} Button`}
-                />
-              </FormButton>
-            )
-          }
-          )}
-        </div>
-      </div>
-      <div className={classes.verticalDivider} />
+    <Grid container>
+      {/* Elite */}
+      {promotionSection}
+      <Hidden xsDown>
+        <Grid item sm={1} className={style.dividerContainer}>
+          <hr className={style.verticalDivider} />
+        </Grid>
+      </Hidden>
+      <Hidden smUp>
+        <Grid item xs={12}>
+          <hr className={style.horizontalDivider} />
+        </Grid>
+      </Hidden>
       {/* Level */}
       {levelSection}
-    </div>
+    </Grid>
   );
 });
 export default DataEntryLevel;
