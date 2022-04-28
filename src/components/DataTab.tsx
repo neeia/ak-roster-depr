@@ -157,7 +157,7 @@ const DataTab = React.memo((props: Props) => {
         <div className={classes.buttonPair}>
           <FormButton
             onClick={() => {
-              selectedPreset === "" ? setSelectState(SELECT_STATE.Grid) : setSelectState(SELECT_STATE.PsEdit);
+              setSelectState(SELECT_STATE.Grid)
               setSelectBatchOps([]);
             }}
           >
