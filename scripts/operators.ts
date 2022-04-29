@@ -1,7 +1,7 @@
 import path from "path";
 import fs from "fs";
-import operators from "./arknights-tools-skunkworks/data/operators.json";
-import { Operator } from "./arknights-tools-skunkworks/scripts/output-types";
+import operators from "./arknights-tools/data/operators.json";
+import { Operator } from "./arknights-tools/scripts/output-types";
 
 interface OperatorSkill {
   skillId: string;
