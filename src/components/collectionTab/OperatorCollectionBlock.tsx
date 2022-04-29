@@ -1,10 +1,10 @@
 import React from "react";
 import slugify from "slugify";
-import { Operator } from "../App";
+import { Operator } from "../../App";
 import { makeStyles } from "@material-ui/core";
-import { useRarityStyles } from "./StyleRarityUnderline";
+import { useRarityStyles } from "../StyleRarityUnderline";
 import clsx from "clsx";
-import SkillDisplayBox from "./SkillDisplayBox";
+import SkillDisplayBox from "../SkillDisplayBox";
 import { MdFavorite } from "react-icons/md";
 
 const useStyles = makeStyles({

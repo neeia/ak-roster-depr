@@ -433,6 +433,7 @@ export function defaultSortComparator(a: Operator, b: Operator) {
     b.promotion - a.promotion ||
     b.level - a.level ||
     b.rarity - a.rarity ||
+    (b.module?.length ?? 0) - (a.module?.length ?? 0) ||
     a.name.localeCompare(b.name)
   );
 }

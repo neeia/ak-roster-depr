@@ -161,7 +161,7 @@ const useStyles = makeStyles({
       boxShadow: "0px 0px 0px 1px #fcf3dc inset",
       background: "#505050"
     }
-  }
+  },
 });
 
 interface Props {
@@ -211,9 +211,8 @@ const DataEntryLevel = React.memo((props: Props) => {
             {[...Array(3)].map((_, i) => {
               const disabled = !op.owned || !hasPromotionLevel(i);
               return (
-                <Grid item xs={4}>
+                <Grid item xs={4} key={"promotion" + i}>
                   <FormButton
-                    key={"promotion" + i + "Button"}
                     className={classes.promotionButton}
                     onClick={() => onChange(op.id, "promotion", i)}
                     toggled={op.promotion === i}

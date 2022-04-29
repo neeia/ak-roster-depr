@@ -100,9 +100,8 @@ const DataEntryCollect = React.memo((props: Props) => {
               {[...Array(6)].map((_, i) => {
                 const disabled = !op.owned;
                 return (
-                  <Grid item xs={4} sm={2}>
+                  <Grid item xs={4} sm={2} key={`potential${i + 1}Button`}>
                     <FormButton
-                      key={`potential${i + 1}Button`}
                       className={classes.potentialButton}
                       onClick={() => onChange(op.id, "potential", i + 1)}
                       toggled={op.potential === i + 1}

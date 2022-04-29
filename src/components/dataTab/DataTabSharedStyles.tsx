@@ -12,6 +12,8 @@ export const useDataStyles = makeStyles({
   },
   dividerContainer: {
     display: "flex",
+    minWidth: "2px",
+    minHeight: "2px",
   },
   verticalDivider: {
     backgroundColor: "#909090",
@@ -56,5 +58,15 @@ export const useDataStyles = makeStyles({
   block: {
     marginTop: "6px",
     marginBottom: "6px",
+  },
+  filterButton: {
+    width: "calc(100% - 4px)",
+    height: "calc(100% - 4px)",
+    margin: "2px",
+    fontSize: "12px",
+  },
+  drawer2: {
+    fontSize: "14px",
+    fontWeight: "normal",
   }
 });

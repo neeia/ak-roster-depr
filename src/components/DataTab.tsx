@@ -4,13 +4,16 @@ import useWindowSize, { Size } from "./UseWindowSize";
 import { makeStyles } from "@material-ui/core";
 import { useDataStyles } from "./dataTab/DataTabSharedStyles";
 import DataTabOperatorSelector from "./dataTab/DataTabOperatorSelector";
-import DataTabClassSelector from "./dataTab/DataTabClassSelector";
+import SelectorClass from "./dataTab/SelectorClass";
 import DataEntryForm from "./dataTab/DataEntryForm";
-import DataTabPresetSelector from "./dataTab/DataTabPresetSelector";
+import SelectorPreset from "./dataTab/SelectorPreset";
 import FormButton from "./FormButton";
 import PresetEntryForm from "./dataTab/PresetEntryForm";
 import { MdCancel, MdCheckCircle } from "react-icons/md";
 import Drawer from "./Drawer";
+import SelectorRarity from "./dataTab/SelectorRarity";
+import SelectorMeta from "./dataTab/SelectorMeta";
+import useLocalStorage from "../UseLocalStorage";
 
 const useStyles = makeStyles({
   container: {
@@ -25,6 +28,13 @@ const useStyles = makeStyles({
     display: "grid",
     gridTemplateRows: "auto auto 1fr",
   },
+  drawerBox: {
+    width: "100%",
+    maxWidth: "800px",
+    display: "flex",
+    flexDirection: "column",
+    justifySelf: "center",
+  },
   label: {
     fontSize: "16px",
     display: "flex",
@@ -36,12 +46,15 @@ const useStyles = makeStyles({
     gridTemplateColumns: "1fr 1fr",
     gap: "4px",
   },
+  hideRoundedCorner: {
+    borderRadius: "0px",
+  },
   svg: {
     marginRight: "4px",
   },
   h1: {
-    display: "inline",
-    fontSize: "1em",
+    display: "block",
+    fontSize: "16px",
     margin: "0px",
     fontWeight: "normal",
   }
@@ -86,26 +99,68 @@ const DataTab = React.memo((props: Props) => {
   const [selectedOperator, setSelectedOperator] = React.useState("")
   const [selectedPreset, setSelectedPreset] = useState("")
   const [selectState, setSelectState] = React.useState(SELECT_STATE.Grid);
-  const [selectedClass, setSelectedClass] = useState("");
   const [selectBatchOps, setSelectBatchOps] = useState<string[]>([])
+
+  // FILTER
+  const [selectedClasses, setSelectedClasses] = useState<string[]>([]);
+  const [selectedRarities, setSelectedRarities] = useState<number[]>([]);
+  const [showOwned, setShowOwned] = useState<boolean | undefined>(undefined);
+  const [sortFavorites, setSortFavorites] = useLocalStorage<boolean>("sortFav", false);
+  const [showCN, setShowCN] = useLocalStorage<boolean>("showCN", false);
 
   // Class Selector Component
   const classSelector = (
-    <DataTabClassSelector
-      classList={classList}
+    <SelectorClass
       onClick={((cl: string) => {
-        if (selectedClass === cl) {
-          setSelectedClass("");
-        } else {
-          setSelectedClass(cl);
+        const index = selectedClasses.indexOf(cl);
+        if (index > -1) {
+          selectedClasses.splice(index, 1)
+          setSelectedClasses(selectedClasses => [...selectedClasses]);
+        }
+        else {
+          setSelectedClasses(selectedClasses => [...selectedClasses, cl]);
         }
       })}
-      activeClass={selectedClass}
+      activeClasses={selectedClasses}
     />
   );
 
+  const raritySelector = (
+    <SelectorRarity
+      onClick={((rar: number) => {
+        const index = selectedRarities.indexOf(rar);
+        if (index > -1) {
+          selectedRarities.splice(index, 1)
+          setSelectedRarities(selectedRarities => [...selectedRarities]);
+        }
+        else {
+          setSelectedRarities(selectedRarities => [...selectedRarities, rar]);
+        }
+      })}
+      activeRarities={selectedRarities}
+    />
+  )
+
+  const metaSelector = (
+    <SelectorMeta
+      activeOwned={showOwned}
+      setActiveOwned={setShowOwned}
+      showCNOps={showCN}
+      setShowCNOps={setShowCN}
+      sortFav={sortFavorites}
+      setSortFav={setSortFavorites}
+      clearFilter={() => {
+        setSelectedClasses([]);
+        setSelectedRarities([]);
+        setShowOwned(undefined);
+        setSortFavorites(false);
+        setShowCN(false);
+      }}
+    />
+  )
+
   const presetSelector = (
-    <DataTabPresetSelector
+    <SelectorPreset
       presets={presets}
       onClick={((psID: string) => {
         if (selectedPreset === psID) {
@@ -127,7 +182,14 @@ const DataTab = React.memo((props: Props) => {
     />
   );
 
+  const filterObject = (op: any) => {
+    return (showOwned === undefined || operators[op.id].owned === showOwned)
+      && (showCN || !op.isCnOnly)
+      && (selectedClasses.length === 0 || selectedClasses.includes(op.class))
+      && (selectedRarities.length === 0 || selectedRarities.includes(op.rarity))
+  }
 
+  const favSortObject = sortFavorites ? (a: any, b: any) => +operators[b.id].favorite - +operators[a.id].favorite : undefined;
   const editSelectionGrid =
     <DataTabOperatorSelector
       operators={operators}
@@ -135,15 +197,17 @@ const DataTab = React.memo((props: Props) => {
         setSelectedOperator(op.id);
         setSelectState(SELECT_STATE.OpEdit)
       }}
-      filter={(op: any) => selectedClass === "" || op.class === selectedClass}
+      filter={filterObject}
+      postSort={favSortObject}
     />
 
   const batchSelectionGrid =
     <div>
-      <div className={style.label}>
+      <div className={classes.label}>
         Batch Mode:
         <div className={classes.buttonPair}>
           <FormButton
+            className={classes.hideRoundedCorner}
             onClick={() => {
               selectedPreset === "" ? setSelectState(SELECT_STATE.Grid) : setSelectState(SELECT_STATE.PsEdit);
               setSelectBatchOps([]);
@@ -153,6 +217,7 @@ const DataTab = React.memo((props: Props) => {
             Cancel
           </FormButton>
           <FormButton
+            className={classes.hideRoundedCorner}
             onClick={() => {
               setSelectState(SELECT_STATE.Grid)
               applyBatch(presets[selectedPreset], selectBatchOps);
@@ -180,7 +245,8 @@ const DataTab = React.memo((props: Props) => {
           }
         }
         )}
-        filter={(op: any) => selectedClass === "" || op.class === selectedClass}
+        filter={filterObject}
+        postSort={favSortObject}
       />
     </div >
 
@@ -191,36 +257,41 @@ const DataTab = React.memo((props: Props) => {
         : batchSelectionGrid
       : selectState === SELECT_STATE.OpEdit
         ? <DataEntryForm op={operators[selectedOperator]} onChange={changeOperators} setSelectState={setSelectState} />
-        : <PresetEntryForm op={presets[selectedPreset]} onChange={changePresets} />
+        : <PresetEntryForm op={presets[selectedPreset]} onChange={changePresets} setSelectState={setSelectState} />
 
 
 
   return (
     <div className={classes.container}>
       <div className={classes.containerChild}>
-        <Drawer
-          label={"Info"}
-        >
-          <span>
-            <h1 className={classes.h1}>
-              Arknights Roster (Krooster) is an operator collection tracker.
-            </h1>
+        <div className={classes.drawerBox}>
+          <Drawer
+            label={"Info"}
+          >
+            <span>
+              <h1 className={classes.h1}>
+                Arknights Roster is an operator collection tracker.
+              </h1>
+              <div className={classes.h1}>
+                Select an operator to get started, or use presets to make batch changes.
+              </div>
+            </span>
+          </Drawer>
+          <Drawer
+            label={"Filter"}
+          >
             <div>
-              Select an operator to get started, or create some presets to make batch changes.
+              {classSelector}
+              {raritySelector}
+              {metaSelector}
             </div>
-          </span>
-        </Drawer>
-        <Drawer
-          label={"Filter"}
-        >
-          {classSelector}
-        </Drawer>
-        {/* Rarity, Fav, Owned, CLEAR FILTER BUTTON */}
-        <Drawer
-          label={"Presets"}
-        >
-          {presetSelector}
-        </Drawer>
+          </Drawer>
+          <Drawer
+            label={"Presets"}
+          >
+            {presetSelector}
+          </Drawer>
+        </div>
         <div className={style.horizontalDivider} />
         {opEditForm}
       </div>

@@ -1,17 +1,28 @@
 import React, { useState } from "react";
-import { defaultSortComparator, Operator } from "../App";
+import { Operator } from "../App";
 import operatorJson from "../data/operators.json";
-import useWindowSize, { Size } from "./UseWindowSize";
 import { makeStyles } from "@material-ui/core";
-import CollectionTabNavbar from "./CollectionTabNavbar";
-import OperatorCollectionBlock from "./OperatorCollectionBlock";
-
+import OperatorCollectionBlock from "./collectionTab/OperatorCollectionBlock";
+import { classList } from "./DataTab";
+import SelectorClass from "./dataTab/SelectorClass";
+import SelectorRarity from "./dataTab/SelectorRarity";
+import Drawer from "./Drawer";
+import { useDataStyles } from "./dataTab/DataTabSharedStyles";
+import SelectorSortOptions from "./collectionTab/SelectorSortOptions";
+import useLocalStorage from "../UseLocalStorage";
 
 const useStyles = makeStyles({
   collectionContainer: {
     display: "flex",
     flexWrap: "wrap",
     gap: "12px 16px",
+  },
+  drawerBox: {
+    width: "100%",
+    maxWidth: "800px",
+    display: "flex",
+    flexDirection: "column",
+    justifySelf: "center",
   },
 });
 
@@ -20,60 +31,89 @@ interface Props {
 }
 
 const CollectionTab = React.memo((props: Props) => {
-  const classes = useStyles();
   const { operators } = props;
+  const classes = useStyles();
+  const style = useDataStyles();
 
-  const size: Size = useWindowSize();
-  const widthOfBox = 160 + 16;
-  const heightOfBox = 140 + 12;
-  
-  const width = size.width === undefined ? 1920 : size.width;
-  const x = Math.floor((width * 0.99) / widthOfBox);
-  const height = size.height === undefined ? 1080 : size.height;
-  const y = Math.floor((height - 120) / heightOfBox);
+  const [selectedClasses, setSelectedClasses] = useState<string[]>([]);
+  const [selectedRarities, setSelectedRarities] = useState<number[]>([]);
+  const [sortFavorites, setSortFavorites] = useLocalStorage<boolean>("sortFav", false);
+  const filterBar =
+    <Drawer
+      label={"Filter"}
+    >
+      <SelectorClass
+        onClick={((cl: string) => {
+          const index = selectedClasses.indexOf(cl);
+          if (index > -1) {
+            selectedClasses.splice(index, 1)
+            setSelectedClasses(selectedClasses => [...selectedClasses]);
+          }
+          else {
+            setSelectedClasses(selectedClasses => [...selectedClasses, cl]);
+          }
+        })}
+        activeClasses={selectedClasses}
+      />
+      <SelectorRarity
+        onClick={((rar: number) => {
+          const index = selectedRarities.indexOf(rar);
+          if (index > -1) {
+            selectedRarities.splice(index, 1)
+            setSelectedRarities(selectedRarities => [...selectedRarities]);
+          }
+          else {
+            setSelectedRarities(selectedRarities => [...selectedRarities, rar]);
+          }
+        })}
+        activeRarities={selectedRarities}
+      />
+      <SelectorSortOptions
+        sortFav={sortFavorites}
+        setSortFav={setSortFavorites}
+        clearFilter={() => {
+          setSelectedClasses([]);
+          setSelectedRarities([]);
+          setSortFavorites(false);
+        }}
+      />
+    </Drawer>
 
-  const none = "none";
-  const [filterType, setFilterType] = useState(none);
-  const [filter, setFilter] = useState<string | number>(none);
-  
-  const collection = Object.values(operatorJson)
-    .filter((op: any) => operators[op.id].owned && operators[op.id].potential > 0)
-    .filter((op: any) => filterType !== none && filter !== none ? op[filterType] === filter : true)
-    .sort((a: any, b: any) =>
-      defaultSortComparator(operators[a.id], operators[b.id])
+  const filterObject = (op: any) => {
+    const a = operators[op.id];
+    return a.owned
+      && (selectedClasses.length === 0 || selectedClasses.includes(op.class))
+      && (selectedRarities.length === 0 || selectedRarities.includes(op.rarity))
+  }
+
+  function defaultSortComparator(x: any, y: any) {
+    const a = operators[x.id];
+    const b = operators[y.id];
+    return (
+      (b.favorite ? 1 : 0) - (a.favorite ? 1 : 0) ||
+      (b.owned ? 1 : 0) - (a.owned ? 1 : 0) ||
+      b.promotion - a.promotion ||
+      b.level - a.level ||
+      b.rarity - a.rarity ||
+      classList.indexOf(x.class) - classList.indexOf(y.class) ||
+      (b.module?.length ?? 0) - (a.module?.length ?? 0) ||
+      a.name.localeCompare(b.name)
     );
-
-  const numOps = x * y;
-  const [page, setPage] = useState(1);
-  const numPages = Math.ceil(collection.length / numOps);
-
-  function updateFilterType(newFilterType: string): void {
-    setFilterType(filterType === newFilterType ? none : newFilterType);
-    updateFilter(none);
-  }
-  function updateFilter(newFilter: string | number): void {
-    setFilter(filter === newFilter ? none : newFilter);
   }
 
-  function validSetPage(newPage: number): void {
-    if (newPage > 0 && newPage <= numPages) {
-      setPage(newPage);
-    }
-  }
+  const collection =
+    Object.values(operatorJson)
+      .filter((op: any) => op.class !== "Token" && op.class !== "Trap")
+      .filter(filterObject)
+      .sort(defaultSortComparator)
 
   return (
     <div>
-      <CollectionTabNavbar
-        page={page}
-        setPage={validSetPage}
-        numPages={numPages}
-        filterType={filterType}
-        setFilterType={updateFilterType}
-        filter={filter}
-        setFilter={updateFilter}
-      />
+      <div className={classes.drawerBox}>
+        {filterBar}
+      </div>
       <div className={classes.collectionContainer}>
-        {collection.slice(numOps * (page - 1), numOps * page)
+        {collection
           .map((op: any) => (
             <OperatorCollectionBlock key={op.id} op={operators[op.id]} />
           ))

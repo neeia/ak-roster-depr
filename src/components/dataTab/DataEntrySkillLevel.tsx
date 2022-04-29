@@ -89,27 +89,24 @@ const useStyles = makeStyles({
     fontSize: "13px",
   },
   skillIcon: {
-    width: "60px",
-    height: "60px",
-    marginRight: "4px",
-  },
-  skillMasteryButton: {
     width: "48px",
     height: "48px",
-    marginLeft: "2px",
+    margin: "2px",
+  },
+  skillMasteryButton: {
+    width: "40px",
+    height: "40px",
+    margin: "2px",
     display: "grid",
     gridTemplateAreas: `"stack"`,
   },
   skillMasteryIcon: {
     gridArea: "stack",
-    width: "36px",
-    height: "36px",
+    width: "32px",
+    height: "32px",
   },
   unselected: {
     opacity: "0.5",
-  },
-  noSkill: {
-    border: "2px solid gray",
   },
   svg: {
     "&:focus": {
@@ -301,7 +298,7 @@ const DataEntrySkillLevel = React.memo((props: Props) => {
                       className={classes.skillIcon}
                     >
                       <rect x="0" y="0" className={classes.skillIcon} fill="transparent" stroke="gray" strokeWidth="4" />
-                      <path d="M 16 48 L 48 16" fill="transparent" stroke="gray" strokeWidth="3" />
+                      <path d="M 12 36 L 36 12" fill="transparent" stroke="gray" strokeWidth="3" />
                       alt={`Skill ${i}`}
                     </svg>}
                 </Hidden>
