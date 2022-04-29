@@ -1,5 +1,4 @@
 import React from "react";
-import slugify from "slugify";
 import { Operator } from "../../App";
 import { ButtonBase, makeStyles } from "@material-ui/core";
 import { useBoxStyles } from "../BoxStyles"
@@ -98,16 +97,13 @@ const DataEntryForm = React.memo((props: Props) => {
   const boxStyle = useBoxStyles();
   const style = useDataStyles();
 
-  let intermediate = op.name;
+  let intermediate = op.id;
   if (op.promotion === 2) {
-    intermediate += " elite 2";
+    intermediate += "_2";
   } else if (op.promotion === 1 && op.name === "Amiya") {
-    intermediate += " elite 1";
+    intermediate += "_1+";
   }
-  const imgUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto,h_256,w_256/v1/arknights/operators/${slugify(
-    intermediate,
-    { lower: true, replacement: "-", remove: /[-"]/g }
-  )}`;
+  const imgUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto,h_256,w_256/v1/arknights/avatars/${intermediate}`;
 
   let opName = (
     <span className={classes.opName}>

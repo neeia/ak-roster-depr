@@ -23,16 +23,19 @@ interface Props {
   onClick: (op: Operator) => void;
   filter?: (op: any) => boolean;
   toggleGroup?: string[];
+  postSort?: (opA: any, opB: any) => number;
 }
 
 const DataTabOperatorSelector = React.memo((props: Props) => {
-  const { operators, onClick, filter, toggleGroup } = props;
+  const { operators, onClick, filter, toggleGroup, postSort } = props;
   const classes = useStyles();
 
+  const ps = postSort ?? ((a: any, b: any) => 0)
+
   function sortComparator(a: any, b: any) {
-    return (
-      b.rarity - a.rarity ||
-      a.name.localeCompare(b.name)
+    return ps(a, b)
+      || (b.rarity - a.rarity
+      || a.name.localeCompare(b.name)
     );
   }
 

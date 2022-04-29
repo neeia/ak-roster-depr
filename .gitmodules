@@ -1,3 +1,4 @@
-[submodule "arknights-tools-skunkworks"]
-	path = scripts/arknights-tools-skunkworks
-	url = https://github.com/iansjk/arknights-tools-skunkworks.git
+[submodule "scripts/arknights-tools"]
+	path = scripts/arknights-tools
+	url = https://github.com/iansjk/arknights-tools.git
+	branch = main

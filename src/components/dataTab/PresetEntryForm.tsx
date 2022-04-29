@@ -1,11 +1,14 @@
 import React from "react";
 import { Operator } from "../../App";
-import { makeStyles, TextField } from "@material-ui/core";
+import { ButtonBase, makeStyles, TextField } from "@material-ui/core";
 import { useBoxStyles } from "../BoxStyles"
+import { useDataStyles } from "./DataTabSharedStyles";
 import clsx from "clsx";
 import DataEntryCollect from "./DataEntryCollect";
 import DataEntryLevel from "./DataEntryLevel";
 import DataEntrySkillLevel from "./DataEntrySkillLevel";
+import { MdClose } from "react-icons/md";
+import { SELECT_STATE } from "../DataTab";
 
 const useStyles = makeStyles({
   displayBox: {
@@ -14,19 +17,19 @@ const useStyles = makeStyles({
     padding: "8px",
     boxShadow: "2px 2px 8px rgb(0 0 0 / 30%)",
     alignItems: "center",
-    width: "460px",
+    width: "100%",
+    maxWidth: "460px",
     justifySelf: "center",
+    position: "relative",
   },
   disabled: {
     opacity: "0.3",
   },
   opName: {
-    paddingTop: "12px",
-    paddingBottom: "12px",
-  },
-  alterTitle: {
     marginLeft: "8px",
-    fontSize: "18px",
+    fontSize: "36px",
+    paddingTop: "12px",
+    paddingBottom: "11px",
   },
   classIcon: {
     width: "48px",
@@ -65,6 +68,20 @@ const useStyles = makeStyles({
     fontSize: "24px",
     textAlign: "center",
   },
+  xBox: {
+    position: "absolute",
+    top: "3px",
+    right: "6px",
+    width: "36px",
+    height: "36px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    "&:focus": {
+      border: "1px solid #fcf3dc",
+      background: "#505050",
+    }
+  }
 });
 
 interface Props {
@@ -74,12 +91,14 @@ interface Props {
     property: string,
     value: any
   ) => void;
+  setSelectState: (state: SELECT_STATE) => void
 }
 
 const PresetEntryForm = React.memo((props: Props) => {
-  const { op, onChange } = props;
+  const { op, onChange, setSelectState } = props;
   const classes = useStyles();
   const boxStyle = useBoxStyles();
+  const style = useDataStyles();
 
   const boxBox = clsx({
     [boxStyle.boxStyle]: "true",
@@ -89,6 +108,16 @@ const PresetEntryForm = React.memo((props: Props) => {
 
   return (
     <div className={boxBox}>
+      <ButtonBase
+        tabIndex={0}
+        className={classes.xBox}
+        onClick={(e) => {
+          e.preventDefault();
+          setSelectState(SELECT_STATE.Grid)
+        }}
+      >
+        <MdClose size={32} />
+      </ButtonBase>
       <TextField
         variant="outlined"
         size="small"
@@ -101,9 +130,9 @@ const PresetEntryForm = React.memo((props: Props) => {
         }}
       />
       <DataEntryCollect op={op} onChange={onChange} />
-      <div className={classes.horizontalDivider} />
+      <div className={style.horizontalDivider} />
       <DataEntryLevel op={op} onChange={onChange} />
-      <div className={classes.horizontalDivider} />
+      <div className={style.horizontalDivider} />
       <DataEntrySkillLevel op={op} onChange={onChange} />
     </div>
   );

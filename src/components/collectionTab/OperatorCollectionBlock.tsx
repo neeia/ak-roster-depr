@@ -1,19 +1,17 @@
 import React from "react";
-import slugify from "slugify";
-import { Operator } from "../App";
+import { Operator } from "../../App";
 import { makeStyles } from "@material-ui/core";
-import { useRarityStyles } from "./StyleRarityUnderline";
+import { useRarityStyles } from "../StyleRarityUnderline";
 import clsx from "clsx";
-import SkillDisplayBox from "./SkillDisplayBox";
+import SkillDisplayBox from "../SkillDisplayBox";
 import { MdFavorite } from "react-icons/md";
 
 const useStyles = makeStyles({
   opContainer: {
     display: "grid",
-    gridTemplateAreas: `"name name"
-                       "img skill"`,
+    gridTemplateAreas: `"name"
+                       "img"`,
     gridTemplateRows: "auto 1fr",
-    gridTemplateColumns: "auto 1fr",
     padding: "4px",
     border: "1px solid #808080",
     borderRadius: "4px",
@@ -139,7 +137,6 @@ const useStyles = makeStyles({
     position: "absolute",
     top: "4px",
     right: "-16px",
-    gridArea: "skill",
     display: "flex",
     flexDirection: "column",
     alignSelf: "center",
@@ -169,19 +166,16 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
   const classes = useStyles();
   const rarity = useRarityStyles();
 
-  let intermediate = op.name;
+  let intermediate = op.id;
   if (op.promotion === 2) {
-    intermediate += " elite 2";
+    intermediate += "_2";
   } else if (op.promotion === 1 && op.name === "Amiya") {
-    intermediate += " elite 1";
+    intermediate += "_1+";
   }
 
   const potentialUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto,h_96,w_96/v1/arknights/potential/${op.potential}`;
   const promotionUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto,h_128,w_128/v1/arknights/elite/${op.promotion}`;
-  const opImgUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto/v1/arknights/operators/${slugify(
-    intermediate,
-    { lower: true, replacement: "-", remove: /[-"]/g }
-  )}`;
+  const opImgUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto/v1/arknights/avatars/${intermediate}`;
 
   const reg = /( the )|\(/g;
   const nameSplitTitle = op.name.split(reg);
