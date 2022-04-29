@@ -16,6 +16,7 @@ const FormButton: React.FC<Props> = React.memo((props) => {
 
   return (
     <ButtonBase
+      disableRipple
       onClick={onClick}
       className={clsx({
         [classes.boxStyle]: true,

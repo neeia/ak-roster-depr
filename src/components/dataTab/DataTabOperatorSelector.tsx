@@ -7,7 +7,7 @@ import DataTabOperatorButton from "./DataTabOperatorButton";
 const useStyles = makeStyles({
   opDisplay: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, 90px)",
+    gridTemplateColumns: "repeat(auto-fit, 78px)",
     justifyContent: "center",
     gridGap: "3px",
     margin: "0px",

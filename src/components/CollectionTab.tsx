@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Operator } from "../App";
 import operatorJson from "../data/operators.json";
-import { makeStyles } from "@material-ui/core";
+import { Hidden, makeStyles } from "@material-ui/core";
 import OperatorCollectionBlock from "./collectionTab/OperatorCollectionBlock";
 import { classList } from "./DataTab";
 import SelectorClass from "./dataTab/SelectorClass";
@@ -9,17 +9,25 @@ import SelectorRarity from "./dataTab/SelectorRarity";
 import Drawer from "./Drawer";
 import SelectorSortOptions from "./collectionTab/SelectorSortOptions";
 import useLocalStorage from "../UseLocalStorage";
+import OperatorCollectionBlockM from "./collectionTab/OperatorCollectionBlockM";
 
 const useStyles = makeStyles({
   container: {
     display: "flex",
     flexDirection: "column",
     alignItems: "start",
+    padding: "calc(2.5% + 4px)",
+    paddingTop: "calc(1.5% + 4px)",
   },
   collectionContainer: {
     display: "flex",
     flexWrap: "wrap",
-    gap: "12px 11px",
+    justifyContent: "space-between",
+    gap: "12px 6px",
+  },
+  dummyContainer: {
+    width: "calc(60)",
+    height: "0px",
   },
   drawerBox: {
     width: "100%",
@@ -128,9 +136,17 @@ const CollectionTab = React.memo((props: Props) => {
       <div className={classes.collectionContainer}>
         {collection
           .map((op: any) => (
-            <OperatorCollectionBlock key={op.id} op={operators[op.id]} />
+            <div>
+              <Hidden xsDown>
+                <OperatorCollectionBlock key={op.id} op={operators[op.id]} />
+              </Hidden>
+              <Hidden smUp>
+                <OperatorCollectionBlockM key={op.id} op={operators[op.id]} />
+              </Hidden>
+            </div>
           ))
         }
+        {[...Array(20)].map((_, i: number) => <div key={i} className={classes.dummyContainer} />)}
       </div>
     </div>
   );

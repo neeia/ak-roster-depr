@@ -9,7 +9,7 @@ import { MdFavorite } from "react-icons/md";
 const useStyles = makeStyles({
   opButton: {
     display: "flex",
-    width: "90px",
+    width: "78px",
     flexDirection: "column",
     boxShadow: "2px 2px 8px rgb(0 0 0 / 30%)",
   },
@@ -17,8 +17,8 @@ const useStyles = makeStyles({
     display: "grid"
   },
   opIcon: {
-    width: "64px",
-    height: "67px",
+    width: "60px",
+    height: "63px",
     marginBottom: "2px",
     gridArea: "1 / 1",
     textAlign: "left",
@@ -37,7 +37,7 @@ const useStyles = makeStyles({
     justifyContent: "center",
   },
   opName: {
-    fontSize: "13px",
+    fontSize: "14px",
   },
   lineWrap: {
     marginTop: "2px",
@@ -49,6 +49,18 @@ const useStyles = makeStyles({
   },
 });
 
+
+function getTextWidth(text: string, font: string): number {
+  const canvas = document.createElement("canvas");
+  const context = canvas.getContext("2d");
+  if (context) {
+    context.font = font;
+    const metrics = context.measureText(text);
+    return metrics.width;
+  }
+  return 0;
+}
+
 interface Props {
   op: Operator;
   onClick: () => void;
@@ -59,11 +71,10 @@ const DataTabOperatorButton = React.memo((props: Props) => {
   const classes = useStyles();
   const rarity = useRarityStyles();
   const { op, onClick, toggleGroup } = props;
-
-  const reg = /( the )|\(/g;
-  const nameSplitTitle = op.name.split(reg);
-  const name = nameSplitTitle.length > 1 ? nameSplitTitle[2].split(")")[0] : nameSplitTitle[0];
-  const nameIsLong = name.split(" ").length > 1 && name.length > 11;
+  
+  const nameSplitTitle = op.name.split(" the ");
+  const name = nameSplitTitle.length > 1 ? nameSplitTitle[1] : nameSplitTitle[0];
+  const nameIsLong = getTextWidth(op.name, classes.opName) > 48;
 
   // Process operator name
   let opName = (nameSplitTitle.length > 1
@@ -125,7 +136,7 @@ const DataTabOperatorButton = React.memo((props: Props) => {
         {op.favorite
           ? <MdFavorite
             className={classes.fav}
-            size={18}
+            size={15}
             color={"#ff4d4d"}
           />
           : ""}

@@ -8,6 +8,7 @@ import {
   Box,
   createTheme,
   CssBaseline,
+  makeStyles,
   Tab,
   Tabs,
   ThemeProvider,
@@ -30,6 +31,14 @@ const darkTheme = createTheme({
     },
   },
 });
+
+const useStyles = makeStyles({
+  tabPanel: {
+    "& .MuiBox-root": {
+      padding: "0px",
+    },
+  },
+})
 
 export const MOBILE_BREAKPOINT = 900;
 export const TABLET_BREAKPOINT = 1300;
@@ -112,6 +121,8 @@ function checkValidUsername(user: string) : boolean {
 }
 
 function App() {
+  const classes = useStyles();
+
   const [operators, setOperators] = useLocalStorage<Record<string, Operator>>(
     "operators",
     defaultOperators
@@ -413,6 +424,7 @@ function TabPanel(props: TabProps) {
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
+      className={ useStyles().tabPanel }
       {...other}
     >
       {value === index && <Box p={3}>{children}</Box>}

@@ -20,7 +20,9 @@ const useStyles = makeStyles({
     display: "flex",
     alignItems: "center",
     flexDirection: "column",
-    fontSize: "16px"
+    fontSize: "16px",
+    padding: "calc(2.5% + 4px)",
+    paddingTop: "calc(1.5% + 4px)",
   },
   containerChild: {
     width: "100%",
