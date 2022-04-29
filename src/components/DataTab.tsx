@@ -209,7 +209,7 @@ const DataTab = React.memo((props: Props) => {
           <FormButton
             className={classes.hideRoundedCorner}
             onClick={() => {
-              selectedPreset === "" ? setSelectState(SELECT_STATE.Grid) : setSelectState(SELECT_STATE.PsEdit);
+              setSelectState(SELECT_STATE.Grid)
               setSelectBatchOps([]);
             }}
           >
