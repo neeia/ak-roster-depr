@@ -44,13 +44,15 @@ const SelectorSortOptions = React.memo((props: Props) => {
   return (
     <Drawer label={"Display"} open={true} labelClass={style.drawer2}>
       <Grid container>
+        <Grid item xs={2} />
         <Grid item xs={3}>
           {favButton}
         </Grid>
-        <Grid item xs={1} />
-        <Grid item xs={2}>
+        <Grid item xs={2} />
+        <Grid item xs={3}>
           {filterButton}
         </Grid>
+        <Grid item xs={2} />
       </Grid>
     </Drawer>
   );

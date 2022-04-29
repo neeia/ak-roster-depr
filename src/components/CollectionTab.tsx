@@ -7,15 +7,19 @@ import { classList } from "./DataTab";
 import SelectorClass from "./dataTab/SelectorClass";
 import SelectorRarity from "./dataTab/SelectorRarity";
 import Drawer from "./Drawer";
-import { useDataStyles } from "./dataTab/DataTabSharedStyles";
 import SelectorSortOptions from "./collectionTab/SelectorSortOptions";
 import useLocalStorage from "../UseLocalStorage";
 
 const useStyles = makeStyles({
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "start",
+  },
   collectionContainer: {
     display: "flex",
     flexWrap: "wrap",
-    gap: "12px 16px",
+    gap: "12px 11px",
   },
   drawerBox: {
     width: "100%",
@@ -23,6 +27,15 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
     justifySelf: "center",
+  },
+  horizontalDivider: {
+    backgroundColor: "#909090",
+    width: "70%",
+    height: "2px",
+    borderWidth: "0px",
+    marginTop: "6px",
+    marginBottom: "6px",
+    marginLeft: "20px",
   },
 });
 
@@ -33,7 +46,6 @@ interface Props {
 const CollectionTab = React.memo((props: Props) => {
   const { operators } = props;
   const classes = useStyles();
-  const style = useDataStyles();
 
   const [selectedClasses, setSelectedClasses] = useState<string[]>([]);
   const [selectedRarities, setSelectedRarities] = useState<number[]>([]);
@@ -108,10 +120,11 @@ const CollectionTab = React.memo((props: Props) => {
       .sort(defaultSortComparator)
 
   return (
-    <div>
+    <div className={classes.container}>
       <div className={classes.drawerBox}>
         {filterBar}
       </div>
+      <div className={classes.horizontalDivider} />
       <div className={classes.collectionContainer}>
         {collection
           .map((op: any) => (
