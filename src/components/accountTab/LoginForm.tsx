@@ -2,7 +2,8 @@ import { useState } from "react";
 import { ButtonBase } from "@material-ui/core";
 import { useFormStyles } from "./FormStyles";
 import TextInput from "./TextInput";
-import firebase from "firebase";
+import firebase from "firebase/app";
+import "firebase/auth";
 import { errCodeToMessage } from "../AccountTab";
 
 

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Operator } from "../App";
+import firebase from "firebase/app";
+import "firebase/database";
 import operatorJson from "../data/operators.json";
 import { Hidden, makeStyles } from "@material-ui/core";
 import OperatorCollectionBlock from "./collectionTab/OperatorCollectionBlock";
@@ -12,7 +14,6 @@ import useLocalStorage from "../UseLocalStorage";
 import OperatorCollectionBlockM from "./collectionTab/OperatorCollectionBlockM";
 import TextInput from "./accountTab/TextInput";
 import FormButton from "./FormButton";
-import firebase from "firebase";
 
 const useStyles = makeStyles({
   container: {

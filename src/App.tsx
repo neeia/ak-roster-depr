@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import firebase from "firebase";
+import firebase from "firebase/app";
+import "firebase/auth";
 import operatorJson from "./data/operators.json";
 import useLocalStorage from "./UseLocalStorage";
 import { MAX_LEVEL_BY_RARITY } from "./components/RosterTable";
