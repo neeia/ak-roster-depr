@@ -5,10 +5,10 @@ import { makeStyles } from "@material-ui/core";
 import { useDataStyles } from "./dataTab/DataTabSharedStyles";
 import DataTabOperatorSelector from "./dataTab/DataTabOperatorSelector";
 import SelectorClass from "./dataTab/SelectorClass";
-import DataEntryForm from "./dataTab/DataEntryForm";
+import EditOperator from "./dataTab/EditOperator";
 import SelectorPreset from "./dataTab/SelectorPreset";
 import FormButton from "./FormButton";
-import PresetEntryForm from "./dataTab/PresetEntryForm";
+import EditPreset from "./dataTab/EditPreset";
 import { MdCancel, MdCheckCircle } from "react-icons/md";
 import Drawer from "./Drawer";
 import SelectorRarity from "./dataTab/SelectorRarity";
@@ -258,8 +258,8 @@ const DataTab = React.memo((props: Props) => {
         ? editSelectionGrid
         : batchSelectionGrid
       : selectState === SELECT_STATE.OpEdit
-        ? <DataEntryForm op={operators[selectedOperator]} onChange={changeOperators} setSelectState={setSelectState} />
-        : <PresetEntryForm op={presets[selectedPreset]} onChange={changePresets} setSelectState={setSelectState} />
+        ? <EditOperator op={operators[selectedOperator]} onChange={changeOperators} setSelectState={setSelectState} />
+        : <EditPreset op={presets[selectedPreset]} onChange={changePresets} setSelectState={setSelectState} />
 
 
 

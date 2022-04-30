@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Operator } from "../App";
 import operatorJson from "../data/operators.json";
 import { Hidden, makeStyles } from "@material-ui/core";
@@ -10,6 +10,9 @@ import Drawer from "./Drawer";
 import SelectorSortOptions from "./collectionTab/SelectorSortOptions";
 import useLocalStorage from "../UseLocalStorage";
 import OperatorCollectionBlockM from "./collectionTab/OperatorCollectionBlockM";
+import TextInput from "./accountTab/TextInput";
+import FormButton from "./FormButton";
+import firebase from "firebase";
 
 const useStyles = makeStyles({
   container: {
@@ -22,11 +25,11 @@ const useStyles = makeStyles({
   collectionContainer: {
     display: "flex",
     flexWrap: "wrap",
-    justifyContent: "space-between",
+    justifyContent: "center",
     gap: "12px 6px",
   },
   dummyContainer: {
-    width: "calc(60)",
+    width: "162px",
     height: "0px",
   },
   drawerBox: {
@@ -45,14 +48,26 @@ const useStyles = makeStyles({
     marginBottom: "6px",
     marginLeft: "20px",
   },
+  hideCorners: {
+    borderRadius: "0px",
+    height: "30px",
+    flexGrow: 0,
+  },
+  searchBlock: {
+    display: "flex",
+    gap: "8px",
+    alignItems: "end",
+  },
 });
 
 interface Props {
-  operators: Record<string, Operator>;
+  inOperators: Record<string, Operator>;
+  findUser?: (s: string) => Promise<boolean>;
+  username?: string;
 }
 
 const CollectionTab = React.memo((props: Props) => {
-  const { operators } = props;
+  const { inOperators, username } = props;
   const classes = useStyles();
 
   const [selectedClasses, setSelectedClasses] = useState<string[]>([]);
@@ -99,6 +114,69 @@ const CollectionTab = React.memo((props: Props) => {
       />
     </Drawer>
 
+  const [operators, setOperators] = useState(inOperators);
+  const findUser = async (username: string, onFinish: (b: boolean) => void): Promise<void> => {
+    const snapshot = await firebase
+      .database()
+      .ref("phonebook/" + username)
+      .get();
+    if (snapshot.exists()) {
+      viewUserCollection(snapshot.val());
+      onFinish(true);
+    }
+    else {
+      onFinish(false);
+    }
+  };
+  const viewUserCollection = (uid: string): void => {
+    firebase
+      .database()
+      .ref("users/" + uid + "/roster/")
+      .get()
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          setOperators(snapshot.val());
+        }
+      });
+  };
+
+  function tryFind() {
+    findUser(searchUser.toLowerCase(), (b: boolean) => {
+      setSuccess(b)
+    })
+  }
+
+  useEffect(() => {
+    if (username) {
+      findUser(username, tryFind);
+    }
+  }, []);
+
+  const [searchUser, setSearchUser] = useState<string>(username?.toLowerCase() ?? "");
+  const [success, setSuccess] = useState<boolean | undefined>(undefined);
+  const searchBar =
+    <Drawer
+      label={"Search"}
+      open={true}
+    >
+      <div className={classes.searchBlock}>
+        <TextInput
+          label={"Find a User"}
+          value={searchUser}
+          onChange={setSearchUser}
+          placeholder={"Enter a username"}
+          description={success === undefined ? "" : success ? "Success" : "Could not find user."}
+        />
+        <FormButton
+          className={classes.hideCorners}
+          onClick={tryFind}
+          disabled={searchUser === ""}
+        >
+          Search
+        </FormButton>
+      </div>
+    </Drawer>
+
   const filterObject = (op: any) => {
     const a = operators[op.id];
     return a.owned
@@ -130,6 +208,7 @@ const CollectionTab = React.memo((props: Props) => {
   return (
     <div className={classes.container}>
       <div className={classes.drawerBox}>
+        {username !== undefined ? searchBar : ""}
         {filterBar}
       </div>
       <div className={classes.horizontalDivider} />

@@ -1,73 +1,88 @@
 import React, { useEffect, useState } from "react";
 import firebase from "firebase";
 import { Operator } from "../App";
-import LoginForm from "./LoginForm";
-import RegisterForm from "./RegisterForm";
-import Button from "./Button";
+import { makeStyles } from "@material-ui/core";
+import LoginRegisterForm from "./accountTab/LoginRegisterForm";
+import LoggedInForm from "./accountTab/LoggedInForm";
+
+const useStyles = makeStyles({
+  container: {
+    display: "flex",
+    padding: "calc(2.5% + 4px)",
+    paddingTop: "calc(1.5% + 4px)",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
+
+export function errCodeToMessage(e: string): string {
+  if (e === "auth/invalid-email") {
+    return "Bad email address.";
+  }
+  else if (e === "auth/user-not-found") {
+    return "Wrong email or password.";
+  }
+  else if (e === "auth/weak-password") {
+    return "Need longer password.";
+  }
+  else if (e === "auth/wrong-password") {
+    return "Wrong email or password.";
+  }
+  else if (e === "auth/email-already-in-use") {
+    return "Email already in use.";
+  }
+  return e;
+}
 
 interface Props {
   operators: Record<string, Operator>;
   updateFromRemote: (remoteOperators: Record<string, Operator>) => void;
+  dirty: boolean;
   setDirty: (flag: boolean) => void;
-}
+};
 
 const AccountTab: React.FC<Props> = (props) => {
-  const { operators, updateFromRemote, setDirty } = props;
+  const { operators, updateFromRemote, dirty, setDirty } = props;
+  const classes = useStyles();
 
   const [user, setUser] = useState<firebase.User | null>(firebase.auth().currentUser);
-  
-  const handleLogin = async (
-    username: string,
-    password: string
-  ): Promise<Boolean> => {
-    try {
-      firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
-      const newUser = await firebase
-        .auth()
-        .signInWithEmailAndPassword(username, password);
-      setUser(newUser.user);
-      return true;
-    } catch (error) {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      console.log(errorCode);
-      console.log(errorMessage);
-      return false;
-    }
-  };
-  const handleSignup = (
+
+  function handleLogin(
     email: string,
-    username: string,
-    password: string
-  ): boolean => {
-    firebase
-      .auth()
+    password: string,
+    onError: (e: string) => void
+  ): void {
+    firebase.auth()
+      .signInWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        if (userCredential != null && userCredential.user != null) {
+          // Signed in
+          firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+          setUser(userCredential.user);
+          onError("");
+        }
+      })
+      .catch((e) => onError(e.code))
+  };
+
+  function handleSignup(
+    email: string,
+    password: string,
+    onError: (e: string) => void
+  ): void {
+    firebase.auth()
       .createUserWithEmailAndPassword(email, password)
       .then((userCredential) => {
         if (userCredential != null && userCredential.user != null) {
           // Signed in
+          firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
           setUser(userCredential.user);
-          firebase
-            .database()
-            .ref("phonebook/" + username)
-            .set(userCredential.user.uid);
-          firebase
-            .database()
-            .ref("users/" + userCredential.user.uid + "/username/")
-            .set(username)
-          return true;
+          onError("");
         }
       })
-      .catch((error) => {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        console.log(errorCode);
-        console.log(errorMessage);
-        return false;
-      });
-    return false;
+      .catch((e) => onError(e.code))
   };
-  const handleLogout = (): boolean => {
+  function handleLogout(): boolean {
     firebase
       .auth()
       .signOut()
@@ -86,43 +101,6 @@ const AccountTab: React.FC<Props> = (props) => {
     return false;
   };
 
-  const getUsername = (): string => {
-    if (!user) return "";
-    firebase
-      .database()
-      .ref("users/" + user.uid + "/meta/username/")
-      .get()
-      .then((snapshot) => {
-        console.log(snapshot.val());
-        if (snapshot.exists()) {
-          return snapshot.val();
-        }
-      });
-    return "";
-  };
-
-  const getIGN = (): string => {
-    if (!user) return "";
-    firebase
-      .database()
-      .ref("users/" + user.uid + "/meta/")
-      .get()
-      .then((snapshot) => {
-        if (snapshot.exists()) {
-          return snapshot.val();
-        }
-      });
-    return "";
-  };
-  
-  const setIGN = (ign: string): void => {
-    if (!user) return;
-    firebase
-      .database()
-      .ref("users/" + user.uid + "/meta/")
-      .set(ign);
-  };
-  
   const writeUserData = (): void => {
     if (!user) return;
     firebase
@@ -145,31 +123,26 @@ const AccountTab: React.FC<Props> = (props) => {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
+      if (dirty) writeUserData();
       setDirty(false);
-      writeUserData();
     }, 10000);
     return () => clearTimeout(timeout);
   }, [operators]);
 
-  if (user) {
-    return (
-      <>
-        <div>
-          Share your collection with https://neia.io/ak/roster/{getUsername()}
-        </div>
-        <Button handleChange={writeUserData} text="Manual Save" />
-        <Button handleChange={importUserData} text="Manual Load" />
-        <Button handleChange={handleLogout} text="Log out" />
-      </>
-    );
-  }
-  else {
-    return (
-      <>
-        <LoginForm handleLogin={handleLogin} />
-        <RegisterForm handleSignup={handleSignup} />
-      </>
-    );
-  }
+  return (
+    <div className={classes.container}>
+      {(user
+        ? <LoggedInForm
+          user={user}
+          saveData={writeUserData}
+          loadData={importUserData}
+          handleLogout={handleLogout}
+        />
+        : <LoginRegisterForm
+          handleLogin={handleLogin}
+          handleSignup={handleSignup}
+        />)}
+    </div>
+  );
 };
 export default AccountTab;

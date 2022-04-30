@@ -12,12 +12,12 @@ const useStyles = makeStyles({
     gridTemplateAreas: `"name"
                        "img"`,
     gridTemplateRows: "auto 1fr",
-    padding: "4px",
+    padding: "6px",
     border: "1px solid #808080",
     borderRadius: "4px",
     backgroundColor: "#40403E",
     boxShadow: "2px 2px 8px rgb(0 0 0 / 30%)",
-    margin: "0px 16px 6px 12px",
+    margin: "0px 14px 12px 14px",
   },
   opNameArea: {
     gridArea: "name",
