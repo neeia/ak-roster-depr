@@ -119,19 +119,22 @@ function LoginRegisterForm(props: Props) {
   //    });
   //};
   function updateUsername(onComplete: () => void): void {
+    try {
+      firebase.database()
+        .ref("phonebook/")
+        .child(actualUsername)
+        .remove()
+    }
+    catch (error) {
+
+    }
     firebase.database()
-      .ref("phonebook/")
-      .child(actualUsername)
-      .remove()
-      .catch()
-      .then(() => {
-        firebase.database()
-          .ref("phonebook/" + username)
-          .set(user.uid);
-        firebase.database()
-          .ref("users/" + user.uid + "/username/")
-          .set(username.toLowerCase());
-      })
+      .ref("phonebook/" + username)
+      .set(user.uid);
+    firebase.database()
+      .ref("users/" + user.uid + "/username/")
+      .set(username.toLowerCase());
+
     onComplete();
   };
   function isAlphaNumeric(str: string) {
