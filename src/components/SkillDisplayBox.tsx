@@ -1,6 +1,5 @@
 import React from "react";
 import { Operator } from "../App";
-import operatorJson from "../data/operators.json";
 import { makeStyles } from "@material-ui/core";
 import clsx from "clsx";
 
@@ -33,7 +32,6 @@ const SkillDisplayBox = React.memo((props: Props) => {
   const { operator, skill, className } = props;
   const classes = useStyles();
 
-  const opInfo = (operatorJson as any)[operator.id];
   const skillLvlUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto,h_64,w_64/v1/arknights/skill-levels/${operator.skillLevel}`;
   const skillBGImgUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto,h_64,w_64/v1/arknights/skill-levels/bg`;
   const skillMastery = (operator as any)[`skill${skill}Mastery`];

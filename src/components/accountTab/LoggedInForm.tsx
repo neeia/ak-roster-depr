@@ -6,8 +6,6 @@ import { useBoxStyles } from "../BoxStyles";
 import { useFormStyles } from "./FormStyles";
 import clsx from "clsx";
 import { Grid } from "@material-ui/core";
-import LoginForm from "./LoginForm";
-import RegisterForm from "./RegisterForm";
 import { useDataStyles } from "../dataTab/DataTabSharedStyles";
 import { MdUpload, MdDownload, MdLogout } from "react-icons/md";
 
@@ -96,8 +94,6 @@ function LoginRegisterForm(props: Props) {
   const [usernameValid, setUsernameValid] = useState<string>("");
   const [syncedData, setSyncedData] = useState<boolean>(false);
 
-  const [pwResetSent, setPwResetSent] = useState<boolean>(false);
-
   function findUser(applyUsername: (s: string) => void): void {
     firebase.database()
       .ref("phonebook/" + username)
@@ -110,21 +106,22 @@ function LoginRegisterForm(props: Props) {
         }
       })
   };
-  function getUsername(applyUsername: (s: string) => void): void {
-    firebase.database()
-      .ref("users/" + user.uid + "/username/")
-      .get()
-      .then((snapshot) => {
-        if (snapshot.exists()) {
-          applyUsername(snapshot.val());
-        }
-      });
-  };
+  //function getUsername(applyUsername: (s: string) => void): void {
+  //  firebase.database()
+  //    .ref("users/" + user.uid + "/username/")
+  //    .get()
+  //    .then((snapshot) => {
+  //      if (snapshot.exists()) {
+  //        applyUsername(snapshot.val());
+  //      }
+  //    });
+  //};
   function updateUsername(onComplete: () => void): void {
     firebase.database()
       .ref("phonebook/")
       .child(actualUsername)
       .remove()
+      .catch()
       .then(() => {
         firebase.database()
           .ref("phonebook/" + username)
@@ -267,7 +264,7 @@ function LoginRegisterForm(props: Props) {
           <div className={form.container}>
             <div className={form.label}>Community</div>
             I'm working hard to bring you new features. Just sit still and stay tuned!
-            <a className={form.link} href="https://forms.gle/eG1DckEKHnYyAdLF7" target="_blank">
+            <a className={form.link} href="https://forms.gle/eG1DckEKHnYyAdLF7" target="_blank" rel="noreferrer">
               Have feedback?
             </a>
           </div>

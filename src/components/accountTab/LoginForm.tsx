@@ -1,10 +1,7 @@
 import { useState } from "react";
-import { ButtonBase, makeStyles } from "@material-ui/core";
-import { useBoxStyles } from "../BoxStyles";
+import { ButtonBase } from "@material-ui/core";
 import { useFormStyles } from "./FormStyles";
-import clsx from "clsx";
 import TextInput from "./TextInput";
-import FormButton from "../FormButton";
 import firebase from "firebase";
 import { errCodeToMessage } from "../AccountTab";
 
@@ -16,7 +13,6 @@ interface Props {
 function LoginForm(props: Props) {
   const { handleLogin } = props;
   const form = useFormStyles();
-  const boxStyle = useBoxStyles();
 
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -32,7 +28,7 @@ function LoginForm(props: Props) {
           setSentEmail(false);
           setEmail(s);
         }} value={email} />
-        <TextInput type="text" label="Password" onChange={setPassword} value={password} />
+        <TextInput type="password" label="Password" onChange={setPassword} value={password} />
         <ButtonBase
           className={form.smallButton}
           disabled={email === "" || sentEmail}

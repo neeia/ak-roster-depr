@@ -120,7 +120,6 @@ function checkValidUsername(user: string): boolean {
 }
 
 function App() {
-  const classes = useStyles();
 
   const [operators, setOperators] = useLocalStorage<Record<string, Operator>>(
     "operators",
@@ -163,6 +162,7 @@ function App() {
         }
       );
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [setOperators]
   );
 
@@ -178,22 +178,22 @@ function App() {
     "skill2Mastery",
     "skill3Mastery",
   ];
-  const changeOneOperator = React.useCallback(
-    (operatorID: string, newOp: Operator) => {
-      setOperators(
-        (oldOperators: Record<string, Operator>): Record<string, Operator> => {
-          const copyOperators = { ...oldOperators };
-          var copyOperatorData = { ...copyOperators[operatorID] };
-          orderOfOperations.forEach((prop: string) =>
-            copyOperatorData = applyChangeWithInvariant(copyOperatorData, prop, (newOp as any)[prop])
-          )
-          copyOperators[operatorID] = copyOperatorData;
-          return copyOperators;
-        }
-      );
-    },
-    [setOperators]
-  );
+  //const changeOneOperator = React.useCallback(
+  //  (operatorID: string, newOp: Operator) => {
+  //    setOperators(
+  //      (oldOperators: Record<string, Operator>): Record<string, Operator> => {
+  //        const copyOperators = { ...oldOperators };
+  //        var copyOperatorData = { ...copyOperators[operatorID] };
+  //        orderOfOperations.forEach((prop: string) =>
+  //          copyOperatorData = applyChangeWithInvariant(copyOperatorData, prop, (newOp as any)[prop])
+  //        )
+  //        copyOperators[operatorID] = copyOperatorData;
+  //        return copyOperators;
+  //      }
+  //    );
+  //  },
+  //  [setOperators]
+  //);
 
   function minMax(min: number, value: number, max: number) {
     return Math.min(Math.max(value, min), max);
@@ -290,6 +290,7 @@ function App() {
         }
       );
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [setPresets]
   );
 
@@ -309,6 +310,7 @@ function App() {
         }
       );
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [setOperators]
   );
 

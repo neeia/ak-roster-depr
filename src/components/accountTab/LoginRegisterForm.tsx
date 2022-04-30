@@ -1,6 +1,4 @@
-import { useState } from "react";
-import TextInput from "./TextInput";
-import { ButtonBase, Hidden, makeStyles } from "@material-ui/core";
+import { Hidden, makeStyles } from "@material-ui/core";
 import { useBoxStyles } from "../BoxStyles";
 import clsx from "clsx";
 import { Grid } from "@material-ui/core";

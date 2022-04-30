@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Operator } from "../App";
-import useWindowSize, { Size } from "./UseWindowSize";
 import { makeStyles } from "@material-ui/core";
 import { useDataStyles } from "./dataTab/DataTabSharedStyles";
 import DataTabOperatorSelector from "./dataTab/DataTabOperatorSelector";
@@ -89,6 +88,13 @@ export const classList = [
   "Specialist",
 ]
 
+export enum SELECT_STATE {
+  Grid,
+  OpEdit,
+  PsEdit,
+  Batch
+}
+
 export const COLOR_BY_RARITY = ["#000000", "#9f9f9f", "#dce537", "#00b2f6", "#dbb1db", "#fbae02", "#f96601"]
 
 
@@ -96,7 +102,6 @@ const DataTab = React.memo((props: Props) => {
   const classes = useStyles();
   const style = useDataStyles();
   const { operators, changeOperators, presets, changePresets, applyBatch } = props;
-  const size: Size = useWindowSize();
 
   const [selectedOperator, setSelectedOperator] = React.useState("")
   const [selectedPreset, setSelectedPreset] = useState("")
@@ -301,10 +306,3 @@ const DataTab = React.memo((props: Props) => {
   );
 });
 export default DataTab;
-
-export enum SELECT_STATE {
-  Grid,
-  OpEdit,
-  PsEdit,
-  Batch
-}

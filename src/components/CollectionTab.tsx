@@ -150,6 +150,7 @@ const CollectionTab = React.memo((props: Props) => {
     if (username) {
       findUser(username, tryFind);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [searchUser, setSearchUser] = useState<string>(username?.toLowerCase() ?? "");
@@ -215,12 +216,12 @@ const CollectionTab = React.memo((props: Props) => {
       <div className={classes.collectionContainer}>
         {collection
           .map((op: any) => (
-            <div>
+            <div key={op.id}>
               <Hidden xsDown>
-                <OperatorCollectionBlock key={op.id} op={operators[op.id]} />
+                <OperatorCollectionBlock op={operators[op.id]} />
               </Hidden>
               <Hidden smUp>
-                <OperatorCollectionBlockM key={op.id} op={operators[op.id]} />
+                <OperatorCollectionBlockM op={operators[op.id]} />
               </Hidden>
             </div>
           ))

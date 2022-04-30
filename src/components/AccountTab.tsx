@@ -127,6 +127,7 @@ const AccountTab: React.FC<Props> = (props) => {
       setDirty(false);
     }, 10000);
     return () => clearTimeout(timeout);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [operators]);
 
   return (
