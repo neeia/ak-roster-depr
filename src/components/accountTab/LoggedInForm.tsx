@@ -172,7 +172,7 @@ function LoginRegisterForm(props: Props) {
                 placeholder={"Enter a unique name"}
                 onChange={(s: string) => {
                   setDirty(true);
-                  setUsername(s);
+                  setUsername(s.toLowerCase());
                 }}
                 value={username}
                 description={actualUsername === ""
