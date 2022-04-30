@@ -91,7 +91,7 @@ interface Props {
   setSelectState: (state: SELECT_STATE) => void
 }
 
-const DataEntryForm = React.memo((props: Props) => {
+const EditOperator = React.memo((props: Props) => {
   const { op, onChange, setSelectState } = props;
   const classes = useStyles();
   const boxStyle = useBoxStyles();
@@ -157,4 +157,4 @@ const DataEntryForm = React.memo((props: Props) => {
     </div>
   );
 });
-export default DataEntryForm;
+export default EditOperator;

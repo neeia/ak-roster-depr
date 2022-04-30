@@ -16,7 +16,6 @@ import {
 import { grey } from "@material-ui/core/colors";
 
 import AccountTab from "./components/AccountTab";
-import SearchForm from "./components/SearchForm";
 import CollectionTab from "./components/CollectionTab";
 import DataTab from "./components/DataTab";
 
@@ -44,7 +43,7 @@ export const MOBILE_BREAKPOINT = 900;
 export const TABLET_BREAKPOINT = 1300;
 
 // Converts an opJson entry into an Operator
-function opObject ([_, op] : any) : [string, Operator] {
+function opObject([_, op]: any): [string, Operator] {
   return [
     op.id,
     {
@@ -111,7 +110,7 @@ const firebaseConfig = {
   databaseURL: "https://ak-roster-default-rtdb.firebaseio.com/",
 };
 
-function checkValidUsername(user: string) : boolean {
+function checkValidUsername(user: string): boolean {
   return user.length > 0
     && !user.includes(".")
     && !user.includes("#")
@@ -134,15 +133,16 @@ function App() {
     }
   })
 
+  var [userSearch, setUserSearch] = useState<string>();
+
   useEffect(() => {
     if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
     const [, path, userName] = window.location.pathname.split("/");
-    window.history.pushState("object or string", "Title", (path !== "u" || userName === undefined ? "/" : "/u/" + userName));
     if (path === "u" && userName !== undefined && checkValidUsername(userName)) {
-      findUser(userName).then(() => {
-        setValue(3);
-      })
+      window.history.pushState("object or string", "Title", "/");
+      setUserSearch(userName)
+      setValue(3);
     }
   }, []);
 
@@ -341,32 +341,7 @@ function App() {
     setValue(newValue);
   };
 
-  var [collOperators, setCollOperators] = useState<typeof operators>();
-  const findUser = async (username: string): Promise<boolean> => {
-    const snapshot = await firebase
-      .database()
-      .ref("phonebook/" + username)
-      .get();
-    if (snapshot.exists()) {
-      viewUserCollection(snapshot.val());
-      return true;
-    }
-    else {
-      return false;
-    }
-  };
-  const viewUserCollection = (uid: string): void => {
-    firebase
-      .database()
-      .ref("users/" + uid + "/roster/")
-      .get()
-      .then((snapshot) => {
-        if (snapshot.exists()) {
-          setCollOperators(snapshot.val());
-        }
-      });
-  };
-  
+
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
@@ -393,21 +368,22 @@ function App() {
       </TabPanel>
       <TabPanel value={value} index={1}>
         <CollectionTab
-          operators={operators}
-          />
+          inOperators={operators}
+        />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <AccountTab 
-          operators={operators} 
+        <AccountTab
+          operators={operators}
           updateFromRemote={(remoteOperators) => setOperators(remoteOperators)}
+          dirty={dirty}
           setDirty={(flag: boolean) => setDirty(flag)}
         />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        <SearchForm handleSubmit={findUser} />
-        {collOperators ? <CollectionTab
-          operators={collOperators}
-        /> : ""}
+        <CollectionTab
+          inOperators={defaultOperators}
+          username={userSearch ?? ""}
+        />
       </TabPanel>
     </ThemeProvider>
   );
@@ -424,7 +400,7 @@ function TabPanel(props: TabProps) {
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
-      className={ useStyles().tabPanel }
+      className={useStyles().tabPanel}
       {...other}
     >
       {value === index && <Box p={3}>{children}</Box>}
