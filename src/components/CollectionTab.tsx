@@ -53,11 +53,12 @@ const useStyles = makeStyles({
     borderRadius: "0px",
     height: "30px",
     flexGrow: 0,
+    marginTop: "calc(0.7vh + 10px)",
   },
   searchBlock: {
     display: "flex",
     gap: "8px",
-    alignItems: "end",
+    alignItems: "start",
   },
 });
 

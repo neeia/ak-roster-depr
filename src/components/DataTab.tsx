@@ -274,6 +274,7 @@ const DataTab = React.memo((props: Props) => {
         <div className={classes.drawerBox}>
           <Drawer
             label={"Info"}
+            open={true}
           >
             <span>
               <h1 className={classes.h1}>
@@ -286,6 +287,7 @@ const DataTab = React.memo((props: Props) => {
           </Drawer>
           <Drawer
             label={"Filter"}
+            open={true}
           >
             <div>
               {classSelector}
@@ -295,6 +297,7 @@ const DataTab = React.memo((props: Props) => {
           </Drawer>
           <Drawer
             label={"Presets"}
+            open={true}
           >
             {presetSelector}
           </Drawer>
