@@ -93,6 +93,7 @@ function LoginRegisterForm(props: Props) {
 
   const [username, setUsername] = useState<string>(user.displayName ?? "");
   const [actualUsername, setActualUsername] = useState<string>(user.displayName ?? "");
+  const [dirty, setDirty] = useState<boolean>(false);
   const [usernameValid, setUsernameValid] = useState<string>("");
   const [syncedData, setSyncedData] = useState<boolean>(false);
 
@@ -108,16 +109,18 @@ function LoginRegisterForm(props: Props) {
         }
       })
   };
-  //function getUsername(applyUsername: (s: string) => void): void {
-  //  firebase.database()
-  //    .ref("users/" + user.uid + "/username/")
-  //    .get()
-  //    .then((snapshot) => {
-  //      if (snapshot.exists()) {
-  //        applyUsername(snapshot.val());
-  //      }
-  //    });
-  //};
+  function getUsername(): void {
+    firebase.database()
+      .ref("users/" + user.uid + "/username/")
+      .get()
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          setUsername(snapshot.val());
+          setActualUsername(snapshot.val());
+          user.updateProfile({ displayName: snapshot.val() })
+        }
+      });
+  };
   function updateUsername(onComplete: () => void): void {
     try {
       firebase.database()
@@ -126,10 +129,9 @@ function LoginRegisterForm(props: Props) {
         .remove()
     }
     catch (error) {
-
     }
     firebase.database()
-      .ref("phonebook/" + username)
+      .ref("phonebook/" + username.toLowerCase())
       .set(user.uid);
     firebase.database()
       .ref("users/" + user.uid + "/username/")
@@ -168,7 +170,10 @@ function LoginRegisterForm(props: Props) {
                 type="text"
                 label="Display Name"
                 placeholder={"Enter a unique name"}
-                onChange={setUsername}
+                onChange={(s: string) => {
+                  setDirty(true);
+                  setUsername(s);
+                }}
                 value={username}
                 description={actualUsername === ""
                   ? "Setting a display name lets you share your data with other people. Alphanumeric characters only."
@@ -179,6 +184,7 @@ function LoginRegisterForm(props: Props) {
                 <ButtonBase
                   className={form.submitButton}
                   onClick={() => {
+                    setDirty(false);
                     if (isAlphaNumeric(username)) {
                       setUsername(username.toLowerCase())
                       findUser((s: string) => {
@@ -202,11 +208,10 @@ function LoginRegisterForm(props: Props) {
                 </div>
                 <ButtonBase
                   className={form.submitButton}
-                  disabled={usernameValid !== "Available"}
+                  disabled={dirty || usernameValid !== "Available"}
                   onClick={() => {
                     updateUsername(() => {
-                      user.updateProfile({ displayName: username })
-                      setActualUsername(username);
+                      getUsername();
                       setUsernameValid("Success");
                     })
                   }}
