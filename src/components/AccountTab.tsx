@@ -25,7 +25,7 @@ export function errCodeToMessage(e: string): string {
     return "Wrong email or password.";
   }
   else if (e === "auth/weak-password") {
-    return "Need longer password.";
+    return "Need password of length >5.";
   }
   else if (e === "auth/wrong-password") {
     return "Wrong email or password.";
