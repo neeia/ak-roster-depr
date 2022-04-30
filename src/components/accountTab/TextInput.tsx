@@ -84,8 +84,6 @@ const TextInput = React.memo((props: Props) => {
           disabled={disabled}
           inputProps={{
             className: classes.levelTextInput,
-            inputMode: 'numeric',
-            pattern: '[0-9]*'
           }}
         />
         {type === "password"
