@@ -58,6 +58,9 @@ const useStyles = makeStyles({
     fontSize: "16px",
     margin: "0px",
     fontWeight: "normal",
+  },
+  description: {
+    fontSize: "14px",
   }
 });
 
@@ -79,13 +82,13 @@ interface Props {
 
 export const classList = [
   "Guard",
-  "Vanguard",
-  "Caster",
   "Sniper",
   "Defender",
   "Medic",
   "Supporter",
+  "Caster",
   "Specialist",
+  "Vanguard",
 ]
 
 export enum SELECT_STATE {
@@ -280,9 +283,15 @@ const DataTab = React.memo((props: Props) => {
               <h1 className={classes.h1}>
                 Arknights Roster is an operator collection tracker.
               </h1>
-              <div className={classes.h1}>
-                Select an operator to get started, or use presets to make batch changes.
+              <div className={classes.description}>
+                You can select an operator to get started, or you can use the batch mode to apply changes to multiple operators at once.
               </div>
+              <Drawer label={"Batch?"} labelClass={style.drawer2}>
+                <div className={classes.description}>
+                  Batch mode lets you create presets to apply to operators. You can edit a preset by selecting it and clicking "Edit".
+                  Then, you can enter batch mode by selecting batch. Or, while you are editing an operator, you can select a preset and click "Apply".
+                </div>
+              </Drawer>
             </span>
           </Drawer>
           <Drawer
@@ -296,7 +305,7 @@ const DataTab = React.memo((props: Props) => {
             </div>
           </Drawer>
           <Drawer
-            label={"Presets"}
+            label={"Batch"}
             open={true}
           >
             {presetSelector}
