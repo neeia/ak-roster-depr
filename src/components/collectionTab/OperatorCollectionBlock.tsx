@@ -5,6 +5,7 @@ import { useRarityStyles } from "../StyleRarityUnderline";
 import clsx from "clsx";
 import SkillDisplayBox from "../SkillDisplayBox";
 import { MdFavorite } from "react-icons/md";
+import { MAX_LEVEL_BY_RARITY } from "../RosterTable";
 
 const useStyles = makeStyles({
   opContainer: {
@@ -147,13 +148,13 @@ const useStyles = makeStyles({
     height: "24px",
   },
   topSkill: {
-    marginLeft: "-2px",
+    marginLeft: "0px",
   },
   middleSkill: {
     marginLeft: "4px",
   },
   bottomSkill: {
-    marginLeft: "6px",
+    marginLeft: "8px",
   },
 });
 
@@ -221,7 +222,7 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
         className={classes.potentialSVG}
       >
         <rect x="0" y="0" className={classes.potentialSVG}
-          fill="#323232" fillOpacity="0.95" stroke="#808080" strokeWidth="1" />
+          fill="#323232" fillOpacity="0.95" stroke={op.potential === 6 ? "#ffffff" : "#808080"} strokeWidth="1.5" />
       </svg>
       <img
         src={potentialUrl}
@@ -238,7 +239,8 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
           className={classes.promotionBox}
         >
           <rect x="0" y="0" className={classes.promotionBox}
-            fill="#323232" fillOpacity="0.95" stroke="#808080" strokeWidth="2" />
+            fill="#323232" fillOpacity="0.95" strokeWidth="2"
+            stroke={op.level === MAX_LEVEL_BY_RARITY[op.rarity][2] ? "#ffffff" : "#808080"} />
         </svg>
         <div className={classes.promotionBox}>
           <img
@@ -257,7 +259,8 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
           className={classes.levelBubble}
         >
           <circle cx="24" cy="24" r="22" className={classes.levelBubble}
-            fill="#323232" fillOpacity="0.95" stroke="#808080" strokeWidth="2" />
+            fill="#323232" fillOpacity="0.95" strokeWidth="2"
+            stroke={op.level === MAX_LEVEL_BY_RARITY[op.rarity][2] ? "#f7d98b" : "#808080"} />
         </svg >
         <div className={classes.levelBubble} >
           <abbr
