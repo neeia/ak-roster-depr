@@ -3,6 +3,7 @@ import { Operator } from "../../App";
 import operatorJson from "../../data/operators.json";
 import { makeStyles } from "@material-ui/core";
 import DataTabOperatorButton from "./DataTabOperatorButton";
+import { classList } from "../DataTab";
 
 const useStyles = makeStyles({
   opDisplay: {
@@ -33,10 +34,10 @@ const DataTabOperatorSelector = React.memo((props: Props) => {
   const ps = postSort ?? ((a: any, b: any) => 0)
 
   function sortComparator(a: any, b: any) {
-    return ps(a, b)
-      || (b.rarity - a.rarity
-      || a.name.localeCompare(b.name)
-    );
+    return ps(a, b) ||
+      b.rarity - a.rarity ||
+      classList.indexOf(a.class) - classList.indexOf(b.class) ||
+      a.name.localeCompare(b.name)
   }
 
   // Operator Selector Component
