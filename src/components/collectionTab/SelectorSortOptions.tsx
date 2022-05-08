@@ -4,6 +4,7 @@ import FormButton from "../FormButton";
 import { useDataStyles } from "../dataTab/DataTabSharedStyles";
 import clsx from "clsx";
 import Drawer from "../Drawer";
+import { SortMode } from "../CollectionTab";
 
 const useStyles = makeStyles({
   button: {
@@ -14,15 +15,34 @@ const useStyles = makeStyles({
 interface Props {
   sortFav: boolean;
   setSortFav: (fav: boolean) => void;
+  sortMode: SortMode;
+  setSortMode: (sm: SortMode) => void;
   clearFilter: () => void;
 }
 
 const SelectorSortOptions = React.memo((props: Props) => {
-  const { sortFav, setSortFav, clearFilter } = props;
+  const { sortFav, setSortFav, sortMode, setSortMode, clearFilter } = props;
   const classes = useStyles();
   const style = useDataStyles();
 
   const buttonClass = clsx({ [style.filterButton]: true, [classes.button]: true})
+
+  const sortLevel =
+    <FormButton
+      className={buttonClass}
+      onClick={() => setSortMode(SortMode.Level)}
+      toggled={sortMode === SortMode.Level}
+    >
+      {"Sort Level"}
+    </FormButton>
+  const sortRarity =
+    <FormButton
+      className={buttonClass}
+      onClick={() => setSortMode(SortMode.Rarity)}
+      toggled={sortMode === SortMode.Rarity}
+    >
+      {"Sort Rarity"}
+    </FormButton>
 
   const favButton =
     <FormButton
@@ -30,7 +50,7 @@ const SelectorSortOptions = React.memo((props: Props) => {
       onClick={() => setSortFav(!sortFav)}
       toggled={sortFav}
     >
-      {sortFav ? "Group Favorites" : "Ungroup Favorites"}
+      {"Favorites"}
     </FormButton>
 
   const filterButton =
@@ -44,15 +64,18 @@ const SelectorSortOptions = React.memo((props: Props) => {
   return (
     <Drawer label={"Display"} open={true} labelClass={style.drawer2}>
       <Grid container>
-        <Grid item xs={2} />
+        <Grid item xs={3}>
+          {sortLevel}
+        </Grid>
+        <Grid item xs={3}>
+          {sortRarity}
+        </Grid>
         <Grid item xs={3}>
           {favButton}
         </Grid>
-        <Grid item xs={2} />
         <Grid item xs={3}>
           {filterButton}
         </Grid>
-        <Grid item xs={2} />
       </Grid>
     </Drawer>
   );

@@ -62,6 +62,11 @@ const useStyles = makeStyles({
   },
 });
 
+export enum SortMode {
+  Level,
+  Rarity
+}
+
 interface Props {
   inOperators: Record<string, Operator>;
   findUser?: (s: string) => Promise<boolean>;
@@ -72,9 +77,11 @@ const CollectionTab = React.memo((props: Props) => {
   const { inOperators, username } = props;
   const classes = useStyles();
 
+  const [sortMode, setSortMode] = useState<SortMode>(SortMode.Level);
+
   const [selectedClasses, setSelectedClasses] = useState<string[]>([]);
   const [selectedRarities, setSelectedRarities] = useState<number[]>([]);
-  const [sortFavorites, setSortFavorites] = useLocalStorage<boolean>("sortFav", false);
+  const [sortFavorites, setSortFavorites] = useLocalStorage<boolean>("sortFav", true);
   const filterBar =
     <Drawer
       label={"Filter"}
@@ -108,6 +115,8 @@ const CollectionTab = React.memo((props: Props) => {
       <SelectorSortOptions
         sortFav={sortFavorites}
         setSortFav={setSortFavorites}
+        sortMode={sortMode}
+        setSortMode={setSortMode}
         clearFilter={() => {
           setSelectedClasses([]);
           setSelectedRarities([]);
@@ -191,10 +200,10 @@ const CollectionTab = React.memo((props: Props) => {
     const a = operators[x.id];
     const b = operators[y.id];
     return (
-      (b.favorite ? 1 : 0) - (a.favorite ? 1 : 0) ||
+      (sortFavorites && (b.favorite ? 1 : 0) - (a.favorite ? 1 : 0)) ||
       (b.owned ? 1 : 0) - (a.owned ? 1 : 0) ||
-      b.promotion - a.promotion ||
-      b.level - a.level ||
+      (sortMode === SortMode.Rarity && b.rarity - a.rarity) ||
+      b.promotion - a.promotion || b.level - a.level ||
       b.rarity - a.rarity ||
       classList.indexOf(x.class) - classList.indexOf(y.class) ||
       (b.module?.length ?? 0) - (a.module?.length ?? 0) ||
