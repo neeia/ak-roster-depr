@@ -1,6 +1,12 @@
 import { Operator } from "../App";
 
-export const MAX_LEVEL_BY_RARITY = [[0], [30], [30], [40, 55], [45, 60, 70], [50, 70, 80], [50, 80, 90]];
+export const MAX_LEVEL_BY_RARITY = [[0],
+  [30, 30, 30],
+  [30, 30, 30],
+  [40, 55, 55],
+  [45, 60, 70],
+  [50, 70, 80],
+  [50, 80, 90]];
 
 export const disableByProperty = (
   op : Operator,
