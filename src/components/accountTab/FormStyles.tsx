@@ -39,6 +39,11 @@ export const useFormStyles = makeStyles({
     margin: "8px 6px -4px 6px",
     justifyContent: "space-between",
   },
+  reveal: {
+    display: "flex",
+    margin: "8px 6px -4px 6px",
+    justifyContent: "end",
+  },
   errorText: {
     color: "red",
     fontSize: "12px",
@@ -53,6 +58,8 @@ export const useFormStyles = makeStyles({
     marginTop: "2px",
     padding: "2px",
     textAlign: "center",
+    border: "1px solid #808080",
+    backgroundColor: "#505050",
     "&:focus": {
       boxShadow: "0px 0px 0px 1px #fcf3dc inset",
       background: "#797977",

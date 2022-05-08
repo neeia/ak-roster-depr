@@ -20,6 +20,7 @@ function LoginForm(props: Props) {
   const [error, setError] = useState<string>("");
 
   const [sentEmail, setSentEmail] = useState<boolean>(false);
+  const [showPW, setShowPW] = useState<boolean>(false);
 
   return (
     <div className={form.container}>
@@ -29,7 +30,7 @@ function LoginForm(props: Props) {
           setSentEmail(false);
           setEmail(s);
         }} value={email} />
-        <TextInput type="password" label="Password" onChange={setPassword} value={password} />
+        <TextInput type={showPW ? "text" : "password"} label="Password" onChange={setPassword} value={password} />
         <ButtonBase
           className={form.smallButton}
           disabled={email === "" || sentEmail}
@@ -45,6 +46,18 @@ function LoginForm(props: Props) {
           </div>
         </ButtonBase>
       </div>
+      <div className={form.errorText}>
+      </div>
+      <div className={form.reveal}>
+        <ButtonBase
+          className={form.smallButton}
+          onClick={() => {
+            setShowPW(!showPW);
+          }}
+        >
+          {showPW ? "Hide PW" : "Reveal PW"}
+        </ButtonBase>
+      </div>
       <div className={form.footer}>
         <div className={form.errorText}>
           {errCodeToMessage(error)}
@@ -58,7 +71,7 @@ function LoginForm(props: Props) {
           Submit
         </ButtonBase>
       </div>
-    </div>
+    </div >
   );
 };
 

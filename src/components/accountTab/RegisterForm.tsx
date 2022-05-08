@@ -16,14 +16,27 @@ function RegisterForm(props: Props) {
   const [password, setPassword] = useState<string>("");
   const [passwordConfirm, setPasswordConfirm] = useState<string>("");
   const [error, setError] = useState<string>("");
+  const [showPW, setShowPW] = useState<boolean>(false);
 
   return (
     <div className={form.container}>
       <div className={form.label}>Register</div>
       <div className={form.formContainer}>
         <TextInput type="text" label="Email" onChange={setEmail} value={email} />
-        <TextInput type="password" label="Password" onChange={setPassword} value={password} />
-        <TextInput type="password" label="Repeat Password" placeholder="Repeat your Password" onChange={setPasswordConfirm} value={passwordConfirm} />
+        <TextInput type={showPW ? "text" : "password"} label="Password" onChange={setPassword} value={password} />
+        <TextInput type={showPW ? "text" : "password"} label="Repeat Password" placeholder="Repeat your Password" onChange={setPasswordConfirm} value={passwordConfirm} />
+      </div>
+      <div className={form.errorText}>
+      </div>
+      <div className={form.reveal}>
+        <ButtonBase
+          className={form.smallButton}
+          onClick={() => {
+            setShowPW(!showPW);
+          }}
+        >
+          {showPW ? "Hide PW" : "Reveal PW"}
+        </ButtonBase>
       </div>
       <div className={form.footer}>
         <div className={form.errorText}>

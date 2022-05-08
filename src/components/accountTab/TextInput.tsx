@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { ButtonBase, makeStyles, TextField } from "@material-ui/core";
 import clsx from "clsx";
-import { MdRemoveRedEye } from "react-icons/md";
 
 const useStyles = makeStyles({
   container: {
@@ -38,12 +37,6 @@ const useStyles = makeStyles({
     fontSize: "calc(0.7vh + 5px)",
     lineHeight: "calc(0.7vh + 7px)",
   },
-  svg: {
-    position: "absolute",
-    right: "6px",
-    top: "0px",
-    bottom: "0px",
-  },
 })
 
 interface Props {
@@ -61,8 +54,6 @@ const TextInput = React.memo((props: Props) => {
   const { label, value, onChange, disabled, className, type, placeholder, description } = props;
   const classes = useStyles();
 
-  const [currentType, setCurrentType] = useState<string>(type??"");
-
   return (
     <div className={classes.container}>
       <div className={classes.label}>
@@ -70,7 +61,7 @@ const TextInput = React.memo((props: Props) => {
       </div>
       <div className={classes.textContainer}>
         <TextField
-          type={currentType ?? "text"}
+          type={type ?? "text"}
           variant="outlined"
           size="small"
           margin="none"
@@ -86,14 +77,6 @@ const TextInput = React.memo((props: Props) => {
             className: classes.levelTextInput,
           }}
         />
-        {type === "password"
-          ? <ButtonBase
-            onClick={() => setCurrentType(currentType === "password" ? "text" : "password")}
-            className={classes.svg}
-          >
-            <MdRemoveRedEye size={18} />
-          </ButtonBase>
-          : ""}
       </div>
       <div className={classes.description}>
         {description ?? ""}
