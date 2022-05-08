@@ -31,10 +31,18 @@ const SelectorMeta = React.memo((props: Props) => {
   const ownedButton =
     <FormButton
       className={buttonClass}
-      onClick={() => setActiveOwned(activeOwned ? undefined : !(activeOwned ?? true))}
-      toggled={activeOwned !== undefined}
+      onClick={() => setActiveOwned(activeOwned ? undefined : true)}
+      toggled={activeOwned}
     >
-      {activeOwned === undefined ? "Only Unowned" : (activeOwned ? "Owned" : "Unowned")}
+      {"Owned"}
+    </FormButton>
+  const unownedButton =
+    <FormButton
+      className={buttonClass}
+      onClick={() => setActiveOwned(activeOwned === false ? undefined : false)}
+      toggled={activeOwned === false}
+    >
+      {"Unowned"}
     </FormButton>
 
   const cnButton =
@@ -66,8 +74,11 @@ const SelectorMeta = React.memo((props: Props) => {
   return (
     <Drawer label={"Display"} open={true} labelClass={style.drawer2}>
       <Grid container>
-        <Grid item xs={3}>
+        <Grid item xs={2}>
           {ownedButton}
+        </Grid>
+        <Grid item xs={2}>
+          {unownedButton}
         </Grid>
         <Grid item xs={3}>
           {cnButton}
@@ -75,7 +86,6 @@ const SelectorMeta = React.memo((props: Props) => {
         <Grid item xs={3}>
           {favButton}
         </Grid>
-        <Grid item xs={1} />
         <Grid item xs={2}>
           {filterButton}
         </Grid>
