@@ -274,8 +274,8 @@ function LoginRegisterForm(props: Props) {
           <div className={form.container}>
             <div className={form.label}>Community</div>
             I'm working hard to bring you new features. Just sit still and stay tuned!
-            <a className={form.link} href="https://forms.gle/eG1DckEKHnYyAdLF7" target="_blank" rel="noreferrer">
-              Have feedback?
+            <a className={form.link} href="https://discord.gg/qx8hJGvTwc" target="_blank" rel="noreferrer">
+              Join the Discord!
             </a>
           </div>
         </Grid>
