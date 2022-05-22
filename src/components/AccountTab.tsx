@@ -36,6 +36,28 @@ export function errCodeToMessage(e: string): string {
   return e;
 }
 
+export interface AccountInfo {
+  friendCode?: FriendCode;
+  public?: boolean;
+  team?: OperatorSkillSlot[];
+  support?: OperatorSkillSlot[];
+  assistantId?: string;
+  accountLevel?: number;
+  currentStage?: string[];
+  creationDate?: Date;
+}
+
+export interface OperatorSkillSlot {
+  opID: string;
+  opSkill: number;
+}
+
+export interface FriendCode {
+  server: string;
+  username: string;
+  usertag: number;
+}
+
 interface Props {
   operators: Record<string, Operator>;
   updateFromRemote: (remoteOperators: Record<string, Operator>) => void;

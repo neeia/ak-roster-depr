@@ -69,7 +69,8 @@ interface Props {
   changeOperators: (
     operatorID: string,
     property: string,
-    value: number | boolean
+    value: number | boolean,
+    index?: number
   ) => void;
   presets: Record<string, Operator>;
   changePresets: (

@@ -86,7 +86,8 @@ interface Props {
   onChange: (
     operatorId: string,
     property: string,
-    value: number | boolean
+    value: number | boolean,
+    index?: number
   ) => void;
   setSelectState: (state: SELECT_STATE) => void
 }

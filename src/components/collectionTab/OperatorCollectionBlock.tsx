@@ -3,7 +3,7 @@ import { Operator } from "../../App";
 import { makeStyles } from "@material-ui/core";
 import { useRarityStyles } from "../StyleRarityUnderline";
 import clsx from "clsx";
-import SkillDisplayBox from "../SkillDisplayBox";
+import SkillDisplayBox from "./SkillDisplayBox";
 import { MdFavorite } from "react-icons/md";
 import { MAX_LEVEL_BY_RARITY } from "../RosterTable";
 
@@ -131,6 +131,30 @@ const useStyles = makeStyles({
     gridArea: "potential",
     width: "24px",
     height: "24px",
+    alignSelf: "center",
+    justifySelf: "center",
+  },
+  moduleContainer: {
+    gridArea: "img",
+    display: "flex",
+    flexDirection: "row-reverse",
+    alignSelf: "end",
+    marginBottom: "-4px",
+    marginRight: "-12px",
+  },
+  moduleSVG: {
+    display: "grid",
+    gridTemplateAreas: `"grid"`,
+    gridArea: "module",
+    width: "36px",
+    height: "36px",
+    alignSelf: "center",
+    justifySelf: "center",
+  },
+  moduleIcon: {
+    gridArea: "module",
+    width: "32px",
+    height: "32px",
     alignSelf: "center",
     justifySelf: "center",
   },
@@ -295,6 +319,29 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
       </div>
     </div>
 
+  const opModuleUrls: string[] = op.module?.map((lvl: number) =>
+    lvl > 0 ? `https://res.cloudinary.com/samidare/image/upload/f_auto/v1/arknights/equip/uniequip_002_${op.id}` : ""
+  ) ?? []
+  const moduleBlock =
+    <div className={classes.moduleContainer}>
+      {opModuleUrls.map((url: string) =>
+        url
+          ? <div key={url} className={classes.moduleSVG}>
+            <svg
+              className={classes.moduleSVG}
+            >
+              <rect x="0" y="0" className={classes.moduleSVG}
+                fill="#323232" fillOpacity="0.95" strokeWidth="1"
+                stroke={"#808080"} />
+            </svg>
+            <img
+              className={classes.moduleIcon}
+              src={`https://res.cloudinary.com/samidare/image/upload/f_auto,h_256,w_256/v1/arknights/equip/uniequip_002_${op.id.split("_")[2]}`}
+            />
+          </div>
+          : "")}
+    </div>
+
   // merge operator portrait with rarity drop-shadow
   const opIconStyle = clsx({
     [rarity.rarityOne]: op.rarity === 1,
@@ -323,8 +370,9 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
         className={opIconStyle}
         alt=""
       />
-      {skillBlock}
       {levelBubble}
+      {skillBlock}
+      {moduleBlock}
     </div>
   );
 });

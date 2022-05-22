@@ -97,7 +97,7 @@ export interface Operator {
   skill1Mastery?: number;
   skill2Mastery?: number;
   skill3Mastery?: number;
-  module?: boolean[];
+  module?: number[];
 }
 
 const firebaseConfig = {
@@ -149,7 +149,7 @@ function App() {
   const [dirty, setDirty] = useLocalStorage<boolean>("dirty", false);
 
   const changePropertyOfOperator = React.useCallback(
-    (operatorID: string, property: string, value: number | boolean) => {
+    (operatorID: string, property: string, value: number | boolean, index?: number) => {
       if (isNaN(value as any)) {
         return;
       }
@@ -157,7 +157,7 @@ function App() {
         (oldOperators: Record<string, Operator>): Record<string, Operator> => {
           const copyOperators = { ...oldOperators };
           const copyOperatorData = { ...copyOperators[operatorID] };
-          copyOperators[operatorID] = applyChangeWithInvariant(copyOperatorData, property, value);
+          copyOperators[operatorID] = applyChangeWithInvariant(copyOperatorData, property, value, index);
           setDirty(true);
           return copyOperators;
         }
@@ -200,9 +200,19 @@ function App() {
     return Math.min(Math.max(value, min), max);
   }
 
-  const applyChangeWithInvariant = (op: Operator, prop: string, value: number | boolean) => {
+  const applyChangeWithInvariant = (op: Operator, prop: string, value: number | boolean, index?: number) => {
     if (!op.owned && prop !== "owned") return op;
-    (op as any)[prop] = value;
+    console.log(`applyChangeWithInvariant: ${op.id}[${prop}]${index ?? ""} = ${value} - was ${(op as any)[prop]}`)
+    if (index !== undefined) {
+      console.log(`applyChangeWithInvariant: ${(op as any)[prop]}`)
+      if ((op as any)[prop] === undefined) {
+        (op as any)[prop] = []
+      }
+      (op as any)[prop][index] = value;
+    }
+    else {
+      (op as any)[prop] = value;
+    }
     switch (prop) {
       case "potential":
         op.potential = minMax(1, op.potential, 6);
@@ -235,15 +245,22 @@ function App() {
           op.skillLevel = Math.min(op.skillLevel, 4);
         }
         if (value === 2) {
+          op.module = [];
           op = applyChangeWithInvariant(op, "skill1Mastery", 0);
           op = applyChangeWithInvariant(op, "skill2Mastery", 0);
           op = applyChangeWithInvariant(op, "skill3Mastery", 0);
         } else {
+          op.module = undefined;
           op.skill1Mastery = undefined;
           op.skill2Mastery = undefined;
           op.skill3Mastery = undefined;
         }
         op.level = Math.min(op.level, MAX_LEVEL_BY_RARITY[op.rarity][op.promotion]);
+        break;
+      case "module":
+        if (op.promotion !== 2) {
+          /*TODO: Module Reqs*/
+        }
         break;
       case "level":
         op.level = minMax(1, op.level, MAX_LEVEL_BY_RARITY[op.rarity][op.promotion]);
