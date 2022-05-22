@@ -1051,7 +1051,9 @@
       }
     ],
     "class": "Medic",
-    "modules": []
+    "modules": [
+      "“江河之韵”"
+    ]
   },
   "char_4041_chnut": {
     "id": "char_4041_chnut",
@@ -2418,7 +2420,9 @@
       }
     ],
     "class": "Medic",
-    "modules": []
+    "modules": [
+      "野外考察套装"
+    ]
   },
   "char_436_whispr": {
     "id": "char_436_whispr",
@@ -2438,7 +2442,9 @@
       }
     ],
     "class": "Medic",
-    "modules": []
+    "modules": [
+      "古朴的急救箱"
+    ]
   },
   "char_402_tuye": {
     "id": "char_402_tuye",
@@ -2826,7 +2832,9 @@
       }
     ],
     "class": "Defender",
-    "modules": []
+    "modules": [
+      "盾用摄制模块"
+    ]
   },
   "char_145_prove": {
     "id": "char_145_prove",
@@ -3037,6 +3045,26 @@
     "modules": [
       "外骨骼装备"
     ]
+  },
+  "char_433_windft": {
+    "id": "char_433_windft",
+    "name": "Windflit",
+    "rarity": 5,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skchr_windft_1",
+        "iconId": null,
+        "skillName": "此身为筑"
+      },
+      {
+        "skillId": "skchr_windft_2",
+        "iconId": null,
+        "skillName": "此身为源"
+      }
+    ],
+    "class": "Supporter",
+    "modules": []
   },
   "char_101_sora": {
     "id": "char_101_sora",
@@ -3276,7 +3304,9 @@
       }
     ],
     "class": "Specialist",
-    "modules": []
+    "modules": [
+      "《乔弗瑞古今童话集》精装本"
+    ]
   },
   "char_4016_kazema": {
     "id": "char_4016_kazema",
@@ -3296,7 +3326,9 @@
       }
     ],
     "class": "Specialist",
-    "modules": []
+    "modules": [
+      "旧物"
+    ]
   },
   "char_103_angel": {
     "id": "char_103_angel",
@@ -4201,6 +4233,33 @@
     "class": "Specialist",
     "modules": []
   },
+  "char_1023_ghost2": {
+    "id": "char_1023_ghost2",
+    "name": "Specter the Unchained",
+    "rarity": 6,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skchr_ghost2_1",
+        "iconId": null,
+        "skillName": "生存的技巧"
+      },
+      {
+        "skillId": "skchr_ghost2_2",
+        "iconId": null,
+        "skillName": "生存的渴望"
+      },
+      {
+        "skillId": "skchr_ghost2_3",
+        "iconId": null,
+        "skillName": "生存的重压"
+      }
+    ],
+    "class": "Specialist",
+    "modules": [
+      "“唱片”收藏箱"
+    ]
+  },
   "char_147_shining": {
     "id": "char_147_shining",
     "name": "Shining",
@@ -4277,6 +4336,33 @@
     ],
     "class": "Medic",
     "modules": []
+  },
+  "char_4042_lumen": {
+    "id": "char_4042_lumen",
+    "name": "Lumen",
+    "rarity": 6,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skchr_lumen_1",
+        "iconId": null,
+        "skillName": "沐雨"
+      },
+      {
+        "skillId": "skchr_lumen_2",
+        "iconId": null,
+        "skillName": "沛霖"
+      },
+      {
+        "skillId": "skchr_lumen_3",
+        "iconId": null,
+        "skillName": "灯火不灭"
+      }
+    ],
+    "class": "Medic",
+    "modules": [
+      "纯铜单筒望远镜"
+    ]
   },
   "char_136_hsguma": {
     "id": "char_136_hsguma",
@@ -4426,7 +4512,9 @@
       }
     ],
     "class": "Defender",
-    "modules": []
+    "modules": [
+      "祖玛玛的工具箱"
+    ]
   },
   "char_4039_horn": {
     "id": "char_4039_horn",
@@ -4553,6 +4641,33 @@
     "class": "Guard",
     "modules": [
       "罗德岛制式剑"
+    ]
+  },
+  "char_4009_irene": {
+    "id": "char_4009_irene",
+    "name": "Irene",
+    "rarity": 6,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skchr_irene_1",
+        "iconId": null,
+        "skillName": "起风"
+      },
+      {
+        "skillId": "skchr_irene_2",
+        "iconId": null,
+        "skillName": "裂潮"
+      },
+      {
+        "skillId": "skchr_irene_3",
+        "iconId": null,
+        "skillName": "判决"
+      }
+    ],
+    "class": "Guard",
+    "modules": [
+      "厚重的经卷"
     ]
   },
   "char_017_huang": {
