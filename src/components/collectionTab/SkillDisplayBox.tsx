@@ -32,10 +32,10 @@ const SkillDisplayBox = React.memo((props: Props) => {
   const { operator, skill, className } = props;
   const classes = useStyles();
 
-  const skillLvlUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto,h_64,w_64/v1/arknights/skill-levels/${operator.skillLevel}`;
-  const skillBGImgUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto,h_64,w_64/v1/arknights/skill-levels/bg`;
+  const skillLvlUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto,h_192,w_192/v1/arknights/skill-levels/${operator.skillLevel}`;
+  const skillBGImgUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto,h_192,w_192/v1/arknights/skill-levels/bg`;
   const skillMastery = (operator as any)[`skill${skill}Mastery`];
-  const skillMasteryUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto,h_64,w_64/v1/arknights/mastery/${skillMastery}`;
+  const skillMasteryUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto,h_144,w_144/v1/arknights/mastery/${skillMastery}`;
 
   const classBG = clsx({
     [classes.skillImg]: true,

@@ -198,7 +198,7 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
     intermediate += "_1+";
   }
 
-  const potentialUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto,h_96,w_96/v1/arknights/potential/${op.potential}`;
+  const potentialUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto,h_128,w_128/v1/arknights/potential/${op.potential}`;
   const promotionUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto,h_128,w_128/v1/arknights/elite/${op.promotion}`;
   const opImgUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto/v1/arknights/avatars/${intermediate}`;
 
@@ -320,7 +320,7 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
     </div>
 
   const opModuleUrls: string[] = op.module?.map((lvl: number) =>
-    lvl > 0 ? `https://res.cloudinary.com/samidare/image/upload/f_auto/v1/arknights/equip/uniequip_002_${op.id}` : ""
+    lvl > 0 ? `https://res.cloudinary.com/samidare/image/upload/f_auto,h_256,w_256/v1/arknights/equip/uniequip_002_${op.id}` : ""
   ) ?? []
   const moduleBlock =
     <div className={classes.moduleContainer}>

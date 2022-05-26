@@ -104,7 +104,7 @@ const EditOperator = React.memo((props: Props) => {
   } else if (op.promotion === 1 && op.name === "Amiya") {
     intermediate += "_1+";
   }
-  const imgUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto,h_256,w_256/v1/arknights/avatars/${intermediate}`;
+  const imgUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto/v1/arknights/avatars/${intermediate}`;
 
   let opName = (
     <span className={classes.opName}>
