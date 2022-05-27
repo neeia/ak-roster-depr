@@ -191,7 +191,7 @@ const CollectionTab = React.memo((props: Props) => {
 
   const filterObject = (op: any) => {
     const a = operators[op.id];
-    return a.owned
+    return a && a.owned
       && (selectedClasses.length === 0 || selectedClasses.includes(op.class))
       && (selectedRarities.length === 0 || selectedRarities.includes(op.rarity))
   }
