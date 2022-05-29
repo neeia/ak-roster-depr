@@ -5,29 +5,29 @@ import { fileURLToPath } from "url";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ACESHIP_ROOT = path.join(__dirname, "../../AN-EN-Tags");
 
-/** @type {Array<{ sourceDir: string, destDir: string, replace?: (filename: string) => string, filter?: (filename: string) => boolean}} */
+/**@type {Array<{ sourceDir: string, destDir: string, replace?: (filename: string) => string, filter?: (filename: string) => boolean}} */
 const tasks = [
   {
     sourceDir: `${ACESHIP_ROOT}/img/skills`,
     destDir: "img/skills",
-    filter: (filename) => filename.endsWith(".png"),
-    replace: (filename) =>
+    filter: (filename: string) => filename.endsWith(".png"),
+    replace: (filename: string) =>
       path.parse(filename).name.replace(/^skill_icon_/, ""),
   },
   {
     sourceDir: `${ACESHIP_ROOT}/img/avatars`,
     destDir: "img/avatars",
-    filter: (filename) => /^char_[^_]+_[^_]+(_\d+\+?)?\.png$/.test(filename),
+    filter: (filename: string) => /^char_[^_]+_[^_]+(_\d+\+?)?\.png$/.test(filename),
   },
   {
     sourceDir: `${ACESHIP_ROOT}/img/equip/icon`,
     destDir: "img/equip",
-    filter: (filename) => filename.endsWith(".png"),
+    filter: (filename: string) => filename.endsWith(".png"),
   },
   {
     sourceDir: `${ACESHIP_ROOT}/img/portraits`,
     destDir: "img/portraits",
-    filter: (filename) => /^char_[^_]+_[^_]+_\d+\+?\.png$/.test(filename),
+    filter: (filename: string) => /^char_[^_]+_[^_]+_\d+\+?\.png$/.test(filename),
   },
   //{
   //  sourceDir: `${ACESHIP_ROOT}/img/items`,
@@ -36,7 +36,7 @@ const tasks = [
   //},
 ];
 
-const upload = async (existingFilePaths, task) => {
+const upload = async (existingFilePaths: Set<string>, task: any) => {
   let uploadCount = 0;
   const { sourceDir, destDir, replace: replaceFn, filter: filterFn } = task;
   const dirEntries = await fs.readdir(sourceDir, {
@@ -80,7 +80,6 @@ const uploadAllImages = async () => {
     `images: found ${existingImageIDs.size} existing images in project.`
   );
 
-  
   try {
     const uploadCounts = await Promise.all(
       tasks.map((task) => upload(existingImageIDs, task))
