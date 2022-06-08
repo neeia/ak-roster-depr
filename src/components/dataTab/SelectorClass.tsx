@@ -46,7 +46,7 @@ const SelectorClass = React.memo((props: Props) => {
     >
       <img
         className={classes.classIcon}
-        src={`https://res.cloudinary.com/samidare/image/upload/f_auto,h_128,w_128/v1/arknights/classes/${cl}`}
+        src={`/img/classes/class_${cl}.png`}
         alt={""}
       />
     </FormButton>

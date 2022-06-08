@@ -198,9 +198,9 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
     intermediate += "_1+";
   }
 
-  const potentialUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto,h_128,w_128/v1/arknights/potential/${op.potential}`;
-  const promotionUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto,h_128,w_128/v1/arknights/elite/${op.promotion}`;
-  const opImgUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto/v1/arknights/avatars/${intermediate}`;
+  const potentialUrl = `/img/potential/${op.potential}.png`;
+  const promotionUrl = `/img/elite/${op.promotion}.png`;
+  const opImgUrl = `/img/avatars/${intermediate}.png`;
 
   const reg = /( the )|\(/g;
   const nameSplitTitle = op.name.split(reg);
@@ -320,7 +320,7 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
     </div>
 
   const opModuleUrls: string[] = op.module?.map((lvl: number) =>
-    lvl > 0 ? `https://res.cloudinary.com/samidare/image/upload/f_auto,h_256,w_256/v1/arknights/equip/uniequip_002_${op.id}` : ""
+    lvl > 0 ? `/img/equip/uniequip_002_${op.id.split("_")[2]}.png` : ""
   ) ?? []
   const moduleBlock =
     <div className={classes.moduleContainer}>
@@ -336,7 +336,8 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
             </svg>
             <img
               className={classes.moduleIcon}
-              src={`https://res.cloudinary.com/samidare/image/upload/f_auto,h_256,w_256/v1/arknights/equip/uniequip_002_${op.id.split("_")[2]}`}
+              src={url}
+              alt={"Module Owned"}
             />
           </div>
           : "")}

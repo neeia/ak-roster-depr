@@ -95,7 +95,7 @@ const useStyles = makeStyles({
     alignItems: "end",
     justifyContent: "center",
     marginBottom: "4px",
-    marginLeft: "-2px",
+    marginLeft: "0px",
   },
   promotionIcon: {
     width: "20px",
@@ -118,8 +118,8 @@ const useStyles = makeStyles({
   },
   potentialIcon: {
     gridArea: "potential",
-    width: "12px",
-    height: "12px",
+    width: "16px",
+    height: "16px",
     marginTop: "2px",
     alignSelf: "center",
     justifySelf: "center",
@@ -189,9 +189,9 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
     intermediate += "_1+";
   }
 
-  const potentialUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto,h_128,w_128/v1/arknights/potential/${op.potential}`;
-  const promotionUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto,h_128,w_128/v1/arknights/elite/${op.promotion}`;
-  const opImgUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto/v1/arknights/avatars/${intermediate}`;
+  const potentialUrl = `/img/potential/${op.potential}.png`;
+  const promotionUrl = `/img/elite/${op.promotion}_s_box.png`;
+  const opImgUrl = `/img/avatars/${intermediate}.png`;
 
   const reg = /( the )|\(/g;
   const nameSplitTitle = op.name.split(reg);
@@ -263,12 +263,6 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
     <div className={classes.imgArea}>
       <div className={classes.levelPromotionContainer}>
         {potentialBlock}
-        <svg
-          className={classes.promotionBox}
-        >
-          <rect x="0" y="0" className={classes.promotionBox}
-            fill="#323232" fillOpacity="0.95" stroke="#808080" strokeWidth="2" />
-        </svg>
         <div className={classes.promotionBox}>
           <img
             src={promotionUrl}
@@ -310,7 +304,7 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
     </div>
 
   const opModuleUrls: string[] = op.module?.map((lvl: number) =>
-    lvl > 0 ? `https://res.cloudinary.com/samidare/image/upload/f_auto,h_256,w_256/v1/arknights/equip/uniequip_002_${op.id}` : ""
+    lvl > 0 ? `/img/equip/uniequip_002_${op.id.split("_")[2]}.png` : ""
   ) ?? []
   const moduleBlock =
     <div className={classes.moduleContainer}>
@@ -326,12 +320,11 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
             </svg>
             <img
               className={classes.moduleIcon}
-              src={`https://res.cloudinary.com/samidare/image/upload/f_auto,h_256,w_256/v1/arknights/equip/uniequip_002_${op.id.split("_")[2]}`}
+              src={url}
             />
           </div>
           : "")}
     </div>
-
 
   // merge operator portrait with rarity drop-shadow
   const opIconStyle = clsx({
@@ -361,8 +354,8 @@ const OperatorCollectionBlock = React.memo((props: Props) => {
         className={opIconStyle}
         alt=""
       />
-      {skillBlock}
       {levelBubble}
+      {skillBlock}
       {moduleBlock}
     </div>
   );

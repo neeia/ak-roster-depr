@@ -241,7 +241,7 @@ const DataEntryLevel = React.memo((props: Props) => {
                         [classes.promotionIcon]: true,
                         [classes.unselected]: op.promotion !== i,
                       })}
-                      src={`https://res.cloudinary.com/samidare/image/upload/f_auto,h_128,w_128/v1/arknights/elite/${i}`}
+                      src={`/img/elite/${i}.png`}
                       alt={`Elite ${i} Button`}
                     />
                   </FormButton>
@@ -277,7 +277,7 @@ const DataEntryLevel = React.memo((props: Props) => {
                     >
                       <img
                         className={classes.moduleIcon}
-                        src={`https://res.cloudinary.com/samidare/image/upload/f_auto,h_256,w_256/v1/arknights/equip/uniequip_00${index + 2}_${op.id.split("_")[2]}`}
+                        src={`/img/equip/uniequip_00${index + 2}_${op.id.split("_")[2]}.png`}
                         alt={"Module"}
                       />
                     </FormButton>

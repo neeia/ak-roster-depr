@@ -131,12 +131,12 @@ const DataEntrySkillLevel = React.memo((props: Props) => {
   const style = useDataStyles();
   const opInfo = (operatorJson as any)[op.id];
 
-  const skillLvlImgUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto,h_192,w_192/v1/arknights/skill-levels/${op.skillLevel}`;
-  const skillBGImgUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto,h_192,w_192/v1/arknights/skill-levels/bg`;
+  const skillLvlImgUrl = `/img/rank/${op.skillLevel}.png`;
+  const skillBGImgUrl =  `/img/rank/bg.png`;
   const previousSkillLevel = op.skillLevel > 4 ? 4 : 1;
   const nextSkillLevel = op.skillLevel < 4 ? 4 : 7;
-  const skillPrvImgUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto,h_192,w_192/v1/arknights/skill-levels/${previousSkillLevel}`;
-  const skillNxtImgUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto,h_192,w_192/v1/arknights/skill-levels/${nextSkillLevel}`;
+  const skillPrvImgUrl = `/img/rank/${previousSkillLevel}.png`;
+  const skillNxtImgUrl = `/img/rank/${nextSkillLevel}.png`;
 
   const skillLevelSection = (
     <Grid item xs={12} sm={4}>
@@ -291,15 +291,14 @@ const DataEntrySkillLevel = React.memo((props: Props) => {
                         [classes.skillIcon]: true,
                         [classes.unselected]: !op.owned || op.promotion < i,
                       })}
-                      src={`https://res.cloudinary.com/samidare/image/upload/f_auto,h_240,w_240/v1/arknights/skills/${opInfo.skills[i].iconId ?? opInfo.skills[i].skillId}`}
-                      alt={`Skill ${i}`}
+                      src={`/img/skills/${opInfo.skills[i].iconId ?? opInfo.skills[i].skillId}.png`}
+                      alt={`Skill ${i+1}`}
                     />
                     : <svg
                       className={classes.skillIcon}
                     >
                       <rect x="0" y="0" className={classes.skillIcon} fill="transparent" stroke="gray" strokeWidth="4" />
                       <path d="M 12 36 L 36 12" fill="transparent" stroke="gray" strokeWidth="3" />
-                      alt={`Skill ${i}`}
                     </svg>}
                 </Hidden>
                 {[...Array(4)].map((_, j) =>
@@ -320,8 +319,8 @@ const DataEntrySkillLevel = React.memo((props: Props) => {
                         [classes.skillMasteryIcon]: true,
                         [classes.unselected]: getSkillMastery(i + 1) === j,
                       })}
-                      src={`https://res.cloudinary.com/samidare/image/upload/f_auto,h_144,w_144/v1/arknights/mastery/${j}`}
-                      alt={`Mastery ${i + 1}`}
+                      src={`/img/rank/m-${j}.png`}
+                      alt={`Mastery ${j}`}
                     />
                   </FormButton>
                 )}
