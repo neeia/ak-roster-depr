@@ -35,7 +35,7 @@ function LoginForm(props: Props) {
           className={form.smallButton}
           disabled={email === "" || sentEmail}
           onClick={() => {
-            firebase.auth().sendPasswordResetEmail(email)
+            firebase.auth().sendPasswordResetEmail(email.trim())
               .then(() => {
                 setSentEmail(true);
               })
@@ -65,7 +65,7 @@ function LoginForm(props: Props) {
         <ButtonBase
           className={form.submitButton}
           onClick={() => {
-            handleLogin(email, password, setError);
+            handleLogin(email.trim(), password, setError);
           }}
         >
           Submit

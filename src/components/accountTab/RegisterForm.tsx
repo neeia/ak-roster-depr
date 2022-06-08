@@ -48,7 +48,7 @@ function RegisterForm(props: Props) {
             if (password !== passwordConfirm) {
               setError("Passwords don't match.");
             }
-            else handleSignup(email, password, setError);
+            else handleSignup(email.trim(), password, setError);
           }}
         >
           Submit
