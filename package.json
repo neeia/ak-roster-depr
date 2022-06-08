@@ -38,7 +38,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "update:operators": "git submodule update --remote && ts-node-script ./scripts/operators.ts",
-    "update:images": "ts-node-script ./scripts/images.ts"
+    "update:images": "node ./scripts/images.mjs"
   },
   "eslintConfig": {
     "extends": [

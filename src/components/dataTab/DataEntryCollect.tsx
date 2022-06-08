@@ -109,7 +109,7 @@ const DataEntryCollect = React.memo((props: Props) => {
                     >
                       <img
                         className={op.potential === i + 1 ? classes.potentialIcon : classes.potentialIconUnselected}
-                        src={`https://res.cloudinary.com/samidare/image/upload/v1/arknights/potential/${i + 1}`}
+                        src={`/img/potential/${i + 1}.png`}
                         alt={`Potential ${i + 1} Button`}
                       />
                     </FormButton>

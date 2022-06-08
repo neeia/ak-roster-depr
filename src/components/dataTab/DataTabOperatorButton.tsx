@@ -118,7 +118,7 @@ const DataTabOperatorButton = React.memo((props: Props) => {
   } else if (elt === 1 && op.name === "Amiya") {
     intermediate += "_1+";
   }
-  const imgUrl = `https://res.cloudinary.com/samidare/image/upload/f_auto/v1/arknights/avatars/${intermediate}`;
+  const imgUrl = `/img/avatars/${intermediate}.png`;
 
 
   return (
