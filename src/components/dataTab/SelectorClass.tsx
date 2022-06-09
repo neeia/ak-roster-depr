@@ -46,8 +46,8 @@ const SelectorClass = React.memo((props: Props) => {
     >
       <img
         className={classes.classIcon}
-        src={`/img/classes/class_${cl}.png`}
-        alt={""}
+        src={`/img/classes/class_${cl.toLowerCase()}.png`}
+        alt={cl}
       />
     </FormButton>
 
