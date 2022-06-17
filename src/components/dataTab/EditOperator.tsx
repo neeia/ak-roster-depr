@@ -102,7 +102,7 @@ const EditOperator = React.memo((props: Props) => {
   if (op.promotion === 2) {
     intermediate += "_2";
   } else if (op.promotion === 1 && op.name === "Amiya") {
-    intermediate += "_1+";
+    intermediate += "_1";
   }
   const imgUrl = `/img/avatars/${intermediate}.png`
 

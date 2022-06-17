@@ -116,7 +116,7 @@ const DataTabOperatorButton = React.memo((props: Props) => {
   if (elt === 2) {
     intermediate += "_2";
   } else if (elt === 1 && op.name === "Amiya") {
-    intermediate += "_1+";
+    intermediate += "_1";
   }
   const imgUrl = `/img/avatars/${intermediate}.png`;
 
