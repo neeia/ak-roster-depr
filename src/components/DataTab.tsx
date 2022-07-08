@@ -277,27 +277,7 @@ const DataTab = React.memo((props: Props) => {
       <div className={classes.containerChild}>
         <div className={classes.drawerBox}>
           <Drawer
-            label={"Info"}
-            open={true}
-          >
-            <span>
-              <h1 className={classes.h1}>
-                Arknights Roster is an operator collection tracker.
-              </h1>
-              <div className={classes.description}>
-                You can select an operator to get started, or you can use the batch mode to apply changes to multiple operators at once.
-              </div>
-              <Drawer label={"Batch?"} labelClass={style.drawer2}>
-                <div className={classes.description}>
-                  Batch mode lets you create presets to apply to operators. You can edit a preset by selecting it and clicking "Edit".
-                  Then, you can enter batch mode by selecting batch. Or, while you are editing an operator, you can select a preset and click "Apply".
-                </div>
-              </Drawer>
-            </span>
-          </Drawer>
-          <Drawer
             label={"Filter"}
-            open={true}
           >
             <div>
               {classSelector}
@@ -307,7 +287,6 @@ const DataTab = React.memo((props: Props) => {
           </Drawer>
           <Drawer
             label={"Batch"}
-            open={true}
           >
             {presetSelector}
           </Drawer>

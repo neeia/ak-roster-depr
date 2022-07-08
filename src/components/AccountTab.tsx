@@ -5,14 +5,15 @@ import "firebase/database";
 import { Operator } from "../App";
 import { makeStyles } from "@material-ui/core";
 import LoginRegisterForm from "./accountTab/LoginRegisterForm";
-import LoggedInForm from "./accountTab/LoggedInForm";
+import Dashboard from "./accountTab/Dashboard";
+import useLocalStorage from "../UseLocalStorage";
 
 const useStyles = makeStyles({
   container: {
     display: "flex",
+    justifyContent: "center",
     padding: "calc(2.5% + 4px)",
     paddingTop: "calc(1.5% + 4px)",
-    justifyContent: "center",
     alignItems: "center",
   },
 });
@@ -37,6 +38,7 @@ export function errCodeToMessage(e: string): string {
 }
 
 export interface AccountInfo {
+  displayName?: string;
   friendCode?: FriendCode;
   public?: boolean;
   team?: OperatorSkillSlot[];
@@ -70,6 +72,7 @@ const AccountTab: React.FC<Props> = (props) => {
   const classes = useStyles();
 
   const [user, setUser] = useState<firebase.User | null>(firebase.auth().currentUser);
+  const [userInfo, setUserInfo] = useLocalStorage<AccountInfo>("userInfo", {});
 
   function handleLogin(
     email: string,
@@ -157,11 +160,13 @@ const AccountTab: React.FC<Props> = (props) => {
   return (
     <div className={classes.container}>
       {(user
-        ? <LoggedInForm
+        ? <Dashboard
           user={user}
+          userInfo={userInfo}
           saveData={writeUserData}
           loadData={importUserData}
           handleLogout={handleLogout}
+          operators={operators}
         />
         : <LoginRegisterForm
           handleLogin={handleLogin}

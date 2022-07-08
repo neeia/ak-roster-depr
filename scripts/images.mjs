@@ -10,23 +10,28 @@ const ACESHIP_ROOT = path.join(__dirname, "../../AN-EN-Tags");
 const tasks = [
   {
     sourceDir: path.join(ACESHIP_ROOT, "img/skills"),
-    destDir: "public\\img\\skills",
+    destDir: "skills",
     filter: (filename) => filename.endsWith(".png"),
     replace: (filename) => filename.replace(/^skill_icon_/, ""),
   },
   {
     sourceDir: path.join(ACESHIP_ROOT, "img/avatars"),
-    destDir: "public\\img\\avatars",
+    destDir: "avatars",
     filter: (filename) => /^char_[^_]+_[^_]+(_\d+\+?)?\.png$/.test(filename),
   },
   {
     sourceDir: path.join(ACESHIP_ROOT, "img/equip/icon"),
-    destDir: "public\\img\\equip",
+    destDir: "equip",
     filter: (filename) => filename.endsWith(".png"),
   },
   {
     sourceDir: path.join(ACESHIP_ROOT, "img/portraits"),
-    destDir: "public\\img\\portraits",
+    destDir: "portraits",
+    filter: (filename) => /^char_[^_]+_[^_]+_\d+\+?\.png$/.test(filename),
+  },
+  {
+    sourceDir: path.join(ACESHIP_ROOT, "img/characters"),
+    destDir: "characters",
     filter: (filename) => /^char_[^_]+_[^_]+_\d+\+?\.png$/.test(filename),
   },
   //{
@@ -47,7 +52,7 @@ const upload = async (existingFilePaths, task) => {
       (dirent) => dirent.isFile() && (filterFn == null || filterFn(dirent.name))
     )
     .map((dirent) => dirent.name);
-  await fs.mkdir(destDir, { recursive: true })
+  await fs.mkdir(path.join("public\\img", destDir), { recursive: true })
 
   //const filename = filenames[0]
   //console.table({sourceDir, destDir, filename})
@@ -55,6 +60,7 @@ const upload = async (existingFilePaths, task) => {
   await Promise.all(
     filenames.map(async (filename) => {
       const targetFilePath = path.join(
+        "public\\img",
         destDir,
         replaceFn ? replaceFn(filename) : filename
       );
@@ -76,25 +82,25 @@ const uploadAllImages = async () => {
   // first iterate through all images in the image directory
   const rawDirInfo = await fs.readdir("./public/img/", { withFileTypes: true });
   const directoryInfo = rawDirInfo.filter(dirent => dirent.isDirectory()).map(dirent => dirent.name);
-  const existingImageIDs = new Set();
   while (directoryInfo.length > 0) {
+    const existingImageIDs = new Set();
     const dirName = directoryInfo.pop();
     const rawFileNames = await fs.readdir("./public/img/" + dirName)
     rawFileNames.forEach(value => existingImageIDs.add(value))
-  }
   
-  console.log(
-    `images: found ${existingImageIDs.size} existing images in project.`
-  );
-
-  try {
-    const uploadCounts = await Promise.all(
-      tasks.map((task) => upload(existingImageIDs, task))
+    console.log(
+        `images: found ${existingImageIDs.size} existing images in project.`
     );
-    const totalUploadCount = uploadCounts.reduce((acc, cur) => acc + cur, 0);
-    console.log(`images: uploaded ${totalUploadCount} new files, done.`);
-  } catch (e) {
-    console.error(e);
+
+    try {
+      const uploadCounts = await Promise.all(
+        tasks.map((task) => task.destDir === dirName ? upload(existingImageIDs, task) : 0)
+      );
+      const totalUploadCount = uploadCounts.reduce((acc, cur) => acc + cur, 0);
+      console.log(`images: uploaded ${totalUploadCount} new files, done.`);
+    } catch (e) {
+      console.error(e);
+    }
   }
 };
 

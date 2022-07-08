@@ -7,11 +7,15 @@ const useStyles = makeStyles({
     width: "270px",
     textAlign: "start",
   },
+  container2: {
+    width: "240px",
+    textAlign: "start",
+  },
   label: {
     marginLeft: "6px",
     marginTop: "2px",
     height: "calc(0.7vh + 10px)",
-    fontSize: "calc(0.7vh + 6px)",
+    fontSize: "calc(0.7vh + 5px)",
   },
   textContainer: {
     position: "relative",
@@ -24,7 +28,7 @@ const useStyles = makeStyles({
   },
   levelTextInput: {
     padding: "4px",
-    fontSize: "16px",
+    fontSize: "14px",
     textAlign: "start",
     background: "#212121",
     "&:focus": {
@@ -45,17 +49,18 @@ interface Props {
   value: string;
   onChange: (v: string) => void;
   disabled?: boolean;
+  short?: boolean;
   className?: string;
   placeholder?: string;
   description?: string;
 }
 
 const TextInput = React.memo((props: Props) => {
-  const { label, value, onChange, disabled, className, type, placeholder, description } = props;
+  const { label, value, onChange, disabled, short, className, type, placeholder, description } = props;
   const classes = useStyles();
 
   return (
-    <div className={classes.container}>
+    <div className={short ? classes.container2 : classes.container}>
       <div className={classes.label}>
         {label}
       </div>

@@ -343,9 +343,7 @@
       }
     ],
     "class": "Caster",
-    "modules": [
-      "占卜师旅行套装"
-    ]
+    "modules": []
   },
   "char_253_greyy": {
     "id": "char_253_greyy",
@@ -365,9 +363,7 @@
       }
     ],
     "class": "Caster",
-    "modules": [
-      "新的开始"
-    ]
+    "modules": []
   },
   "char_328_cammou": {
     "id": "char_328_cammou",
@@ -427,9 +423,7 @@
       }
     ],
     "class": "Caster",
-    "modules": [
-      "Portable Electrical Measuring Equipment"
-    ]
+    "modules": []
   },
   "char_235_jesica": {
     "id": "char_235_jesica",
@@ -529,9 +523,7 @@
       }
     ],
     "class": "Sniper",
-    "modules": [
-      "手里剑"
-    ]
+    "modules": []
   },
   "char_440_pinecn": {
     "id": "char_440_pinecn",
@@ -571,9 +563,7 @@
       }
     ],
     "class": "Sniper",
-    "modules": [
-      "Portable Radar Equipment"
-    ]
+    "modules": []
   },
   "char_366_acdrop": {
     "id": "char_366_acdrop",
@@ -593,9 +583,7 @@
       }
     ],
     "class": "Sniper",
-    "modules": [
-      "“自由、洋葱圈和我”"
-    ]
+    "modules": []
   },
   "char_198_blackd": {
     "id": "char_198_blackd",
@@ -655,9 +643,7 @@
       }
     ],
     "class": "Vanguard",
-    "modules": [
-      "伟大的摇滚"
-    ]
+    "modules": []
   },
   "char_151_myrtle": {
     "id": "char_151_myrtle",
@@ -717,9 +703,7 @@
       }
     ],
     "class": "Guard",
-    "modules": [
-      "Military Telescope"
-    ]
+    "modules": []
   },
   "char_289_gyuki": {
     "id": "char_289_gyuki",
@@ -739,9 +723,7 @@
       }
     ],
     "class": "Guard",
-    "modules": [
-      "断竹插花作品"
-    ]
+    "modules": []
   },
   "char_159_peacok": {
     "id": "char_159_peacok",
@@ -761,9 +743,7 @@
       }
     ],
     "class": "Guard",
-    "modules": [
-      "断罪之拳"
-    ]
+    "modules": []
   },
   "char_193_frostl": {
     "id": "char_193_frostl",
@@ -843,9 +823,7 @@
       }
     ],
     "class": "Guard",
-    "modules": [
-      "可替换刀具套装"
-    ]
+    "modules": []
   },
   "char_337_utage": {
     "id": "char_337_utage",
@@ -905,9 +883,7 @@
       }
     ],
     "class": "Specialist",
-    "modules": [
-      "Covert Action Toolkit"
-    ]
+    "modules": []
   },
   "char_272_strong": {
     "id": "char_272_strong",
@@ -927,9 +903,7 @@
       }
     ],
     "class": "Specialist",
-    "modules": [
-      "精钢刀具套组"
-    ]
+    "modules": []
   },
   "char_236_rope": {
     "id": "char_236_rope",
@@ -1029,9 +1003,7 @@
       }
     ],
     "class": "Medic",
-    "modules": [
-      "'Aegean's Kiss'"
-    ]
+    "modules": []
   },
   "char_385_finlpp": {
     "id": "char_385_finlpp",
@@ -1051,9 +1023,7 @@
       }
     ],
     "class": "Medic",
-    "modules": [
-      "“江河之韵”"
-    ]
+    "modules": []
   },
   "char_4041_chnut": {
     "id": "char_4041_chnut",
@@ -1193,9 +1163,7 @@
       }
     ],
     "class": "Supporter",
-    "modules": [
-      "Weird Palette"
-    ]
+    "modules": []
   },
   "char_183_skgoat": {
     "id": "char_183_skgoat",
@@ -1215,9 +1183,7 @@
       }
     ],
     "class": "Supporter",
-    "modules": [
-      "待确认的申请表"
-    ]
+    "modules": []
   },
   "char_258_podego": {
     "id": "char_258_podego",
@@ -1237,9 +1203,7 @@
       }
     ],
     "class": "Supporter",
-    "modules": [
-      "“不谢的苗圃”"
-    ]
+    "modules": []
   },
   "char_484_robrta": {
     "id": "char_484_robrta",
@@ -1319,9 +1283,7 @@
       }
     ],
     "class": "Medic",
-    "modules": [
-      "Medic Environment Analyze System"
-    ]
+    "modules": []
   },
   "char_275_breeze": {
     "id": "char_275_breeze",
@@ -1341,9 +1303,7 @@
       }
     ],
     "class": "Medic",
-    "modules": [
-      "Surgical Instrument Kit"
-    ]
+    "modules": []
   },
   "char_115_headbr": {
     "id": "char_115_headbr",
@@ -1423,9 +1383,7 @@
       }
     ],
     "class": "Vanguard",
-    "modules": [
-      "枪刃清洁套装"
-    ]
+    "modules": []
   },
   "char_496_wildmn": {
     "id": "char_496_wildmn",
@@ -1445,9 +1403,7 @@
       }
     ],
     "class": "Vanguard",
-    "modules": [
-      "长枪替补套装"
-    ]
+    "modules": []
   },
   "char_401_elysm": {
     "id": "char_401_elysm",
@@ -1507,9 +1463,7 @@
       }
     ],
     "class": "Guard",
-    "modules": [
-      "Self-defense Lipstick"
-    ]
+    "modules": []
   },
   "char_265_sophia": {
     "id": "char_265_sophia",
@@ -1529,9 +1483,7 @@
       }
     ],
     "class": "Guard",
-    "modules": [
-      "Whipsword Wire.L"
-    ]
+    "modules": []
   },
   "char_106_franka": {
     "id": "char_106_franka",
@@ -1551,9 +1503,7 @@
       }
     ],
     "class": "Guard",
-    "modules": [
-      "尖端铝热单元"
-    ]
+    "modules": []
   },
   "char_131_flameb": {
     "id": "char_131_flameb",
@@ -1573,9 +1523,7 @@
       }
     ],
     "class": "Guard",
-    "modules": [
-      "锈损的断刀"
-    ]
+    "modules": []
   },
   "char_155_tiger": {
     "id": "char_155_tiger",
@@ -1675,9 +1623,7 @@
       }
     ],
     "class": "Guard",
-    "modules": [
-      "做工优良的衬衣"
-    ]
+    "modules": []
   },
   "char_459_tachak": {
     "id": "char_459_tachak",
@@ -1697,9 +1643,7 @@
       }
     ],
     "class": "Guard",
-    "modules": [
-      "轻机枪枪架"
-    ]
+    "modules": []
   },
   "char_143_ghost": {
     "id": "char_143_ghost",
@@ -1959,9 +1903,7 @@
       }
     ],
     "class": "Sniper",
-    "modules": [
-      "无名的身份牌"
-    ]
+    "modules": []
   },
   "char_379_sesa": {
     "id": "char_379_sesa",
@@ -1981,9 +1923,7 @@
       }
     ],
     "class": "Sniper",
-    "modules": [
-      "“灵魂共鸣”"
-    ]
+    "modules": []
   },
   "char_279_excu": {
     "id": "char_279_excu",
@@ -2108,9 +2048,7 @@
       }
     ],
     "class": "Caster",
-    "modules": [
-      "阻燃处理方案"
-    ]
+    "modules": []
   },
   "char_306_leizi": {
     "id": "char_306_leizi",
@@ -2130,9 +2068,27 @@
       }
     ],
     "class": "Caster",
-    "modules": [
-      "'All the Thunderlight'"
-    ]
+    "modules": []
+  },
+  "char_135_halo": {
+    "id": "char_135_halo",
+    "name": "Astgenne",
+    "rarity": 5,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skchr_halo_1",
+        "iconId": null,
+        "skillName": "双端导流"
+      },
+      {
+        "skillId": "skchr_halo_2",
+        "iconId": null,
+        "skillName": "星束交汇"
+      }
+    ],
+    "class": "Caster",
+    "modules": []
   },
   "char_344_beewax": {
     "id": "char_344_beewax",
@@ -2172,9 +2128,7 @@
       }
     ],
     "class": "Caster",
-    "modules": [
-      "传承与开拓"
-    ]
+    "modules": []
   },
   "char_388_mint": {
     "id": "char_388_mint",
@@ -2234,9 +2188,7 @@
       }
     ],
     "class": "Caster",
-    "modules": [
-      "萨卡兹的刀"
-    ]
+    "modules": []
   },
   "char_489_serum": {
     "id": "char_489_serum",
@@ -2262,17 +2214,17 @@
     "id": "char_4013_kjera",
     "name": "Kjera",
     "rarity": 5,
-    "isCnOnly": true,
+    "isCnOnly": false,
     "skills": [
       {
         "skillId": "skcom_atk_up[3]",
         "iconId": null,
-        "skillName": "攻击力强化·γ型"
+        "skillName": "ATK Up γ"
       },
       {
         "skillId": "skchr_kjera_2",
         "iconId": null,
-        "skillName": "心随意动"
+        "skillName": "Unrestrained Heart"
       }
     ],
     "class": "Caster",
@@ -2316,9 +2268,7 @@
       }
     ],
     "class": "Supporter",
-    "modules": [
-      "'Meeboo' Control Terminal XP"
-    ]
+    "modules": []
   },
   "char_336_folivo": {
     "id": "char_336_folivo",
@@ -2338,9 +2288,7 @@
       }
     ],
     "class": "Supporter",
-    "modules": [
-      "Improved Lens.P"
-    ]
+    "modules": []
   },
   "char_108_silent": {
     "id": "char_108_silent",
@@ -2420,9 +2368,7 @@
       }
     ],
     "class": "Medic",
-    "modules": [
-      "野外考察套装"
-    ]
+    "modules": []
   },
   "char_436_whispr": {
     "id": "char_436_whispr",
@@ -2442,9 +2388,7 @@
       }
     ],
     "class": "Medic",
-    "modules": [
-      "古朴的急救箱"
-    ]
+    "modules": []
   },
   "char_402_tuye": {
     "id": "char_402_tuye",
@@ -2501,6 +2445,26 @@
         "skillId": "skchr_glider_2",
         "iconId": null,
         "skillName": "Rouse"
+      }
+    ],
+    "class": "Medic",
+    "modules": []
+  },
+  "char_1024_hbisc2": {
+    "id": "char_1024_hbisc2",
+    "name": "Hibiscus the Purifier",
+    "rarity": 5,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skcom_atk_up[3]",
+        "iconId": null,
+        "skillName": "攻击力强化·γ型"
+      },
+      {
+        "skillId": "skchr_hbisc2_2",
+        "iconId": null,
+        "skillName": "抚业之触"
       }
     ],
     "class": "Medic",
@@ -2564,9 +2528,7 @@
       }
     ],
     "class": "Specialist",
-    "modules": [
-      "Mystery Prop Pack"
-    ]
+    "modules": []
   },
   "char_243_waaifu": {
     "id": "char_243_waaifu",
@@ -2586,9 +2548,7 @@
       }
     ],
     "class": "Specialist",
-    "modules": [
-      "The Classic of Hung Mei Wing Chun"
-    ]
+    "modules": []
   },
   "char_214_kafka": {
     "id": "char_214_kafka",
@@ -2608,9 +2568,7 @@
       }
     ],
     "class": "Specialist",
-    "modules": [
-      "Rubik's Cube Pendant"
-    ]
+    "modules": []
   },
   "char_455_nothin": {
     "id": "char_455_nothin",
@@ -2630,9 +2588,7 @@
       }
     ],
     "class": "Specialist",
-    "modules": [
-      "“檐下听雨”"
-    ]
+    "modules": []
   },
   "char_107_liskam": {
     "id": "char_107_liskam",
@@ -2754,6 +2710,26 @@
     "class": "Defender",
     "modules": []
   },
+  "char_4047_pianst": {
+    "id": "char_4047_pianst",
+    "name": "Czerny",
+    "rarity": 5,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skchr_pianst_1",
+        "iconId": null,
+        "skillName": "纷飞十指"
+      },
+      {
+        "skillId": "skchr_pianst_2",
+        "iconId": null,
+        "skillName": "曲惊四座"
+      }
+    ],
+    "class": "Defender",
+    "modules": []
+  },
   "char_457_blitz": {
     "id": "char_457_blitz",
     "name": "Blitz",
@@ -2818,23 +2794,21 @@
     "id": "char_422_aurora",
     "name": "Aurora",
     "rarity": 5,
-    "isCnOnly": true,
+    "isCnOnly": false,
     "skills": [
       {
         "skillId": "skchr_aurora_1",
         "iconId": null,
-        "skillName": "固守家园"
+        "skillName": "Homeland Protector"
       },
       {
         "skillId": "skchr_aurora_2",
         "iconId": null,
-        "skillName": "人工降雪"
+        "skillName": "Artificial Snowfall"
       }
     ],
     "class": "Defender",
-    "modules": [
-      "盾用摄制模块"
-    ]
+    "modules": []
   },
   "char_145_prove": {
     "id": "char_145_prove",
@@ -2854,9 +2828,7 @@
       }
     ],
     "class": "Sniper",
-    "modules": [
-      "尾巴养护套装"
-    ]
+    "modules": []
   },
   "char_158_milu": {
     "id": "char_158_milu",
@@ -2876,9 +2848,7 @@
       }
     ],
     "class": "Sniper",
-    "modules": [
-      "Field Sniper Equipment"
-    ]
+    "modules": []
   },
   "char_218_cuttle": {
     "id": "char_218_cuttle",
@@ -2898,9 +2868,7 @@
       }
     ],
     "class": "Sniper",
-    "modules": [
-      "Gunsmithing Toolkit"
-    ]
+    "modules": []
   },
   "char_363_toddi": {
     "id": "char_363_toddi",
@@ -2917,6 +2885,46 @@
         "skillId": "skchr_toddi_2",
         "iconId": null,
         "skillName": "Portable Fortcracker Arrows"
+      }
+    ],
+    "class": "Sniper",
+    "modules": []
+  },
+  "char_4043_erato": {
+    "id": "char_4043_erato",
+    "name": "Erato",
+    "rarity": 5,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skchr_erato_1",
+        "iconId": null,
+        "skillName": "安眠旋律"
+      },
+      {
+        "skillId": "skchr_erato_2",
+        "iconId": null,
+        "skillName": "英雄赞歌"
+      }
+    ],
+    "class": "Sniper",
+    "modules": []
+  },
+  "char_1027_greyy2": {
+    "id": "char_1027_greyy2",
+    "name": "Greyy the Lightningbearer",
+    "rarity": 5,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skcom_quickattack[3]",
+        "iconId": null,
+        "skillName": "迅捷打击·γ型"
+      },
+      {
+        "skillId": "skchr_greyy2_2",
+        "iconId": null,
+        "skillName": "晨曦信标"
       }
     ],
     "class": "Sniper",
@@ -3020,9 +3028,7 @@
       }
     ],
     "class": "Supporter",
-    "modules": [
-      "读书笔记"
-    ]
+    "modules": []
   },
   "char_326_glacus": {
     "id": "char_326_glacus",
@@ -3042,9 +3048,7 @@
       }
     ],
     "class": "Supporter",
-    "modules": [
-      "外骨骼装备"
-    ]
+    "modules": []
   },
   "char_433_windft": {
     "id": "char_433_windft",
@@ -3304,9 +3308,7 @@
       }
     ],
     "class": "Specialist",
-    "modules": [
-      "《乔弗瑞古今童话集》精装本"
-    ]
+    "modules": []
   },
   "char_4016_kazema": {
     "id": "char_4016_kazema",
@@ -3326,9 +3328,7 @@
       }
     ],
     "class": "Specialist",
-    "modules": [
-      "旧物"
-    ]
+    "modules": []
   },
   "char_103_angel": {
     "id": "char_103_angel",
@@ -3428,9 +3428,7 @@
       }
     ],
     "class": "Sniper",
-    "modules": [
-      "定制弩配件套装"
-    ]
+    "modules": []
   },
   "char_430_fartth": {
     "id": "char_430_fartth",
@@ -3455,9 +3453,7 @@
       }
     ],
     "class": "Sniper",
-    "modules": [
-      "First-show Support Set"
-    ]
+    "modules": []
   },
   "char_113_cqbw": {
     "id": "char_113_cqbw",
@@ -3482,9 +3478,7 @@
       }
     ],
     "class": "Sniper",
-    "modules": [
-      "佣兵的行囊"
-    ]
+    "modules": []
   },
   "char_300_phenxi": {
     "id": "char_300_phenxi",
@@ -3509,9 +3503,7 @@
       }
     ],
     "class": "Sniper",
-    "modules": [
-      "“律外”特种弹药配给组"
-    ]
+    "modules": []
   },
   "char_197_poca": {
     "id": "char_197_poca",
@@ -3636,9 +3628,7 @@
       }
     ],
     "class": "Vanguard",
-    "modules": [
-      "破城矛弹夹"
-    ]
+    "modules": []
   },
   "char_362_saga": {
     "id": "char_362_saga",
@@ -3763,9 +3753,7 @@
       }
     ],
     "class": "Caster",
-    "modules": [
-      "锁与匙之家"
-    ]
+    "modules": []
   },
   "char_180_amgoat": {
     "id": "char_180_amgoat",
@@ -3840,9 +3828,7 @@
       }
     ],
     "class": "Caster",
-    "modules": [
-      "无题长卷"
-    ]
+    "modules": []
   },
   "char_472_pasngr": {
     "id": "char_472_pasngr",
@@ -3867,9 +3853,7 @@
       }
     ],
     "class": "Caster",
-    "modules": [
-      "Electromagnetic Regulator"
-    ]
+    "modules": []
   },
   "char_426_billro": {
     "id": "char_426_billro",
@@ -3921,26 +3905,51 @@
     "class": "Caster",
     "modules": []
   },
-  "char_206_gnosis": {
-    "id": "char_206_gnosis",
-    "name": "Gnosis",
+  "char_4046_ebnhlz": {
+    "id": "char_4046_ebnhlz",
+    "name": "Ebenholz",
     "rarity": 6,
     "isCnOnly": true,
     "skills": [
       {
+        "skillId": "skchr_ebnhlz_1",
+        "iconId": null,
+        "skillName": "渐快急板"
+      },
+      {
+        "skillId": "skchr_ebnhlz_2",
+        "iconId": null,
+        "skillName": "荒芜回响"
+      },
+      {
+        "skillId": "skchr_ebnhlz_3",
+        "iconId": null,
+        "skillName": "寂静之声"
+      }
+    ],
+    "class": "Caster",
+    "modules": []
+  },
+  "char_206_gnosis": {
+    "id": "char_206_gnosis",
+    "name": "Gnosis",
+    "rarity": 6,
+    "isCnOnly": false,
+    "skills": [
+      {
         "skillId": "skchr_gnosis_1",
         "iconId": null,
-        "skillName": "高速思考"
+        "skillName": "High-Speed Cogitation"
       },
       {
         "skillId": "skchr_gnosis_2",
         "iconId": null,
-        "skillName": "零度爆发"
+        "skillName": "Zero-Point Burst"
       },
       {
         "skillId": "skchr_gnosis_3",
         "iconId": null,
-        "skillName": "失温症"
+        "skillName": "Hypothermia"
       }
     ],
     "class": "Supporter",
@@ -3969,9 +3978,7 @@
       }
     ],
     "class": "Supporter",
-    "modules": [
-      "重力校准模块"
-    ]
+    "modules": []
   },
   "char_358_lisa": {
     "id": "char_358_lisa",
@@ -3996,9 +4003,7 @@
       }
     ],
     "class": "Supporter",
-    "modules": [
-      "怀中御守"
-    ]
+    "modules": []
   },
   "char_248_mgllan": {
     "id": "char_248_mgllan",
@@ -4023,9 +4028,7 @@
       }
     ],
     "class": "Supporter",
-    "modules": [
-      "Drone Control Module.P"
-    ]
+    "modules": []
   },
   "char_1012_skadi2": {
     "id": "char_1012_skadi2",
@@ -4075,9 +4078,7 @@
       }
     ],
     "class": "Supporter",
-    "modules": [
-      "诗短梦长"
-    ]
+    "modules": []
   },
   "char_250_phatom": {
     "id": "char_250_phatom",
@@ -4102,9 +4103,7 @@
       }
     ],
     "class": "Specialist",
-    "modules": [
-      "Miss Christine's Felt"
-    ]
+    "modules": []
   },
   "char_322_lmlee": {
     "id": "char_322_lmlee",
@@ -4129,9 +4128,7 @@
       }
     ],
     "class": "Specialist",
-    "modules": [
-      "“无问吉凶”"
-    ]
+    "modules": []
   },
   "char_400_weedy": {
     "id": "char_400_weedy",
@@ -4256,9 +4253,32 @@
       }
     ],
     "class": "Specialist",
-    "modules": [
-      "“唱片”收藏箱"
-    ]
+    "modules": []
+  },
+  "char_4048_doroth": {
+    "id": "char_4048_doroth",
+    "name": "Dorothy",
+    "rarity": 6,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skchr_doroth_1",
+        "iconId": null,
+        "skillName": "危险目标清除"
+      },
+      {
+        "skillId": "skchr_doroth_2",
+        "iconId": null,
+        "skillName": "流沙区域生成"
+      },
+      {
+        "skillId": "skchr_doroth_3",
+        "iconId": null,
+        "skillName": "高速共振排障"
+      }
+    ],
+    "class": "Specialist",
+    "modules": []
   },
   "char_147_shining": {
     "id": "char_147_shining",
@@ -4308,9 +4328,7 @@
       }
     ],
     "class": "Medic",
-    "modules": [
-      "'Closed Hope'"
-    ]
+    "modules": []
   },
   "char_003_kalts": {
     "id": "char_003_kalts",
@@ -4360,9 +4378,7 @@
       }
     ],
     "class": "Medic",
-    "modules": [
-      "纯铜单筒望远镜"
-    ]
+    "modules": []
   },
   "char_136_hsguma": {
     "id": "char_136_hsguma",
@@ -4512,9 +4528,7 @@
       }
     ],
     "class": "Defender",
-    "modules": [
-      "祖玛玛的工具箱"
-    ]
+    "modules": []
   },
   "char_4039_horn": {
     "id": "char_4039_horn",
@@ -4639,9 +4653,7 @@
       }
     ],
     "class": "Guard",
-    "modules": [
-      "罗德岛制式剑"
-    ]
+    "modules": []
   },
   "char_4009_irene": {
     "id": "char_4009_irene",
@@ -4666,9 +4678,7 @@
       }
     ],
     "class": "Guard",
-    "modules": [
-      "厚重的经卷"
-    ]
+    "modules": []
   },
   "char_017_huang": {
     "id": "char_017_huang",
@@ -4768,9 +4778,7 @@
       }
     ],
     "class": "Guard",
-    "modules": [
-      "'Ούρος'"
-    ]
+    "modules": []
   },
   "char_1014_nearl2": {
     "id": "char_1014_nearl2",
@@ -4795,9 +4803,7 @@
       }
     ],
     "class": "Guard",
-    "modules": [
-      "耀阳锋刃"
-    ]
+    "modules": []
   },
   "char_230_savage": {
     "id": "char_230_savage",
@@ -4927,9 +4933,7 @@
       }
     ],
     "class": "Vanguard",
-    "modules": [
-      "骑警套装"
-    ]
+    "modules": []
   },
   "char_263_skadi": {
     "id": "char_263_skadi",
@@ -4954,9 +4958,7 @@
       }
     ],
     "class": "Guard",
-    "modules": [
-      "潮湿的剑袋"
-    ]
+    "modules": []
   },
   "char_1001_amiya2": {
     "id": "char_1001_amiya2",
