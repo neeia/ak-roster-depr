@@ -94,7 +94,7 @@ const AccountSettings = React.memo((props: Props) => {
             placeholder={"Set a username to get a share link"}
             onChange={() => { }}
             disabled
-            short
+            width="209px"
             value={`https://krooster.com/u/${actualDisplayName}`}
           />
           <FormButton

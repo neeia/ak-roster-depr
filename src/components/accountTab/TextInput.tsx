@@ -1,16 +1,8 @@
 import React, { useState } from "react";
-import { ButtonBase, makeStyles, TextField } from "@material-ui/core";
+import { Box, ButtonBase, makeStyles, TextField } from "@material-ui/core";
 import clsx from "clsx";
 
 const useStyles = makeStyles({
-  container: {
-    width: "270px",
-    textAlign: "start",
-  },
-  container2: {
-    width: "240px",
-    textAlign: "start",
-  },
   label: {
     marginLeft: "6px",
     marginTop: "2px",
@@ -41,10 +33,24 @@ const useStyles = makeStyles({
     fontSize: "calc(0.7vh + 5px)",
     lineHeight: "calc(0.7vh + 7px)",
   },
+  input: {
+    '& input[type=number]': {
+      '-moz-appearance': 'textfield'
+    },
+    '& input[type=number]::-webkit-outer-spin-button': {
+      '-webkit-appearance': 'none',
+      margin: 0
+    },
+    '& input[type=number]::-webkit-inner-spin-button': {
+      '-webkit-appearance': 'none',
+      margin: 0
+    }
+  },
 })
 
 interface Props {
   type?: string;
+  width?: string;
   label: string;
   value: string;
   onChange: (v: string) => void;
@@ -53,14 +59,20 @@ interface Props {
   className?: string;
   placeholder?: string;
   description?: string;
+  split?: string;
 }
 
 const TextInput = React.memo((props: Props) => {
-  const { label, value, onChange, disabled, short, className, type, placeholder, description } = props;
+  const { label, width = "240px", value, onChange, disabled, className, type, placeholder, description } = props;
   const classes = useStyles();
 
   return (
-    <div className={short ? classes.container2 : classes.container}>
+    <Box
+      sx={{
+        width: width,
+        textAlign: "start",
+      }}
+    >
       <div className={classes.label}>
         {label}
       </div>
@@ -72,6 +84,7 @@ const TextInput = React.memo((props: Props) => {
           margin="none"
           className={clsx({
             [classes.levelText]: true,
+            [classes.input]: true,
             [className ?? ""]: true,
           })}
           placeholder={placeholder ?? "Type your " + label}
@@ -86,7 +99,7 @@ const TextInput = React.memo((props: Props) => {
       <div className={classes.description}>
         {description ?? ""}
       </div>
-    </div>
+    </Box>
   );
 });
 export default TextInput;

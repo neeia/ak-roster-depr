@@ -3,7 +3,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
 import TextInput from "./TextInput";
-import { ButtonBase, Hidden, makeStyles } from "@material-ui/core";
+import { Box, ButtonBase, Hidden, makeStyles } from "@material-ui/core";
 import { useBoxStyles } from "../BoxStyles";
 import { useFormStyles } from "./FormStyles";
 import clsx from "clsx";
@@ -14,7 +14,6 @@ import FormButton from "../FormButton";
 import React from "react";
 import { AccountView } from "./Dashboard";
 import { AccountInfo } from "../AccountTab";
-import ProfileCard from "./ProfileCard";
 import { Operator } from "../../App";
 
 const useStyles = makeStyles({
@@ -34,6 +33,7 @@ const useStyles = makeStyles({
     display: "flex",
     alignItems: "end",
     gap: "2px",
+    justifyContent: "space-between"
   },
   button: {
     height: "25px",
@@ -81,7 +81,91 @@ const AccountProfile = React.memo((props: Props) => {
   const iconSize = 16;
   return (
     <div className={classes.displayBox}>
-      <ProfileCard user={user} userInfo={userInfo} operators={operators} />
+      <div className={classes.centerBox}>
+        <div className={classes.row}>
+          <TextInput
+            label="Arknights ID"
+            placeholder={"Enter your in-game name."}
+            onChange={(s: string) => {
+              setDirty(true);
+              setDisplayName(s.toLowerCase());
+            }}
+            value={displayName}
+            width="160px"
+          />
+          <Box
+            sx={{
+              marginBottom: "4px",
+              fontSize: "16px",
+            }}>
+            #
+          </Box>
+          <TextInput
+            label="Tag"
+            placeholder={"####"}
+            onChange={(s: string) => {
+              setDirty(true);
+              setDisplayName(s.toLowerCase());
+            }}
+            type="number"
+            value={displayName}
+            width="60px"
+          />
+        </div>
+        <div className={classes.row}>
+          <TextInput
+            label="Level"
+            onChange={(s: string) => {
+              setDirty(true);
+              setDisplayName(s.toLowerCase());
+            }}
+            value={displayName}
+            width="60px"
+          />
+          <TextInput
+            label="Onboarding Date"
+            placeholder={"Date of Account Creation"}
+            onChange={() => { }}
+            value={``}
+            type="date"
+            width="175px"
+          />
+        </div>
+        <TextInput
+          label="Email Address"
+          onChange={(s: string) => {
+            setDirty(true);
+            setEmailAddress(s);
+          }}
+          value={emailAddress}
+        />
+        <div className={style.horizontalDivider} />
+        <TextInput type={"password"} label="Password" placeholder="Confirm your Password" onChange={setPassword} value={password} />
+        <div className={classes.row}>
+          <FormButton
+            className={classes.changeButton}
+            onClick={() => {
+              setDisplayName(actualDisplayName);
+              setEmailAddress(user.email ?? "UNDEFINED");
+            }}
+            disabled={!dirty || password === ""}
+          >
+            <MdOutlineUndo size={iconSize * 1.5} />
+            Revert
+          </FormButton>
+          <FormButton
+            className={classes.changeButton}
+            onClick={() => {
+              setDisplayName(actualDisplayName);
+              setEmailAddress(user.email ?? "UNDEFINED");
+            }}
+            disabled={!dirty || password === ""}
+          >
+            <MdOutlineCheck size={iconSize * 1.5} />
+            Confirm
+          </FormButton>
+        </div>
+      </div>
     </div>
   );
 });
