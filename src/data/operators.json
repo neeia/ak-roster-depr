@@ -344,7 +344,11 @@
     ],
     "class": "Caster",
     "modules": [
-      "占卜师旅行套装"
+      {
+        "moduleName": "占卜师旅行套装",
+        "moduleId": "uniequip_002_fmout",
+        "typeName": "SPC-X"
+      }
     ]
   },
   "char_253_greyy": {
@@ -366,7 +370,11 @@
     ],
     "class": "Caster",
     "modules": [
-      "新的开始"
+      {
+        "moduleName": "新的开始",
+        "moduleId": "uniequip_002_greyy",
+        "typeName": "SPC-Y"
+      }
     ]
   },
   "char_328_cammou": {
@@ -407,7 +415,13 @@
       }
     ],
     "class": "Caster",
-    "modules": []
+    "modules": [
+      {
+        "moduleName": "法杖保养套装",
+        "moduleId": "uniequip_002_indigo",
+        "typeName": "MSC-X"
+      }
+    ]
   },
   "char_4004_pudd": {
     "id": "char_4004_pudd",
@@ -428,7 +442,11 @@
     ],
     "class": "Caster",
     "modules": [
-      "Portable Electrical Measuring Equipment"
+      {
+        "moduleName": "Portable Electrical Measuring Equipment",
+        "moduleId": "uniequip_002_pudd",
+        "typeName": "CHA-Y"
+      }
     ]
   },
   "char_235_jesica": {
@@ -449,7 +467,13 @@
       }
     ],
     "class": "Sniper",
-    "modules": []
+    "modules": [
+      {
+        "moduleName": "杰西卡的订单",
+        "moduleId": "uniequip_002_jesica",
+        "typeName": "MAR-Y"
+      }
+    ]
   },
   "char_126_shotst": {
     "id": "char_126_shotst",
@@ -469,7 +493,13 @@
       }
     ],
     "class": "Sniper",
-    "modules": []
+    "modules": [
+      {
+        "moduleName": "猎刀",
+        "moduleId": "uniequip_002_shotst",
+        "typeName": "MAR-X"
+      }
+    ]
   },
   "char_190_clour": {
     "id": "char_190_clour",
@@ -489,7 +519,13 @@
       }
     ],
     "class": "Sniper",
-    "modules": []
+    "modules": [
+      {
+        "moduleName": "“不落”",
+        "moduleId": "uniequip_002_clour",
+        "typeName": "MAR-X"
+      }
+    ]
   },
   "char_133_mm": {
     "id": "char_133_mm",
@@ -509,7 +545,13 @@
       }
     ],
     "class": "Sniper",
-    "modules": []
+    "modules": [
+      {
+        "moduleName": "新手侦探礼包",
+        "moduleId": "uniequip_002_mm",
+        "typeName": "MAR-X"
+      }
+    ]
   },
   "char_118_yuki": {
     "id": "char_118_yuki",
@@ -530,7 +572,11 @@
     ],
     "class": "Sniper",
     "modules": [
-      "手里剑"
+      {
+        "moduleName": "手里剑",
+        "moduleId": "uniequip_002_yuki",
+        "typeName": "ART-Y"
+      }
     ]
   },
   "char_440_pinecn": {
@@ -572,7 +618,11 @@
     ],
     "class": "Sniper",
     "modules": [
-      "Portable Radar Equipment"
+      {
+        "moduleName": "Portable Radar Equipment",
+        "moduleId": "uniequip_002_glaze",
+        "typeName": "DEA-X"
+      }
     ]
   },
   "char_366_acdrop": {
@@ -594,7 +644,11 @@
     ],
     "class": "Sniper",
     "modules": [
-      "“自由、洋葱圈和我”"
+      {
+        "moduleName": "“自由、洋葱圈和我”",
+        "moduleId": "uniequip_002_acdrop",
+        "typeName": "ARC-X"
+      }
     ]
   },
   "char_198_blackd": {
@@ -656,7 +710,11 @@
     ],
     "class": "Vanguard",
     "modules": [
-      "伟大的摇滚"
+      {
+        "moduleName": "The Greatrock",
+        "moduleId": "uniequip_002_vigna",
+        "typeName": "CHG-Y"
+      }
     ]
   },
   "char_151_myrtle": {
@@ -718,7 +776,11 @@
     ],
     "class": "Guard",
     "modules": [
-      "Military Telescope"
+      {
+        "moduleName": "Military Telescope",
+        "moduleId": "uniequip_002_doberm",
+        "typeName": "INS-Y"
+      }
     ]
   },
   "char_289_gyuki": {
@@ -740,7 +802,11 @@
     ],
     "class": "Guard",
     "modules": [
-      "断竹插花作品"
+      {
+        "moduleName": "断竹插花作品",
+        "moduleId": "uniequip_002_gyuki",
+        "typeName": "DRE-Y"
+      }
     ]
   },
   "char_159_peacok": {
@@ -762,7 +828,11 @@
     ],
     "class": "Guard",
     "modules": [
-      "断罪之拳"
+      {
+        "moduleName": "断罪之拳",
+        "moduleId": "uniequip_002_peacok",
+        "typeName": "DRE-X"
+      }
     ]
   },
   "char_193_frostl": {
@@ -844,7 +914,11 @@
     ],
     "class": "Guard",
     "modules": [
-      "可替换刀具套装"
+      {
+        "moduleName": "Replaceable Tool Set",
+        "moduleId": "uniequip_002_cutter",
+        "typeName": "SWO-Y"
+      }
     ]
   },
   "char_337_utage": {
@@ -906,7 +980,11 @@
     ],
     "class": "Specialist",
     "modules": [
-      "Covert Action Toolkit"
+      {
+        "moduleName": "Covert Action Toolkit",
+        "moduleId": "uniequip_002_gravel",
+        "typeName": "EXE-X"
+      }
     ]
   },
   "char_272_strong": {
@@ -928,7 +1006,11 @@
     ],
     "class": "Specialist",
     "modules": [
-      "精钢刀具套组"
+      {
+        "moduleName": "精钢刀具套组",
+        "moduleId": "uniequip_002_strong",
+        "typeName": "MER-X"
+      }
     ]
   },
   "char_236_rope": {
@@ -1030,7 +1112,11 @@
     ],
     "class": "Medic",
     "modules": [
-      "'Aegean's Kiss'"
+      {
+        "moduleName": "'Aegean's Kiss'",
+        "moduleId": "uniequip_002_flower",
+        "typeName": "RIN-Y"
+      }
     ]
   },
   "char_385_finlpp": {
@@ -1052,7 +1138,11 @@
     ],
     "class": "Medic",
     "modules": [
-      "“江河之韵”"
+      {
+        "moduleName": "“江河之韵”",
+        "moduleId": "uniequip_002_finlpp",
+        "typeName": "WAH-Y"
+      }
     ]
   },
   "char_4041_chnut": {
@@ -1153,7 +1243,13 @@
       }
     ],
     "class": "Defender",
-    "modules": []
+    "modules": [
+      {
+        "moduleName": "蜜糖馅饼礼包",
+        "moduleId": "uniequip_002_sunbr",
+        "typeName": "GUA-X"
+      }
+    ]
   },
   "char_260_durnar": {
     "id": "char_260_durnar",
@@ -1194,7 +1290,11 @@
     ],
     "class": "Supporter",
     "modules": [
-      "Weird Palette"
+      {
+        "moduleName": "Weird Palette",
+        "moduleId": "uniequip_002_deepcl",
+        "typeName": "SUM-Y"
+      }
     ]
   },
   "char_183_skgoat": {
@@ -1216,7 +1316,11 @@
     ],
     "class": "Supporter",
     "modules": [
-      "待确认的申请表"
+      {
+        "moduleName": "待确认的申请表",
+        "moduleId": "uniequip_002_skgoat",
+        "typeName": "DEC-Y"
+      }
     ]
   },
   "char_258_podego": {
@@ -1238,7 +1342,11 @@
     ],
     "class": "Supporter",
     "modules": [
-      "“不谢的苗圃”"
+      {
+        "moduleName": "“不谢的苗圃”",
+        "moduleId": "uniequip_002_podego",
+        "typeName": "DEC-X"
+      }
     ]
   },
   "char_484_robrta": {
@@ -1320,7 +1428,11 @@
     ],
     "class": "Medic",
     "modules": [
-      "Medic Environment Analyze System"
+      {
+        "moduleName": "Medic Environment Analyze System",
+        "moduleId": "uniequip_002_plosis",
+        "typeName": "RIN-X"
+      }
     ]
   },
   "char_275_breeze": {
@@ -1342,7 +1454,11 @@
     ],
     "class": "Medic",
     "modules": [
-      "Surgical Instrument Kit"
+      {
+        "moduleName": "Surgical Instrument Kit",
+        "moduleId": "uniequip_002_breeze",
+        "typeName": "RIN-X"
+      }
     ]
   },
   "char_115_headbr": {
@@ -1424,7 +1540,11 @@
     ],
     "class": "Vanguard",
     "modules": [
-      "枪刃清洁套装"
+      {
+        "moduleName": "Spear Clean Suit",
+        "moduleId": "uniequip_002_sddrag",
+        "typeName": "CHG-Y"
+      }
     ]
   },
   "char_496_wildmn": {
@@ -1446,7 +1566,11 @@
     ],
     "class": "Vanguard",
     "modules": [
-      "长枪替补套装"
+      {
+        "moduleName": "Spear Replacement Suit",
+        "moduleId": "uniequip_002_wildmn",
+        "typeName": "CHG-X"
+      }
     ]
   },
   "char_401_elysm": {
@@ -1508,7 +1632,11 @@
     ],
     "class": "Guard",
     "modules": [
-      "Self-defense Lipstick"
+      {
+        "moduleName": "Self-defense Lipstick",
+        "moduleId": "uniequip_002_swire",
+        "typeName": "INS-X"
+      }
     ]
   },
   "char_265_sophia": {
@@ -1530,7 +1658,11 @@
     ],
     "class": "Guard",
     "modules": [
-      "Whipsword Wire.L"
+      {
+        "moduleName": "Whipsword Wire.L",
+        "moduleId": "uniequip_002_sophia",
+        "typeName": "INS-X"
+      }
     ]
   },
   "char_106_franka": {
@@ -1552,7 +1684,11 @@
     ],
     "class": "Guard",
     "modules": [
-      "尖端铝热单元"
+      {
+        "moduleName": "尖端铝热单元",
+        "moduleId": "uniequip_002_franka",
+        "typeName": "DRE-X"
+      }
     ]
   },
   "char_131_flameb": {
@@ -1574,7 +1710,11 @@
     ],
     "class": "Guard",
     "modules": [
-      "锈损的断刀"
+      {
+        "moduleName": "锈损的断刀",
+        "moduleId": "uniequip_002_flameb",
+        "typeName": "DRE-Y"
+      }
     ]
   },
   "char_155_tiger": {
@@ -1676,7 +1816,11 @@
     ],
     "class": "Guard",
     "modules": [
-      "做工优良的衬衣"
+      {
+        "moduleName": "A Well-Made Shirt",
+        "moduleId": "uniequip_002_bibeak",
+        "typeName": "SWO-X"
+      }
     ]
   },
   "char_459_tachak": {
@@ -1698,7 +1842,11 @@
     ],
     "class": "Guard",
     "modules": [
-      "轻机枪枪架"
+      {
+        "moduleName": "Machinegun Rack",
+        "moduleId": "uniequip_002_tachak",
+        "typeName": "SWO-X"
+      }
     ]
   },
   "char_143_ghost": {
@@ -1859,7 +2007,13 @@
       }
     ],
     "class": "Sniper",
-    "modules": []
+    "modules": [
+      {
+        "moduleName": "标准比色卡",
+        "moduleId": "uniequip_002_bluep",
+        "typeName": "MAR-Y"
+      }
+    ]
   },
   "char_204_platnm": {
     "id": "char_204_platnm",
@@ -1879,7 +2033,13 @@
       }
     ],
     "class": "Sniper",
-    "modules": []
+    "modules": [
+      {
+        "moduleName": "独自旅行套装",
+        "moduleId": "uniequip_002_platnm",
+        "typeName": "MAR-X"
+      }
+    ]
   },
   "char_367_swllow": {
     "id": "char_367_swllow",
@@ -1899,7 +2059,13 @@
       }
     ],
     "class": "Sniper",
-    "modules": []
+    "modules": [
+      {
+        "moduleName": "母爱的倒影",
+        "moduleId": "uniequip_002_swllow",
+        "typeName": "MAR-Y"
+      }
+    ]
   },
   "char_365_aprl": {
     "id": "char_365_aprl",
@@ -1919,7 +2085,13 @@
       }
     ],
     "class": "Sniper",
-    "modules": []
+    "modules": [
+      {
+        "moduleName": "高保真通讯耳机",
+        "moduleId": "uniequip_002_aprl",
+        "typeName": "MAR-Y"
+      }
+    ]
   },
   "char_1021_kroos2": {
     "id": "char_1021_kroos2",
@@ -1939,7 +2111,13 @@
       }
     ],
     "class": "Sniper",
-    "modules": []
+    "modules": [
+      {
+        "moduleName": "真心的话和想冒的险",
+        "moduleId": "uniequip_002_kroos2",
+        "typeName": "MAR-X"
+      }
+    ]
   },
   "char_219_meteo": {
     "id": "char_219_meteo",
@@ -1960,7 +2138,11 @@
     ],
     "class": "Sniper",
     "modules": [
-      "无名的身份牌"
+      {
+        "moduleName": "无名的身份牌",
+        "moduleId": "uniequip_002_meteo",
+        "typeName": "ART-Y"
+      }
     ]
   },
   "char_379_sesa": {
@@ -1982,7 +2164,11 @@
     ],
     "class": "Sniper",
     "modules": [
-      "“灵魂共鸣”"
+      {
+        "moduleName": "“灵魂共鸣”",
+        "moduleId": "uniequip_002_sesa",
+        "typeName": "ART-X"
+      }
     ]
   },
   "char_279_excu": {
@@ -2109,7 +2295,11 @@
     ],
     "class": "Caster",
     "modules": [
-      "阻燃处理方案"
+      {
+        "moduleName": "阻燃处理方案",
+        "moduleId": "uniequip_002_skfire",
+        "typeName": "SPC-Y"
+      }
     ]
   },
   "char_306_leizi": {
@@ -2131,7 +2321,37 @@
     ],
     "class": "Caster",
     "modules": [
-      "'All the Thunderlight'"
+      {
+        "moduleName": "'All the Thunderlight'",
+        "moduleId": "uniequip_002_leizi",
+        "typeName": "CHA-X"
+      }
+    ]
+  },
+  "char_135_halo": {
+    "id": "char_135_halo",
+    "name": "Astgenne",
+    "rarity": 5,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skchr_halo_1",
+        "iconId": null,
+        "skillName": "双端导流"
+      },
+      {
+        "skillId": "skchr_halo_2",
+        "iconId": null,
+        "skillName": "星束交汇"
+      }
+    ],
+    "class": "Caster",
+    "modules": [
+      {
+        "moduleName": "未组装的钟表",
+        "moduleId": "uniequip_002_halo",
+        "typeName": "CHA-Y"
+      }
     ]
   },
   "char_344_beewax": {
@@ -2173,7 +2393,11 @@
     ],
     "class": "Caster",
     "modules": [
-      "传承与开拓"
+      {
+        "moduleName": "传承与开拓",
+        "moduleId": "uniequip_002_lionhd",
+        "typeName": "SPC-X"
+      }
     ]
   },
   "char_388_mint": {
@@ -2214,7 +2438,13 @@
       }
     ],
     "class": "Caster",
-    "modules": []
+    "modules": [
+      {
+        "moduleName": "梦之城堡立体书",
+        "moduleId": "uniequip_002_iris",
+        "typeName": "MSC-X"
+      }
+    ]
   },
   "char_1011_lava2": {
     "id": "char_1011_lava2",
@@ -2235,7 +2465,11 @@
     ],
     "class": "Caster",
     "modules": [
-      "萨卡兹的刀"
+      {
+        "moduleName": "萨卡兹的刀",
+        "moduleId": "uniequip_002_lava2",
+        "typeName": "SPC-X"
+      }
     ]
   },
   "char_489_serum": {
@@ -2262,17 +2496,17 @@
     "id": "char_4013_kjera",
     "name": "Kjera",
     "rarity": 5,
-    "isCnOnly": true,
+    "isCnOnly": false,
     "skills": [
       {
         "skillId": "skcom_atk_up[3]",
         "iconId": null,
-        "skillName": "攻击力强化·γ型"
+        "skillName": "ATK Up γ"
       },
       {
         "skillId": "skchr_kjera_2",
         "iconId": null,
-        "skillName": "心随意动"
+        "skillName": "Unrestrained Heart"
       }
     ],
     "class": "Caster",
@@ -2317,7 +2551,11 @@
     ],
     "class": "Supporter",
     "modules": [
-      "'Meeboo' Control Terminal XP"
+      {
+        "moduleName": "'Meeboo' Control Terminal XP",
+        "moduleId": "uniequip_002_otter",
+        "typeName": "SUM-X"
+      }
     ]
   },
   "char_336_folivo": {
@@ -2339,7 +2577,11 @@
     ],
     "class": "Supporter",
     "modules": [
-      "Improved Lens.P"
+      {
+        "moduleName": "Improved Lens.P",
+        "moduleId": "uniequip_002_folivo",
+        "typeName": "SUM-X"
+      }
     ]
   },
   "char_108_silent": {
@@ -2421,7 +2663,11 @@
     ],
     "class": "Medic",
     "modules": [
-      "野外考察套装"
+      {
+        "moduleName": "野外考察套装",
+        "moduleId": "uniequip_002_ceylon",
+        "typeName": "WAH-X"
+      }
     ]
   },
   "char_436_whispr": {
@@ -2443,7 +2689,11 @@
     ],
     "class": "Medic",
     "modules": [
-      "古朴的急救箱"
+      {
+        "moduleName": "古朴的急救箱",
+        "moduleId": "uniequip_002_whispr",
+        "typeName": "WAH-X"
+      }
     ]
   },
   "char_402_tuye": {
@@ -2506,6 +2756,26 @@
     "class": "Medic",
     "modules": []
   },
+  "char_1024_hbisc2": {
+    "id": "char_1024_hbisc2",
+    "name": "Hibiscus the Purifier",
+    "rarity": 5,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skcom_atk_up[3]",
+        "iconId": null,
+        "skillName": "攻击力强化·γ型"
+      },
+      {
+        "skillId": "skchr_hbisc2_2",
+        "iconId": null,
+        "skillName": "抚业之触"
+      }
+    ],
+    "class": "Medic",
+    "modules": []
+  },
   "char_148_nearl": {
     "id": "char_148_nearl",
     "name": "Nearl",
@@ -2524,7 +2794,13 @@
       }
     ],
     "class": "Defender",
-    "modules": []
+    "modules": [
+      {
+        "moduleName": "改良骑士盾牌",
+        "moduleId": "uniequip_002_nearl",
+        "typeName": "GUA-X"
+      }
+    ]
   },
   "char_226_hmau": {
     "id": "char_226_hmau",
@@ -2544,7 +2820,13 @@
       }
     ],
     "class": "Defender",
-    "modules": []
+    "modules": [
+      {
+        "moduleName": "八点档情景剧录像带",
+        "moduleId": "uniequip_002_hmau",
+        "typeName": "GUA-Y"
+      }
+    ]
   },
   "char_144_red": {
     "id": "char_144_red",
@@ -2565,7 +2847,11 @@
     ],
     "class": "Specialist",
     "modules": [
-      "Mystery Prop Pack"
+      {
+        "moduleName": "Mystery Prop Pack",
+        "moduleId": "uniequip_002_red",
+        "typeName": "EXE-Y"
+      }
     ]
   },
   "char_243_waaifu": {
@@ -2587,7 +2873,11 @@
     ],
     "class": "Specialist",
     "modules": [
-      "The Classic of Hung Mei Wing Chun"
+      {
+        "moduleName": "The Classic of Hung Mei Wing Chun",
+        "moduleId": "uniequip_002_waaifu",
+        "typeName": "EXE-X"
+      }
     ]
   },
   "char_214_kafka": {
@@ -2609,7 +2899,11 @@
     ],
     "class": "Specialist",
     "modules": [
-      "Rubik's Cube Pendant"
+      {
+        "moduleName": "Rubik's Cube Pendant",
+        "moduleId": "uniequip_002_kafka",
+        "typeName": "EXE-Y"
+      }
     ]
   },
   "char_455_nothin": {
@@ -2631,7 +2925,11 @@
     ],
     "class": "Specialist",
     "modules": [
-      "“檐下听雨”"
+      {
+        "moduleName": "“檐下听雨”",
+        "moduleId": "uniequip_002_nothin",
+        "typeName": "MER-X"
+      }
     ]
   },
   "char_107_liskam": {
@@ -2754,6 +3052,26 @@
     "class": "Defender",
     "modules": []
   },
+  "char_4047_pianst": {
+    "id": "char_4047_pianst",
+    "name": "Czerny",
+    "rarity": 5,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skchr_pianst_1",
+        "iconId": null,
+        "skillName": "纷飞十指"
+      },
+      {
+        "skillId": "skchr_pianst_2",
+        "iconId": null,
+        "skillName": "曲惊四座"
+      }
+    ],
+    "class": "Defender",
+    "modules": []
+  },
   "char_457_blitz": {
     "id": "char_457_blitz",
     "name": "Blitz",
@@ -2818,22 +3136,26 @@
     "id": "char_422_aurora",
     "name": "Aurora",
     "rarity": 5,
-    "isCnOnly": true,
+    "isCnOnly": false,
     "skills": [
       {
         "skillId": "skchr_aurora_1",
         "iconId": null,
-        "skillName": "固守家园"
+        "skillName": "Homeland Protector"
       },
       {
         "skillId": "skchr_aurora_2",
         "iconId": null,
-        "skillName": "人工降雪"
+        "skillName": "Artificial Snowfall"
       }
     ],
     "class": "Defender",
     "modules": [
-      "盾用摄制模块"
+      {
+        "moduleName": "盾用摄制模块",
+        "moduleId": "uniequip_002_aurora",
+        "typeName": "HES-X"
+      }
     ]
   },
   "char_145_prove": {
@@ -2855,7 +3177,11 @@
     ],
     "class": "Sniper",
     "modules": [
-      "尾巴养护套装"
+      {
+        "moduleName": "尾巴养护套装",
+        "moduleId": "uniequip_002_prove",
+        "typeName": "ARC-X"
+      }
     ]
   },
   "char_158_milu": {
@@ -2877,7 +3203,11 @@
     ],
     "class": "Sniper",
     "modules": [
-      "Field Sniper Equipment"
+      {
+        "moduleName": "Field Sniper Equipment",
+        "moduleId": "uniequip_002_milu",
+        "typeName": "DEA-Y"
+      }
     ]
   },
   "char_218_cuttle": {
@@ -2899,7 +3229,11 @@
     ],
     "class": "Sniper",
     "modules": [
-      "Gunsmithing Toolkit"
+      {
+        "moduleName": "Gunsmithing Toolkit",
+        "moduleId": "uniequip_002_cuttle",
+        "typeName": "DEA-X"
+      }
     ]
   },
   "char_363_toddi": {
@@ -2917,6 +3251,46 @@
         "skillId": "skchr_toddi_2",
         "iconId": null,
         "skillName": "Portable Fortcracker Arrows"
+      }
+    ],
+    "class": "Sniper",
+    "modules": []
+  },
+  "char_4043_erato": {
+    "id": "char_4043_erato",
+    "name": "Erato",
+    "rarity": 5,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skchr_erato_1",
+        "iconId": null,
+        "skillName": "安眠旋律"
+      },
+      {
+        "skillId": "skchr_erato_2",
+        "iconId": null,
+        "skillName": "英雄赞歌"
+      }
+    ],
+    "class": "Sniper",
+    "modules": []
+  },
+  "char_1027_greyy2": {
+    "id": "char_1027_greyy2",
+    "name": "Greyy the Lightningbearer",
+    "rarity": 5,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skcom_quickattack[3]",
+        "iconId": null,
+        "skillName": "迅捷打击·γ型"
+      },
+      {
+        "skillId": "skchr_greyy2_2",
+        "iconId": null,
+        "skillName": "晨曦信标"
       }
     ],
     "class": "Sniper",
@@ -3021,7 +3395,11 @@
     ],
     "class": "Supporter",
     "modules": [
-      "读书笔记"
+      {
+        "moduleName": "读书笔记",
+        "moduleId": "uniequip_002_glassb",
+        "typeName": "DEC-Y"
+      }
     ]
   },
   "char_326_glacus": {
@@ -3043,7 +3421,11 @@
     ],
     "class": "Supporter",
     "modules": [
-      "外骨骼装备"
+      {
+        "moduleName": "外骨骼装备",
+        "moduleId": "uniequip_002_glacus",
+        "typeName": "DEC-X"
+      }
     ]
   },
   "char_433_windft": {
@@ -3305,7 +3687,11 @@
     ],
     "class": "Specialist",
     "modules": [
-      "《乔弗瑞古今童话集》精装本"
+      {
+        "moduleName": "《乔弗瑞古今童话集》精装本",
+        "moduleId": "uniequip_002_bena",
+        "typeName": "PUM-Y"
+      }
     ]
   },
   "char_4016_kazema": {
@@ -3327,7 +3713,11 @@
     ],
     "class": "Specialist",
     "modules": [
-      "旧物"
+      {
+        "moduleName": "旧物",
+        "moduleId": "uniequip_002_kazema",
+        "typeName": "PUM-X"
+      }
     ]
   },
   "char_103_angel": {
@@ -3353,7 +3743,13 @@
       }
     ],
     "class": "Sniper",
-    "modules": []
+    "modules": [
+      {
+        "moduleName": "能天使的杰作",
+        "moduleId": "uniequip_002_angel",
+        "typeName": "MAR-X"
+      }
+    ]
   },
   "char_332_archet": {
     "id": "char_332_archet",
@@ -3378,7 +3774,13 @@
       }
     ],
     "class": "Sniper",
-    "modules": []
+    "modules": [
+      {
+        "moduleName": "“明天的种子”",
+        "moduleId": "uniequip_002_archet",
+        "typeName": "MAR-Y"
+      }
+    ]
   },
   "char_456_ash": {
     "id": "char_456_ash",
@@ -3403,7 +3805,13 @@
       }
     ],
     "class": "Sniper",
-    "modules": []
+    "modules": [
+      {
+        "moduleName": "破墙榴弹战术收纳包",
+        "moduleId": "uniequip_002_ash",
+        "typeName": "MAR-Y"
+      }
+    ]
   },
   "char_340_shwaz": {
     "id": "char_340_shwaz",
@@ -3429,7 +3837,11 @@
     ],
     "class": "Sniper",
     "modules": [
-      "定制弩配件套装"
+      {
+        "moduleName": "定制弩配件套装",
+        "moduleId": "uniequip_002_shwaz",
+        "typeName": "ARC-X"
+      }
     ]
   },
   "char_430_fartth": {
@@ -3456,7 +3868,11 @@
     ],
     "class": "Sniper",
     "modules": [
-      "First-show Support Set"
+      {
+        "moduleName": "First-show Support Set",
+        "moduleId": "uniequip_002_fartth",
+        "typeName": "DEA-X"
+      }
     ]
   },
   "char_113_cqbw": {
@@ -3483,7 +3899,11 @@
     ],
     "class": "Sniper",
     "modules": [
-      "佣兵的行囊"
+      {
+        "moduleName": "佣兵的行囊",
+        "moduleId": "uniequip_002_cqbw",
+        "typeName": "ART-X"
+      }
     ]
   },
   "char_300_phenxi": {
@@ -3510,7 +3930,11 @@
     ],
     "class": "Sniper",
     "modules": [
-      "“律外”特种弹药配给组"
+      {
+        "moduleName": "“律外”特种弹药配给组",
+        "moduleId": "uniequip_002_phenxi",
+        "typeName": "ART-Y"
+      }
     ]
   },
   "char_197_poca": {
@@ -3637,7 +4061,11 @@
     ],
     "class": "Vanguard",
     "modules": [
-      "破城矛弹夹"
+      {
+        "moduleName": "Piledriver Spear Magazine",
+        "moduleId": "uniequip_002_bpipe",
+        "typeName": "CHG-X"
+      }
     ]
   },
   "char_362_saga": {
@@ -3764,7 +4192,11 @@
     ],
     "class": "Caster",
     "modules": [
-      "锁与匙之家"
+      {
+        "moduleName": "锁与匙之家",
+        "moduleId": "uniequip_002_mostma",
+        "typeName": "SPC-Y"
+      }
     ]
   },
   "char_180_amgoat": {
@@ -3841,7 +4273,11 @@
     ],
     "class": "Caster",
     "modules": [
-      "无题长卷"
+      {
+        "moduleName": "无题长卷",
+        "moduleId": "uniequip_002_dusk",
+        "typeName": "SPC-X"
+      }
     ]
   },
   "char_472_pasngr": {
@@ -3868,7 +4304,16 @@
     ],
     "class": "Caster",
     "modules": [
-      "Electromagnetic Regulator"
+      {
+        "moduleName": "Electromagnetic Regulator",
+        "moduleId": "uniequip_002_pasngr",
+        "typeName": "CHA-X"
+      },
+      {
+        "moduleName": "王权金币",
+        "moduleId": "uniequip_003_pasngr",
+        "typeName": "CHA-Y"
+      }
     ]
   },
   "char_426_billro": {
@@ -3921,26 +4366,57 @@
     "class": "Caster",
     "modules": []
   },
-  "char_206_gnosis": {
-    "id": "char_206_gnosis",
-    "name": "Gnosis",
+  "char_4046_ebnhlz": {
+    "id": "char_4046_ebnhlz",
+    "name": "Ebenholz",
     "rarity": 6,
     "isCnOnly": true,
     "skills": [
       {
+        "skillId": "skchr_ebnhlz_1",
+        "iconId": null,
+        "skillName": "渐快急板"
+      },
+      {
+        "skillId": "skchr_ebnhlz_2",
+        "iconId": null,
+        "skillName": "荒芜回响"
+      },
+      {
+        "skillId": "skchr_ebnhlz_3",
+        "iconId": null,
+        "skillName": "寂静之声"
+      }
+    ],
+    "class": "Caster",
+    "modules": [
+      {
+        "moduleName": "源石骰子收纳盒",
+        "moduleId": "uniequip_002_ebnhlz",
+        "typeName": "MSC-X"
+      }
+    ]
+  },
+  "char_206_gnosis": {
+    "id": "char_206_gnosis",
+    "name": "Gnosis",
+    "rarity": 6,
+    "isCnOnly": false,
+    "skills": [
+      {
         "skillId": "skchr_gnosis_1",
         "iconId": null,
-        "skillName": "高速思考"
+        "skillName": "High-Speed Cogitation"
       },
       {
         "skillId": "skchr_gnosis_2",
         "iconId": null,
-        "skillName": "零度爆发"
+        "skillName": "Zero-Point Burst"
       },
       {
         "skillId": "skchr_gnosis_3",
         "iconId": null,
-        "skillName": "失温症"
+        "skillName": "Hypothermia"
       }
     ],
     "class": "Supporter",
@@ -3970,7 +4446,11 @@
     ],
     "class": "Supporter",
     "modules": [
-      "重力校准模块"
+      {
+        "moduleName": "重力校准模块",
+        "moduleId": "uniequip_002_aglina",
+        "typeName": "DEC-Y"
+      }
     ]
   },
   "char_358_lisa": {
@@ -3997,7 +4477,11 @@
     ],
     "class": "Supporter",
     "modules": [
-      "怀中御守"
+      {
+        "moduleName": "怀中御守",
+        "moduleId": "uniequip_002_lisa",
+        "typeName": "DEC-X"
+      }
     ]
   },
   "char_248_mgllan": {
@@ -4024,7 +4508,16 @@
     ],
     "class": "Supporter",
     "modules": [
-      "Drone Control Module.P"
+      {
+        "moduleName": "Drone Control Module.P",
+        "moduleId": "uniequip_002_mgllan",
+        "typeName": "SUM-X"
+      },
+      {
+        "moduleName": "教学用龙腾无人机",
+        "moduleId": "uniequip_003_mgllan",
+        "typeName": "SUM-Y"
+      }
     ]
   },
   "char_1012_skadi2": {
@@ -4076,7 +4569,11 @@
     ],
     "class": "Supporter",
     "modules": [
-      "诗短梦长"
+      {
+        "moduleName": "诗短梦长",
+        "moduleId": "uniequip_002_ling",
+        "typeName": "SUM-Y"
+      }
     ]
   },
   "char_250_phatom": {
@@ -4103,7 +4600,11 @@
     ],
     "class": "Specialist",
     "modules": [
-      "Miss Christine's Felt"
+      {
+        "moduleName": "Miss Christine's Felt",
+        "moduleId": "uniequip_002_phatom",
+        "typeName": "EXE-X"
+      }
     ]
   },
   "char_322_lmlee": {
@@ -4130,7 +4631,11 @@
     ],
     "class": "Specialist",
     "modules": [
-      "“无问吉凶”"
+      {
+        "moduleName": "“无问吉凶”",
+        "moduleId": "uniequip_002_lmlee",
+        "typeName": "MER-X"
+      }
     ]
   },
   "char_400_weedy": {
@@ -4257,8 +4762,37 @@
     ],
     "class": "Specialist",
     "modules": [
-      "“唱片”收藏箱"
+      {
+        "moduleName": "“唱片”收藏箱",
+        "moduleId": "uniequip_002_ghost2",
+        "typeName": "PUM-X"
+      }
     ]
+  },
+  "char_4048_doroth": {
+    "id": "char_4048_doroth",
+    "name": "Dorothy",
+    "rarity": 6,
+    "isCnOnly": true,
+    "skills": [
+      {
+        "skillId": "skchr_doroth_1",
+        "iconId": null,
+        "skillName": "危险目标清除"
+      },
+      {
+        "skillId": "skchr_doroth_2",
+        "iconId": null,
+        "skillName": "流沙区域生成"
+      },
+      {
+        "skillId": "skchr_doroth_3",
+        "iconId": null,
+        "skillName": "高速共振排障"
+      }
+    ],
+    "class": "Specialist",
+    "modules": []
   },
   "char_147_shining": {
     "id": "char_147_shining",
@@ -4309,7 +4843,11 @@
     ],
     "class": "Medic",
     "modules": [
-      "'Closed Hope'"
+      {
+        "moduleName": "'Closed Hope'",
+        "moduleId": "uniequip_002_cgbird",
+        "typeName": "RIN-X"
+      }
     ]
   },
   "char_003_kalts": {
@@ -4361,7 +4899,11 @@
     ],
     "class": "Medic",
     "modules": [
-      "纯铜单筒望远镜"
+      {
+        "moduleName": "纯铜单筒望远镜",
+        "moduleId": "uniequip_002_lumen",
+        "typeName": "WAH-X"
+      }
     ]
   },
   "char_136_hsguma": {
@@ -4412,7 +4954,13 @@
       }
     ],
     "class": "Defender",
-    "modules": []
+    "modules": [
+      {
+        "moduleName": "闲置的拳击手套",
+        "moduleId": "uniequip_002_demkni",
+        "typeName": "GUA-X"
+      }
+    ]
   },
   "char_423_blemsh": {
     "id": "char_423_blemsh",
@@ -4437,7 +4985,13 @@
       }
     ],
     "class": "Defender",
-    "modules": []
+    "modules": [
+      {
+        "moduleName": "工匠团的回响",
+        "moduleId": "uniequip_002_blemsh",
+        "typeName": "GUA-Y"
+      }
+    ]
   },
   "char_2014_nian": {
     "id": "char_2014_nian",
@@ -4513,7 +5067,11 @@
     ],
     "class": "Defender",
     "modules": [
-      "祖玛玛的工具箱"
+      {
+        "moduleName": "祖玛玛的工具箱",
+        "moduleId": "uniequip_002_zumama",
+        "typeName": "HES-X"
+      }
     ]
   },
   "char_4039_horn": {
@@ -4640,7 +5198,11 @@
     ],
     "class": "Guard",
     "modules": [
-      "罗德岛制式剑"
+      {
+        "moduleName": "Rhodes Island Standard Combat Sword",
+        "moduleId": "uniequip_002_chen",
+        "typeName": "SWO-X"
+      }
     ]
   },
   "char_4009_irene": {
@@ -4667,7 +5229,11 @@
     ],
     "class": "Guard",
     "modules": [
-      "厚重的经卷"
+      {
+        "moduleName": "厚重的经卷",
+        "moduleId": "uniequip_002_irene",
+        "typeName": "SWO-Y"
+      }
     ]
   },
   "char_017_huang": {
@@ -4769,7 +5335,16 @@
     ],
     "class": "Guard",
     "modules": [
-      "'Ούρος'"
+      {
+        "moduleName": "'Ούρος'",
+        "moduleId": "uniequip_002_pallas",
+        "typeName": "INS-X"
+      },
+      {
+        "moduleName": "“赫里亚之辉”",
+        "moduleId": "uniequip_003_pallas",
+        "typeName": "INS-Y"
+      }
     ]
   },
   "char_1014_nearl2": {
@@ -4796,7 +5371,11 @@
     ],
     "class": "Guard",
     "modules": [
-      "耀阳锋刃"
+      {
+        "moduleName": "耀阳锋刃",
+        "moduleId": "uniequip_002_nearl2",
+        "typeName": "DRE-X"
+      }
     ]
   },
   "char_230_savage": {
@@ -4928,7 +5507,11 @@
     ],
     "class": "Vanguard",
     "modules": [
-      "骑警套装"
+      {
+        "moduleName": "Cavalry Policeman Suit",
+        "moduleId": "uniequip_002_grani",
+        "typeName": "CHG-X"
+      }
     ]
   },
   "char_263_skadi": {
@@ -4955,7 +5538,16 @@
     ],
     "class": "Guard",
     "modules": [
-      "潮湿的剑袋"
+      {
+        "moduleName": "潮湿的剑袋",
+        "moduleId": "uniequip_002_skadi",
+        "typeName": "DRE-Y"
+      },
+      {
+        "moduleName": "往日残梦",
+        "moduleId": "uniequip_003_skadi",
+        "typeName": "DRE-X"
+      }
     ]
   },
   "char_1001_amiya2": {
