@@ -1,7 +1,7 @@
 import path from "path";
 import fs from "fs";
 import operators from "./arknights-tools/data/operators.json";
-import { Operator } from "./arknights-tools/scripts/output-types";
+import { Module, Operator } from "./arknights-tools/scripts/output-types";
 
 interface OperatorSkill {
   skillId: string;
@@ -22,7 +22,14 @@ const subset = Object.values(operators).map((entry: Operator) => {
       skillName
     };
   });
-  const modules = (entry.module === undefined ? [] : [entry.module.name])
+  const modules = entry.modules === undefined ? [] : entry.modules.map((module: Module) => {
+    const { moduleName, moduleId, typeName } = module;
+    return {
+      moduleName,
+      moduleId,
+      typeName
+    }
+  });
   return [
     id,
     { id, name, rarity, isCnOnly, skills, class: entry.class, modules }

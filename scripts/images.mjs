@@ -25,6 +25,16 @@ const tasks = [
     filter: (filename) => filename.endsWith(".png"),
   },
   {
+    sourceDir: path.join(ACESHIP_ROOT, "img/equip/stage"),
+    destDir: "public\\img\\equip",
+    filter: (filename) => filename.endsWith(".png"),
+  },
+  {
+    sourceDir: path.join(ACESHIP_ROOT, "img/equip/type"),
+    destDir: "public\\img\\equip",
+    filter: (filename) => filename.endsWith(".png"),
+  },
+  {
     sourceDir: path.join(ACESHIP_ROOT, "img/portraits"),
     destDir: "public\\img\\portraits",
     filter: (filename) => /^char_[^_]+_[^_]+_\d+\+?\.png$/.test(filename),
