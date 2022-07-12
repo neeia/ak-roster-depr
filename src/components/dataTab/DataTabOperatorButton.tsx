@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import { Operator } from "../../App";
 import { makeStyles } from "@material-ui/core";
 import { useRarityStyles } from "../StyleRarityUnderline";
