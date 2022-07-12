@@ -108,7 +108,7 @@ const DataEntryModule = React.memo((props: Props) => {
                         onClick={() => {
                           onChange(op.id, `module`, j, i);
                         }}
-                        toggled={op.module ? op.module[i] === j : false}
+                        toggled={op.module && op.module[i] ? op.module[i] === j : j === 0}
                         disabled={false}
                       >
                         <img
