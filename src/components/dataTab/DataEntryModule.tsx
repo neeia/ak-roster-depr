@@ -1,8 +1,7 @@
 import React from "react";
 import { Operator } from "../../App";
 import operatorJson from "../../data/operators.json";
-import { MAX_LEVEL_BY_RARITY } from "../RosterTable";
-import { ButtonBase, Grid, Hidden, makeStyles, TextField } from "@material-ui/core";
+import { Grid, Hidden, makeStyles } from "@material-ui/core";
 import clsx from "clsx";
 import FormButton from "../FormButton";
 import { useDataStyles } from "./DataTabSharedStyles";

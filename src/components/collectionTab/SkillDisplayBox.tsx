@@ -1,7 +1,6 @@
 import React from "react";
 import { Operator } from "../../App";
 import { makeStyles } from "@material-ui/core";
-import clsx from "clsx";
 import { Box, SxProps, Theme } from "@mui/material";
 
 interface Props {

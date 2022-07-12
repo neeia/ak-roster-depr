@@ -1,6 +1,5 @@
 import React from "react";
 import { Operator } from "../../App";
-import operatorJson from "../../data/operators.json";
 import { MAX_LEVEL_BY_RARITY } from "../RosterTable";
 import { ButtonBase, Grid, Hidden, makeStyles, TextField } from "@material-ui/core";
 import clsx from "clsx";
@@ -194,7 +193,6 @@ const DataEntryLevel = React.memo((props: Props) => {
   const { op, onChange } = props;
   const classes = useStyles();
   const style = useDataStyles();
-  const opInfo = (operatorJson as any)[op.id];
 
   const [levelField, setLevelField] = React.useState<number | string>(op.level);
 

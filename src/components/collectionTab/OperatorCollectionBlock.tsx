@@ -1,8 +1,7 @@
 import React from "react";
 import { Operator } from "../../App";
 import { makeStyles, Hidden } from "@material-ui/core";
-import { useRarityStyles, rarityColors } from "../StyleRarityUnderline";
-import clsx from "clsx";
+import { rarityColors } from "../StyleRarityUnderline";
 import SkillDisplayBox from "./SkillDisplayBox";
 import { MdFavorite } from "react-icons/md";
 import { MAX_LEVEL_BY_RARITY } from "../RosterTable";
