@@ -3,7 +3,7 @@ import { Operator } from "../App";
 import firebase from "firebase/app";
 import "firebase/database";
 import operatorJson from "../data/operators.json";
-import { Hidden, makeStyles } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 import OperatorCollectionBlock from "./collectionTab/OperatorCollectionBlock";
 import { classList } from "./DataTab";
 import SelectorClass from "./dataTab/SelectorClass";
@@ -11,7 +11,6 @@ import SelectorRarity from "./dataTab/SelectorRarity";
 import Drawer from "./Drawer";
 import SelectorSortOptions from "./collectionTab/SelectorSortOptions";
 import useLocalStorage from "../UseLocalStorage";
-import OperatorCollectionBlockM from "./collectionTab/OperatorCollectionBlockM";
 import TextInput from "./accountTab/TextInput";
 import FormButton from "./FormButton";
 
@@ -228,12 +227,7 @@ const CollectionTab = React.memo((props: Props) => {
         {collection
           .map((op: any) => (
             <div key={op.id}>
-              <Hidden xsDown>
-                <OperatorCollectionBlock op={operators[op.id]} />
-              </Hidden>
-              <Hidden smUp>
-                <OperatorCollectionBlockM op={operators[op.id]} />
-              </Hidden>
+              <OperatorCollectionBlock op={operators[op.id]} />
             </div>
           ))
         }
