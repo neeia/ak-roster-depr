@@ -8,16 +8,20 @@ interface Props {
   toggled?: boolean;
   disabled?: boolean;
   className?: string;
+  submit?: boolean;
 }
 
 const FormButton: React.FC<Props> = React.memo((props) => {
   const classes = useBoxStyles();
-  const { children, onClick, toggled, disabled, className } = props;
+  const { children, onClick, toggled, disabled, className, submit } = props;
 
   return (
     <ButtonBase
       disableRipple
-      onClick={onClick}
+      onClick={(e) => {
+        e.preventDefault();
+        onClick();
+      }}
       className={clsx({
         [classes.boxStyle]: true,
         [classes.highlighted]: toggled,
@@ -25,6 +29,7 @@ const FormButton: React.FC<Props> = React.memo((props) => {
         [className ?? ""]: true,
       })}
       disabled={disabled}
+      type={submit ? "submit" : "button"}
     >
       {children}
     </ButtonBase>

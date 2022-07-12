@@ -19,7 +19,7 @@ function RegisterForm(props: Props) {
   const [showPW, setShowPW] = useState<boolean>(false);
 
   return (
-    <div className={form.container}>
+    <form className={form.container}>
       <div className={form.label}>Register</div>
       <div className={form.formContainer}>
         <TextInput type="text" label="Email" onChange={setEmail} value={email} />
@@ -43,8 +43,10 @@ function RegisterForm(props: Props) {
           {errCodeToMessage(error)}
         </div>
         <ButtonBase
+          type="submit"
           className={form.submitButton}
-          onClick={() => {
+          onClick={(e) => {
+            e.preventDefault();
             if (password !== passwordConfirm) {
               setError("Passwords don't match.");
             }
@@ -54,7 +56,7 @@ function RegisterForm(props: Props) {
           Submit
         </ButtonBase>
       </div>
-    </div>
+    </form>
   );
 };
 

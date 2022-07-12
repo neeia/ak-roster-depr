@@ -132,22 +132,29 @@ const CollectionTab = React.memo((props: Props) => {
       .get();
     if (snapshot.exists()) {
       viewUserCollection(snapshot.val());
+      await new Promise(r => setTimeout(r, 600));
       onFinish(true);
     }
     else {
+      viewUserCollection();
+      await new Promise(r => setTimeout(r, 0));
       onFinish(false);
     }
   };
-  const viewUserCollection = (uid: string): void => {
-    firebase
-      .database()
-      .ref("users/" + uid + "/roster/")
-      .get()
-      .then((snapshot) => {
-        if (snapshot.exists()) {
-          setOperators(snapshot.val());
-        }
-      });
+  const viewUserCollection = (uid?: string): void => {
+    if (uid) {
+      firebase
+        .database()
+        .ref("users/" + uid + "/roster/")
+        .get()
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            setOperators(snapshot.val());
+          }
+        });
+    } else {
+      setOperators({});
+    }
   };
 
   function tryFind() {
@@ -170,7 +177,7 @@ const CollectionTab = React.memo((props: Props) => {
       label={"Search"}
       open={true}
     >
-      <div className={classes.searchBlock}>
+      <form className={classes.searchBlock}>
         <TextInput
           label={"Find a User"}
           value={searchUser}
@@ -180,12 +187,16 @@ const CollectionTab = React.memo((props: Props) => {
         />
         <FormButton
           className={classes.hideCorners}
-          onClick={tryFind}
+          onClick={() => {
+            setSuccess(undefined);
+            tryFind();
+          }}
           disabled={searchUser === ""}
+          submit
         >
           Search
         </FormButton>
-      </div>
+      </form>
     </Drawer>
 
   const filterObject = (op: any) => {

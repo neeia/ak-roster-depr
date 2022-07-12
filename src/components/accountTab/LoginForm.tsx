@@ -23,7 +23,7 @@ function LoginForm(props: Props) {
   const [showPW, setShowPW] = useState<boolean>(false);
 
   return (
-    <div className={form.container}>
+    <form className={form.container}>
       <div className={form.label}>Log In</div>
       <div className={form.formContainer}>
         <TextInput type="text" label="Email" onChange={(s: string) => {
@@ -63,15 +63,17 @@ function LoginForm(props: Props) {
           {errCodeToMessage(error)}
         </div>
         <ButtonBase
+          type="submit"
           className={form.submitButton}
-          onClick={() => {
+          onClick={(e) => {
+            e.preventDefault();
             handleLogin(email.trim(), password, setError);
           }}
         >
           Submit
         </ButtonBase>
       </div>
-    </div >
+    </form>
   );
 };
 
