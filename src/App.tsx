@@ -202,9 +202,7 @@ function App() {
 
   const applyChangeWithInvariant = (op: Operator, prop: string, value: number | boolean, index?: number) => {
     if (!op.owned && prop !== "owned") return op;
-    console.log(`applyChangeWithInvariant: ${op.id}[${prop}]${index ?? ""} = ${value} - was ${(op as any)[prop]}`)
     if (index !== undefined) {
-      console.log(`applyChangeWithInvariant: ${(op as any)[prop]}`)
       if ((op as any)[prop] === undefined) {
         (op as any)[prop] = []
       }
