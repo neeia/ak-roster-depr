@@ -9,6 +9,7 @@ import DataEntryLevel from "./DataEntryLevel";
 import DataEntrySkillLevel from "./DataEntrySkillLevel";
 import { MdClose } from "react-icons/md";
 import { SELECT_STATE } from "../DataTab";
+import DataEntryModule from "./DataEntryModule";
 
 const useStyles = makeStyles({
   displayBox: {
@@ -97,7 +98,7 @@ const EditOperator = React.memo((props: Props) => {
   const classes = useStyles();
   const boxStyle = useBoxStyles();
   const style = useDataStyles();
-
+  
   let intermediate = op.id;
   if (op.promotion === 2) {
     intermediate += "_2";
@@ -155,6 +156,8 @@ const EditOperator = React.memo((props: Props) => {
       <DataEntryLevel op={op} onChange={onChange} />
       <div className={style.horizontalDivider} />
       <DataEntrySkillLevel op={op} onChange={onChange} />
+      <div className={style.horizontalDivider} />
+      <DataEntryModule op={op} onChange={onChange} />
     </div>
   );
 });

@@ -251,54 +251,6 @@ const DataEntryLevel = React.memo((props: Props) => {
             )}
           </Grid>
         </Grid>
-
-        <Hidden smUp>
-          <Grid item xs={12}>
-            <hr className={style.horizontalDivider} />
-          </Grid>
-        </Hidden>
-
-        {opInfo ?
-          <React.Fragment>
-            <DataLabel label={"Module"} part={false} />
-            <DataLabel label={"Module"} part={true} />
-            {opInfo["modules"].length > 0
-              ? <Grid item xs={7} sm={12} className={style.block}>
-                {opInfo["modules"].map((moduleName: string, index: number) =>
-                  <div key={index} className={classes.moduleContainer}>
-                    {moduleName}
-                    <FormButton
-                      className={classes.moduleButton}
-                      onClick={() => {
-                        onChange(op.id, `module`, 1 - (op.module ? (op.module[index] ?? 0) : 0), index);
-                      }}
-                      toggled={op.module ? op.module[index] > 0 : false}
-                      disabled={opInfo["modules"] === []}
-                    >
-                      <img
-                        className={classes.moduleIcon}
-                        src={`/img/equip/uniequip_00${index + 2}_${op.id.split("_")[2]}.png`}
-                        alt={"Module"}
-                      />
-                    </FormButton>
-                  </div>
-                )}
-              </Grid>
-              : <Grid item xs={7} sm={12} className={style.block}>
-                <div className={classes.moduleContainer}>
-                  <svg
-                    className={classes.moduleIcon}
-                  >
-                    <rect x="0" y="0" className={classes.moduleIcon} fill="transparent" stroke="gray" strokeWidth="4" />
-                    <path d="M 12 36 L 36 12" fill="transparent" stroke="gray" strokeWidth="3" />
-                    alt={``}
-                  </svg>
-                  No Module
-                </div>
-              </Grid>
-            }
-          </React.Fragment>
-          : ""}
       </Grid>
     </Grid>
   );
