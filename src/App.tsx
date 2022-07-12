@@ -6,10 +6,8 @@ import useLocalStorage from "./UseLocalStorage";
 import { MAX_LEVEL_BY_RARITY } from "./components/RosterTable";
 import {
   AppBar,
-  Box,
   createTheme,
   CssBaseline,
-  makeStyles,
   Tab,
   Tabs,
   ThemeProvider,
@@ -19,6 +17,7 @@ import { grey } from "@material-ui/core/colors";
 import AccountTab from "./components/AccountTab";
 import CollectionTab from "./components/CollectionTab";
 import DataTab from "./components/DataTab";
+import { Box } from "@mui/material";
 
 const darkTheme = createTheme({
   palette: {
@@ -31,14 +30,6 @@ const darkTheme = createTheme({
     },
   },
 });
-
-const useStyles = makeStyles({
-  tabPanel: {
-    "& .MuiBox-root": {
-      padding: "0px",
-    },
-  },
-})
 
 export const MOBILE_BREAKPOINT = 900;
 export const TABLET_BREAKPOINT = 1300;
@@ -348,8 +339,8 @@ function App() {
   // no clue what this is for
   function a11yProps(index: number) {
     return {
-      id: `simple-tab-${index}`,
-      "aria-controls": `simple-tabpanel-${index}`,
+      id: `tab-${index}`,
+      "aria-controls": `tabpanel-${index}`,
     };
   }
 
@@ -413,16 +404,15 @@ function TabPanel(props: TabProps) {
   const { children, value, index, ...other } = props;
 
   return (
-    <div
+    <Box
       role="tabpanel"
       hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      className={useStyles().tabPanel}
+      id={`tabpanel-${index}`}
+      aria-labelledby={`tab-${index}`}
       {...other}
     >
-      {value === index && <Box p={3}>{children}</Box>}
-    </div>
+      {value === index && <Box>{children}</Box>}
+    </Box>
   );
 }
 
