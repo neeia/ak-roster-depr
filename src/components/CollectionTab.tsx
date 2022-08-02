@@ -25,7 +25,7 @@ const useStyles = makeStyles({
   collectionContainer: {
     display: "flex",
     flexWrap: "wrap",
-    justifyContent: "center",
+    justifyContent: "start",
     gap: "12px 6px",
   },
   dummyContainer: {
@@ -242,7 +242,6 @@ const CollectionTab = React.memo((props: Props) => {
             </div>
           ))
         }
-        {[...Array(20)].map((_, i: number) => <div key={i} className={classes.dummyContainer} />)}
       </div>
     </div>
   );
