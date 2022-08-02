@@ -803,7 +803,7 @@
     "class": "Guard",
     "modules": [
       {
-        "moduleName": "断竹插花作品",
+        "moduleName": "Bamboo Ikebana",
         "moduleId": "uniequip_002_gyuki",
         "typeName": "DRE-Y"
       }
@@ -829,7 +829,7 @@
     "class": "Guard",
     "modules": [
       {
-        "moduleName": "断罪之拳",
+        "moduleName": "The Fist of Conviction",
         "moduleId": "uniequip_002_peacok",
         "typeName": "DRE-X"
       }
@@ -1007,7 +1007,7 @@
     "class": "Specialist",
     "modules": [
       {
-        "moduleName": "精钢刀具套组",
+        "moduleName": "Steel Tool Set",
         "moduleId": "uniequip_002_strong",
         "typeName": "MER-X"
       }
@@ -1597,17 +1597,17 @@
     "id": "char_476_blkngt",
     "name": "Blacknight",
     "rarity": 5,
-    "isCnOnly": true,
+    "isCnOnly": false,
     "skills": [
       {
         "skillId": "skchr_blkngt_1",
         "iconId": null,
-        "skillName": "半醒"
+        "skillName": "Drowsy"
       },
       {
         "skillId": "skchr_blkngt_2",
         "iconId": null,
-        "skillName": "安眠"
+        "skillName": "Peaceful Slumber"
       }
     ],
     "class": "Vanguard",
@@ -1685,7 +1685,7 @@
     "class": "Guard",
     "modules": [
       {
-        "moduleName": "尖端铝热单元",
+        "moduleName": "Cutting-edge Thermite Unit",
         "moduleId": "uniequip_002_franka",
         "typeName": "DRE-X"
       }
@@ -1711,7 +1711,7 @@
     "class": "Guard",
     "modules": [
       {
-        "moduleName": "锈损的断刀",
+        "moduleName": "Rusty Broken Blade",
         "moduleId": "uniequip_002_flameb",
         "typeName": "DRE-Y"
       }
@@ -2097,17 +2097,17 @@
     "id": "char_1021_kroos2",
     "name": "Kroos the Keen Glint",
     "rarity": 5,
-    "isCnOnly": true,
+    "isCnOnly": false,
     "skills": [
       {
         "skillId": "skchr_kroos2_1",
         "iconId": null,
-        "skillName": "无痕"
+        "skillName": "Traceless"
       },
       {
         "skillId": "skchr_kroos2_2",
         "iconId": null,
-        "skillName": "封喉"
+        "skillName": "Silencer"
       }
     ],
     "class": "Sniper",
@@ -2926,7 +2926,7 @@
     "class": "Specialist",
     "modules": [
       {
-        "moduleName": "“檐下听雨”",
+        "moduleName": "'Shelter from the Rain'",
         "moduleId": "uniequip_002_nothin",
         "typeName": "MER-X"
       }
@@ -3036,17 +3036,17 @@
     "id": "char_4025_aprot2",
     "name": "Shalem",
     "rarity": 5,
-    "isCnOnly": true,
+    "isCnOnly": false,
     "skills": [
       {
         "skillId": "skchr_aprot2_1",
         "iconId": null,
-        "skillName": "速战速决"
+        "skillName": "Rapid Onslaught"
       },
       {
         "skillId": "skchr_aprot2_2",
         "iconId": null,
-        "skillName": "燃命狂欢"
+        "skillName": "Carnival of Self-Immolation"
       }
     ],
     "class": "Defender",
@@ -3512,17 +3512,17 @@
     "id": "char_4019_ncdeer",
     "name": "Nine-Colored Deer",
     "rarity": 5,
-    "isCnOnly": true,
+    "isCnOnly": false,
     "skills": [
       {
         "skillId": "skchr_ncdeer_1",
         "iconId": null,
-        "skillName": "人间降吉"
+        "skillName": "Fortune Bringer of the Mortal Realm"
       },
       {
         "skillId": "skchr_ncdeer_2",
         "iconId": null,
-        "skillName": "仙山去远"
+        "skillName": "Return to the Immortal Mountain"
       }
     ],
     "class": "Supporter",
@@ -3532,17 +3532,17 @@
     "id": "char_492_quercu",
     "name": "Quercus",
     "rarity": 5,
-    "isCnOnly": true,
+    "isCnOnly": false,
     "skills": [
       {
         "skillId": "skchr_quercu_1",
         "iconId": null,
-        "skillName": "大地的慈悲"
+        "skillName": "Earth's Benevolence"
       },
       {
         "skillId": "skchr_quercu_2",
         "iconId": null,
-        "skillName": "生灵的回响"
+        "skillName": "Echo of Life"
       }
     ],
     "class": "Supporter",
@@ -4345,22 +4345,22 @@
     "id": "char_377_gdglow",
     "name": "Goldenglow",
     "rarity": 6,
-    "isCnOnly": true,
+    "isCnOnly": false,
     "skills": [
       {
         "skillId": "skchr_gdglow_1",
         "iconId": null,
-        "skillName": "火花四溅"
+        "skillName": "Scattering Sparks"
       },
       {
         "skillId": "skchr_gdglow_2",
         "iconId": null,
-        "skillName": "电流翻涌"
+        "skillName": "Surging Current"
       },
       {
         "skillId": "skchr_gdglow_3",
         "iconId": null,
-        "skillName": "澄净闪耀"
+        "skillName": "Crystalline Shine"
       }
     ],
     "class": "Caster",
@@ -4549,28 +4549,28 @@
     "id": "char_2023_ling",
     "name": "Ling",
     "rarity": 6,
-    "isCnOnly": true,
+    "isCnOnly": false,
     "skills": [
       {
         "skillId": "skchr_ling_1",
         "iconId": null,
-        "skillName": "重进酒"
+        "skillName": "Sips of Wine"
       },
       {
         "skillId": "skchr_ling_2",
         "iconId": null,
-        "skillName": "笑鸣瑟"
+        "skillName": "Amidst Pleasant Melodies"
       },
       {
         "skillId": "skchr_ling_3",
         "iconId": null,
-        "skillName": "宁作吾"
+        "skillName": "To Remain Oneself"
       }
     ],
     "class": "Supporter",
     "modules": [
       {
-        "moduleName": "诗短梦长",
+        "moduleName": "Fond Dream with Poetry",
         "moduleId": "uniequip_002_ling",
         "typeName": "SUM-Y"
       }
@@ -4611,28 +4611,28 @@
     "id": "char_322_lmlee",
     "name": "Lee",
     "rarity": 6,
-    "isCnOnly": true,
+    "isCnOnly": false,
     "skills": [
       {
         "skillId": "skchr_lmlee_1",
         "iconId": null,
-        "skillName": "小惩大诫"
+        "skillName": "Stern Admonishment"
       },
       {
         "skillId": "skchr_lmlee_2",
         "iconId": null,
-        "skillName": "驱凶辟邪"
+        "skillName": "Exorcise Evil"
       },
       {
         "skillId": "skchr_lmlee_3",
         "iconId": null,
-        "skillName": "贵客盈门"
+        "skillName": "Honored Guest"
       }
     ],
     "class": "Specialist",
     "modules": [
       {
-        "moduleName": "“无问吉凶”",
+        "moduleName": "'Wandering'",
         "moduleId": "uniequip_002_lmlee",
         "typeName": "MER-X"
       }
@@ -5372,7 +5372,7 @@
     "class": "Guard",
     "modules": [
       {
-        "moduleName": "耀阳锋刃",
+        "moduleName": "Blade of Blazing Sun",
         "moduleId": "uniequip_002_nearl2",
         "typeName": "DRE-X"
       }
@@ -5539,7 +5539,7 @@
     "class": "Guard",
     "modules": [
       {
-        "moduleName": "潮湿的剑袋",
+        "moduleName": "Moist Sword Bag",
         "moduleId": "uniequip_002_skadi",
         "typeName": "DRE-Y"
       },
