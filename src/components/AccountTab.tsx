@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
@@ -66,7 +66,7 @@ interface Props {
 };
 
 const AccountTab: React.FC<Props> = (props) => {
-  const { operators, updateFromRemote, dirty, setDirty } = props;
+  const { operators, updateFromRemote } = props;
   const classes = useStyles();
 
   const [user, setUser] = useState<firebase.User | null>(firebase.auth().currentUser);
