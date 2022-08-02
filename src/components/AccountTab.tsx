@@ -145,15 +145,6 @@ const AccountTab: React.FC<Props> = (props) => {
       });
   };
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      if (dirty) writeUserData();
-      setDirty(false);
-    }, 10000);
-    return () => clearTimeout(timeout);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [operators]);
-
   return (
     <div className={classes.container}>
       {(user
