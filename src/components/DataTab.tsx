@@ -195,7 +195,7 @@ const DataTab = React.memo((props: Props) => {
 
   const filterObject = (op: any) => {
     return (showOwned === undefined || operators[op.id].owned === showOwned)
-      && (showCN || !op.isCnOnly)
+      && (op.owned || showCN || !op.isCnOnly)
       && (selectedClasses.length === 0 || selectedClasses.includes(op.class))
       && (selectedRarities.length === 0 || selectedRarities.includes(op.rarity))
   }
