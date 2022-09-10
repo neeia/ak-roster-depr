@@ -1,4 +1,6 @@
 # Arknights Roster [DEPRECATED]
+# This repository is deprecated and is no longer receiving updates. See the new repo at [ak-roster](https://github.com/neeia/ak-roster).
+
 This is a collection and progress tracker for [Arknights](https://www.arknights.global/), a game developed by Hypergryph.
 The site is available at [krooster.com](https://krooster.com/).
 
