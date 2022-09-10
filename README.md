@@ -1,4 +1,4 @@
-# Arknights Roster
+# Arknights Roster [DEPRECATED]
 This is a collection and progress tracker for [Arknights](https://www.arknights.global/), a game developed by Hypergryph.
 The site is available at [krooster.com](https://krooster.com/).
 
